@@ -39,9 +39,8 @@ module.exports = {
     cssSourceMap: false,
     proxyTable: {
       '/api': {
-        target: 'http://localhost:8888',
+        target: 'http://localhost:8888/',
         changeOrigin: true
-
       }
     }
   }
