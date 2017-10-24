@@ -22,7 +22,7 @@
 
     methods: {
       fetchData: function () {
-        axios.get('/api/hello')
+        axios.get('/api/countrylist')
           .then(function (response) {
             console.log('Response', response)
           })
