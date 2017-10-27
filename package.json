@@ -10,12 +10,13 @@
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
-    "lint": "eslint --ext .js,.vue src test/unit/specs"
+    "lint": "eslint --ext .js,.vue src test/unit/specs",
+    "package": "npm run build && tar -zcf gdhi.tar.gz dist"
   },
   "dependencies": {
     "axios": "^0.17.0",
     "d3": "^4.11.0",
-   "leaflet": "^1.2.0",
+    "leaflet": "^1.2.0",
     "osm-countries-geojson": "^1.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
