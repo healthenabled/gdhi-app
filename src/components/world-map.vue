@@ -8,7 +8,7 @@
 </template>
 <script>
   import L from 'leaflet'
-  import countriesData from '../assets/countries_today.geo.json'
+//  import countriesData from '../assets/countries_today.geo.json'
 //  import countriesData from '../assets/countries1.geo.json'
 
   export default {
