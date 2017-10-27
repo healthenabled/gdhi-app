@@ -14,8 +14,12 @@
   },
   "dependencies": {
     "axios": "^0.17.0",
+    "d3": "^4.11.0",
+   "leaflet": "^1.2.0",
+    "osm-countries-geojson": "^1.0.1",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue2-leaflet": "0.0.55"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -84,6 +88,12 @@
   "engines": {
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
+  },
+  "eslintConfig": {
+    "globals": {
+      "window": true,
+      "google": true
+    }
   },
   "browserslist": [
     "> 1%",
