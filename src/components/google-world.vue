@@ -11,36 +11,44 @@
     mounted: function () {
       setTimeout(this.drawMap, 100)
     },
-
-//    ready () {
-//      setTimeout(this.drawMap, 100)
-//    },
     methods: {
       drawMap () {
         console.log('map data ******', window.countryData)
         var data = window.countryData
         var map
         var myOptions = {
-          zoom: 2,
           center: new google.maps.LatLng(45.4555729, 9.169236),
-          mapTypeId: google.maps.MapTypeId.ROADMAP
+          zoom: 2,
+          minZoom: 2,
+          mapTypeId: google.maps.MapTypeId.ROADMAP,
+
         }
         // initialize the map
         map = new google.maps.Map(document.getElementById('map-canvas'), myOptions)
-//        var allowedBounds = new google.maps.LatLngBounds(
-//          new google.maps.LatLng(-95, -180),	// top left corner of map
-//          new google.maps.LatLng(85, 180)	// bottom right corner
-//        );
-//
-//        var k = 0.0
-//        var n = allowedBounds.getNorthEast().lat() - k
-//        var e = allowedBounds.getNorthEast().lng() - k
-//        var s = allowedBounds.getSouthWest().lat() + k
-//        var w = allowedBounds.getSouthWest().lng() + k
-//        var neNew = new google.maps.LatLng(n, e)
-//        var swNew = new google.maps.LatLng(s, w)
-//        var boundsNew = new google.maps.LatLngBounds(swNew, neNew)
-//        map.fitBounds(boundsNew)
+
+        // align map to center
+        google.maps.event.addListener(map, 'idle', function() {
+          var allowedBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(20.124072, -30.002952),
+            new google.maps.LatLng(20.124072, -30.002952));
+          if (allowedBounds.contains(map.getCenter())) return;
+          var c = map.getCenter(),
+                 x = c.lng(),
+                 y = c.lat(),
+                 maxX = allowedBounds.getNorthEast().lng(),
+                 maxY = allowedBounds.getNorthEast().lat(),
+                 minX = allowedBounds.getSouthWest().lng(),
+                 minY = allowedBounds.getSouthWest().lat();
+
+             if (x < minX) x = minX;
+             if (x > maxX) x = maxX;
+             if (y < minY) y = minY;
+             if (y > maxY) y = maxY;
+             if(map.zoom<3){
+               map.setCenter(new google.maps.LatLng(y,x));
+             }
+           });
+
 
         var styles = [
           {
