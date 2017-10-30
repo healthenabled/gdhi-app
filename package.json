@@ -11,7 +11,7 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "package": "npm run build && tar -zcf gdhi.tar.gz dist"
+    "package": "npm run build && tar -zvcf gdhi.tar.gz --exclude=*.map --exclude=.DS_Store dist/"
   },
   "dependencies": {
     "axios": "^0.17.0",
