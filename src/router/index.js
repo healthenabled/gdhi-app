@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import content from '@/components/container/container.js'
 import mapComponent from '@/components/map/map.js'
-import headerComp from '@/components/Header/header.vue'
-import footerComp from '@/components/Footer/footer.vue'
+import headerComp from '@/components/header/header.vue'
+import footerComp from '@/components/footer/footer.vue'
 Vue.use(Router)
 
 export default new Router({

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import Layout from './components/Layout/layout.vue'
+  import Layout from './components/layout/layout.vue'
 export default {
     name: 'app',
     components: {
@@ -15,5 +15,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../src/assets/stylesheets/main.scss'
+  @import '../src/assets/stylesheets/main.scss';
 </style>
