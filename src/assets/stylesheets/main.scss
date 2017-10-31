@@ -2,8 +2,31 @@
 @import "components/all";
 @import "font";
 
-
-
-body {
+body, html {
   font-family: 'Roboto', sans-serif;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
+ ul {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+ }
+
+ #app {
+   width: 100%;
+   height: 100%;
+   background: $bg-beige;
+ }
+
+ a {
+   text-decoration: none;
+ }
+
+ .clearfix:after{
+   content: "";
+   display: table;
+   clear: both;
+ }

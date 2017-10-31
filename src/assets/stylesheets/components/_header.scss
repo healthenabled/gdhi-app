@@ -1,4 +1,52 @@
 .header {
   width: 100%;
-  background: $header-grey;
+  background: $white;
+  font-family: 'RobotoBold';
+  position: fixed;
+  top: 0;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  .header-width {
+    margin: 0 auto;
+    width: 92%;
+
+  }
+  .hd-element {
+    display: flex;
+    align-items: flex-end;
+    padding: 20px 0px;
+    flex-grow: 0.4;
+  }
+  .xl-length {
+    flex-grow: 5;
+  }
 }
+
+.header-elements {
+  display: flex;
+  width: 100%;
+  .logo-name {
+    width: 10%;
+    font-size: 22px;
+    color: $logo-blue;
+    font-family: 'RobotoBold';
+
+
+  }
+  .search-box {
+    input {
+      width: 100%;
+      padding: 5px 3px;
+    }
+  }
+
+
+}
+.header-elements__right {
+  display: inline-flex;
+  width: 15%;
+  .search-box {
+
+  }
+}
+
+

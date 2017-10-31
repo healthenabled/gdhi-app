@@ -1,0 +1,22 @@
+.footer {
+  width: 100%;
+  background: #fff;
+  height: 35px;
+  font-size: 12px;
+  font-family: 'RobotoLight';
+  position: fixed;
+  bottom: 0;
+  padding: 10px 0;
+  box-sizing: border-box;
+  color: $footer-blue;
+  .footer-width {
+    width: 92%;
+    margin: 0 auto;
+  }
+  .ft-element {
+    &:after {
+      content: '|';
+      padding: 0 5px;
+    }
+  }
+}
