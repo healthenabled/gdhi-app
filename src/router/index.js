@@ -1,17 +1,39 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
-// import map from '@/components/world-map'
-// import map from '@/components/world-map-plugin'
-import map from '@/components/google-world'
-
+import content from '@/components/container/container.js'
+import mapComponent from '@/components/map/map.js'
+import headerComp from '@/components/Header/header.vue'
+import footerComp from '@/components/Footer/footer.vue'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      component: map
+      path: '',
+      components: {
+        container: content,
+        header: headerComp,
+        footer: footerComp
+      },
+      children: [
+        {
+          path: '/map',
+          component: mapComponent,
+          children: [
+            {
+              path: ':foo'
+            }
+          ]
+        },
+        {
+          path: 'countryProfile',
+          component: footerComp
+        },
+        {
+          path: '/allIndicators',
+          component: footerComp
+        }
+      ]
     }
   ]
 })

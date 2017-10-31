@@ -28,7 +28,7 @@ module.exports = {
   },
   module: {
     rules: [
-      /*{
+      {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
@@ -36,11 +36,16 @@ module.exports = {
         options: {
           formatter: require('eslint-friendly-formatter')
         }
-      },*/
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
+      },
+      {
+        exclude: /node_modules/,
+        loader: 'html-loader',
+        test: /\.html$/
       },
       {
         test: /\.js$/,
@@ -63,8 +68,9 @@ module.exports = {
           name: utils.assetsPath('media/[name].[hash:7].[ext]')
         }
       },
+
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        test: /\.(woff2?|eot|ttf|otf|woff)(\?.*)?$/,
         loader: 'url-loader',
         options: {
           limit: 10000,
