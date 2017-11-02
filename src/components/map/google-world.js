@@ -111,6 +111,7 @@ export default {
     return styles
   },
   bindEventsToMap (boundaryData, countryIndices, map) {
+    console.log('country indices', countryIndices)
     var rows = boundaryData['rows']
     for (var i in rows) {
       if (rows[i][1] !== 'Antarctica') {
