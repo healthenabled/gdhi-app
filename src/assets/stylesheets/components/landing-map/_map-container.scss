@@ -1,6 +1,9 @@
 .map-container {
   width: 100%;
-
+  height: 100%;
   font-family: 'RobotoBold';
-  //background: url('/static/images/edit.png');
+  #map-canvas {
+    height: 800px;
+    width: 100%;
+  }
 }
