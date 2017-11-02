@@ -116,31 +116,48 @@ export default {
         } else {
           newCoordinates = this.constructNewCoordinates(rows[i][2]['geometry'])
         }
-        let drawingcountryCode = rows[i][0]
-        let matchedCountry = _.filter(countryIndices,
-          (countryObj) => { return countryObj.country_code === drawingcountryCode })
         var country = new google.maps.Polygon({
           paths: newCoordinates,
           strokeColor: '#ff9900',
           strokeOpacity: 1,
           strokeWeight: 0.3,
-          fillColor: matchedCountry && matchedCountry.length > 0 ? matchedCountry[0].color_code : '#606060',
-          // fillOpacity: 0,
+          fillOpacity: 0.3,
           name: rows[i][1]
         })
-        google.maps.event.addListener(country, 'mouseover', function () {
-          // this.setOptions({fillOpacity: 0.4})
+        country.country_code = rows[i][0]
+        country.setOptions({fillColor: this.getColorCodeOf(country, countryIndices)})
+        var infowindow = new google.maps.InfoWindow()
+        google.maps.event.addListener(country, 'mouseover', function (event) {
+          var contentString = '<div id="content">' +
+            '<strong>' + this.name + '</strong>' +
+            '</div>'
+          infowindow.setContent(contentString)
+          infowindow.setPosition(event.latLng)
+          infowindow.open(map, country)
         })
-        google.maps.event.addListener(country, 'mouseout', function () {
-          // this.setOptions({fillOpacity: 0})
-        })
-        google.maps.event.addListener(country, 'click', function () {
-          alert(this.name)
+        var lastSelectedCountry = ''
+        var self = this
+        google.maps.event.addListener(country, 'click', function (event) {
+          if (lastSelectedCountry !== '') {
+            lastSelectedCountry.setOptions({
+              fillOpacity: 0.3,
+              fillColor: self.getColorCodeOf(lastSelectedCountry, countryIndices)
+            })
+          }
+          lastSelectedCountry = this
+          this.setOptions({fillOpacity: 0.6})
+          this.setOptions({fillColor: '#ffa500'})
         })
 
         country.setMap(map)
       }
     }
+  },
+  getColorCodeOf (country, countryIndices) {
+    let matchedCountry = _.filter(countryIndices,
+      (countryObj) => { return countryObj.country_code === country.country_code })
+    return matchedCountry && matchedCountry.length >
+      0 ? matchedCountry[0].color_code : '#606060'
   },
   constructNewCoordinates (polygon) {
     var newCoordinates = []

@@ -38,8 +38,17 @@ export default Vue.extend({
     },
     stubData () {
       this.$set(this.mapData, 'globalHealthIndices', [{
-        'country_name': 'India',
-        'country_code': 'IND',
+        'country_name': 'Afghanistan',
+        'country_code': 'AFG',
+        'catagory': 'Cat 1',
+        'indicator_description': 'Indicator 1',
+        'indicator_name': 'Name',
+        'indicator_score': 2,
+        'color_code': '#225e8e'
+      },
+      {
+        'country_name': 'Russia',
+        'country_code': 'RUS',
         'catagory': 'Cat 1',
         'indicator_description': 'Indicator 1',
         'indicator_name': 'Name',
