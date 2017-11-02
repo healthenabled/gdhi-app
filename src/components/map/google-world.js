@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 /* eslint-disable no-undef */
 export default {
   drawMap (data, $mapEl) {
@@ -34,17 +36,7 @@ export default {
       }
     })
     map.setOptions({styles: this.mapStyleConfiguration()})
-    // this.bindEventsToMap(data, {}, map)
     return map
-  },
-  constructNewCoordinates (polygon) {
-    var newCoordinates = []
-    var coordinates = polygon['coordinates'][0]
-    for (var i in coordinates) {
-      newCoordinates.push(
-        new google.maps.LatLng(coordinates[i][1], coordinates[i][0]))
-    }
-    return newCoordinates
   },
 
   mapStyleConfiguration () {
@@ -124,20 +116,23 @@ export default {
         } else {
           newCoordinates = this.constructNewCoordinates(rows[i][2]['geometry'])
         }
+        let drawingcountryCode = rows[i][0]
+        let matchedCountry = _.filter(countryIndices,
+          (countryObj) => { return countryObj.country_code === drawingcountryCode })
         var country = new google.maps.Polygon({
           paths: newCoordinates,
           strokeColor: '#ff9900',
           strokeOpacity: 1,
           strokeWeight: 0.3,
-          fillColor: '#ffff66',
-          fillOpacity: 0,
-          name: rows[i][0]
+          fillColor: matchedCountry && matchedCountry.length > 0 ? matchedCountry[0].color_code : '#606060',
+          // fillOpacity: 0,
+          name: rows[i][1]
         })
         google.maps.event.addListener(country, 'mouseover', function () {
-          this.setOptions({fillOpacity: 0.4})
+          // this.setOptions({fillOpacity: 0.4})
         })
         google.maps.event.addListener(country, 'mouseout', function () {
-          this.setOptions({fillOpacity: 0})
+          // this.setOptions({fillOpacity: 0})
         })
         google.maps.event.addListener(country, 'click', function () {
           alert(this.name)
@@ -146,5 +141,15 @@ export default {
         country.setMap(map)
       }
     }
+  },
+  constructNewCoordinates (polygon) {
+    var newCoordinates = []
+    var coordinates = polygon['coordinates'][0]
+    for (var i in coordinates) {
+      newCoordinates.push(
+        new google.maps.LatLng(coordinates[i][1], coordinates[i][0]))
+    }
+    return newCoordinates
   }
+
 }
