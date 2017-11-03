@@ -49,6 +49,13 @@ export default {
         ]
       },
       {
+        featureType: 'water',
+        elementType: 'labels',
+        stylers: [
+          { visibility: 'off' }
+        ]
+      },
+      {
         featureType: 'landscape',
         stylers: [
           { visibility: 'off' }
@@ -98,7 +105,53 @@ export default {
         stylers: [
           { visibility: 'off' }
         ]
+      },
+      {
+        'featureType': 'administrative',
+        'elementType': 'geometry',
+        'stylers': [
+          {
+            'visibility': 'off'
+          }
+        ]
+      },
+      {
+        'featureType': 'administrative.country',
+        'elementType': 'labels.text.fill',
+        'stylers': [
+          {
+            'color': '#ff2546'
+          }
+        ]
+      },
+      {
+        'featureType': 'administrative.country',
+        'elementType': 'labels.text.stroke',
+        'stylers': [
+          {
+            'visibility': 'on'
+          }
+        ]
+      },
+      {
+        'featureType': 'administrative.land_parcel',
+        'elementType': 'labels',
+        'stylers': [
+          {
+            'visibility': 'off'
+          }
+        ]
+      },
+      {
+        'featureType': 'poi',
+        'elementType': 'labels.text',
+        'stylers': [
+          {
+            'visibility': 'off'
+          }
+        ]
       }
+
     ]
     return styles
   },
