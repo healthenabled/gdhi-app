@@ -3,7 +3,17 @@
   height: 100%;
   font-family: 'RobotoBold';
   #map-canvas {
-    height: 800px;
+    min-height: 650px;
+    height: 100%;
     width: 100%;
+  }
+  .legend {
+    position: absolute;
+    right: 70px;
+    bottom: 120px;
+    .l-box {
+      border: solid thin $header-grey;
+      padding: 5px;
+    }
   }
 }

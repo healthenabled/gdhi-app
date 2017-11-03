@@ -7,7 +7,7 @@ export default {
     var myOptions = {
       center: new window.google.maps.LatLng(45.4555729, 9.169236),
       zoom: 2,
-      minZoom: 2,
+      // minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
     // initialize the map
