@@ -1,18 +1,17 @@
 .country-detail {
-    background: white;
+  background: white;
 	position: absolute;
 	top: 60px;
-	left: 80px;
 	bottom: 160px;
-    width: 300px;
-    box-shadow: 1px 1px 10px 1px #CCC;
+  width: 300px;
+  box-shadow: 1px 1px 10px 1px #CCC;
 	text-transform: uppercase;
-    font-family: Roboto !important;
+  font-family: Roboto !important;
 
     &-container {
 		display: flex;
 		flex-flow: column;
-		align-items: center;	
+		align-items: center;
 		height: 95%;
     	margin: 20px 10px;
 
@@ -55,16 +54,16 @@
 			flex: 0 0 40%;
 		    width: 90%;
 			&-section {
-				padding: 5px 0;				
-			    &-name { 
+				padding: 5px 0;
+			    &-name {
 	    			font-size: 12px;
 			    }
-				&-phase {				
+				&-phase {
 					position: relative;
-					background: #555;					
+					background: #555;
 					border-radius: 15px;
 					height: 10px;
-				    margin-bottom: 5px;				    				   
+				    margin-bottom: 5px;
 
 					&:before {
 						content:'';
@@ -73,7 +72,7 @@
 						position: absolute;
 						overflow: hidden;
 						z-index: 1;
-						font-size: 10px;						
+						font-size: 10px;
 						text-align: right;
 						transform: translateX(-10px);
 					}
@@ -83,10 +82,10 @@
 						display: block;
 						height: 10px;
 						width: 0;
-						border-radius: 15px;						
+						border-radius: 15px;
 						background-color: purple;
 						position: relative;
-						overflow: hidden;						
+						overflow: hidden;
 					}
 
 					&[value="1"]::after, &[value="1"]::before {
@@ -106,7 +105,7 @@
 					}
 					&[value="1"]::before {
 						content:'phase 1';
-						transform: translateX(-7px);						
+						transform: translateX(-7px);
 					}
 					&[value="2"]::before {
 						content:'phase 2';

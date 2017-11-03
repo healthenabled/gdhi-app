@@ -3,9 +3,12 @@
   height: 100%;
   font-family: 'RobotoBold';
   #map-canvas {
-    min-height: 650px;
-    height: 100%;
+    //min-height: 650px;
+    height: 84vh;
     width: 100%;
+    & > div {
+      background-color: $bg-beige !important;
+    }
   }
   .legend {
     position: absolute;

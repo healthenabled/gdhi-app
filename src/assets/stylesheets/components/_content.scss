@@ -1,9 +1,11 @@
 .content-container {
   position: relative;
   top: 90px;
+  width: 100%;
+  height: 100%;
   .content-width {
     width: 92%;
     margin: 0 auto;
-
+    height: 100%;
   }
 }

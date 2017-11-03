@@ -7,8 +7,13 @@ export default {
     var myOptions = {
       center: new window.google.maps.LatLng(45.4555729, 9.169236),
       zoom: 2,
-      // minZoom: 2,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      minZoom: 2,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: true,
+      scaleControl: true,
+      fullscreenControl: false,
+      mapTypeControl: false,
+      streetViewControl: false
     }
     // initialize the map
     map = new google.maps.Map($mapEl, myOptions)
@@ -179,15 +184,15 @@ export default {
         })
         country.country_code = rows[i][0]
         country.setOptions({fillColor: this.getColorCodeOf(country, countryIndices)})
-        var infowindow = new google.maps.InfoWindow()
-        google.maps.event.addListener(country, 'mouseover', function (event) {
-          var contentString = '<div id="content">' +
-            '<strong>' + this.name + '</strong>' +
-            '</div>'
-          infowindow.setContent(contentString)
-          infowindow.setPosition(event.latLng)
-          infowindow.open(map, country)
-        })
+        // var infowindow = new google.maps.InfoWindow()
+        // google.maps.event.addListener(country, 'mouseover', function (event) {
+        //   var contentString = '<div id="content">' +
+        //     '<strong>' + this.name + '</strong>' +
+        //     '</div>'
+        //   infowindow.setContent(contentString)
+        //   infowindow.setPosition(event.latLng)
+        //   infowindow.open(map, country)
+        // })
         var lastSelectedCountry = ''
         var self = this
         google.maps.event.addListener(country, 'click', function (event) {
