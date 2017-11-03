@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import map from './map.html'
 import worldMap from './google-world'
+import countryDetail from '../countryDetail/country-detail.js'
 import axios from 'axios'
 
 export default Vue.extend({
   template: map,
   name: 'mappage',
+  components: { countryDetail },
   data () {
     this.mapData = {
       globalHealthIndices: []

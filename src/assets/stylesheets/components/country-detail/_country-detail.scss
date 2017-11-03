@@ -1,0 +1,128 @@
+.country-detail {
+    background: white;
+	position: absolute;
+	top: 60px;
+	left: 80px;
+	bottom: 160px;
+    width: 300px;
+    box-shadow: 1px 1px 10px 1px #CCC;
+	text-transform: uppercase;
+    font-family: Roboto !important;
+
+    &-container {
+		display: flex;
+		flex-flow: column;
+		align-items: center;	
+		height: 95%;
+    	margin: 20px 10px;
+
+		&-name {
+			flex: 0 0 5%;
+			font-weight: 600;
+			align-self: left;
+			left: 10px;
+    		position: relative;
+		}
+
+		&-score {
+			flex: 0 0 5%;
+			border: 1.5px solid #CCC;
+			height: 10px;
+			width: 95%;
+			display: flex;
+			margin: 10px 0;
+    		padding: 5px 0;
+
+			&-title {
+				font-size: 15px;
+				font-weight: 400;
+				align-self: center;
+				flex: 0 0 80%;
+				padding-left: 10px;
+			}
+
+			&-overall-score {
+			    font-size: 35px;
+			    font-weight: 800;
+			    flex: 0 0 10%;
+			    align-self: center;
+			    padding-right: 10px;
+			}
+
+		}
+
+		&-category {
+			flex: 0 0 40%;
+		    width: 90%;
+			&-section {
+				padding: 5px 0;				
+			    &-name { 
+	    			font-size: 12px;
+			    }
+				&-phase {				
+					position: relative;
+					background: #555;					
+					border-radius: 15px;
+					height: 10px;
+				    margin-bottom: 5px;				    				   
+
+					&:before {
+						content:'';
+						color: white;
+					    font-weight: 600;
+						position: absolute;
+						overflow: hidden;
+						z-index: 1;
+						font-size: 10px;						
+						text-align: right;
+						transform: translateX(-10px);
+					}
+
+					&:after {
+						content:'';
+						display: block;
+						height: 10px;
+						width: 0;
+						border-radius: 15px;						
+						background-color: purple;
+						position: relative;
+						overflow: hidden;						
+					}
+
+					&[value="1"]::after, &[value="1"]::before {
+					  width: 20%;
+					}
+					&[value="2"]::after, &[value="2"]::before {
+					  width: 40%;
+					}
+					&[value="3"]::after, &[value="3"]::before {
+					  width: 60%;
+					}
+					&[value="4"]::after, &[value="4"]::before {
+					  width: 80%;
+					}
+					&[value="5"]::after, &[value="5"]::before {
+					  width: 100%;
+					}
+					&[value="1"]::before {
+						content:'phase 1';
+						transform: translateX(-7px);						
+					}
+					&[value="2"]::before {
+						content:'phase 2';
+					}
+					&[value="3"]::before {
+						content:'phase 3';
+					}
+					&[value="4"]::before {
+						content:'phase 4';
+					}
+					&[value="5"]::before {
+						content:'phase 5';
+					}
+
+				}
+			}
+		}
+    }
+}
