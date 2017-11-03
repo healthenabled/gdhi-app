@@ -5,7 +5,7 @@ export default {
   drawMap (data, $mapEl) {
     var map
     var myOptions = {
-      center: new window.google.maps.LatLng(45.4555729, 9.169236),
+      center: new window.google.maps.LatLng(43.068117532484706, -345.2356098368254),
       zoom: 2,
       minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -37,7 +37,7 @@ export default {
       if (y < minY) y = minY
       if (y > maxY) y = maxY
       if (map.zoom < 3) {
-        map.setCenter(new google.maps.LatLng(y, x))
+        map.setCenter(new google.maps.LatLng(43.068117532484706, -345.2356098368254))
       }
     })
     map.setOptions({styles: this.mapStyleConfiguration()})

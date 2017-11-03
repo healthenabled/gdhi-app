@@ -2,9 +2,11 @@
   width: 100%;
   height: 100%;
   font-family: 'RobotoBold';
+  .map-layer {
+    width: 1024px;
+  }
   #map-canvas {
-    //min-height: 650px;
-    height: 84vh;
+    height: 83vh;
     width: 100%;
     & > div {
       background-color: $bg-beige !important;
@@ -18,5 +20,47 @@
       border: solid thin $header-grey;
       padding: 5px;
     }
+  }
+
+
+}
+@media screen
+and (min-device-width: 1200px)
+and (max-device-width: 1300px) {
+  .map-layer {
+    margin-left: 150px;
+  }
+  .map-container .country-detail {
+    width: 250px;
+  }
+}
+
+@media screen
+and (min-device-width: 1301px)
+and (max-device-width: 1400px) {
+  .map-layer {
+    margin-left: 200px;
+  }
+}
+@media screen
+and (min-device-width: 1401px)
+and (max-device-width: 1500px) {
+  .map-layer {
+    margin-left: 290px;
+  }
+}
+@media screen
+and (min-device-width: 1501px)
+and (max-device-width: 1800px) {
+  .map-layer {
+    margin-left: 400px;
+  }
+}
+
+@media screen
+and (min-device-width: 1801px)
+and (max-device-width: 1950px) {
+  .map-layer {
+    margin-left: 500px;
   }
 }
