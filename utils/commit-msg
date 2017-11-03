@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-$regex = /\A(GDHI-\w{2,10})+(.* )+(<\w+(\/\s?)?\w*>)$/i
+$regex = /\A(GDHI-\w{1,10})+(.* )+(<\w+(\/\s?)?\w*>)$/i
 message_file = ARGV[0]
 message = File.read(message_file)
 
