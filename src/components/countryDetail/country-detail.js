@@ -7,10 +7,9 @@ export default Vue.extend({
   name: 'country-detail-panel',
 
   data () {
-    this.developmentIndicators = {
-      details: {}
+    return {
+      developmentIndicators: {}
     }
-    return this.developmentIndicators
   },
 
   created () {
@@ -37,13 +36,13 @@ export default Vue.extend({
       const developmentIndicatorsUrl = '/api/countries/' + countryId + '/development_indicators'
       axios.get(developmentIndicatorsUrl)
       .then(response => {
-        var developmentIndicatorsData = response.data
-        context.$set(this.developmentIndicators, 'details', {
-          'gniPerCapita': context.getGNIPerCapitaInKilo(developmentIndicatorsData.gniPerCapita),
-          'population': context.getTotalPopulationInMillion(developmentIndicatorsData.totalPopulation),
-          'lifeExpectancy': developmentIndicatorsData.lifeExpectancy,
-          'healthExpenditure': context.getHealthExpenditureInPercentage(developmentIndicatorsData.healthExpenditure)
-        })
+        var developmentIndicatorsData = {
+          'gniPerCapita': context.getGNIPerCapitaInKilo(response.data.gniPerCapita),
+          'population': context.getTotalPopulationInMillion(response.data.totalPopulation),
+          'lifeExpectancy': response.data.lifeExpectancy,
+          'healthExpenditure': context.getHealthExpenditureInPercentage(response.data.healthExpenditure)
+        }
+        this.developmentIndicators = developmentIndicatorsData
       }).catch(e => {
         console.log('Error pulling development indicators data')
       })
