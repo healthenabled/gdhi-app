@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import $ from 'jQuery'
 
 /* eslint-disable no-undef */
 export default {
@@ -6,14 +7,18 @@ export default {
     var map
     var myOptions = {
       center: new window.google.maps.LatLng(43.068117532484706, -345.2356098368254),
-      zoom: 2,
+      zoom: 3,
       minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       zoomControl: true,
       scaleControl: true,
       fullscreenControl: false,
       mapTypeControl: false,
-      streetViewControl: false
+      streetViewControl: false,
+      zoomControlOptions: {
+        style: google.maps.ZoomControlStyle.SMALL
+      }
+
     }
     // initialize the map
     map = new google.maps.Map($mapEl, myOptions)
@@ -40,6 +45,12 @@ export default {
         map.setCenter(new google.maps.LatLng(43.068117532484706, -345.2356098368254))
       }
     })
+    google.maps.event.addDomListener(map, 'tilesloaded', function () {
+      if ($('#zoomPos').length === 0) {
+        $('div.gmnoprint').last().parent().wrap('<div id="zoomPos" />')
+      }
+    })
+
     map.setOptions({styles: this.mapStyleConfiguration()})
     return map
   },
@@ -50,7 +61,7 @@ export default {
         featureType: 'water',
         elementType: 'geometry.fill',
         stylers: [
-          {color: '#f2f2e4'}
+          {color: '#f2f2e5'}
         ]
       },
       {
