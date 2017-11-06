@@ -41,3 +41,7 @@ node_modules/
 # dotenv environment variables file
 .env
 .DS_Store
+
+#Sublime
+*.sublime-project
+*.sublime-workspace
