@@ -15,10 +15,31 @@ export default {
       mapTypeControl: false,
       streetViewControl: false
     }
+    // initialize the map
     map = new google.maps.Map($mapEl, myOptions)
-    if (map.zoom < 3) {
-      map.setCenter(new google.maps.LatLng(43.068117532484706, -345.2356098368254))
-    }
+
+    // align map to center
+    google.maps.event.addListener(map, 'idle', function () {
+      var allowedBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(20.124072, -30.002952),
+        new google.maps.LatLng(20.124072, -30.002952))
+      if (allowedBounds.contains(map.getCenter())) return
+      var c = map.getCenter()
+      var x = c.lng()
+      var y = c.lat()
+      var maxX = allowedBounds.getNorthEast().lng()
+      var maxY = allowedBounds.getNorthEast().lat()
+      var minX = allowedBounds.getSouthWest().lng()
+      var minY = allowedBounds.getSouthWest().lat()
+
+      if (x < minX) x = minX
+      if (x > maxX) x = maxX
+      if (y < minY) y = minY
+      if (y > maxY) y = maxY
+      if (map.zoom < 3) {
+        map.setCenter(new google.maps.LatLng(43.068117532484706, -345.2356098368254))
+      }
+    })
     map.setOptions({styles: this.mapStyleConfiguration()})
     return map
   },
