@@ -1,34 +1,14 @@
 <div class="country-detail">
 	<div class="country-detail-container">
-		<div class="country-detail-container-name">Country Name</div>
+		<div class="country-detail-container-name">{{healthIndicators.countryName}}</div>
 		<div class="country-detail-container-score">
 			<span class="country-detail-container-score-title">Overall Score</span>
-			<span class="country-detail-container-score-overall-score">4</span>
+			<span class="country-detail-container-score-overall-score">{{healthIndicators.countryPhase}}</span>
 		</div>
 		<div class="country-detail-container-category">
-			<div class="country-detail-container-category-section">
-				<div class="country-detail-container-category-section-phase" value=''></div>
-				<span class="country-detail-container-category-section-name">LEADERSHIP</span>
-			</div>
-			<div class="country-detail-container-category-section">
-				<div class="country-detail-container-category-section-phase" value='1'></div>
-				<span class="country-detail-container-category-section-name">INFRASTRUCTURE</span>
-			</div>
-			<div class="country-detail-container-category-section">
-				<div class="country-detail-container-category-section-phase" value='2'></div>
-				<span class="country-detail-container-category-section-name">SERVICES & APPLICATIONS</span>
-			</div>
-			<div class="country-detail-container-category-section">
-				<div class="country-detail-container-category-section-phase" value='3'></div>
-				<span class="country-detail-container-category-section-name">STRATEGY</span>
-			</div>
-			<div class="country-detail-container-category-section">
-				<div class="country-detail-container-category-section-phase" value='4'></div>
-				<span class="country-detail-container-category-section-name">LEGISLATION</span>
-			</div>
-			<div class="country-detail-container-category-section">
-				<div class="country-detail-container-category-section-phase" value='5'></div>
-				<span class="country-detail-container-category-section-name">WORKFORCE</span>
+			<div v-for="(catagory, index) in healthIndicators.categories" class="country-detail-container-category-section">
+				<div class="country-detail-container-category-section-phase" :value="catagory.phase"></div>
+				<span class="country-detail-container-category-section-name">{{catagory.name}}</span>
 			</div>
 		</div>
 		<div class="country-detail-container-context">

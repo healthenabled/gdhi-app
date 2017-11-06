@@ -8,13 +8,15 @@ export default Vue.extend({
 
   data () {
     return {
-      developmentIndicators: {}
+      developmentIndicators: {},
+      healthIndicators: {}
     }
   },
 
   created () {
     var self = this
     const countryId = 'ARG'
+    this.getHealthIndicators(self, countryId)
     this.getDevelopmentIndicators(self, countryId)
   },
 
@@ -45,6 +47,22 @@ export default Vue.extend({
         this.developmentIndicators = developmentIndicatorsData
       }).catch(e => {
         console.log('Error pulling development indicators data')
+      })
+    },
+
+    getHealthIndicators: function (context, countryId) {
+      const healthIndicatorsUrl = '/api/countries/' + countryId + '/health_indicators'
+      axios.get(healthIndicatorsUrl)
+      .then(response => {
+        var healthIndicatorsData = {
+          'countryName': response.data.countryName,
+          'overallScore': response.data.overallScore,
+          'categories': response.data.categories,
+          'countryPhase': response.data.countryPhase
+        }
+        this.healthIndicators = healthIndicatorsData
+      }).catch(e => {
+        console.log('Error pulling health indicators data')
       })
     }
   }
