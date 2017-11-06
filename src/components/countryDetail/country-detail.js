@@ -16,20 +16,7 @@ export default Vue.extend({
   created () {
     var self = this
     const countryId = 'ARG'
-    const developmentIndicatorsUrl = '/api/countries/' + countryId + '/development_indicators'
-    axios.get(developmentIndicatorsUrl)
-    .then(response => {
-      var developmentIndicatorsData = response.data
-      self.$set(this.developmentIndicators, 'details', {
-        'gniPerCapita': self.getGNIPerCapitaInKilo(developmentIndicatorsData.gniPerCapita),
-        'population': self.getTotalPopulationInMillion(developmentIndicatorsData.totalPopulation),
-        'lifeExpectancy': developmentIndicatorsData.lifeExpectancy,
-        'healthExpenditure': self.getHealthExpenditureInPercentage(developmentIndicatorsData.healthExpenditure)
-      })
-    })
-    .catch(e => {
-      console.log('Error pulling development indicators data')
-    })
+    this.getDevelopmentIndicators(self, countryId)
   },
 
   methods: {
@@ -44,8 +31,23 @@ export default Vue.extend({
 
     getHealthExpenditureInPercentage: function (healthExpenditure) {
       return Number((healthExpenditure).toFixed(1)) + '%'
-    }
+    },
 
+    getDevelopmentIndicators: function (context, countryId) {
+      const developmentIndicatorsUrl = '/api/countries/' + countryId + '/development_indicators'
+      axios.get(developmentIndicatorsUrl)
+      .then(response => {
+        var developmentIndicatorsData = response.data
+        context.$set(this.developmentIndicators, 'details', {
+          'gniPerCapita': context.getGNIPerCapitaInKilo(developmentIndicatorsData.gniPerCapita),
+          'population': context.getTotalPopulationInMillion(developmentIndicatorsData.totalPopulation),
+          'lifeExpectancy': developmentIndicatorsData.lifeExpectancy,
+          'healthExpenditure': context.getHealthExpenditureInPercentage(developmentIndicatorsData.healthExpenditure)
+        })
+      }).catch(e => {
+        console.log('Error pulling development indicators data')
+      })
+    }
   }
 
 })
