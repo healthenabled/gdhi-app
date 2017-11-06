@@ -7,7 +7,7 @@
     width: 100%;
   }
   #map-canvas {
-    height: 83vh;
+    height: calc(100vh - 126px);
     width: 100%;
     & > div {
       background-color: $bg-beige !important;

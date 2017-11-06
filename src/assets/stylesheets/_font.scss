@@ -1,4 +1,18 @@
 @font-face {
+  font-family: 'RobotoSlabBold';
+  src: url('./assets/fonts/RobotoSlab-Bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'RobotoSlabRegular';
+  src: url('./assets/fonts/RobotoSlab-Regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'RobotoRegular';
   src: url('./assets/fonts/Roboto-Regular-webfont.woff') format('woff');
   font-weight: normal;

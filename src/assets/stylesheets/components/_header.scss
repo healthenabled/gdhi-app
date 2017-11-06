@@ -25,11 +25,12 @@
 .header-elements {
   display: flex;
   width: 100%;
+  font-family: RobotoRegular;
   .logo-name {
-    width: 10%;
-    font-size: 22px;
+    width: 119px;
+    font-size: 23px;
     color: $logo-blue;
-    font-family: 'RobotoBold';
+    font-family: 'RobotoSlabBold';
 
 
   }

@@ -6,7 +6,7 @@ export default {
   drawMap (data, $mapEl) {
     var map
     var myOptions = {
-      center: new window.google.maps.LatLng(43.068117532484706, -345.2356098368254),
+      center: new window.google.maps.LatLng(33.386790019438294, 27.74469604492184),
       zoom: 3,
       minZoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
