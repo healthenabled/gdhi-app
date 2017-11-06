@@ -25,7 +25,7 @@
 
     &-score {
       flex: 0 0 5%;
-      border: 1.5px solid #CCC;
+      border: 2px solid #CCC;
       height: 25px;
       width: 95%;
       display: flex;
@@ -51,48 +51,33 @@
     }
 
     &-context {
-      flex: 0 0 40%;
       width: 100%;
       &-section {
         padding: 5px;
         &-name {
-          flex: 0 0 5%;
           font-weight: 600;
-          align-self: left;
-          position: relative;
         }
         &-details {
-          flex: 0 0 5%;
-          border: 1.5px solid #CCC;
-          width: 95%;
-          display: inline-block;
+          border: 2px solid #CCC;
           margin: 10px 0;
           padding: 5px;
-          align-items: center;
 
           &-info {
-            width: 40%;
-            height: 20%;
-            align-self: center;
-            flex: 0 0 80%;
-            // padding-left: 10px;
-            position: relative;
-            display: inline-grid;
-            align-items: center;
-
+            display: inline-block;
+            width: 50%;
+            &-score, &-title {
+              display: block;
+              text-align: center;
+            }
             &-score {
               font-size: 20px;
-              font-weight: 800;
-              flex: 0 0 10%;
-              align-self: center;
-              // padding-right: 10px;
+              font-weight: 600;
+
             }
             &-title {
               font-size: 12px;
               color: #A9A9A9;
-              align-self: center;
-              flex: 0 0 80%;
-              // padding-left: 10px;
+              padding-top: 5px;
             }
           }
         }

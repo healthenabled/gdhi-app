@@ -12,30 +12,13 @@
 			</div>
 		</div>
 		<div class="country-detail-container-context">
-			<div class="country-detail-container-context-section">
-				<span class="country-detail-container-context-section-name">CONTEXT</span>
-				<div class="country-detail-container-context-section-details">
-					<div class="country-detail-container-context-section-details-info">
-						<span class="country-detail-container-context-section-details-info-score">{{developmentIndicators.gniPerCapita}}</span>
-						<span class="country-detail-container-context-section-details-info-title">GNI PER CAPITA</span>
-					</div>
-					<div class="country-detail-container-context-section-details-info">
-						<span class="country-detail-container-context-section-details-info-score">{{developmentIndicators.population}}</span>
-						<span class="country-detail-container-context-section-details-info-title">TOTAL POPULATION</span>
-					</div>
-				</div>
-			</div>
-			<div class="country-detail-container-context-section">
-				<span class="country-detail-container-context-section-name">HEALTH</span>
-				<div class="country-detail-container-context-section-details">
-					<div class="country-detail-container-context-section-details-info">
-						<span class="country-detail-container-context-section-details-info-score">{{developmentIndicators.lifeExpectancy}}</span>
-						<span class="country-detail-container-context-section-details-info-title">LIFE EXPECTANCY</span>
-					</div>
-					<div class="country-detail-container-context-section-details-info">
-						<span class="country-detail-container-context-section-details-info-score">{{developmentIndicators.healthExpenditure}}</span>
-						<span class="country-detail-container-context-section-details-info-title">HEALTH EXPENDITURE</span>
-					</div>
+			<div v-for="indicatorCategory in developmentIndicators" class="country-detail-container-context-section">
+				<span class="country-detail-container-context-section-name">{{Object.keys(indicatorCategory)[0]}}</span>
+				<div v-for="indicators in indicatorCategory" class="country-detail-container-context-section-details">
+						<div v-for="(indicator, key) in indicators" class="country-detail-container-context-section-details-info">
+							<span class="country-detail-container-context-section-details-info-score">{{indicator}}</span>
+							<span class="country-detail-container-context-section-details-info-title">{{key}}</span>
+						</div>
 				</div>
 			</div>
 		</div>
