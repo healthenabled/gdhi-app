@@ -1,0 +1,26 @@
+<div class="health-inicators">
+	<div class="health-inicators-container">
+		<div class="health-inicators-container-name">{{healthIndicators.countryName}}</div>
+		<div class="health-inicators-container-score">
+			<span class="health-inicators-container-score-title">Overall Score</span>
+			<span class="health-inicators-container-score-overall-score">{{healthIndicators.countryPhase}}</span>
+		</div>
+		<div class="health-inicators-container-category">
+			<div v-for="(catagory, index) in healthIndicators.categories" class="health-inicators-container-category-section">
+				<div class="health-inicators-container-category-section-phase" :value="catagory.phase"></div>
+				<span class="health-inicators-container-category-section-name">{{catagory.name}}</span>
+			</div>
+		</div>
+		<div class="health-inicators-container-context">
+			<div v-for="indicatorCategory in developmentIndicators" class="health-inicators-container-context-section">
+				<span class="health-inicators-container-context-section-name">{{Object.keys(indicatorCategory)[0]}}</span>
+				<div v-for="indicators in indicatorCategory" class="health-inicators-container-context-section-details">
+						<div v-for="(indicator, key) in indicators" class="health-inicators-container-context-section-details-info">
+							<span class="health-inicators-container-context-section-details-info-score">{{indicator}}</span>
+							<span class="health-inicators-container-context-section-details-info-title">{{key}}</span>
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

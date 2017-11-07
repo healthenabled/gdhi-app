@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import countryDetail from './country-detail.html'
+import healthIndicators from './health-inicators.html'
 import axios from 'axios'
 
 export default Vue.extend({
-  template: countryDetail,
-  name: 'country-detail-panel',
+  template: healthIndicators,
+  name: 'health-inicators-panel',
 
   data () {
     return {

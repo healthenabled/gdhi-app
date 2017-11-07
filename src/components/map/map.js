@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import map from './map.html'
 import worldMap from './google-world'
-import countryDetail from '../countryDetail/country-detail.js'
+import healthIndicator from '../healthIndicator/health-indicator.js'
 import mapLegend from '../legend/legend.js'
 import axios from 'axios'
 
 export default Vue.extend({
   template: map,
   name: 'mappage',
-  components: { countryDetail, mapLegend },
+  components: { healthIndicator, mapLegend },
 
   data () {
     this.mapData = {
