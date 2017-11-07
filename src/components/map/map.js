@@ -4,6 +4,8 @@ import worldMap from './google-world'
 import healthIndicator from '../healthIndicator/health-indicator.js'
 import mapLegend from '../legend/legend.js'
 import axios from 'axios'
+import colors from '../common/color-codes.js'
+import _ from 'lodash'
 
 export default Vue.extend({
   template: map,
@@ -16,15 +18,14 @@ export default Vue.extend({
     }
     return this.mapData
   },
+
   created () {
     var self = this
     axios.all([self.fetchGlobalIndices(), self.fetchGlobalMapData()])
-      .then(axios.spread(function (healthIndices, mapData) {
+      .then(axios.spread(function (globalHealthIndices, mapData) {
         self.boundaries = mapData.data
-        console.log('Response', self.boundaries)
-        self.stubData()
         var map = worldMap.drawMap(self.boundaries, document.getElementById('map-canvas'))
-        worldMap.bindEventsToMap(self.boundaries, self.mapData.globalHealthIndices,
+        worldMap.bindEventsToMap(self.boundaries, self.mergeColorCodeToHealthIndicators(globalHealthIndices, self),
           map)
       }))
   },
@@ -37,28 +38,26 @@ export default Vue.extend({
       return axios.get(fusionapiUrl)
     },
 
-    fetchGlobalIndices: function (callback, map) {
-      return axios.get('/api/countries')
+    mergeColorCodeToHealthIndicators: function (globalHealthIndices, self) {
+      var collection = globalHealthIndices.data.countryHealthScores
+      _.forEach(collection, function (value) {
+        _.merge(value, {
+          'colorCode': self.getColorCodeFor(value['countryPhase'])
+        })
+      })
+      return collection
     },
-    stubData () {
-      this.$set(this.mapData, 'globalHealthIndices', [{
-        'country_name': 'Afghanistan',
-        'country_code': 'AFG',
-        'catagory': 'Cat 1',
-        'indicator_description': 'Indicator 1',
-        'indicator_name': 'Name',
-        'indicator_score': 2,
-        'color_code': '#225e8e'
-      },
-      {
-        'country_name': 'Russia',
-        'country_code': 'RUS',
-        'catagory': 'Cat 1',
-        'indicator_description': 'Indicator 1',
-        'indicator_name': 'Name',
-        'indicator_score': 2,
-        'color_code': '#225e8e'
-      }])
+
+    getColorCodeFor (score) {
+      var colorCodes = colors.getColorCodes()
+      var colorHashArray = colorCodes.filter(function (c) {
+        return !score ? 'NA' : c['score'] === JSON.stringify(score)
+      })
+      return colorHashArray[0]['color']
+    },
+
+    fetchGlobalIndices: function () {
+      return axios.get('/api/global_health_indicators')
     }
   }
 

@@ -1,8 +1,5 @@
-<ul class="legend">
-  <li class="l-box">1</li>
-  <li class="l-box">2</li>
-  <li class="l-box">3</li>
-  <li class="l-box">4</li>
-  <li class="l-box">5</li>
-  <li class="l-box">NA</li>
+<ul id="v-for-object" class="legend">
+  <li class="l-box" v-for="value in object.scoreToColor" :style="{ 'background-color': value.color }">
+    {{value.score}}
+  </li>
 </ul>

@@ -192,17 +192,8 @@ export default {
           fillOpacity: 0.3,
           name: rows[i][1]
         })
-        country.country_code = rows[i][0]
+        country.countryCode = rows[i][0]
         country.setOptions({fillColor: this.getColorCodeOf(country, countryIndices)})
-        // var infowindow = new google.maps.InfoWindow()
-        // google.maps.event.addListener(country, 'mouseover', function (event) {
-        //   var contentString = '<div id="content">' +
-        //     '<strong>' + this.name + '</strong>' +
-        //     '</div>'
-        //   infowindow.setContent(contentString)
-        //   infowindow.setPosition(event.latLng)
-        //   infowindow.open(map, country)
-        // })
         var lastSelectedCountry = ''
         var self = this
         google.maps.event.addListener(country, 'click', function (event) {
@@ -221,11 +212,12 @@ export default {
       }
     }
   },
+
   getColorCodeOf (country, countryIndices) {
     let matchedCountry = _.filter(countryIndices,
-      (countryObj) => { return countryObj.country_code === country.country_code })
+      (countryObj) => { return countryObj.countryId === country.countryCode })
     return matchedCountry && matchedCountry.length >
-      0 ? matchedCountry[0].color_code : '#606060'
+      0 ? matchedCountry[0].colorCode : '#606060'
   },
   constructNewCoordinates (polygon) {
     var newCoordinates = []
