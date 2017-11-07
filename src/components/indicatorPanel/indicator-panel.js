@@ -16,8 +16,7 @@ export default Vue.extend({
   created () {
     var self = this
     const countryId = 'ARG'
-    this.getHealthIndicators(self, countryId)
-    this.getDevelopmentIndicators(self, countryId)
+    this.getIndicators(self, countryId)
   },
 
   methods: {
@@ -32,6 +31,11 @@ export default Vue.extend({
 
     getHealthExpenditureInPercentage: function (healthExpenditure) {
       return Number((healthExpenditure).toFixed(1)) + '%'
+    },
+
+    getIndicators: function (context, countryId) {
+      this.getHealthIndicators(context, countryId)
+      this.getDevelopmentIndicators(context, countryId)
     },
 
     getDevelopmentIndicators: function (context, countryId) {
