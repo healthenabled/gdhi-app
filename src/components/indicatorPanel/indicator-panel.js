@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import healthIndicators from './health-inicators.html'
+import indicatorPanel from './indicator-panel.html'
 import axios from 'axios'
 
 export default Vue.extend({
-  template: healthIndicators,
-  name: 'health-inicators-panel',
+  template: indicatorPanel,
+  name: 'indicator-panel',
 
   data () {
     return {

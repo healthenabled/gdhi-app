@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import map from './map.html'
 import worldMap from './google-world'
-import healthIndicator from '../healthIndicator/health-indicator.js'
+import indicatorPanel from '../indicatorPanel/indicator-panel.js'
 import mapLegend from '../legend/legend.js'
 import axios from 'axios'
 import colors from '../common/color-codes.js'
@@ -10,7 +10,7 @@ import _ from 'lodash'
 export default Vue.extend({
   template: map,
   name: 'mappage',
-  components: { healthIndicator, mapLegend },
+  components: { indicatorPanel, mapLegend },
 
   data () {
     this.mapData = {
