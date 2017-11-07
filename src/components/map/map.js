@@ -38,7 +38,7 @@ export default Vue.extend({
     },
 
     fetchGlobalIndices: function (callback, map) {
-      return axios.get('/api/countrylist')
+      return axios.get('/api/countries')
     },
     stubData () {
       this.$set(this.mapData, 'globalHealthIndices', [{
