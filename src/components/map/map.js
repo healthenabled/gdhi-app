@@ -53,7 +53,7 @@ export default Vue.extend({
       var colorHashArray = colorCodes.filter(function (c) {
         return !score ? 'NA' : c['score'] === JSON.stringify(score)
       })
-      return colorHashArray[0]['color']
+      return colorHashArray.length !== 0 ? colorHashArray[0]['color'] : '#606060'
     },
 
     fetchGlobalIndices: function () {
