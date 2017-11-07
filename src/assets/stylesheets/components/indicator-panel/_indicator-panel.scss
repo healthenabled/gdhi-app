@@ -94,7 +94,7 @@
         }
         &-phase {
           position: relative;
-          background: #555;
+          background: #606060;
           border-radius: 15px;
           height: 10px;
           margin-bottom: 5px;
@@ -118,7 +118,7 @@
             height: 10px;
             width: 0;
             border-radius: 15px;
-            background-color: purple;
+            background-color: #606060;
             position: relative;
             overflow: hidden;
           }
@@ -153,6 +153,21 @@
           }
           &[value="5"]::before {
             content: 'phase 5';
+          }
+          &[value="1"]::after {
+            background-color: #BEDCE3;
+          }
+          &[value="2"]::after {
+            background-color: #77B2BF;
+          }
+          &[value="3"]::after {
+            background-color: #387886;
+          }
+          &[value="4"]::after {
+            background-color: #225E8E;
+          }
+          &[value="5"]::after {
+            background-color: #11184B;
           }
         }
       }
