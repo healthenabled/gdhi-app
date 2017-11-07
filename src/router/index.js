@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import content from '@/components/container/container.js'
 import mapComponent from '@/components/map/map.js'
-import headerComp from '@/components/header/header.vue'
+import headerComp from '@/components/header/header.js'
 import footerComp from '@/components/footer/footer.vue'
 Vue.use(Router)
 
