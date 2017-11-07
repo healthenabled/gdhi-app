@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import $ from 'jQuery'
+import $ from 'jquery'
 
 /* eslint-disable no-undef */
 export default {
