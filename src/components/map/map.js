@@ -32,7 +32,7 @@ export default Vue.extend({
 
   methods: {
     fetchGlobalMapData () {
-      const fusionapiUrl = 'https://www.googleapis.com/fusiontables/v2/query?sql=SELECT sov_a3, name_sort, kml_4326 ' +
+      const fusionapiUrl = 'https://www.googleapis.com/fusiontables/v2/query?sql=SELECT adm0_a3, name_sort, kml_4326 ' +
         'FROM 1foc3xO9DyfSIF6ofvN0kp2bxSfSeKog5FbdWdQ&key=' + process.env.MAP_KEY
       console.log('Fusion Url', fusionapiUrl)
       return axios.get(fusionapiUrl)
