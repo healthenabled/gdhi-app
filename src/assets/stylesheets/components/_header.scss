@@ -1,11 +1,13 @@
 .header {
   width: 100%;
   background: $white;
-  font-family: 'RobotoBold';
+  font-family: 'RobotoMedium';
   position: fixed;
   top: 0;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  font-size: 14px;
+
   .header-width {
     margin: 0 auto;
     width: 92%;
@@ -16,18 +18,19 @@
     align-items: flex-end;
     padding: 20px 0px;
     flex-grow: 0.4;
+
   }
   .xl-length {
     flex-grow: 5;
+    color: $link-blue;
   }
 }
 
 .header-elements {
   display: flex;
   width: 100%;
-  font-family: RobotoRegular;
   .logo-name {
-    width: 119px;
+    width: 160px;
     font-size: 23px;
     color: $logo-blue;
     font-family: 'RobotoSlabBold';
@@ -38,6 +41,7 @@
     input {
       width: 100%;
       padding: 5px 3px;
+      font-size: 12px;
     }
   }
 

@@ -1,7 +1,7 @@
 .indicator-panel {
   background: white;
   position: absolute;
-  top: 60px;
+  top: 7px;
   // bottom: 160px;
   width: 265px;
   box-shadow: 1px 1px 10px 1px #CCC;
@@ -13,7 +13,7 @@
     flex-flow: column;
     align-items: center;
     height: 95%;
-    margin: 20px 10px;
+    margin: 8px 10px;
 
     &-name {
       flex: 0 0 5%;
@@ -21,6 +21,9 @@
       align-self: left;
       left: 10px;
       position: relative;
+      font-family: 'RobotoSlabRegular';
+      font-size: 18px;
+      text-transform: capitalize;
     }
 
     &-score {
@@ -91,12 +94,13 @@
         padding: 5px 0;
         &-name {
           font-size: 12px;
+          font-family: 'RobotoSlab';
         }
         &-phase {
           position: relative;
           background: #606060;
           border-radius: 15px;
-          height: 10px;
+          height: 11px;
           margin-bottom: 5px;
           width: 100%;
 
@@ -107,9 +111,10 @@
             position: absolute;
             overflow: hidden;
             z-index: 1;
-            font-size: 10px;
+            font-size: 11px;
             text-align: right;
             transform: translateX(-10px);
+            font-family: 'RobotoBold';
           }
 
           &:after {
