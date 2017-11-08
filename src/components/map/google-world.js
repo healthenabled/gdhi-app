@@ -186,7 +186,7 @@ export default {
               })
             }
             lastSelectedCountry = this
-            this.setOptions({fillColor: '#ff2546'})
+            this.setOptions({fillColor: '#CF0A01'})
           })
         }
         var infowindow = new google.maps.InfoWindow()
