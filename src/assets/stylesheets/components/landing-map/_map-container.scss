@@ -28,48 +28,8 @@
   #zoomPos {
     position: absolute;
     top: 140px;
-    left: 340px;
+    left: 305px;
   }
 
 
-}
-@media screen
-and (min-device-width: 1200px)
-and (max-device-width: 1300px) {
-  .map-layer {
-    //padding-left: 150px;
-  }
-  .map-container .indicator-panel {
-    width: 250px;
-  }
-}
-
-@media screen
-and (min-device-width: 1301px)
-and (max-device-width: 1400px) {
-  .map-layer {
-    //padding-left: 200px;
-  }
-}
-@media screen
-and (min-device-width: 1401px)
-and (max-device-width: 1500px) {
-  .map-layer {
-    //padding-left: 290px;
-  }
-}
-@media screen
-and (min-device-width: 1501px)
-and (max-device-width: 1800px) {
-  .map-layer {
-    //padding-left: 400px;
-  }
-}
-
-@media screen
-and (min-device-width: 1801px)
-and (max-device-width: 1950px) {
-  .map-layer {
-    //padding-left: 500px;
-  }
 }
