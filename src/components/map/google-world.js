@@ -5,7 +5,7 @@ import $ from 'jquery'
 export default {
   drawMap (data, $mapEl) {
     var map
-    var myOptions = {
+    var mapOptions = {
       center: new window.google.maps.LatLng(33.386790019438294, 27.74469604492184),
       zoom: 3,
       minZoom: 2,
@@ -21,30 +21,7 @@ export default {
 
     }
     // initialize the map
-    map = new google.maps.Map($mapEl, myOptions)
-
-    // align map to center
-    google.maps.event.addListener(map, 'idle', function () {
-      var allowedBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(20.124072, -30.002952),
-        new google.maps.LatLng(20.124072, -30.002952))
-      if (allowedBounds.contains(map.getCenter())) return
-      var c = map.getCenter()
-      var x = c.lng()
-      var y = c.lat()
-      var maxX = allowedBounds.getNorthEast().lng()
-      var maxY = allowedBounds.getNorthEast().lat()
-      var minX = allowedBounds.getSouthWest().lng()
-      var minY = allowedBounds.getSouthWest().lat()
-
-      if (x < minX) x = minX
-      if (x > maxX) x = maxX
-      if (y < minY) y = minY
-      if (y > maxY) y = maxY
-      if (map.zoom < 3) {
-        map.setCenter(new google.maps.LatLng(43.068117532484706, -345.2356098368254))
-      }
-    })
+    map = new google.maps.Map($mapEl, mapOptions)
     google.maps.event.addDomListener(map, 'tilesloaded', function () {
       if ($('#zoomPos').length === 0) {
         $('div.gmnoprint').last().parent().wrap('<div id="zoomPos" />')
@@ -137,6 +114,9 @@ export default {
         'stylers': [
           {
             'color': '#ff2546'
+          },
+          {
+            'visibility': 'off'
           }
         ]
       },
@@ -145,7 +125,7 @@ export default {
         'elementType': 'labels.text.stroke',
         'stylers': [
           {
-            'visibility': 'on'
+            'visibility': 'off'
           }
         ]
       },
@@ -186,26 +166,41 @@ export default {
         }
         var country = new google.maps.Polygon({
           paths: newCoordinates,
-          strokeColor: '#ff9900',
+          strokeColor: '#fff',
           strokeOpacity: 1,
           strokeWeight: 0.3,
-          fillOpacity: 0.3,
+          fillOpacity: 0.95,
           name: rows[i][1]
         })
         country.countryCode = rows[i][0]
         country.setOptions({fillColor: this.getColorCodeOf(country, countryIndices)})
         var lastSelectedCountry = ''
         var self = this
-        google.maps.event.addListener(country, 'click', function (event) {
-          if (lastSelectedCountry !== '') {
-            lastSelectedCountry.setOptions({
-              fillOpacity: 0.3,
-              fillColor: self.getColorCodeOf(lastSelectedCountry, countryIndices)
-            })
+        if (this.getMatchedCountry(country, countryIndices)) {
+          google.maps.event.addListener(country, 'click', function (event) {
+            infowindow.close()
+            if (lastSelectedCountry !== '') {
+              lastSelectedCountry.setOptions({
+                fillOpacity: 0.95,
+                fillColor: self.getColorCodeOf(lastSelectedCountry, countryIndices)
+              })
+            }
+            lastSelectedCountry = this
+            this.setOptions({fillColor: '#ff2546'})
+          })
+        }
+        var infowindow = new google.maps.InfoWindow()
+        var lastMouseOverCountry = ''
+        google.maps.event.addListener(country, 'mouseover', function (event) {
+          if (lastMouseOverCountry !== this.name) {
+            var contentString = '<div id="popover">' +
+              '<strong>' + this.name + '</strong>' +
+              '</div>'
+            infowindow.setContent(contentString)
+            infowindow.setPosition(event.latLng)
+            lastMouseOverCountry = this.name
           }
-          lastSelectedCountry = this
-          this.setOptions({fillOpacity: 0.6})
-          this.setOptions({fillColor: '#ffa500'})
+          infowindow.open(map, country)
         })
 
         country.setMap(map)
@@ -214,10 +209,14 @@ export default {
   },
 
   getColorCodeOf (country, countryIndices) {
+    var matchedCountry = this.getMatchedCountry(country, countryIndices)
+    return matchedCountry ? matchedCountry.colorCode : '#606060'
+  },
+  getMatchedCountry (country, countryIndices) {
     let matchedCountry = _.filter(countryIndices,
       (countryObj) => { return countryObj.countryId === country.countryCode })
     return matchedCountry && matchedCountry.length >
-      0 ? matchedCountry[0].colorCode : '#606060'
+      0 ? matchedCountry[0] : null
   },
   constructNewCoordinates (polygon) {
     var newCoordinates = []
