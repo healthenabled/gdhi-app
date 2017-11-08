@@ -31,6 +31,7 @@ export default Vue.extend({
         getValue: 'name',
         highlightPhrase: true,
         list: {
+          match: { enabled: true },
           onSelectItemEvent: function () {
             console.log($('#search-box').getSelectedItemData().id)
           }
