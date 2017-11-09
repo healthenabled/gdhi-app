@@ -62,10 +62,11 @@
           font-size: 12px;
         }
         &-details {
-          border: 2px solid #CCC;
+          border: 1px solid #CCC;
           margin: 5px 0;
           padding: 5px;
           display: flex;
+          background: $bg-beige;
           &-info {
             display: inline-block;
             width: 50%;
