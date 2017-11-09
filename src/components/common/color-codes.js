@@ -1,5 +1,6 @@
 export default {
   getColorCodes () {
+    // Update variables if changed.
     return [
       {score: 'NA', color: '#606060'},
       {score: '1', color: '#BEDCE3'},

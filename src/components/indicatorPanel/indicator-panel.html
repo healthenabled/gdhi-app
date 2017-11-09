@@ -7,7 +7,7 @@
 		</div>
 		<div class="indicator-panel-container-category">
 			<div v-for="(catagory, index) in healthIndicators.categories" class="indicator-panel-container-category-section">
-				<div class="indicator-panel-container-category-section-phase" :value="catagory.phase"></div>
+				<div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
 				<span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
 			</div>
 		</div>

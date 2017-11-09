@@ -1,5 +1,5 @@
 <ul id="v-for-object" class="legend">
-  <li class="l-box" v-for="value in object.scoreToColor" :style="{ 'background-color': value.color }">
+  <li class="l-box" v-for="value in object.scoreToColor" :id="'phase' + value.score">
     {{value.score}}
   </li>
 </ul>

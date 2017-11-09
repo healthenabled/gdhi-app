@@ -2,7 +2,6 @@
   background: white;
   position: absolute;
   top: 7px;
-  // bottom: 160px;
   width: 265px;
   box-shadow: 1px 1px 10px 1px #CCC;
   text-transform: uppercase;
@@ -100,7 +99,7 @@
         }
         &-phase {
           position: relative;
-          background: #606060;
+          background: #DFDCDF;
           border-radius: 15px;
           height: 11px;
           margin-bottom: 5px;
@@ -113,7 +112,7 @@
             position: absolute;
             overflow: hidden;
             z-index: 1;
-            font-size: 11px;
+            font-size: 10px;
             text-align: right;
             transform: translateX(-10px);
             font-family: 'RobotoBold';
@@ -125,7 +124,7 @@
             height: 10px;
             width: 0;
             border-radius: 15px;
-            background-color: #606060;
+            background-color: $na;
             position: relative;
             overflow: hidden;
           }
@@ -161,20 +160,20 @@
           &[value="5"]::before {
             content: 'phase 5';
           }
-          &[value="1"]::after {
-            background-color: #BEDCE3;
+          &.phase1::after {
+            background-color: $score1;
           }
-          &[value="2"]::after {
-            background-color: #77B2BF;
+          &.phase2::after {
+            background-color: $score2;
           }
-          &[value="3"]::after {
-            background-color: #387886;
+          &.phase3::after {
+            background-color: $score3;
           }
-          &[value="4"]::after {
-            background-color: #225E8E;
+          &.phase4::after {
+            background-color: $score4;
           }
-          &[value="5"]::after {
-            background-color: #11184B;
+          &.phase5::after {
+            background-color: $score5;
           }
         }
       }
