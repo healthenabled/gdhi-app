@@ -55,16 +55,18 @@
 
     &-context {
       width: 100%;
+      font-family: 'RobotoSlabRegular';
       &-section {
         padding: 5px;
         &-name {
-          font-weight: 600;
+          //font-weight: 600;
+          font-size: 12px;
         }
         &-details {
           border: 2px solid #CCC;
-          margin: 10px 0;
+          margin: 5px 0;
           padding: 5px;
-
+          display: flex;
           &-info {
             display: inline-block;
             width: 50%;
@@ -73,14 +75,14 @@
               text-align: center;
             }
             &-score {
-              font-size: 20px;
-              font-weight: 600;
-
+              font-size: 18px;
+              //font-weight: 600;
+              font-family: 'RobotoSlabRegular';
             }
             &-title {
-              font-size: 12px;
+              font-size: 11px;
               color: #A9A9A9;
-              padding-top: 5px;
+              padding-top: 3px;
             }
           }
         }
@@ -93,8 +95,8 @@
       &-section {
         padding: 5px 0;
         &-name {
-          font-size: 12px;
-          font-family: 'RobotoSlab';
+          font-size: 11px;
+          font-family: 'RobotoSlabRegular';
         }
         &-phase {
           position: relative;
