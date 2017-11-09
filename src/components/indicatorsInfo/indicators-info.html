@@ -1,0 +1,27 @@
+<div class="indicators-info">
+  <div class="indicators-info-static">
+    <span class="indicator-info-static-heading">List of indicators</span>
+    <span class="indicator-info-static-description">Place Holder</span>
+  </div>
+  <div class="indicators-info-content">
+    <div class="indicators-info-content-categories">
+      <ul id="v-for-categoryNames" class="category-names">
+        <li class="l-box" v-for="categoryName in categoryNames">
+          {{categoryName}}
+        </li>
+      </ul>
+    </div>
+
+      <div v-for="category in categoricalIndicators" class="indicators-info-content-definition-row">
+      <div class="">{{category.categoryId}}</div>
+      <div class="indicators-info-content-definition-row-colomn-1">{{category.categoryName}}</div>
+      <div v-for="indicator in category.indicators" class="indicators-info-content-definition-row-indicator">
+      <div class="indicators-info-content-definition-row-colomn-indicator-colomn-3">{{indicator.indicatorId}}</div>
+      <div class="indicators-info-content-definition-row-colomn-indicator-colomn-4">{{indicator.indicatorName}}</div>
+      <div class="indicators-info-content-definition-row-colomn-indicator-colomn-5">{{indicator.indicatorDefinition}}</div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

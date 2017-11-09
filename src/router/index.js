@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import content from '@/components/container/container.js'
 import mapComponent from '@/components/map/map.js'
+import indicatorsInfoComp from '@/components/indicatorsInfo/indicators-info.js'
 import headerComp from '@/components/header/header.js'
 import footerComp from '@/components/footer/footer.vue'
 Vue.use(Router)
@@ -30,8 +31,8 @@ export default new Router({
           component: footerComp
         },
         {
-          path: '/allIndicators',
-          component: footerComp
+          path: '/indicatorsInfo',
+          component: indicatorsInfoComp
         }
       ]
     }
