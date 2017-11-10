@@ -151,7 +151,7 @@ export default {
     ]
     return styles
   },
-  bindEventsToMap (boundaryData, countryIndices, map) {
+  bindEventsToMap (boundaryData, countryIndices, map, callBack) {
     var rows = boundaryData['rows']
     for (var i in rows) {
       if (rows[i][1] !== 'Antarctica') {
@@ -176,19 +176,18 @@ export default {
         country.setOptions({fillColor: this.getColorCodeOf(country, countryIndices)})
         var lastSelectedCountry = ''
         var self = this
-        if (this.getMatchedCountry(country, countryIndices)) {
-          google.maps.event.addListener(country, 'click', function (event) {
-            infowindow.close()
-            if (lastSelectedCountry !== '') {
-              lastSelectedCountry.setOptions({
-                fillOpacity: 0.95,
-                fillColor: self.getColorCodeOf(lastSelectedCountry, countryIndices)
-              })
-            }
-            lastSelectedCountry = this
-            this.setOptions({fillColor: '#CF0A01'})
-          })
-        }
+        google.maps.event.addListener(country, 'click', function (event) {
+          infowindow.close()
+          if (lastSelectedCountry !== '') {
+            lastSelectedCountry.setOptions({
+              fillOpacity: 0.95,
+              fillColor: self.getColorCodeOf(lastSelectedCountry, countryIndices)
+            })
+          }
+          lastSelectedCountry = this
+          this.setOptions({fillColor: '#CF0A01'})
+          callBack(this)
+        })
         var infowindow = new google.maps.InfoWindow()
         var lastMouseOverCountry = ''
         google.maps.event.addListener(country, 'mouseover', function (event) {

@@ -26,7 +26,7 @@ export default Vue.extend({
         self.boundaries = mapData.data
         var map = worldMap.drawMap(self.boundaries, document.getElementById('map-canvas'))
         worldMap.bindEventsToMap(self.boundaries, self.mergeColorCodeToHealthIndicators(globalHealthIndices, self),
-          map)
+          map, self.onCountrySelection.bind(self))
       }))
   },
 
@@ -58,6 +58,10 @@ export default Vue.extend({
 
     fetchGlobalIndices: function () {
       return axios.get('/api/global_health_indicators')
+    },
+
+    onCountrySelection (country) {
+      this.$emit('countrySelectionChanged', country)
     }
   }
 

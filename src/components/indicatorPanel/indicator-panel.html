@@ -1,10 +1,12 @@
 <div class="indicator-panel">
 	<div class="indicator-panel-container">
-		<div class="indicator-panel-container-name">{{healthIndicators.countryName}}</div>
-		<div class="indicator-panel-container-score">
+		<div class="indicator-panel-container-name">{{countryName}}</div>
+
+		<div class="indicator-panel-container-score" v-if = "healthIndicators.countryPhase">
 			<span class="indicator-panel-container-score-title">Overall Score</span>
 			<span class="indicator-panel-container-score-overall-score">{{healthIndicators.countryPhase}}</span>
 		</div>
+    <div class = "indicator-panel-error" v-else>No Health Indicators Available</div>
 		<div class="indicator-panel-container-category">
 			<div v-for="(catagory, index) in healthIndicators.categories" class="indicator-panel-container-category-section">
 				<div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>

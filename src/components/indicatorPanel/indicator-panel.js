@@ -18,6 +18,13 @@ export default Vue.extend({
     const countryId = 'ARG'
     this.getIndicators(self, countryId)
   },
+  mounted () {
+    this.$parent.$on('countrySelectionChanged', (country) => {
+      console.log('Listening', country.countryCode)
+      this.getIndicators(this, country.countryCode)
+      this.countryName = country.name
+    })
+  },
 
   methods: {
     getGNIPerCapitaInKilo: function (gniPerCapita) {
@@ -40,16 +47,17 @@ export default Vue.extend({
 
     getDevelopmentIndicators: function (context, countryId) {
       const developmentIndicatorsUrl = '/api/countries/' + countryId + '/development_indicators'
+      var self = this
       axios.get(developmentIndicatorsUrl)
       .then(response => {
         var developmentIndicatorsData = [
           {'CONTEXT': {
-            'gni Per Capita': context.getGNIPerCapitaInKilo(response.data.gniPerCapita),
-            'total population': context.getTotalPopulationInMillion(response.data.totalPopulation)
+            'gni Per Capita': self.getGNIPerCapitaInKilo(response.data.gniPerCapita),
+            'total population': self.getTotalPopulationInMillion(response.data.totalPopulation)
           }},
           {'HEALTH': {
             'life expectancy': response.data.lifeExpectancy,
-            'health expenditure': context.getHealthExpenditureInPercentage(response.data.healthExpenditure)
+            'health expenditure': self.getHealthExpenditureInPercentage(response.data.healthExpenditure)
           }}
         ]
         this.developmentIndicators = developmentIndicatorsData
