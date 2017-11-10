@@ -29,11 +29,11 @@ export default Vue.extend({
       var options = {
         data: countries,
         getValue: 'name',
-        highlightPhrase: true,
         list: {
           match: { enabled: true },
-          onSelectItemEvent: function () {
-            console.log($('#search-box').getSelectedItemData().id)
+          onChooseEvent: function () {
+            var countryId = $('#search-box').getSelectedItemData().id
+            console.log('Selected Country ID:' + countryId)
           }
         }
       }
