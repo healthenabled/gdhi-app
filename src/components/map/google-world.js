@@ -187,10 +187,6 @@ export default {
               strokeWeight: 0.3,
               strokeColor: '#fff'
             })
-            if (lastSelectedCountry.countryCode === this.countryCode) {
-              lastSelectedCountry = ''
-              return
-            }
           }
           lastSelectedCountry = this
           this.setOptions({
