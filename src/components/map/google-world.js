@@ -113,10 +113,10 @@ export default {
         'elementType': 'labels.text.fill',
         'stylers': [
           {
-            'color': 'blue'
+            'color': '#ff2546'
           },
           {
-            'visibility': 'on'
+            'visibility': 'off'
           }
         ]
       },
@@ -125,7 +125,7 @@ export default {
         'elementType': 'labels.text.stroke',
         'stylers': [
           {
-            'visibility': 'on'
+            'visibility': 'off'
           }
         ]
       },
@@ -176,56 +176,33 @@ export default {
         country.setOptions({fillColor: this.getColorCodeOf(country, countryIndices)})
         var lastSelectedCountry = ''
         var self = this
-
-        google.maps.event.addListener(country, 'click', function (event) {
-          infowindow.close()
-          if (lastSelectedCountry !== '') {
-            lastSelectedCountry.setOptions({
-              fillOpacity: 0.95,
-              fillColor: self.getColorCodeOf(lastSelectedCountry, countryIndices),
-              strokeOpacity: 1,
-              strokeWeight: 0.3,
-              strokeColor: '#fff'
-            })
-          }
-          lastSelectedCountry = this
-          this.setOptions({
-            fillColor: '#ffa500',
-            strokeColor: '#ffa500',
-            fillOpacity: 0.6,
-            strokeOpacity: 1,
-            strokeWeight: 2
+        if (this.getMatchedCountry(country, countryIndices)) {
+          google.maps.event.addListener(country, 'click', function (event) {
+            infowindow.close()
+            if (lastSelectedCountry !== '') {
+              lastSelectedCountry.setOptions({
+                fillOpacity: 0.95,
+                fillColor: self.getColorCodeOf(lastSelectedCountry, countryIndices)
+              })
+            }
+            lastSelectedCountry = this
+            this.setOptions({fillColor: '#CF0A01'})
           })
+        }
+        var infowindow = new google.maps.InfoWindow()
+        var lastMouseOverCountry = ''
+        google.maps.event.addListener(country, 'mouseover', function (event) {
+          if (lastMouseOverCountry !== this.name) {
+            var contentString = '<div id="popover">' +
+              '<strong>' + this.name + '</strong>' +
+              '</div>'
+            infowindow.setContent(contentString)
+            infowindow.setPosition(event.latLng)
+            lastMouseOverCountry = this.name
+          }
+          infowindow.open(map, country)
         })
 
-        var infowindow = new google.maps.InfoWindow()
-        // var lastMouseOverCountry = ''
-        google.maps.event.addListener(country, 'mouseover', function (event) {
-          if (lastSelectedCountry === '' || lastSelectedCountry.countryCode !==
-            this.countryCode) {
-            this.setOptions({
-              fillOpacity: 0.3
-            })
-          }
-          // if (lastMouseOverCountry !== this.name) {
-          //   var contentString = '<div id="popover">' +
-          //     '<strong>' + this.name + '</strong>' +
-          //     '</div>'
-          //   infowindow.setContent(contentString)
-          //   infowindow.setPosition(event.latLng)
-          //   lastMouseOverCountry = this.name
-          // }
-          // infowindow.open(map, country)
-        })
-        google.maps.event.addListener(country, 'mouseout', function (event) {
-          if (lastSelectedCountry === '' || lastSelectedCountry.countryCode !==
-            this.countryCode) {
-            this.setOptions({
-              fillOpacity: 0.95
-              // fillColor: self.getColorCodeOf(this, countryIndices)
-            })
-          }
-        })
         country.setMap(map)
       }
     }
