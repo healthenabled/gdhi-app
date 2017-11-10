@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import $ from 'jquery'
+import mapEventHandler from './map-event-handler'
 
 /* eslint-disable no-undef */
 export default {
@@ -174,34 +175,9 @@ export default {
         })
         country.countryCode = rows[i][0]
         country.setOptions({fillColor: this.getColorCodeOf(country, countryIndices)})
-        var lastSelectedCountry = ''
         var self = this
-        google.maps.event.addListener(country, 'click', function (event) {
-          infowindow.close()
-          if (lastSelectedCountry !== '') {
-            lastSelectedCountry.setOptions({
-              fillOpacity: 0.95,
-              fillColor: self.getColorCodeOf(lastSelectedCountry, countryIndices)
-            })
-          }
-          lastSelectedCountry = this
-          this.setOptions({fillColor: '#CF0A01'})
-          callBack(this)
-        })
-        var infowindow = new google.maps.InfoWindow()
-        var lastMouseOverCountry = ''
-        google.maps.event.addListener(country, 'mouseover', function (event) {
-          if (lastMouseOverCountry !== this.name) {
-            var contentString = '<div id="popover">' +
-              '<strong>' + this.name + '</strong>' +
-              '</div>'
-            infowindow.setContent(contentString)
-            infowindow.setPosition(event.latLng)
-            lastMouseOverCountry = this.name
-          }
-          infowindow.open(map, country)
-        })
-
+        mapEventHandler.countryClickHandler(country, countryIndices, callBack, self)
+        mapEventHandler.countryMouseOverHandler(country, map)
         country.setMap(map)
       }
     }

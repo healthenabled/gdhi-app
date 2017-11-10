@@ -15,8 +15,10 @@ export default Vue.extend({
 
   created () {
     var self = this
+    // Todo: Remove countryName & countryId variables on wiring up Global summary
     const countryId = 'ARG'
     this.getIndicators(self, countryId)
+    this.countryName = 'ARGENTINA'
   },
   mounted () {
     this.$parent.$on('countrySelectionChanged', (country) => {
