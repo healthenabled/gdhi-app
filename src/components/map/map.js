@@ -6,6 +6,7 @@ import mapLegend from '../legend/legend.js'
 import axios from 'axios'
 import colors from '../common/color-codes.js'
 import _ from 'lodash'
+import { EventBus } from '../common/event-bus'
 
 export default Vue.extend({
   template: map,
@@ -17,6 +18,10 @@ export default Vue.extend({
       globalHealthIndices: []
     }
     return this.mapData
+  },
+
+  mounted () {
+    EventBus.$on('countrySearched', (countryCode) => { return this.onCountrySearched(countryCode) })
   },
 
   created () {
@@ -36,6 +41,11 @@ export default Vue.extend({
         'FROM 1foc3xO9DyfSIF6ofvN0kp2bxSfSeKog5FbdWdQ&key=' + process.env.MAP_KEY
       console.log('Fusion Url', fusionapiUrl)
       return axios.get(fusionapiUrl)
+    },
+
+    onCountrySearched (countryCode) {
+      console.log(countryCode)
+      worldMap.doOnSearch(countryCode)
     },
 
     mergeColorCodeToHealthIndicators: function (globalHealthIndices, self) {

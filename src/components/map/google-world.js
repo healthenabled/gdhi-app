@@ -154,6 +154,7 @@ export default {
   },
   bindEventsToMap (boundaryData, countryIndices, map, callBack) {
     var rows = boundaryData['rows']
+    this.polygonData = []
     for (var i in rows) {
       if (rows[i][1] !== 'Antarctica') {
         var newCoordinates = []
@@ -173,6 +174,7 @@ export default {
           fillOpacity: 0.95,
           name: rows[i][1]
         })
+        this.polygonData.push(country)
         country.countryCode = rows[i][0]
         country.setOptions({fillColor: this.getColorCodeOf(country, countryIndices)})
         var self = this
@@ -201,6 +203,13 @@ export default {
         new google.maps.LatLng(coordinates[i][1], coordinates[i][0]))
     }
     return newCoordinates
+  },
+
+  doOnSearch (countryCode) {
+    let polygonObj = _.filter(this.polygonData, function (polygon) {
+      return polygon.countryCode === countryCode
+    })
+    google.maps.event.trigger(polygonObj[0], 'click', {})
   }
 
 }

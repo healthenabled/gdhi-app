@@ -3,6 +3,7 @@ import header from './header.html'
 import $ from 'jquery'
 import easyAutocomplete from 'easy-autocomplete'
 import axios from 'axios'
+import { EventBus } from '../common/event-bus'
 
 export default Vue.extend({
   template: header,
@@ -34,6 +35,7 @@ export default Vue.extend({
           onChooseEvent: function () {
             var countryId = $('#search-box').getSelectedItemData().id
             console.log('Selected Country ID:' + countryId)
+            EventBus.$emit('countrySearched', countryId)
           }
         }
       }
