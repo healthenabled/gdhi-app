@@ -5,6 +5,7 @@ import mapComponent from '@/components/map/map.js'
 import indicatorsInfoComp from '@/components/indicatorsInfo/indicators-info.js'
 import headerComp from '@/components/header/header.js'
 import footerComp from '@/components/footer/footer.vue'
+import countryProfile from '@/components/countryProfile/country-profile.js'
 Vue.use(Router)
 
 export default new Router({
@@ -27,8 +28,8 @@ export default new Router({
           ]
         },
         {
-          path: 'countryProfile',
-          component: footerComp
+          path: 'countryProfile/:countryCode',
+          component: countryProfile
         },
         {
           path: '/indicatorsInfo',
