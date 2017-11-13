@@ -14,7 +14,15 @@
             <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
             <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
           </div>
-          <div class="category-expand">+</div>
+          <span class="category-expand" @click="onCategoryExpand(catagory, index)">+</span>
+          <div class="category-indicators" v-if="catagory.showIndicator">
+            <div class="indicator-desc">Digital health prioritized at the national level through dedicated
+              bodies / mechanisms for governance</div>
+            <div class="indicator-score">4</div>
+            <div class="indicator-score-desc">Governance structure is government-led, consults with
+              other ministries, and monitors implementation of digital health based on a work plan.
+              It mobilizes resources—financial, human resources (HR), political—to accomplish its goals</div>
+          </div>
         </div>
 
       </div>

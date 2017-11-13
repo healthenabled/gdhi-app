@@ -3,13 +3,36 @@
   display: inline-block;
   .category-bar {
     background: $grey;
-    padding-bottom: 24px;
+    padding-bottom: 18px;
     padding-top: 10px;
   }
   .bar {
     width: calc(100% - 50px);
     float: left;
     margin: 0 10px;
+  }
+  .category-indicators {
+    background: $white;
+    .indicator-desc {
+      width: 90%;
+      display: inline-block;
+      vertical-align: middle;
+      padding-bottom: 12px;
+      font-family: 'RobotoRegular';
+      font-size: 12px;
+    }
+    .indicator-score {
+      padding: 2px 5px;
+      font-family: 'RobotoSlabBold';
+      background: $white;
+      margin: 0 5px;
+      display: inline-block;
+    }
+    .indicator-score-desc {
+      font-family: 'RobotoItalic';
+      color: $grey;
+      font-size: 12px;
+    }
   }
 }
 .context-section {
