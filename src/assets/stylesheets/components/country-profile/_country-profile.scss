@@ -1,0 +1,18 @@
+.health-indicator-section {
+  width: 50%;
+  display: inline-block;
+  .category-bar {
+    background: $grey;
+    padding-bottom: 24px;
+    padding-top: 10px;
+  }
+  .bar {
+    width: calc(100% - 50px);
+    float: left;
+    margin: 0 10px;
+  }
+}
+.context-section {
+  width: 50%;
+  display: inline-block;
+}
