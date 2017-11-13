@@ -6,6 +6,15 @@
   box-shadow: 1px 1px 10px 1px #CCC;
   text-transform: uppercase;
   font-family: Roboto !important;
+  &-error {
+    font-size: 12px;
+    font-family: 'RobotoSlabRegular';
+    text-transform: capitalize;
+    color: red;
+    margin-top: 10px;
+    text-align: left;
+  }
+
 
   &-container {
     display: flex;
