@@ -1,10 +1,69 @@
+.country-detail {
+  display: flex;
+}
 .health-indicator-section {
   width: 50%;
   display: inline-block;
+  padding-top: 20px;
+  font-family: 'RobotoSlabRegular';
+  font-size: 12px;
+  .country-name {
+    font-size: 22px;
+    display: inline-block;
+    margin-bottom: 18px;
+    font-family: 'RobotoSlabRegular';
+  }
+  .back-text {
+    font-size: 12px;
+    color: $link-blue;
+    font-family: 'RobotoRegular';
+    display: block;
+    margin-bottom: 5px;
+  }
+  .phase-content {
+    display: flex;
+    padding: 10px;
+
+    .score {
+      width: 70px;
+      border: solid thin #dcdcdc;
+      height: 60px;
+      margin-right: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: baseline;
+      font-size: 50px;
+      font-family: 'RobotoSlabBold';
+      color: $white;
+    }
+    .phase-desc {
+      float: left;
+      width: calc(100% - 120px);
+      font-family: 'RobotoMedium';
+    }
+
+    #expand-btn {
+      padding: 0 2px;
+      background: #fff;
+      text-align: center;
+      display: inline-block;
+      width: 10px;
+      color: $link-blue;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .health-indicators {
+      margin-top: 20px;
+    }
+  }
   .category-bar {
-    background: $grey;
-    padding-bottom: 18px;
+    background: $light-grey;
+    padding-bottom: 10px;
     padding-top: 10px;
+    overflow: auto;
   }
   .bar {
     width: calc(100% - 50px);
@@ -13,25 +72,29 @@
   }
   .category-indicators {
     background: $white;
+    float: left;
+    margin: 0 10px;
+    padding: 10px;
+    margin-top: 10px;
+
     .indicator-desc {
       width: 90%;
       display: inline-block;
-      vertical-align: middle;
       padding-bottom: 12px;
       font-family: 'RobotoRegular';
       font-size: 12px;
     }
     .indicator-score {
-      padding: 2px 5px;
+      padding: 2px 8px;
       font-family: 'RobotoSlabBold';
-      background: $white;
       margin: 0 5px;
       display: inline-block;
+      color: $white;
     }
     .indicator-score-desc {
       font-family: 'RobotoItalic';
-      color: $grey;
-      font-size: 12px;
+      color: $light-font-grey;
+      font-size: 11px;
     }
   }
 }

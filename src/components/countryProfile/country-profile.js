@@ -23,15 +23,17 @@ export default Vue.extend({
       axios.get(`/api/countries/${countryCode}/health_indicators`)
         .then(response => {
           this.healthIndicatorData = response.data
-          this.hideAllIndicators()
+          this.initialise()
         })
     },
     onCategoryExpand (category, index) {
       category.showIndicator = !category.showIndicator
+      category.expandCollapseBtn = category.expandCollapseBtn === '+' ? '-' : '+'
     },
-    hideAllIndicators () {
+    initialise () {
       _.each(this.healthIndicatorData.categories, (category) => {
         this.$set(category, 'showIndicator', false)
+        this.$set(category, 'expandCollapseBtn', '+')
       })
     }
   }
