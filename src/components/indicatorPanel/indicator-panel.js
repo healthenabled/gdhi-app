@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import indicatorPanel from './indicator-panel.html'
 import axios from 'axios'
-import httpRequests from '../../common-http/indicator-http-requests'
+import httpRequests from '../../commonHttp/indicator-http-requests'
 
 export default Vue.extend({
   template: indicatorPanel,
