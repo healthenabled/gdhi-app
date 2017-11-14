@@ -1,8 +1,21 @@
 import Vue from 'vue'
-import developmentIndicators from './development-indicators.html'
+import developmentIndicatorsTemplate from './development-indicators.html'
+import httpRequests from '../../commonHttp/indicator-http-requests'
 
 export default Vue.extend({
-  template: developmentIndicators,
-  name: 'development-indicators'
-
+  template: developmentIndicatorsTemplate,
+  name: 'development-indicators',
+  data () {
+    return {
+      developmentIndicators: []
+    }
+  },
+  created () {
+    this.getDevelopmentIndicatorsFor(this.$route.params.countryCode)
+  },
+  methods: {
+    getDevelopmentIndicatorsFor (countryCode) {
+      httpRequests.getDevelopmentIndicators(this, countryCode, false)
+    }
+  }
 })

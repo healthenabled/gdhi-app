@@ -32,7 +32,7 @@ export default Vue.extend({
   methods: {
     getIndicators: function (context, countryId) {
       this.getHealthIndicators(context, countryId)
-      httpRequests.getDevelopmentIndicators(context, countryId)
+      httpRequests.getDevelopmentIndicators(context, countryId, true)
     },
 
     getHealthIndicators: function (context, countryId) {

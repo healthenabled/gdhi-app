@@ -1,4 +1,11 @@
 <div class="development-indicators">
-  <div class="context-section">
+  <div v-for="indicatorCategory in developmentIndicators" class="indicator-panel-container-context-section">
+    <span class="indicator-panel-container-context-section-name">{{Object.keys(indicatorCategory)[0]}}</span>
+    <div v-for="indicators in indicatorCategory" class="indicator-panel-container-context-section-details">
+      <div v-for="(indicator, key) in indicators" class="indicator-panel-container-context-section-details-info">
+        <span class="indicator-panel-container-context-section-details-info-score">{{indicator}}</span>
+        <span class="indicator-panel-container-context-section-details-info-title">{{key}}</span>
+      </div>
+    </div>
   </div>
 </div>
