@@ -1,7 +1,14 @@
 <div class="indicators-info">
   <div class="indicators-info-static">
-    <span class="indicator-info-static-heading">List of indicators</span>
-    <span class="indicator-info-static-description">Place Holder</span>
+    <div class="indicator-info-static-heading">List of indicators</div>
+    <div class="indicator-info-static-description">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+      took a galley of type and scrambled it to make a type specimen book.
+      It has survived not only five centuries, but also the leap into electronic typesetting,remaining essentially unchanged.
+      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
+      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </div>
   </div>
   <div class="indicators-info-content">
     <div class="indicators-info-content-categories">
@@ -11,27 +18,27 @@
         </li>
       </ul>
     </div>
-    <div class="table">
+     <div class="table">
       <div class="table-row table-header">
         <div class="table-row-item">No.</div>
         <div class="table-row-item">Category</div>
-        <div class="table-row-item">sNo.</div>
+        <div class="table-row-item">No.</div>
         <div class="table-row-item">Indicator</div>
         <div class="table-row-item">Definition</div>
       </div>
 
       <div v-for="category in categoricalIndicators" class="table-row">
-        <div class="table-row-item" data-header="No.">{{category.categoryId}}</div>
-        <div class="table-row-item" data-header="Category">{{category.categoryName}}</div>
+        <div class="table-row-item table-font" data-header="No.">{{category.categoryId}}</div>
+        <div class="table-row-item bold-font" data-header="Category">{{category.categoryName}}</div>
 
         <div class="table-row-item containers" data-header="sNo.">
-          <div v-for="indicator in category.indicators" class="table-row-item half-containers">
+          <div v-for="indicator in category.indicators" class="table-row-item table-font half-containers">
             {{indicator.indicatorId}}
           </div>
         </div>
 
         <div class="table-row-item containers" data-header="Indicator">
-          <div v-for="indicator in category.indicators" class="table-row-item half-containers">
+          <div v-for="indicator in category.indicators" class="table-row-item medium-font half-containers">
             {{indicator.indicatorName}}
           </div>
         </div>
