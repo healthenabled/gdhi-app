@@ -11,17 +11,37 @@
         </li>
       </ul>
     </div>
-
-      <div v-for="category in categoricalIndicators" class="indicators-info-content-definition-row">
-      <div class="">{{category.categoryId}}</div>
-      <div class="indicators-info-content-definition-row-colomn-1">{{category.categoryName}}</div>
-      <div v-for="indicator in category.indicators" class="indicators-info-content-definition-row-indicator">
-      <div class="indicators-info-content-definition-row-colomn-indicator-colomn-3">{{indicator.indicatorId}}</div>
-      <div class="indicators-info-content-definition-row-colomn-indicator-colomn-4">{{indicator.indicatorName}}</div>
-      <div class="indicators-info-content-definition-row-colomn-indicator-colomn-5">{{indicator.indicatorDefinition}}</div>
+    <div class="table">
+      <div class="table-row table-header">
+        <div class="table-row-item">No.</div>
+        <div class="table-row-item">Category</div>
+        <div class="table-row-item">sNo.</div>
+        <div class="table-row-item">Indicator</div>
+        <div class="table-row-item">Definition</div>
       </div>
+
+      <div v-for="category in categoricalIndicators" class="table-row">
+        <div class="table-row-item" data-header="No.">{{category.categoryId}}</div>
+        <div class="table-row-item" data-header="Category">{{category.categoryName}}</div>
+
+        <div class="table-row-item containers" data-header="sNo.">
+          <div v-for="indicator in category.indicators" class="table-row-item half-containers">
+            {{indicator.indicatorId}}
+          </div>
+        </div>
+
+        <div class="table-row-item containers" data-header="Indicator">
+          <div v-for="indicator in category.indicators" class="table-row-item half-containers">
+            {{indicator.indicatorName}}
+          </div>
+        </div>
+
+        <div class="table-row-item containers" data-header="Definition">
+          <div v-for="indicator in category.indicators" class="table-row-item half-containers">
+            {{indicator.indicatorDefinition}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
