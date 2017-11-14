@@ -10,22 +10,21 @@ export default Vue.extend({
   data () {
     return {
       developmentIndicators: [],
-      healthIndicators: {}
+      healthIndicators: {},
+      globalHealthIndicators: {},
+      showCountryDetail: true
     }
   },
 
-  created () {
-    var self = this
-    // Todo: Remove countryName & countryId variables on wiring up Global summary
-    const countryId = 'ARG'
-    this.getIndicators(self, countryId)
-    this.countryName = 'ARGENTINA'
-  },
   mounted () {
+    this.getGlobalHealthIndicators()
     this.$parent.$on('countrySelectionChanged', (country) => {
+      if (country.deselected) {
+        this.showCountryDetail = !country.deselected
+        return
+      }
       console.log('Listening', country.countryCode)
       this.getIndicators(this, country.countryCode)
-      this.countryName = country.name
     })
   },
 
@@ -46,6 +45,22 @@ export default Vue.extend({
           'countryPhase': response.data.countryPhase
         }
         this.healthIndicators = healthIndicatorsData
+        this.showCountryDetail = true
+      }).catch(e => {
+        console.log('Error pulling health indicators data')
+      })
+    },
+
+    getGlobalHealthIndicators: function () {
+      const globalHealthIndicatorsUrl = '/api/global_health_indicators'
+      axios.get(globalHealthIndicatorsUrl)
+      .then(response => {
+        var globalHealthIndicatorsData = {
+          'overallCountryScore': response.data.overAllScore,
+          'categories': response.data.categories
+        }
+        this.globalHealthIndicators = globalHealthIndicatorsData
+        this.showCountryDetail = false
       }).catch(e => {
         console.log('Error pulling health indicators data')
       })

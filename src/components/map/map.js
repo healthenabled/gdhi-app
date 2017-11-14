@@ -15,13 +15,16 @@ export default Vue.extend({
 
   data () {
     this.mapData = {
-      globalHealthIndices: []
+      globalHealthIndices: [],
+      lastSelectedCountry: ''
     }
     return this.mapData
   },
 
   mounted () {
-    EventBus.$on('countrySearched', (countryCode) => { return this.onCountrySearched(countryCode) })
+    EventBus.$on('countrySearched', (countryCode) => {
+      return this.mapData.lastSelectedCountry !== countryCode ? this.onCountrySearched(countryCode) : ''
+    })
   },
 
   created () {
@@ -45,6 +48,7 @@ export default Vue.extend({
 
     onCountrySearched (countryCode) {
       console.log(countryCode)
+      this.mapData.lastSelectedCountry = countryCode
       worldMap.doOnSearch(countryCode)
     },
 
@@ -71,6 +75,14 @@ export default Vue.extend({
     },
 
     onCountrySelection (country) {
+      if (this.mapData.lastSelectedCountry === country.countryCode) {
+        country.deselected = true
+        this.mapData.lastSelectedCountry = ''
+        console.log('deselected', country)
+      } else {
+        country.deselected = false
+        this.mapData.lastSelectedCountry = country.countryCode
+      }
       this.$emit('countrySelectionChanged', country)
     }
   }

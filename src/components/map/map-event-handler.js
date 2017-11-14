@@ -1,8 +1,13 @@
 export default {
   /* eslint-disable no-undef */
   countryClickHandler: function (country, countryIndices, callBack, googleObj) {
-    var mapHandlerObj = this
+    var mapHandlerObj
+    mapHandlerObj = this
     mapHandlerObj.lastSelectedCountry = ''
+    var color = '#CF0A01'
+    if (country.deselected) {
+      color = '#CCC'
+    }
     google.maps.event.addListener(country, 'click', function () {
       if (mapHandlerObj.lastSelectedCountry !== '') {
         mapHandlerObj.lastSelectedCountry.setOptions({
@@ -11,7 +16,7 @@ export default {
         })
       }
       mapHandlerObj.lastSelectedCountry = this
-      this.setOptions({fillColor: '#CF0A01'})
+      this.setOptions({fillColor: color})
       callBack(this)
     })
   },
