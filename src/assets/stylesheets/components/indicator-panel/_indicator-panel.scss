@@ -2,7 +2,7 @@
   background: white;
   position: absolute;
   top: 7px;
-  width: 265px;
+  width: 300px;
   box-shadow: 1px 1px 10px 1px #CCC;
   text-transform: uppercase;
   font-family: Roboto !important;
@@ -26,11 +26,17 @@
       flex: 0 0 5%;
       font-weight: 600;
       align-self: left;
-      left: 10px;
       position: relative;
       font-family: 'RobotoSlabRegular';
       font-size: 18px;
       text-transform: capitalize;
+    }
+
+    &-desc {
+      font-size: 12px;
+      text-transform: none;
+      font-weight: 100;
+      padding-top: 10px;
     }
 
     &-context {
@@ -68,7 +74,6 @@
       }
 
       &-section {
-        //padding: 5px;
         &-name {
           font-size: 12px;
           height: 22px;
@@ -103,7 +108,6 @@
     }
 
     &-category {
-      flex: 0 0 40%;
       width: 95%;
       &-section {
         padding: 5px 0;
@@ -194,5 +198,15 @@
         }
       }
     }
+  }
+
+  &-button {
+    border: 1px solid #404E7B;
+    background-color: #404E7B;
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    color: #FFF;
+    cursor: pointer;
   }
 }

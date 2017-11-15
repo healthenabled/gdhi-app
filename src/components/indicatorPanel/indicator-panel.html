@@ -1,6 +1,12 @@
 <div class="indicator-panel">
 	<div class="indicator-panel-container" v-if="!showCountryDetail">
-		<div class="indicator-panel-container-name">Summary</div>
+		<div class="indicator-panel-container-name">Average Global Digital Health Phase</div>
+		<div class="indicator-panel-container-desc">
+			The Global Digital Health Index (GDHI) is an interactive web-based resource that aims to track, monitor, and assess the enabling environment for digital health throughout the world.
+		</div>
+		<div class="indicator-panel-container-desc">
+			Use the map and filters to view each country’s phase of digital health across 7 WHO & ITU eHealth Strategy Toolkit categories
+		</div>
 
 		<div class="indicator-panel-container-category" v-if = "globalHealthIndicators.overallCountryScore">
 			<div class="indicator-panel-container-category-section">
@@ -15,6 +21,7 @@
 					<div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
 				</div>
 			</div>
+		<div class="indicator-panel-button">VIEW LIST OF COUNTRIES</div>
 	</div>
 	<div class="indicator-panel-container" v-else>
 		<div class="indicator-panel-container-name">{{healthIndicators.countryName}}</div>
@@ -43,7 +50,6 @@
 				</div>
 			</div>
 		</div>
+		<div class="indicator-panel-button" @click="showCountryDetails(healthIndicators.countryId)">VIEW DETAILS</div>
 	</div>
-  <button v-if="!showCountryDetail">VIEW LIST OF COUNTRIES</button>
-  <button v-else @click="showCountryDetails(healthIndicators.countryId)">VIEW DETAILS</button>
 </div>
