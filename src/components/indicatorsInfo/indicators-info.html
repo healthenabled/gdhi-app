@@ -20,32 +20,34 @@
     </div>
      <div class="table">
       <div class="table-row table-header">
-        <div class="table-row-item">No.</div>
+        <div class="table-row-item column-flex-grow">No.</div>
         <div class="table-row-item">Category</div>
-        <div class="table-row-item">No.</div>
+        <div class="table-row-item column-flex-grow">No.</div>
         <div class="table-row-item">Indicator</div>
         <div class="table-row-item">Definition</div>
       </div>
 
       <div v-for="category in categoricalIndicators" class="table-row">
-        <div class="table-row-item table-font" data-header="No.">{{category.categoryId}}</div>
+        <div class="table-row-item table-font column-flex-grow" data-header="No.">
+          <span class="align-no">{{category.categoryId}}</span>
+        </div>
         <div class="table-row-item bold-font" data-header="Category">{{category.categoryName}}</div>
 
-        <div class="table-row-item containers" data-header="sNo.">
-          <div v-for="indicator in category.indicators" class="table-row-item table-font half-containers">
-            {{indicator.indicatorId}}
+        <div class="table-row-item containers column-flex-grow" data-header="sNo.">
+          <div v-for="indicator in category.indicators" class="table-font half-containers">
+            <span class="align-no">{{indicator.indicatorId}}</span>
           </div>
         </div>
 
         <div class="table-row-item containers" data-header="Indicator">
-          <div v-for="indicator in category.indicators" class="table-row-item medium-font half-containers">
+          <div v-for="indicator in category.indicators" class="medium-font half-containers">
             {{indicator.indicatorName}}
           </div>
         </div>
 
         <div class="table-row-item containers" data-header="Definition">
-          <div v-for="indicator in category.indicators" class="table-row-item half-containers">
-            {{indicator.indicatorDefinition}}
+          <div v-for="indicator in category.indicators" class="half-containers">
+            <div class="block-with-text">{{indicator.indicatorDefinition}}</div>
           </div>
         </div>
       </div>

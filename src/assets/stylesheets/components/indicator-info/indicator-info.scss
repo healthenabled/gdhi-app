@@ -7,12 +7,9 @@
   -ms-flex-flow: column  ;
   flex-flow: column  ;
   justify-content: space-between;
-  //border: 1px solid #000;
   font-size: 1rem;
-  margin: 0.5rem;
   line-height: 1.5;
-  width: 70%;
-  float: right
+  width: 75%;
 
 }
 .table-header {
@@ -57,7 +54,7 @@
   flex-basis: 0;
   word-break: break-word;
   border: $table-border ;
-  align-items: center;
+  padding-top: 12px;
   padding-left: 12px;
   color: $table-header;
   background: rgba(241,241,238,0.30);
@@ -76,18 +73,23 @@
 
 
 .half-containers {
-  flex: 0 0 100%;
-  max-width: 100%;
+  flex: 1 0 100%;
   overflow: hidden;
   padding:0;
   border:none;
+  height: 200px;
   font-size: 12px;
+  padding-left: 12px;
+  margin-left: -12px;
   font-family: 'RobotoRegular';
 }
 
-//.half-containers:nth-child(2) {
-//  background-color: $white;
-//}
+.half-containers:nth-child(even) {
+  border-top: 1px solid $grey;
+  border-bottom: 1px solid $grey;
+  background-color: $white;
+  padding-top: 12px;
+}
 
 .containers:nth-child(1){
   border:none;
@@ -124,7 +126,7 @@
     flex-direction: row;
 
     .indicators-info-content-categories {
-      width: 30%
+      width: 25%
     }
 
     .l-box {
@@ -150,3 +152,39 @@
 .table-font {
   font-size: 14px;
 }
+
+.column-flex-grow {
+  flex-grow: 0.15
+}
+.align-no {
+  padding-left: 5px;
+}
+
+
+/* styles for '...' */
+//.block-with-text {
+//  overflow: hidden;
+//  position: relative;
+//  line-height: 1.2em;
+//  max-height: 12em;
+//  text-align: justify;
+//  //margin-right: -1em;
+//  padding-right: 1em;
+//}
+///* create the ... */
+//.block-with-text:before {
+//  content: '...';
+//  position: absolute;
+//  right: 0;
+//  bottom: 0;
+//}
+///* hide ... if we have text, which is less than or equal to max lines */
+//.block-with-text:after {
+//  content: '';
+//  position: absolute;
+//  right: 0;
+//  width: 1em;
+//  height: 1em;
+//  margin-top: 0.2em;
+//  background: white;
+//}
