@@ -3,23 +3,23 @@ import axios from 'axios'
 export default ({
 
   getGNIPerCapitaInKilo: function (gniPerCapita) {
-    return gniPerCapita / 1000 + 'K'
+    return gniPerCapita ? gniPerCapita / 1000 + 'K' : null
   },
 
   getTotalPopulationInMillion: function (population) {
-    var populationInMillion = Number((population / 10000000).toFixed(2))
-    return populationInMillion + 'M'
+    var populationInMillion = population ? Number((population / 10000000).toFixed(2)) : null
+    return populationInMillion ? populationInMillion + 'M' : null
   },
 
   getHealthExpenditureInPercentage: function (healthExpenditure) {
-    return Number((healthExpenditure).toFixed(1)) + '%'
+    return healthExpenditure ? Number((healthExpenditure).toFixed(1)) + '%' : null
   },
 
   getAdultLiteracyInPercentage: function (adultLiteracy) {
-    return Number((adultLiteracy).toFixed(1)) + '%'
+    return adultLiteracy ? Number((adultLiteracy).toFixed(1)) + '%' : null
   },
   getNCDDeathsInPercentage: function (ncdDeaths) {
-    return Number((ncdDeaths).toFixed(1)) + '%'
+    return ncdDeaths ? Number((ncdDeaths).toFixed(1)) + '%' : null
   },
   getMinimalDevelopmentIndicatorsData: function (self, response) {
     var developmentIndicatorsData = [
@@ -40,6 +40,7 @@ export default ({
   },
 
   getDevelopmentIndicatorsData: function (self, response) {
+    debugger
     var developmentIndicatorsData = [
       {
         'CONTEXT': {
