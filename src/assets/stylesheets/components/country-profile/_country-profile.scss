@@ -4,7 +4,7 @@
 .health-indicator-section {
   width: 50%;
   display: inline-block;
-  padding-top: 20px;
+  padding-top: 72px;
   font-family: 'RobotoSlabRegular';
   font-size: 12px;
   .country-name {
@@ -82,26 +82,32 @@
       width: 90%;
       display: inline-block;
       padding-bottom: 12px;
-      font-family: 'RobotoRegular';
+      font-family: 'RobotoSlabRegular';
       font-size: 12px;
     }
     .indicator-score {
-      padding: 2px 8px;
+      padding: 6px 10px;
       font-family: 'RobotoSlabBold';
       margin: 0 5px;
       display: inline-block;
       color: $white;
+      vertical-align: top;
     }
     .indicator-score-desc {
       font-family: 'RobotoItalic';
       color: $light-font-grey;
       font-size: 11px;
+      padding-bottom: 8px;
     }
   }
 }
 .development-indicators {
-  width: 49%;
+  margin-top: 80px;
+  width: 45%;
   display: inline-block;
-  height: 200px;
-  border: solid thin #dcdcdc;
+  height: 242px;
+  border: solid thin $grey;
+  box-shadow: 0 1px 4px 0 rgba(173,173,173,0.50);
+  border-radius: 2px;
+  background-color: $white;
 }

@@ -12,7 +12,7 @@
           <div v-for="(catagory, index) in healthIndicatorData.categories" class="indicator-panel-container-category-section">
             <div class="category-bar">
               <div class="bar">
-                <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
+                <div class="indicator-panel-container-category-section-name">{{catagory.name}}</div>
                 <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
               </div>
               <span class="category-expand" id='expand-btn' @click="onCategoryExpand(catagory, index)">{{catagory.expandCollapseBtn}}</span>
