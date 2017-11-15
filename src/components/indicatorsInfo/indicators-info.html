@@ -2,12 +2,7 @@
   <div class="indicators-info-static">
     <div class="indicator-info-static-heading">List of indicators</div>
     <div class="indicator-info-static-description">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-      took a galley of type and scrambled it to make a type specimen book.
-      It has survived not only five centuries, but also the leap into electronic typesetting,remaining essentially unchanged.
-      It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-      and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
     </div>
   </div>
   <div class="indicators-info-content">
@@ -20,28 +15,28 @@
     </div>
      <div class="table">
       <div class="table-row table-header">
-        <div class="table-row-item column-flex-grow">No.</div>
-        <div class="table-row-item">Category</div>
-        <div class="table-row-item column-flex-grow">No.</div>
-        <div class="table-row-item">Indicator</div>
-        <div class="table-row-item">Definition</div>
+        <div class="table-row-item column-flex-grow-sno border-right-no align-header-text">No.</div>
+        <div class="table-row-item align-header-text">Category</div>
+        <div class="table-row-item align-header-text column-flex-grow-sno">No.</div>
+        <div class="table-row-item align-header-text">Indicator</div>
+        <div class="table-row-item align-header-text">Definition</div>
       </div>
 
       <div v-for="category in categoricalIndicators" class="table-row">
         <div class="table-row-item table-font column-flex-grow" data-header="No.">
-          <span class="align-no">{{category.categoryId}}</span>
+          <span class="align-No">{{category.categoryId}}</span>
         </div>
-        <div class="table-row-item bold-font" data-header="Category">{{category.categoryName}}</div>
+        <div class="table-row-item indicator-data" data-header="Category">{{category.categoryName}}</div>
 
-        <div class="table-row-item containers column-flex-grow" data-header="sNo.">
+        <div class="table-row-item containers column-flex-grow-sno" data-header="sNo.">
           <div v-for="indicator in category.indicators" class="table-font half-containers">
-            <span class="align-no">{{indicator.indicatorId}}</span>
+            <span class="align-No">{{indicator.indicatorId}}</span>
           </div>
         </div>
 
         <div class="table-row-item containers" data-header="Indicator">
           <div v-for="indicator in category.indicators" class="medium-font half-containers">
-            {{indicator.indicatorName}}
+            <div class="block-with-text">{{indicator.indicatorName}}</div>
           </div>
         </div>
 
