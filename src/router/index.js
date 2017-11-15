@@ -6,6 +6,8 @@ import indicatorsInfoComp from '@/components/indicatorsInfo/indicators-info.js'
 import headerComp from '@/components/header/header.js'
 import footerComp from '@/components/footer/footer.vue'
 import countryProfile from '@/components/countryProfile/country-profile.js'
+import methodologyComp from '@/components/methodology/methodology.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +36,10 @@ export default new Router({
         {
           path: '/indicatorsInfo',
           component: indicatorsInfoComp
+        },
+        {
+          path: '/methodology',
+          component: methodologyComp
         }
       ]
     }
