@@ -40,7 +40,6 @@ export default ({
   },
 
   getDevelopmentIndicatorsData: function (self, response) {
-    debugger
     var developmentIndicatorsData = [
       {
         'CONTEXT': {
