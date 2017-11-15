@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import countryProfile from './countryProfile.html'
 import developmentIndicators from '../developmentIndicators/development-indicators.js'
+import countrySummary from '../countrySummary/country-summary.js'
 import axios from 'axios'
 import _ from 'lodash'
 
@@ -10,7 +11,7 @@ export default Vue.extend({
   },
   template: countryProfile,
 
-  components: { developmentIndicators },
+  components: { developmentIndicators, countrySummary },
 
   created () {
     this.getHealthIndicatorsFor(this.$route.params.countryCode)

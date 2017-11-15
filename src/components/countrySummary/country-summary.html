@@ -1,0 +1,14 @@
+<div class="country-summary">
+  <div class="country-summary-text">
+    <div class="country-summary-title">Country Summary</div>
+    <div>{{countrySummaries.summary}}</div>
+  </div>
+  <div class="country-summary-title">Resources</div>
+  <div v-for="resource in countrySummaries.resources" class="country-summary-resource">
+    {{resource}}
+  </div>
+  <div class="country-summary-title">Contact</div>
+    <div>{{countrySummaries.contactName}}</div>
+    <div>{{countrySummaries.contactDesignation}}</div>
+    <div>{{countrySummaries.contactOrganization}}</div>
+</div>
