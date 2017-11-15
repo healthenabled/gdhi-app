@@ -1,0 +1,27 @@
+.methodology {
+  margin: 60px 120px;
+  .methodology-title {
+    font-family: RobotoSlab-Regular;
+    font-size: 22px;
+    color: $black;
+  }
+  .content {
+    margin-top: 25px;
+    font-family: RobotoSlabRegular;
+    font-size: 12px;
+    color: #000000;
+    line-height: 20px;
+  }
+  p {
+    padding-top: 16px;
+  }
+  ul {
+    padding-left: 16px;
+  }
+  ul > li {
+    list-style: disc;
+  }
+  .link {
+    color: $link-blue;
+  }
+}
