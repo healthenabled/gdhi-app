@@ -9,7 +9,7 @@
     <div class="indicators-info-content-categories">
       <ul id="v-for-categoryNames" class="category-names">
         <li class="l-box" v-for="categoryName in categoryNames">
-          {{categoryName}}
+          <a :href="'#' + categoryName">{{ categoryName }}</a>
         </li>
       </ul>
     </div>
@@ -26,7 +26,7 @@
         <div class="table-row-item table-font column-flex-grow" data-header="No.">
           <span class="align-No">{{category.categoryId}}</span>
         </div>
-        <div class="table-row-item indicator-data" data-header="Category">{{category.categoryName}}</div>
+        <div class="table-row-item indicator-data" data-header="Category" :id="category.categoryName">{{category.categoryName}}</div>
 
         <div class="table-row-item containers column-flex-grow-sno" data-header="sNo.">
           <div v-for="indicator in category.indicators" class="table-font half-containers">
