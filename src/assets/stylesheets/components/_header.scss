@@ -24,6 +24,11 @@
     flex-grow: 5;
     color: $link-blue;
   }
+
+  .xs-length {
+    flex-grow: 0.25;
+    color: $link-blue;
+  }
 }
 
 .header-elements {
