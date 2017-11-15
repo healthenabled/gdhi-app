@@ -1,17 +1,12 @@
 <div class="country-detail content-width content-centered">
 
   <div class="health-indicator-section">
-    <a href="javascript:void(0);"><span>Back to Map view</span></a>
     <span class="country-name">{{healthIndicatorData.countryName}}</span>
     <div class="title">Overall Digital Health Maturity</div>
     <div class="phase-content clearfix">
       <div class="score" :id="'phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase}}</div>
-      <div class="phase-desc"><p>Governance structure is government-led, consults with
-        other ministries, and monitors implementation of digital health based on a work plan.
-        It mobilizes resources—financial, human resources (HR), political—to accomplish its goals.
-        Governance structure is government-led, consults with
-        other ministries, and monitors implementation of digital health based on a work plan.
-        It mobilizes resources—financial, human resources (HR), political—to accomplish its goals
+      <div class="phase-desc"><p>The overall score is an average of the scores for the
+        19 GDHI indicators
       </p>
         <div class="health-indicators">
           <div v-for="(catagory, index) in healthIndicatorData.categories" class="indicator-panel-container-category-section">
