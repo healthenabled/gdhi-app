@@ -39,6 +39,7 @@ export default Vue.extend({
       axios.get(healthIndicatorsUrl)
       .then(response => {
         var healthIndicatorsData = {
+          'countryId': response.data.countryId,
           'countryName': response.data.countryName,
           'overallScore': response.data.overallScore,
           'categories': response.data.categories,
@@ -64,6 +65,10 @@ export default Vue.extend({
       }).catch(e => {
         console.log('Error pulling health indicators data')
       })
+    },
+
+    showCountryDetails: function (countryId) {
+      this.$router.push({path: `/countryProfile/${countryId}`})
     }
   }
 })

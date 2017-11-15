@@ -44,4 +44,6 @@
 			</div>
 		</div>
 	</div>
+  <button v-if="!showCountryDetail">VIEW LIST OF COUNTRIES</button>
+  <button v-else @click="showCountryDetails(healthIndicators.countryId)">VIEW DETAILS</button>
 </div>
