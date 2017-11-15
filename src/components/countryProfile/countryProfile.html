@@ -1,7 +1,7 @@
 <div class="country-detail content-width content-centered">
 
   <div class="health-indicator-section">
-    <a href="javascript:void(0);"><span class="back-text">Back to Map view</span></a>
+    <a href="javascript:void(0);"><span>Back to Map view</span></a>
     <span class="country-name">{{healthIndicatorData.countryName}}</span>
     <div class="title">Overall Digital Health Maturity</div>
     <div class="phase-content clearfix">
@@ -21,14 +21,10 @@
                 <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
               </div>
               <span class="category-expand" id='expand-btn' @click="onCategoryExpand(catagory, index)">{{catagory.expandCollapseBtn}}</span>
-              <!--<label for="expand-btn">-->
-                <!--<span class="collapse" v-if="catagory.showIndicator">-</span>-->
-                <!--<span class="expand" v-else="catagory.showIndicator">+</span>-->
-              <!--</label>-->
               <div class="category-indicators" v-if="catagory.showIndicator">
                 <div v-for="(indicator, index_indicator) in catagory.indicators">
                   <div class="indicator-desc">{{indicator.indicatorDescription}}</div>
-                  <div class="indicator-score">{{indicator.score}}</div>
+                  <div class="indicator-score" :id="'phase' + indicator.score">{{indicator.score}}</div>
                   <div class="indicator-score-desc">{{indicator.scoreDescription}}</div>
                 </div>
               </div>
@@ -36,12 +32,10 @@
 
           </div>
 
->>>>>>> GDHI-12 Country detail health indicators styling <Sakunthala>
         </div>
       </div>
     </div>
 
   </div>
   <development-indicators></development-indicators>
-  </div>
 </div>
