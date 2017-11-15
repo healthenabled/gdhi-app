@@ -5,9 +5,6 @@ export default {
     mapHandlerObj = this
     mapHandlerObj.lastSelectedCountry = ''
     var color = '#CF0A01'
-    if (country.deselected) {
-      color = '#CCC'
-    }
     google.maps.event.addListener(country, 'click', function () {
       if (mapHandlerObj.lastSelectedCountry !== '') {
         mapHandlerObj.lastSelectedCountry.setOptions({

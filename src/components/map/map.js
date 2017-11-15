@@ -75,14 +75,6 @@ export default Vue.extend({
     },
 
     onCountrySelection (country) {
-      if (this.mapData.lastSelectedCountry === country.countryCode) {
-        country.deselected = true
-        this.mapData.lastSelectedCountry = ''
-        console.log('deselected', country)
-      } else {
-        country.deselected = false
-        this.mapData.lastSelectedCountry = country.countryCode
-      }
       this.$emit('countrySelectionChanged', country)
     }
   }

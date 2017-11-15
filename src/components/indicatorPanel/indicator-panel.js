@@ -19,10 +19,6 @@ export default Vue.extend({
   mounted () {
     this.getGlobalHealthIndicators()
     this.$parent.$on('countrySelectionChanged', (country) => {
-      if (country.deselected) {
-        this.showCountryDetail = !country.deselected
-        return
-      }
       console.log('Listening', country.countryCode)
       this.getIndicators(this, country.countryCode)
     })
