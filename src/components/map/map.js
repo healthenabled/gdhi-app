@@ -71,7 +71,7 @@ export default Vue.extend({
     },
 
     fetchGlobalIndices: function () {
-      return axios.get('/api/global_health_indicators')
+      return axios.get('/api/countries_health_indicator_scores')
     },
 
     onCountrySelection (country) {
