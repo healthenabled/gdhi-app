@@ -2,11 +2,14 @@
   display: flex;
 }
 .health-indicator-section {
-  width: 50%;
-  display: inline-block;
-  padding-top: 72px;
+  width: 70%;
+  display: flex;
+  flex: 1 1 50%;
+  flex-direction: column;
+  padding-top: 62px;
   font-family: 'RobotoSlabRegular';
   font-size: 12px;
+  margin-right: 18px;
   .country-name {
     font-size: 22px;
     display: inline-block;
@@ -40,7 +43,7 @@
     }
     .phase-desc {
       float: left;
-      width: calc(100% - 120px);
+      width: calc(100% - 100px);
       font-family: 'RobotoMedium';
     }
 
@@ -86,9 +89,9 @@
       font-size: 12px;
     }
     .indicator-score {
-      padding: 6px 10px;
+      padding: 4px 8px;
       font-family: 'RobotoSlabBold';
-      margin: 0 5px;
+      //margin: 0 5px;
       display: inline-block;
       color: $white;
       vertical-align: top;
@@ -101,13 +104,41 @@
     }
   }
 }
-.development-indicators {
-  margin-top: 80px;
-  width: 45%;
-  display: inline-block;
-  height: 242px;
-  border: solid thin $grey;
-  box-shadow: 0 1px 4px 0 rgba(173,173,173,0.50);
-  border-radius: 2px;
-  background-color: $white;
+.detailed-indicators {
+  display: flex;
+  flex: 1 1 50%;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  .development-indicators {
+    margin-top: 60px;
+    display: inline-block;
+    height: 242px;
+    border: solid thin $grey;
+    box-shadow: 0 1px 4px 0 rgba(173, 173, 173, 0.50);
+    border-radius: 2px;
+    background-color: $white;
+  }
+
+  .country-summary {
+    margin-top: 25px;
+    font-family: Roboto-Regular;
+    font-size: 12px;
+
+    .country-summary-title {
+      font-family: RobotoSlabRegular;
+      font-size: 14px;
+    }
+    .country-text {
+      margin-top: 8px;
+      margin-bottom: 20px;
+    }
+    .country-summary-link {
+      color: $link-blue;
+    }
+  }
 }
+
+
+
+

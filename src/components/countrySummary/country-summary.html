@@ -1,14 +1,18 @@
 <div class="country-summary">
-  <div class="country-summary-text">
-    <div class="country-summary-title">Country Summary</div>
-    <div>{{countrySummaries.summary}}</div>
-  </div>
+  <div class="country-summary-title">Country Summary</div>
+  <div class="country-text">{{countrySummaries.summary}}</div>
   <div class="country-summary-title">Resources</div>
-  <div v-for="resource in countrySummaries.resources" class="country-summary-resource">
-    {{resource}}
-  </div>
+  <ul class="country-text">
+    <li v-for="resource in countrySummaries.resources" class="country-summary-link">
+      <a :href="resource" target="_blank">{{resource}}</a>
+    </li>
+  </ul>
   <div class="country-summary-title">Contact</div>
-    <div>{{countrySummaries.contactName}}</div>
-    <div>{{countrySummaries.contactDesignation}}</div>
-    <div>{{countrySummaries.contactOrganization}}</div>
+    <div class="country-text">
+      <span class="country-summary-link">
+        <a :href="'mailto:' + countrySummaries.contactName" target="_blank">{{countrySummaries.contactName}}</a>,
+      </span>
+      <span>{{countrySummaries.contactDesignation}},</span>
+      <span>{{countrySummaries.contactOrganization}}</span>
+    </div>
 </div>

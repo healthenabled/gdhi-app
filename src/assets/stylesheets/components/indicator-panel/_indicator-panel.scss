@@ -167,18 +167,23 @@
           &[value="1"]::before {
             content: 'phase 1';
             transform: translateX(-7px);
+            text-transform: uppercase;
           }
           &[value="2"]::before {
             content: 'phase 2';
+            text-transform: uppercase;
           }
           &[value="3"]::before {
             content: 'phase 3';
+            text-transform: uppercase;
           }
           &[value="4"]::before {
             content: 'phase 4';
+            text-transform: uppercase;
           }
           &[value="5"]::before {
             content: 'phase 5';
+            text-transform: uppercase;
           }
           &.phase1::after {
             background-color: $score1;
