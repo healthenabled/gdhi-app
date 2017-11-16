@@ -20,6 +20,7 @@
     "lodash": "^4.17.4",
     "normalize.css": "^7.0.0",
     "vue": "^2.5.2",
+    "vue-json-excel": "0.0.8",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
