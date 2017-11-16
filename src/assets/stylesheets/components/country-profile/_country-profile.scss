@@ -10,6 +10,7 @@
   font-family: 'RobotoSlabRegular';
   font-size: 12px;
   margin-right: 18px;
+  padding-bottom: 20px;
   .country-name {
     font-size: 22px;
     display: inline-block;
@@ -112,7 +113,6 @@
   .development-indicators {
     margin-top: 60px;
     display: inline-block;
-    height: 242px;
     border: solid thin $grey;
     box-shadow: 0 1px 4px 0 rgba(173, 173, 173, 0.50);
     border-radius: 2px;
