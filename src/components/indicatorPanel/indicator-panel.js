@@ -12,13 +12,15 @@ export default Vue.extend({
       developmentIndicators: [],
       healthIndicators: {},
       globalHealthIndicators: {},
-      showCountryDetail: true
+      showCountryDetail: true,
+      country: {}
     }
   },
 
   mounted () {
     this.getGlobalHealthIndicators()
     this.$parent.$on('countrySelectionChanged', (country) => {
+      this.country = country
       console.log('Listening', country.countryCode)
       this.getIndicators(this, country.countryCode)
     })
