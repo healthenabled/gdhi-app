@@ -11,5 +11,11 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  mounted () {
+    console.log('Route path', this.$route.fullPath)
+    if (this.$route.fullPath.length <= 1) {
+      this.$router.push('map')
+    }
+  }
 })

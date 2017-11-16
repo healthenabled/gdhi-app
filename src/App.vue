@@ -10,10 +10,8 @@ export default {
     name: 'app',
     components: {
       Layout
-    },
-    mounted () {
-      this.$router.push('map')
     }
+
 }
 </script>
 
