@@ -18,7 +18,7 @@
               <span class="category-expand" id='expand-btn' @click="onCategoryExpand(catagory, index)">{{catagory.expandCollapseBtn}}</span>
               <div class="category-indicators" v-if="catagory.showIndicator">
                 <div v-for="(indicator, index_indicator) in catagory.indicators">
-                  <div class="indicator-desc">{{indicator.indicatorDescription}}</div>
+                  <div class="indicator-desc">{{indicator.name}}</div>
                   <div class="indicator-score" :id="'phase' + indicator.score">{{indicator.score}}</div>
                   <div class="indicator-score-desc">{{indicator.scoreDescription}}</div>
                 </div>
