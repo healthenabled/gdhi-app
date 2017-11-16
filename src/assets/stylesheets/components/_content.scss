@@ -3,9 +3,13 @@
   top: 90px;
   width: 100%;
   height: 100%;
-  .content-centered {
-    margin: 0 120px;
+  .content-width {
+    width: 92%;
+    margin: 0 auto;
     height: 100%;
+  }
+  .content-centered {
+    width: 83%;
     overflow: auto;
   }
 }
