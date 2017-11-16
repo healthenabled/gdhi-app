@@ -21,7 +21,7 @@
          of recommended indicators into a user-friendly and manageable list.
        </li>
      </ul>
-     <p>List of GDHI Indicators. <router-link :to="{path: '/indicatorsInfo'}" class="link">See here</router-link> </p>
+     <p>List of GDHI Indicators. <a href="/indicatorsInfo" class="link">See here</a> </p>
      <p>Data Collection and Verification</p>
      <p> We work with country partners who are leading digital health efforts in their respective countries to collect
      data for each country. These country partners submit their country’s data through an annual GDHI questionnaire,
