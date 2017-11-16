@@ -180,19 +180,19 @@
   padding-right: 1.25em;
 }
 //* create the ... */
-.block-with-text:before {
-  content: '...';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
+//.block-with-text:before {
+//  content: '...';
+//  position: absolute;
+//  right: 0;
+//  bottom: 0;
+//}
 //* hide ... if we have text, which is less than or equal to max lines */
-.block-with-text:after {
-  content: '';
-  position: absolute;
-  right: 0;
-  width: 1em;
-  height: 1em;
-  margin-top: 0.2em;
-  background: white;
-}
+//.block-with-text:after {
+//  content: '';
+//  position: absolute;
+//  right: 0;
+//  width: 1em;
+//  height: 1em;
+//  margin-top: 0.2em;
+//  background: white;
+//}
