@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import content from '@/components/container/container.js'
-import mapComponent from '@/components/map/map.js'
+// import mapComponent from '@/components/map/map.js'
 import indicatorsInfoComp from '@/components/indicatorsInfo/indicators-info.js'
 import headerComp from '@/components/header/header.js'
 import footerComp from '@/components/footer/footer.vue'
 import countryProfile from '@/components/countryProfile/country-profile.js'
+import landingMap from '@/components/landing-map/map.js'
 import methodologyComp from '@/components/methodology/methodology.vue'
 import healthIndicatorQuestionnaire from '@/components/health_indicator_questionnaire/health_indicator_questionnaire.js'
 
@@ -24,7 +25,7 @@ export default new Router({
       children: [
         {
           path: 'map',
-          component: mapComponent,
+          component: landingMap,
           children: [
             {
               path: ':foo'
