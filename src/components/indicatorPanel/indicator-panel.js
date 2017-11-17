@@ -19,10 +19,15 @@ export default Vue.extend({
 
   mounted () {
     this.getGlobalHealthIndicators()
-    this.$parent.$on('countrySelectionChanged', (country) => {
-      this.country = country
-      console.log('Listening', country.countryCode)
-      this.getIndicators(this, country.countryCode)
+    this.$parent.$on('Map:Clicked', ($clickedEl) => {
+      if ($clickedEl.type === 'COUNTRY') {
+        this.country.countryName = $clickedEl.countryName
+        this.country.countryCode = $clickedEl.countryCode
+        console.log('Listening', this.country.countryCode)
+        this.getIndicators(this, this.country.countryCode)
+      } else if ($clickedEl.type === 'GLOBAL') {
+        this.getGlobalHealthIndicators()
+      }
     })
   },
 
