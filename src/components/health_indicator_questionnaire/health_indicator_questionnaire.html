@@ -1,0 +1,37 @@
+<div>
+  <div class="categories">
+    <div class="table">
+      <div class="table-row table-header">
+        <div class="table-row-item column-flex-grow-sno border-right-no align-header-text">No.</div>
+        <div class="table-row-item align-header-text">Category</div>
+        <div class="table-row-item align-header-text column-flex-grow-sno">No.</div>
+        <div class="table-row-item align-header-text">Indicator</div>
+      </div>
+
+      <div v-for="category in questionnaire" class="table-row">
+        <div class="table-row-item table-font column-flex-grow" data-header="No.">
+          <span class="align-No">{{category.categoryId}}</span>
+        </div>
+        <div class="table-row-item indicator-data" data-header="Category" :id="category.categoryName">{{category.categoryName}}</div>
+
+        <div class="table-row-item containers column-flex-grow-sno" data-header="sNo.">
+          <div v-for="indicator in category.indicators" class="table-font half-containers">
+            <span class="align-No">{{indicator.indicatorId}}</span>
+          </div>
+        </div>
+
+        <div class="table-row-item containers" data-header="Indicator">
+          <div v-for="indicator in category.indicators" class="medium-font half-containers">
+            <div class="block-with-text">{{indicator.indicatorName}}</div>
+            <div class="block-with-text">{{indicator.indicatorDefinition}}</div>
+            <div v-for="score in indicator.scores">
+              <input type="radio" data-category-id="{{category.categoryId}}" name="{{indicator.indicatorId}}" value="{{score.score}}"/>
+              {{score.scoreDefinition}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button>Submit</button>
+</div>

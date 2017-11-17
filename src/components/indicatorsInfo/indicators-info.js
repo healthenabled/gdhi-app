@@ -21,7 +21,6 @@ export default Vue.extend({
       self.categoricalIndicators = response.data
 
       self.categoryNames = self.getCategoryNames(response.data)
-      console.log(response.data)
     })
   },
 
