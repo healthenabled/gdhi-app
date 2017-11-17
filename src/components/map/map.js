@@ -54,6 +54,7 @@ export default Vue.extend({
 
     mergeColorCodeToHealthIndicators: function (globalHealthIndices, self) {
       var collection = globalHealthIndices.data.countryHealthScores
+      this.mapData.globalHealthIndices = collection
       _.forEach(collection, function (value) {
         _.merge(value, {
           'colorCode': self.getColorCodeFor(value['countryPhase'])
