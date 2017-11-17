@@ -2,8 +2,6 @@
 
   <div class="health-indicator-section">
     <span class="country-name">{{healthIndicatorData.countryName}}</span>
-    <export-data :healthData="healthIndicatorData"></export-data>
-
     <div class="title">Overall Digital Health Phase</div>
     <div class="phase-content clearfix">
       <div class="score" :id="'phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase}}</div>
@@ -34,6 +32,11 @@
     </div>
   </div>
   <div class="detailed-indicators">
+    <!--<download-excel class = "btn"-->
+                    <!--:data = "json_data"-->
+                    <!--:fields = "json_fields"-->
+                    <!--:meta = "json_meta"-->
+                    <!--name="digital health data.xls">Export </download-excel>-->
   <development-indicators></development-indicators>
   <country-summary></country-summary>
   </div>

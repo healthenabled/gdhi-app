@@ -197,3 +197,53 @@
 //  height: 1em;
 //  margin-top: 0.2em;
 //}
+
+.health-indicator-questionnaire {
+    margin: 60px auto;
+    color: $black;
+  .health-indicator-questionnaire-heading {
+    font-family: 'RobotoSlabRegular';
+    font-size: 22px;
+    margin-bottom: 32px;
+  }
+  .health-indicator-questionnaire-contact-info {
+    font-family: 'RobotoSlabBold';
+    font-size: 18px;
+    .health-indicator-questionnaire-contact-info-heading {
+      margin-bottom: 36px;
+    }
+  }
+  .health-indicator-questionnaire-contact-form {
+    display: flex;
+    flex-direction: row;
+    .form-group {
+      flex: 1 1 33.33%;
+    }
+    label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-family: 'RobotoSlabRegular';
+      font-size: 14px;
+    }
+    .form-control {
+      display: block;
+      width: 94%;
+      margin-bottom: 12px;
+      background: #FFFFFF;
+      border: 1px solid #CCCCCC;
+      border-radius: 2px;
+      height: 38px;
+      font-family: Roboto-Regular;
+      font-size: 16px;
+    }
+    .custom-width {
+      width: 64.5%;
+      height: 148px;
+    }
+  }
+  .table {
+    width: 100%;
+  }
+}
+
+

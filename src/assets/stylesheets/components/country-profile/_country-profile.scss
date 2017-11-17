@@ -14,8 +14,11 @@
   .country-name {
     font-size: 22px;
     display: inline-block;
-    margin-bottom: 18px;
+    margin-bottom: 25px;
     font-family: 'RobotoSlabRegular';
+  }
+  .title {
+    text-transform: uppercase;
   }
   .back-text {
     font-size: 12px;
@@ -26,10 +29,10 @@
   }
   .phase-content {
     display: flex;
-    padding: 10px;
+    padding-top: 10px;
 
     .score {
-      width: 70px;
+      width: 60px;
       border: solid thin #dcdcdc;
       height: 60px;
       margin-right: 30px;
@@ -49,11 +52,13 @@
     }
 
     #expand-btn {
-      padding: 0 2px;
+      padding-top: 1px;
+      padding-left: 1px;
       background: #fff;
       text-align: center;
       display: inline-block;
-      width: 10px;
+      width: 15px;
+      height: 15px;
       color: $link-blue;
       &:hover {
         cursor: pointer;
@@ -72,12 +77,12 @@
   .bar {
     width: calc(100% - 50px);
     float: left;
-    margin: 0 10px;
+    margin-left: 18px;
   }
   .category-indicators {
     background: $white;
     float: left;
-    margin: 0 10px;
+    margin: 0 14px;
     padding: 10px;
     margin-top: 10px;
     width: 90%;
@@ -112,11 +117,15 @@
   overflow: auto;
   .development-indicators {
     margin-top: 60px;
+    margin-left: 4px;
+    margin-right: 4px;
     display: inline-block;
-    border: solid thin $grey;
-    box-shadow: 0 1px 4px 0 rgba(173, 173, 173, 0.50);
+    box-shadow: 0 0px 4px 0 rgba(173, 173, 173, 0.50);
     border-radius: 2px;
     background-color: $white;
+    .indicator-panel-container-context-section {
+      padding-top: 0px;
+    }
   }
 
   .country-summary {

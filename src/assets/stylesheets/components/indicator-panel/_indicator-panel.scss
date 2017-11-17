@@ -20,7 +20,7 @@
     flex-flow: column;
     align-items: center;
     height: 95%;
-    margin: 8px 10px;
+    margin: 25px 21px;
 
     &-name {
       flex: 0 0 5%;
@@ -28,15 +28,17 @@
       align-self: left;
       position: relative;
       font-family: 'RobotoSlabRegular';
-      font-size: 18px;
+      font-size: 22px;
       text-transform: capitalize;
     }
 
     &-desc {
-      font-size: 12px;
+      font-size: 11px;
+      color: #4A4A4A;
       text-transform: none;
-      font-weight: 100;
-      padding-top: 10px;
+      line-height: 1.5;
+      font-family: 'RobotoLight';
+      padding-top: 4px;
     }
 
     &-context {
@@ -44,7 +46,6 @@
       font-family: 'RobotoSlabRegular';
       &-name {
         font-size: 12px;
-        padding-left: 6px;
       }
       &-details {
         display: flex;
@@ -74,11 +75,12 @@
       }
 
       &-section {
+        padding-top: 11px;
         &-name {
           font-size: 12px;
           height: 22px;
           background: $score-background2;
-          line-height: 1.5;
+          line-height: 1.75;
           padding-left: 20px;
         }
         &-details {
@@ -109,12 +111,11 @@
     }
 
     &-category {
-      width: 95%;
+      width: 100%;
       &-section {
-        padding: 5px 0;
+        padding-top: 11px;
         &-name {
           font-size: 12px;
-          margin-bottom: 3px;
           text-transform: uppercase;
           font-family: 'RobotoSlabRegular';
         }
@@ -122,9 +123,8 @@
           position: relative;
           background: #DFDCDF;
           border-radius: 15px;
-          height: 11px;
-          margin-bottom: 5px;
-          width: 100%;
+          margin-top: 2px;
+          width: 98%;
           text-transform: uppercase;
 
           &:before {
@@ -134,8 +134,9 @@
             position: absolute;
             overflow: hidden;
             z-index: 1;
-            font-size: 10px;
+            font-size: 11px;
             text-align: right;
+            margin-top: -1px;
             transform: translateX(-10px);
             font-family: 'RobotoBold';
           }
@@ -206,10 +207,15 @@
   &-button {
     border: 1px solid #404E7B;
     background-color: #404E7B;
-    margin: 10px;
-    text-align: center;
-    padding: 10px;
     color: #FFF;
     cursor: pointer;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.15);
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: 'RobotoSlabRegular';
+    margin-top: 26px;
+    text-align: center;
+    width: 90%;
+    padding: 12px;
   }
 }
