@@ -1,56 +1,55 @@
 <div class="indicator-panel">
+  <div class="indicator-panel-container" v-if="!showCountryDetail">
+    <div class="indicator-panel-container-name">Average Global Digital Health Phase</div>
+    <div class="indicator-panel-container-desc">
+      The Global Digital Health Index (GDHI) is an interactive web-based resource that aims to track, monitor, and assess the enabling environment for digital health throughout the world.
+    </div>
+    <!--<div class="indicator-panel-container-desc">-->
+    <!--Use the map and filters to view each country's phase of digital health across 7 WHO & ITU eHealth Strategy Toolkit categories-->
+    <!--</div>-->
 
+    <div class="indicator-panel-container-category" v-if = "globalHealthIndicators.overallCountryScore">
+      <div class="indicator-panel-container-category-section">
+        <span class="indicator-panel-container-category-section-name">Overall</span>
+        <div :class="'indicator-panel-container-category-section-phase phase' + globalHealthIndicators.overallCountryScore" :value="globalHealthIndicators.overallCountryScore"></div>
+      </div>
+    </div>
+    <div class = "indicator-panel-error" v-else>No Global Health Indicators Available</div>
+    <div class="indicator-panel-container-category">
+      <div v-for="(catagory, index) in globalHealthIndicators.categories" class="indicator-panel-container-category-section">
+        <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
+        <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
+      </div>
+    </div>
+    <div class="indicator-panel-button">VIEW LIST OF COUNTRIES</div>
+  </div>
+  <div class="indicator-panel-container" v-else>
+    <div class="indicator-panel-container-name">{{country.countryName}}</div>
 
-		<div class="indicator-panel-container-name">Average Global Digital Health Phase</div>
-		<div class="indicator-panel-container-desc">
-			The Global Digital Health Index (GDHI) is an interactive web-based resource that aims to track, monitor, and assess the enabling environment for digital health throughout the world.
-		</div>
-		<!--<div class="indicator-panel-container-desc">-->
-			<!--Use the map and filters to view each country’s phase of digital health across 7 WHO & ITU eHealth Strategy Toolkit categories-->
-		<!--</div>-->
-
-		<div class="indicator-panel-container-category" v-if = "globalHealthIndicators.overallCountryScore">
-			<div class="indicator-panel-container-category-section">
-				<span class="indicator-panel-container-category-section-name">Overall</span>
-				<div :class="'indicator-panel-container-category-section-phase phase' + globalHealthIndicators.overallCountryScore" :value="globalHealthIndicators.overallCountryScore"></div>
-			</div>
-		</div>
-		<div class = "indicator-panel-error" v-else>No Global Health Indicators Available</div>
-			<div class="indicator-panel-container-category">
-				<div v-for="(catagory, index) in globalHealthIndicators.categories" class="indicator-panel-container-category-section">
-					<span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
-					<div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
-				</div>
-			</div>
-		<div class="indicator-panel-button">VIEW LIST OF COUNTRIES</div>
-	</div>
-	<div class="indicator-panel-container" v-else>
-		<div class="indicator-panel-container-name">{{country.countryName}}</div>
-
-		<div class="indicator-panel-container-category" v-if = "healthIndicators.countryPhase">
-			<div class="indicator-panel-container-category-section">
-				<span class="indicator-panel-container-category-section-name">Overall </span>
-				<div :class="'indicator-panel-container-category-section-phase phase' + healthIndicators.countryPhase" :value="healthIndicators.countryPhase"></div>
-			</div>
-		</div>
-	<div class = "indicator-panel-error" v-else>No Digital Health Indicators Available</div>
-		<div class="indicator-panel-container-category">
-			<div v-for="(catagory, index) in healthIndicators.categories" class="indicator-panel-container-category-section">
-				<span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
-				<div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
-			</div>
-		</div>
-		<div class="indicator-panel-container-context">
-			<div v-for="indicatorCategory in developmentIndicators" class="indicator-panel-container-context-section">
-				<span class="indicator-panel-container-context-name">{{Object.keys(indicatorCategory)[0]}}</span>
-				<div v-for="indicators in indicatorCategory" class="indicator-panel-container-context-details">
-						<div v-for="(indicator, key) in indicators" class="indicator-panel-container-context-details-info">
-							<span class="indicator-panel-container-context-details-info-score">{{indicator}}</span>
-							<span class="indicator-panel-container-context-details-info-title">{{key}}</span>
-						</div>
-				</div>
-			</div>
-		</div>
-		<div class="indicator-panel-button" @click="showCountryDetails(healthIndicators.countryId)">VIEW DETAILS</div>
-	</div>
+    <div class="indicator-panel-container-category" v-if = "healthIndicators.countryPhase">
+      <div class="indicator-panel-container-category-section">
+        <span class="indicator-panel-container-category-section-name">Overall </span>
+        <div :class="'indicator-panel-container-category-section-phase phase' + healthIndicators.countryPhase" :value="healthIndicators.countryPhase"></div>
+      </div>
+    </div>
+    <div class = "indicator-panel-error" v-else>No Digital Health Indicators Available</div>
+    <div class="indicator-panel-container-category">
+      <div v-for="(catagory, index) in healthIndicators.categories" class="indicator-panel-container-category-section">
+        <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
+        <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
+      </div>
+    </div>
+    <div class="indicator-panel-container-context">
+      <div v-for="indicatorCategory in developmentIndicators" class="indicator-panel-container-context-section">
+        <span class="indicator-panel-container-context-name">{{Object.keys(indicatorCategory)[0]}}</span>
+        <div v-for="indicators in indicatorCategory" class="indicator-panel-container-context-details">
+          <div v-for="(indicator, key) in indicators" class="indicator-panel-container-context-details-info">
+            <span class="indicator-panel-container-context-details-info-score">{{indicator}}</span>
+            <span class="indicator-panel-container-context-details-info-title">{{key}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="indicator-panel-button" @click="showCountryDetails(healthIndicators.countryId)">VIEW DETAILS</div>
+  </div>
 </div>

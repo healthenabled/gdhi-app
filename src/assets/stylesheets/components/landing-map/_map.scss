@@ -12,19 +12,23 @@
   height: calc(100vh - 130px);
   background: $bg-beige;
 }
-
 .legend {
   position: absolute;
   right: 0px;
   bottom: 30px;
   color: $white;
-  z-index: 1000;
+  z-index: 2000;
   .l-box {
     text-align: center;
-    height: 20px;
-    padding: 5px;
+    height: 23px;
+    width: 23px;
+    line-height: 1.75;
+    font-size: 12px;
+    font-family: 'RobotoRegular';
   }
 }
+
+
 
 
 
