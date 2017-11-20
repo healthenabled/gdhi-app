@@ -2,15 +2,14 @@ import L from 'leaflet'
 import countriesData from '../../assets/countries_mega.json'
 import helper from './map-helper'
 import eventHandler from './map-event-handler'
+import _ from 'lodash'
 
 export default {
-  RED_COLOR_CODE: '#CF0A01',
   BLACK_COLOR_CODE: '#000',
   lastClickedCountry: '',
   lastMouseOverCountry: '',
   drawMap: function (healthData, postClickCallBack) {
     this.healthData = healthData
-    this.countryLayers = []
     this.map = L.map('map').setView([44, -31], 2)
     var self = this
     this.geoLayer = L.geoJson(countriesData, {
@@ -33,7 +32,6 @@ export default {
           popupString += '</div>'
           layer.bindTooltip(popupString)
         }
-        self.countryLayers.push(layer)
         layer.on({
           'mousemove': function (e) {
             eventHandler.onMouseMove(e.target, self.lastMouseOverCountry)
@@ -42,19 +40,31 @@ export default {
             eventHandler.onMouseOut(e.target, self.lastMouseOverCountry)
           },
           'click': function (e) {
-            var clickState = eventHandler.onCountryClick(e.target, self.lastClickedCountry, self.healthData)
-            if (clickState === 'CLICK_ON') {
-              self.lastClickedCountry = e.target
-              postClickCallBack({'type': 'COUNTRY',
-                'countryCode': e.target.feature.properties.BRK_A3,
-                'countryName': e.target.feature.properties.NAME})
-            } else {
-              self.lastClickedCountry = ''
-              postClickCallBack({'type': 'GLOBAL'})
-            }
+            self.handleClick(e.target, self.lastClickedCountry, self.healthData, postClickCallBack)
           }
         })
       }
     }).addTo(this.map)
+    return this.geoLayer._layers
+  },
+  handleSearch (countryCode, postSearchCallBack) {
+    var searchCountry = _.filter(this.geoLayer._layers, function (layer) {
+      return layer.feature.properties.BRK_A3 === countryCode
+    })
+    console.log('Searching', searchCountry[0])
+    this.handleClick(searchCountry[0], this.lastClickedCountry, this.healthData,
+      postSearchCallBack)
+  },
+  handleClick ($el, lastClickedCountry, healthData, postClickCallBack) {
+    var clickState = eventHandler.onCountryClick($el, lastClickedCountry, healthData)
+    if (clickState === 'CLICK_ON') {
+      this.lastClickedCountry = $el
+      postClickCallBack({'type': 'COUNTRY',
+        'countryCode': $el.feature.properties.BRK_A3,
+        'countryName': $el.feature.properties.NAME})
+    } else {
+      this.lastClickedCountry = ''
+      postClickCallBack({'type': 'GLOBAL'})
+    }
   }
 }

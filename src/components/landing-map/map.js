@@ -25,12 +25,8 @@ export default Vue.extend({
   },
   mounted: function () {
     var self = this
-    EventBus.$on('countrySearched', function (countryCode) {
-      var searchCountry = self.countryLayers.filter(function (layer) {
-        return layer.feature.properties.BRK_A3 === countryCode
-      })
-      console.log('Searching', searchCountry[0])
-      searchCountry[0].setStyle({'fillColor': this.RED_COLOR_CODE})
+    EventBus.$on('Map:Searched', function (countryCode) {
+      worldMap.handleSearch(countryCode, self.onCountrySelection.bind(self))
     })
   },
   methods: {

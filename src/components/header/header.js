@@ -35,7 +35,7 @@ export default Vue.extend({
           onChooseEvent: function () {
             var countryId = $('#search-box').getSelectedItemData().id
             console.log('Selected Country ID:' + countryId)
-            EventBus.$emit('countrySearched', countryId)
+            EventBus.$emit('Map:Searched', countryId)
           }
         }
       }
