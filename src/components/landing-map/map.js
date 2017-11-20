@@ -26,10 +26,15 @@ export default Vue.extend({
     this.fetchGlobalIndices()
   },
   mounted: function () {
+    console.log('map mounted')
     var self = this
     EventBus.$on('Map:Searched', function (countryCode) {
       worldMap.handleSearch(countryCode, self.onCountrySelection.bind(self))
     })
+  },
+  beforeDestroy () {
+    console.log('map destroyed')
+    EventBus.$emit('showCountrySearch', false)
   },
   methods: {
     fetchGlobalIndices: function () {

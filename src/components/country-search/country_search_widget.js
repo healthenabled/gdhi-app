@@ -12,9 +12,11 @@ export default Vue.extend({
     return {show: false}
   },
   mounted () {
-    EventBus.$on('showCountrySearch', () => {
-      this.show = true
-      this.loadCountries()
+    EventBus.$on('showCountrySearch', (show) => {
+      $('#search-box').toggleClass('hide')
+      if (show) {
+        this.loadCountries()
+      }
     })
   },
   methods: {
