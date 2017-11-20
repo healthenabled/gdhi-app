@@ -3,13 +3,16 @@
   <form class="health-indicator-questionnaire-contact-info">
     <div class="health-indicator-questionnaire-contact-info-heading">Contact Information</div>
     <div class="health-indicator-questionnaire-contact-form">
-      <div class="form-group">
+      <div class="form-group" :class="{'has-error': errors.has('countryName') }">
         <label for="countryName">Country Name</label>
-        <input type="input" class="form-control" id="countryName" required>
+        <input type="input" class="form-control" id="countryName" name="countryName" v-validate="'required'" v-model="countryId">
+        <span v-show="errors.has('countryName')" class="help is-danger">{{ errors.first('countryName') }}</span>
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{'has-error': errors.has('Organisation') }">
         <label for="Organisation">Organisation</label>
-        <input type="input" class="form-control" id="Organisation" v-model="countrySummary.contactOrganization" required>
+        <input type="input" class="form-control" id="Organisation" name="Organisation" v-validate="'required'"
+               v-model="countrySummary.contactOrganization" required>
+        <span v-show="errors.has('Organisation')" class="help is-danger">{{ errors.first('Organisation') }}</span>
       </div>
       <div class="form-group">
         <label for="date">Date for which data was collected</label>

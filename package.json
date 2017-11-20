@@ -23,7 +23,8 @@
     "topojson": "^3.0.2",
     "vue": "^2.5.2",
     "vue-json-excel": "0.0.8",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vee-validate": "2.0.0-rc.22"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

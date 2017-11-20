@@ -2,6 +2,10 @@ import Vue from 'vue'
 import healthIndicatorForm from './health_indicator_questionnaire.html'
 import axios from 'axios'
 import countrySearch from '../auto-search/auto-search'
+import common from '../../common/country'
+import VeeValidate from 'vee-validate'
+
+Vue.use(VeeValidate)
 
 export default Vue.extend({
   components: {
@@ -25,7 +29,8 @@ export default Vue.extend({
       contactEmail: ''
     }
     var healthIndicators = {}
-    return {countryId: 'IND', questionnaire: {}, countrySummary, healthIndicators}
+    console.log('error', this.$validator)
+    return {countryId: '', questionnaire: {}, countrySummary, healthIndicators}
   },
   mounted: function () {
     this.getQuestionnaire()
@@ -62,12 +67,16 @@ export default Vue.extend({
       })
     },
     submit: function () {
-      axios.post('/api/countries', {
-        countryId: this.countryId,
-        countrySummary: this.countrySummary,
-        healthIndicators: this.getHealthIndicators()
-      }).then(() => {
-        console.log('Details saved successfully')
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          axios.post('/api/countries', {
+            countryId: this.countryId,
+            countrySummary: this.countrySummary,
+            healthIndicators: this.getHealthIndicators()
+          }).then(() => {
+            console.log('Details saved successfully')
+          })
+        }
       })
     },
     getHealthIndicators: function () {
