@@ -5,24 +5,23 @@ import axios from 'axios'
 export default Vue.extend({
   template: healthIndicatorForm,
   data: function () {
-    var contactSummary = {
-      countryId: '',
-      feeder_name: '',
-      feeder_role: '',
-      feeder_email: '',
-      collector_name: '',
-      collector_role: '',
-      collector_email: '',
-      collected_date: '',
-      country_summary: '',
-      resources: [],
-      contact_name: '',
-      contact_designation: '',
-      contact_org: '',
-      contact_email: ''
+    var countrySummary = {
+      dataFeederName: '',
+      dataFeederRole: '',
+      dataFeederEmail: '',
+      dataCollectorName: '',
+      dataCollectorRole: '',
+      dataCollectorEmail: '',
+      collectedDate: '',
+      summary: '',
+      resources: '',
+      contactName: '',
+      contactDesignation: '',
+      contactOrganization: '',
+      contactEmail: ''
     }
-    var healthIndicators = []
-    return {questionnaire: {}, contactSummary, healthIndicators}
+    var healthIndicators = {}
+    return {countryId: 'IND', questionnaire: {}, countrySummary, healthIndicators}
   },
   mounted: function () {
     this.getQuestionnaire()
@@ -45,8 +44,16 @@ export default Vue.extend({
       })
     },
     submit: function () {
-      console.log(this.contactSummary)
-      console.log(this.healthIndicators)
+      axios.post('/api/countries', {
+        countryId: this.countryId,
+        countrySummary: this.countrySummary,
+        healthIndicators: this.getHealthIndicators()
+      }).then(() => {
+        console.log('Details saved successfully')
+      })
+    },
+    getHealthIndicators: function () {
+      return Object.entries(this.healthIndicators).map((entry) => entry[1])
     }
   }
 })

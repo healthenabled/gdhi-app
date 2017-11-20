@@ -5,63 +5,63 @@
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="countryName">Country Name</label>
-        <input type="input" class="form-control" id="countryName" v-model="contactSummary.countryId" required>
+        <input type="input" class="form-control" id="countryName" v-model="countryId" required>
       </div>
       <div class="form-group">
         <label for="Organisation">Organisation</label>
-        <input type="input" class="form-control" id="Organisation" v-model="contactSummary.contact_org" required>
+        <input type="input" class="form-control" id="Organisation" v-model="countrySummary.contactOrganization" required>
       </div>
       <div class="form-group">
         <label for="date">Date for which data was collected</label>
-        <input type="input" class="form-control" id="date" v-model="contactSummary.collected_date" required>
+        <input type="input" class="form-control" id="date" v-model="countrySummary.collectedDate" required>
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="nameofPersonEnteringData">Name of person entering data</label>
-        <input type="input" class="form-control" id="nameofPersonEnteringData" v-model="contactSummary.feeder_name" required>
+        <input type="input" class="form-control" id="nameofPersonEnteringData" v-model="countrySummary.dataFeederName" required>
       </div>
       <div class="form-group">
         <label for="roleOfPersonEnteringData">Role of the person entering data</label>
-        <input type="input" class="form-control" id="roleOfPersonEnteringData" v-model="contactSummary.feeder_role" required>
+        <input type="input" class="form-control" id="roleOfPersonEnteringData" v-model="countrySummary.dataFeederRole" required>
       </div>
       <div class="form-group">
         <label for="emailOfPersonEnteringData">Email of the person entering data</label>
-        <input type="email" class="form-control" id="emailOfPersonEnteringData" v-model="contactSummary.feeder_email" required>
+        <input type="email" class="form-control" id="emailOfPersonEnteringData" v-model="countrySummary.dataFeederEmail" required>
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="nameofPersonCollectedData">Name of the person who collected data</label>
-        <input type="input" class="form-control" id="nameofPersonCollectedData" v-model="contactSummary.collector_name" required>
+        <input type="input" class="form-control" id="nameofPersonCollectedData" v-model="countrySummary.dataCollectorName" required>
       </div>
       <div class="form-group">
         <label for="roleofPersonCollectedData">Role of the person who collected data</label>
-        <input type="input" class="form-control" id="roleofPersonCollectedData" v-model="contactSummary.collector_role" required>
+        <input type="input" class="form-control" id="roleofPersonCollectedData" v-model="countrySummary.dataCollectorRole" required>
       </div>
       <div class="form-group">
         <label for="emailofPersonCollectedData">Email of the person who collected data</label>
-        <input type="email" class="form-control" id="emailofPersonCollectedData" v-model="contactSummary.collector_email" required>
+        <input type="email" class="form-control" id="emailofPersonCollectedData" v-model="countrySummary.dataCollectorEmail" required>
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="nameofCompanyContact">Name of the company contact</label>
-        <input type="input"class="form-control" id="nameofCompanyContact" v-model="contactSummary.contact_name" required>
+        <input type="input"class="form-control" id="nameofCompanyContact" v-model="countrySummary.contactName" required>
       </div>
       <div class="form-group">
         <label for="roleofCompanyContact">Role of the company contact</label>
-        <input type="input" class="form-control" id="roleofCompanyContact" v-model="contactSummary.contact_designation" required>
+        <input type="input" class="form-control" id="roleofCompanyContact" v-model="countrySummary.contactDesignation" required>
       </div>
       <div class="form-group">
         <label for="emailofCompanyContact">Email of the company contact</label>
-        <input type="email" class="form-control" id="emailofCompanyContact" v-model="contactSummary.contact_email" required>
+        <input type="email" class="form-control" id="emailofCompanyContact" v-model="countrySummary.contactEmail" required>
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="countrySummary">Country Summary</label>
-        <textarea class="form-control custom-width" id="countrySummary" v-model="contactSummary.countrySummary" required></textarea>
+        <textarea class="form-control custom-width" id="countrySummary" v-model="countrySummary.summary" required></textarea>
       </div>
     </div>
   </form>
