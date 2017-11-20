@@ -243,8 +243,6 @@
       cursor: pointer;
     }
     .accordian-content {
-      height: 98px;
-      overflow-y: auto;
       padding-left: 10px;
     }
     .bold-text {
@@ -254,6 +252,27 @@
     .scores {
       margin-bottom: 10px;
     }
+    .containers {
+      .half-containers {
+        height: auto;
+      }
+      .half-containers:nth-child(even) {
+        border-top: none;
+        border-bottom: none;
+        background: none;
+      }
+    }
+  }
+  .submit-btn {
+    background: #3F4D7C;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    color: #fff;
+    border: none;
+    float: right;
+    margin-top: 20px;
+    height: 46px;
+    width: 163px;
   }
 }
 

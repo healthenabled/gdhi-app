@@ -70,7 +70,7 @@
       <div class="table-row-item column-flex-grow-sno border-right-no align-header-text">No.</div>
       <div class="table-row-item align-header-text">Category</div>
       <div class="table-row-item align-header-text column-flex-grow-sno">No.</div>
-      <div class="table-row-item align-header-text">Indicator</div>
+      <div class="table-row-item align-header-text"></div>
     </div>
 
     <div v-for="category in questionnaire" class="table-row">
@@ -105,6 +105,6 @@
       </div>
     </div>
   </div>
-  <button @click="submit()">Submit</button>
+  <button class="submit-btn"@click="submit()">Submit</button>
 </div>
 
