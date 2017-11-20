@@ -16,9 +16,8 @@ export default Vue.extend({
 
   components: { developmentIndicators, countrySummary, exportData },
 
-  mounted () {
+  created () {
     this.getHealthIndicatorsFor(this.$route.params.countryCode)
-    console.log('IN country profile route')
   },
   methods: {
     getHealthIndicatorsFor (countryCode) {
@@ -34,7 +33,6 @@ export default Vue.extend({
     },
     initialise () {
       _.each(this.healthIndicatorData.categories, (category) => {
-        console.log(category)
         this.$set(category, 'showIndicator', false)
         this.$set(category, 'expandCollapseBtn', '+')
       })

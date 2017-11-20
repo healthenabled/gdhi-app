@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import JsonExcel from 'vue-json-excel'
 import exportTemplate from './export-data.html'
- /* eslint-disable */  // To be removed after the full fix
+import _ from 'lodash'
+
 Vue.component('downloadExcel', JsonExcel)
+
 export default Vue.extend({
-	template: exportTemplate,
-  data () {
+  template: exportTemplate,
+  data: function () {
     return {
       json_fields: {
         'Country Name': 'Definition',
@@ -71,46 +73,32 @@ export default Vue.extend({
         'key': 'charset',
         'value': 'utf-8'
       }]
-      ],
-      healthIndicatorData: {}
+      ]
     }
   },
-  props: {
-  	healthData: {
-  		type: Object,
-  		default: function () {
-  			return {}
-  		}
-  	}
-  },
+
+  props: ['healthData'],
 
   mounted () {
-  	this.healthIndicatorData = this.healthData
-  },
-
-  updated () {
-  	console.log('CountryName', this.healthIndicatorData)
-  	this.download(this.healthIndicatorData)
+    this.download(this.healthData)
   },
 
   methods: {
-  	download: function (healthIndicatorData) {
-  		console.log('------------------> ', healthIndicatorData)
-		const countryData = Object.assign({}, this.json_data[0])
-		_.each(countryData, function (index, data) {
-			countryData[data] = 'Missing / Not Available'
-		})
+    download: function (healthIndicatorData) {
+      const countryData = Object.assign({}, this.json_data[0])
+      _.each(countryData, function (index, data) {
+        countryData[data] = 'Missing / Not Available'
+      })
+      _.each(healthIndicatorData.categories, (category) => {
+        countryData['Category ' + category.id] = 'Phase  ' + category.phase
+        _.each(category.indicators, (indicator) => {
+          countryData['Indicator ' + indicator.id] = 'Phase  ' + indicator.score
+        })
+      })
 
-		_.each(healthIndicatorData.categories, (category) => {
-			countryData['Category ' + category.id] = 'Phase  ' + category.phase
-		    _.each(category.indicators, (indicator) => {
-		      countryData['Indicator ' + indicator.id] = 'Phase  ' + indicator.score
-		    })
-    	})
-
-        countryData['Country Name'] = healthIndicatorData.countryName
-      	countryData['Overall Phase'] = healthIndicatorData.countryPhase
-      	this.json_data.push(countryData)
-  	}
+      countryData['Country Name'] = healthIndicatorData.countryName
+      countryData['Overall Phase'] = 'Phase  ' + healthIndicatorData.countryPhase
+      this.json_data.push(countryData)
+    }
   }
 })
