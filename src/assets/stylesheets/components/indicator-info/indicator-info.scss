@@ -180,6 +180,7 @@
   line-height: 1.2em;
   max-height: 14.4em;
   padding-right: 1.25em;
+  padding-bottom: 8px;
 }
 ////create the ... */
 //.block-with-text:before {
@@ -243,6 +244,26 @@
   }
   .table {
     width: 100%;
+    .accordian {
+      display: inline-block;
+      width: calc(100% - 40px);
+    }
+    .expand-btn {
+      vertical-align: top;
+      cursor: pointer;
+    }
+    .accordian-content {
+      height: 98px;
+      overflow-y: auto;
+      padding-left: 10px;
+    }
+    .bold-text {
+      font-family: 'RobotoBold';
+      padding-bottom: 6px;
+    }
+    .scores {
+      margin-bottom: 10px;
+    }
   }
 }
 

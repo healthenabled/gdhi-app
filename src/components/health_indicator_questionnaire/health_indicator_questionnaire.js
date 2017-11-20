@@ -40,6 +40,8 @@ export default Vue.extend({
             indicatorId: indicator.indicatorId,
             score: '',
             supportingText: ''}
+          this.$set(indicator, 'showIndicator', false)
+          this.$set(indicator, 'expandCollapseBtn', '+')
         })
       })
     },
@@ -54,6 +56,10 @@ export default Vue.extend({
     },
     getHealthIndicators: function () {
       return Object.entries(this.healthIndicators).map((entry) => entry[1])
+    },
+    onIndicatorExpand (indicator) {
+      indicator.showIndicator = !indicator.showIndicator
+      indicator.expandCollapseBtn = indicator.expandCollapseBtn === '+' ? '-' : '+'
     }
   }
 })
