@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import developmentIndicatorsTemplate from './development-indicators.html'
-import httpRequests from '../../commonHttp/indicator-http-requests'
+import httpRequests from '../../common/indicator-http-requests'
 
 export default Vue.extend({
   template: developmentIndicatorsTemplate,

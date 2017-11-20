@@ -29,8 +29,20 @@ export default Vue.extend({
   },
   mounted: function () {
     this.getQuestionnaire()
+    this.loadCountries()
   },
   methods: {
+    loadCountries: function () {
+      common.loadCountries().then((response) => {
+        this.countries = response.data
+        var options = common.loadSearchData(this.countries, this.onCountrySelect.bind(this))
+        $('#countryName').easyAutocomplete(options)
+      })
+    },
+    onCountrySelect: function () {
+      var countryId = $('#countryName').getSelectedItemData().id
+      this.countryId = countryId
+    },
     getQuestionnaire: function () {
       axios.get('/api/health_indicator_options').then((response) => {
         this.questionnaire = response.data
