@@ -62,9 +62,11 @@ export default {
       postClickCallBack({'type': 'COUNTRY',
         'countryCode': $el.feature.properties.BRK_A3,
         'countryName': $el.feature.properties.NAME})
+      this.map.fitBounds($el.getBounds())
     } else {
       this.lastClickedCountry = ''
       postClickCallBack({'type': 'GLOBAL'})
+      this.map.setView([44, -31], 2)
     }
   }
 }
