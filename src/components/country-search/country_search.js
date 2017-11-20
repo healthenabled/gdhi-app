@@ -8,8 +8,15 @@ import {EventBus} from '../common/event-bus'
 export default Vue.extend({
   template: countrySearch,
   name: countrySearch,
+  props: ['show'],
+  data: function () {
+    return {show: false}
+  },
   mounted () {
     this.loadCountries()
+    EventBus.$on('showCountrySearch', () => {
+      this.show = true
+    })
   },
   methods: {
     loadCountries: function () {

@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import healthIndicatorForm from './health_indicator_questionnaire.html'
 import axios from 'axios'
+import countrySearch from '../country-search/country_search'
 
 export default Vue.extend({
+  components: {
+    countrySearch
+  },
   template: healthIndicatorForm,
   data: function () {
     var countrySummary = {
