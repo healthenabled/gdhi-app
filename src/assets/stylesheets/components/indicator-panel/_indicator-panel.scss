@@ -1,13 +1,13 @@
 .indicator-panel {
   background: white;
   position: absolute;
-  top: 7px;
+  top:3px;
   width: 300px;
   box-shadow: 1px 1px 10px 1px #CCC;
   text-transform: uppercase;
   font-family: Roboto !important;
   z-index: 1000;
-  max-height: 560px;
+  max-height: calc(100vh - 130px);
   overflow-y: auto;
   &-error {
     font-size: 12px;
@@ -23,7 +23,7 @@
     flex-flow: column;
     align-items: center;
     height: 95%;
-    margin: 25px 21px;
+    margin: 15px 15px;
 
     &-name {
       flex: 0 0 5%;
@@ -116,7 +116,7 @@
     &-category {
       width: 100%;
       &-section {
-        padding-top: 11px;
+        padding-top: 8px;
         &-name {
           font-size: 12px;
           text-transform: uppercase;
@@ -216,7 +216,7 @@
     border-radius: 3px;
     font-size: 12px;
     font-family: 'RobotoSlabRegular';
-    margin-top: 26px;
+    margin-top: 12px;
     text-align: center;
     width: 90%;
     padding: 12px;
