@@ -138,12 +138,15 @@
   .error-info {
     font-size: x-small;
     color:red;
+    .form-group {
+      margin-bottom: 0;
+    }
   }
   .hide {
     display: none;
   }
   .has-error {
-    border: 1px solid red;
+    border: 1px solid red !important;
   }
   .success {
     color: darkgreen;

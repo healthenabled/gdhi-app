@@ -6,8 +6,11 @@
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="countryName">Country Name</label>
-        <input :class="{'has-error': errors.has('countryName') }" type="input" class="form-control" id="countryName" name="countryName" v-validate="'required'" v-model="countryId">
-        <span v-show="errors.has('countryName')" class="error-info">{{ errors.first('countryName') }} </span>
+        <input :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" type="input"
+               id="countryName" name="countryName"
+               v-validate="'required'"
+               v-model="countryId"
+               :title="errors.has('collectedDate') ? 'Country Name is required' :'Please Choose a Country'">
       </div>
       <div class="form-group">
         <label for="Organisation">Organisation</label>
@@ -16,65 +19,85 @@
       </div>
       <div class="form-group">
         <label for="date">Date for which data was collected (DD-MM-YYYY)</label>*
-        <input type="input" class="form-control" name='collectedDate' id="date" v-model="countrySummary.collectedDate" v-validate="'required|date_format:DD-MM-YYYY'">
-        <span v-show="errors.has('collectedDate')" class="error-info">Date for which data was collected is either empty or invalid</span>
+        <input type="input"
+               :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'"
+               name='collectedDate' id="date"
+               v-model="countrySummary.collectedDate"
+               v-validate="'required|date_format:DD-MM-YYYY'"
+               :title="errors.has('collectedDate') ? 'Date for which data was collected is either empty or invalid' : 'Please Enter Date' ">
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="nameofPersonEnteringData">Name of person entering data</label>*
-        <input type="input" name='feederName' class="form-control" id="nameofPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederName"
-               required>
-        <span v-show="errors.has('feederName')" class="error-info">Name of person entering data is required</span>
+        <input type="input" name='feederName'
+               :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'"
+               id="nameofPersonEnteringData"
+               v-validate="'required'"
+               v-model="countrySummary.dataFeederName"
+               :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
       </div>
       <div class="form-group">
         <label for="roleOfPersonEnteringData">Role of the person entering data</label>*
-        <input type="input" name="feederRole" class="form-control" id="roleOfPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederRole"
-               required>
-        <span v-show="errors.has('feederRole')" class="error-info">Role of the person entering data is required</span>
+        <input type="input" name="feederRole"
+               :class="errors.has('feederRole') ? 'has-error form-control' : 'form-control'"
+               id="roleOfPersonEnteringData"
+               v-validate="'required'"
+               v-model="countrySummary.dataFeederRole"
+               :title="errors.has('feederRole') ? 'Role of the person entering data is required' : 'Please Enter Role of the person entering data'">
       </div>
       <div class="form-group">
         <label for="emailOfPersonEnteringData">Email of the person entering data</label>*
-        <input type="email" name='feederEmail' class="form-control" id="emailOfPersonEnteringData" v-validate="'required|email'" v-model="countrySummary.dataFeederEmail"
-               required>
-        <span v-show="errors.has('feederEmail')" class="error-info">Email of the person entering data is either empty or invalid</span>
+        <input type="email" name='feederEmail'
+               :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'"
+               id="emailOfPersonEnteringData"
+               v-validate="'required|email'"
+               v-model="countrySummary.dataFeederEmail"
+               :title="errors.has('feederEmail') ? 'Please enter valid email' : 'Enter email'">
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="nameofPersonCollectedData">Name of the person who collected data</label>
         <input type="input" class="form-control" id="nameofPersonCollectedData"
-               v-model="countrySummary.dataCollectorName" required>
+               v-model="countrySummary.dataCollectorName">
       </div>
       <div class="form-group">
         <label for="roleofPersonCollectedData">Role of the person who collected data</label>
         <input type="input" class="form-control" id="roleofPersonCollectedData"
-               v-model="countrySummary.dataCollectorRole" required>
+               v-model="countrySummary.dataCollectorRole">
       </div>
       <div class="form-group">
         <label for="emailofPersonCollectedData">Email of the person who collected data</label>
         <input type="email" class="form-control" id="emailofPersonCollectedData"
-               v-model="countrySummary.dataCollectorEmail" required>
+               v-model="countrySummary.dataCollectorEmail">
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="nameofCountryContact">Name of the country contact</label>*
-        <input type="input" name="countryContact" class="form-control" id="nameofCountryContact" v-validate="'required'" v-model="countrySummary.contactName"
-               required>
-        <span v-show="errors.has('countryContact')" class="error-info">Name of the country contact is required</span>
+        <input type="input" name="countryContact"
+               :class="errors.has('countryContact') ? 'has-error form-control' : 'form-control'"
+               id="nameofCountryContact" v-validate="'required'"
+               v-model="countrySummary.contactName"
+               :title="errors.has('countryContact') ? 'Country contact is Required' : 'Country contact'"
+               >
       </div>
       <div class="form-group">
         <label for="roleofCountryContact">Role of the country contact</label>*
-        <input type="input" name="contactRole" class="form-control" id="roleofCountryContact" v-validate="'required'" v-model="countrySummary.contactDesignation"
-               required>
-        <span v-show="errors.has('contactRole')" class="error-info">Role of the country contact is required</span>
+        <input type="input" name="contactRole"
+               :class="errors.has('contactRole') ? 'has-error form-control' : 'form-control'"
+               id="roleofCountryContact"
+               v-validate="'required'"
+               :title="errors.has('contactRole') ? 'Role of the country contact is Required' : 'Role of the country contact'"
+               v-model="countrySummary.contactDesignation">
       </div>
       <div class="form-group">
         <label for="emailofCountryContact">Email of the country contact</label>*
-        <input type="email" name="contactEmail" class="form-control" id="emailofCountryContact" v-validate="'required|email'" v-model="countrySummary.contactEmail"
-               required>
-        <span v-show="errors.has('contactEmail')" class="error-info">Email of the country contact is either empty or invalid</span>
+        <input type="email" name="contactEmail"
+               :class="errors.has('contactEmail') ? 'has-error form-control' : 'form-control'"
+               id="emailofCountryContact" v-validate="'required|email'" v-model="countrySummary.contactEmail"
+               :title="errors.has('contactEmail') ? 'Please enter valid email' : 'Enter email'">
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
