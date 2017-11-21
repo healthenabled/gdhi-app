@@ -22,18 +22,21 @@
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="nameofPersonEnteringData">Name of person entering data</label>
-        <input type="input" class="form-control" id="nameofPersonEnteringData" v-model="countrySummary.dataFeederName"
+        <input type="input" name='feederName' class="form-control" id="nameofPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederName"
                required>
+        <span v-show="errors.has('feederName')" class="error-info">Name of person entering data is required</span>
       </div>
       <div class="form-group">
         <label for="roleOfPersonEnteringData">Role of the person entering data</label>
-        <input type="input" class="form-control" id="roleOfPersonEnteringData" v-model="countrySummary.dataFeederRole"
+        <input type="input" name="feederRole" class="form-control" id="roleOfPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederRole"
                required>
+        <span v-show="errors.has('feederRole')" class="error-info">Role of the person entering data is required</span>
       </div>
       <div class="form-group">
         <label for="emailOfPersonEnteringData">Email of the person entering data</label>
-        <input type="email" class="form-control" id="emailOfPersonEnteringData" v-model="countrySummary.dataFeederEmail"
+        <input type="email" name='feederEmail' class="form-control" id="emailOfPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederEmail"
                required>
+        <span v-show="errors.has('feederEmail')" class="error-info">Email of the person entering data is required</span>
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
@@ -55,19 +58,22 @@
     </div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
-        <label for="nameofCompanyContact">Name of the country contact</label>
-        <input type="input" class="form-control" id="nameofCompanyContact" v-model="countrySummary.contactName"
+        <label for="nameofCountryContact">Name of the country contact</label>
+        <input type="input" name="countryContact" class="form-control" id="nameofCountryContact" v-validate="'required'" v-model="countrySummary.contactName"
                required>
+        <span v-show="errors.has('countryContact')" class="error-info">Name of the country contact is requied</span>
       </div>
       <div class="form-group">
-        <label for="roleofCompanyContact">Role of the country contact</label>
-        <input type="input" class="form-control" id="roleofCompanyContact" v-model="countrySummary.contactDesignation"
+        <label for="roleofCountryContact">Role of the country contact</label>
+        <input type="input" name="contactRole" class="form-control" id="roleofCountryContact" v-validate="'required'" v-model="countrySummary.contactDesignation"
                required>
+        <span v-show="errors.has('contactRole')" class="error-info">Role of the country contact is requied</span>
       </div>
       <div class="form-group">
-        <label for="emailofCompanyContact">Email of the country contact</label>
-        <input type="email" class="form-control" id="emailofCompanyContact" v-model="countrySummary.contactEmail"
+        <label for="emailofCountryContact">Email of the country contact</label>
+        <input type="email" name="contactEmail" class="form-control" id="emailofCountryContact" v-validate="'required'" v-model="countrySummary.contactEmail"
                required>
+        <span v-show="errors.has('contactEmail')" class="error-info">Email of the country contact is requied</span>
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-form">
@@ -102,7 +108,7 @@
 
       <div class="table-row-item containers" data-header="Indicator">
         <div v-for="indicator in category.indicators" class="medium-font half-containers">
-          <div :class="{'has-error': errors.has(indicator.indicatorId)}">
+          <div :class="{'has-error': errors.has(indicator.indicatorId) || errors.has('rationale')}">
             <div class="accordian">
               <div class="block-with-text bold-text">{{indicator.indicatorName}}</div>
               <div class="block-with-text">{{indicator.indicatorDefinition}}</div>
@@ -115,11 +121,12 @@
                        :value="score.score"/>
                 {{score.scoreDefinition}}({{score.score}})
               </div>
-              <span v-show="errors.has(indicator.indicatorId)" class="error-info">Please select a value for above indicator</span>
-              <textarea class="description" name="rational"
+              <span v-show="errors.has(indicator.indicatorId)" class="error-info">Please select a value for above indicator</span><br/>
+              Rationale or supporting text
+              <textarea class="description" name="rationale"
                         v-model="healthIndicators[indicator.indicatorId].supportingText"
                         v-validate="'required'"></textarea>
-              <span v-show="errors.has('rational')" class="error-info">{{ errors.first('rational') }}</span>
+              <span v-show="errors.has('rationale')" class="error-info">{{ errors.first('rationale') }}</span>
 
             </div>
           </div>
