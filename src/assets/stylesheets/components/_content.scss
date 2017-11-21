@@ -12,4 +12,17 @@
     width: 83%;
     overflow: auto;
   }
+  .export {
+    margin-left: auto;
+    margin-top: 60px;
+    color: $link-blue;
+    font-size: 12px;
+    &.home {
+      position: absolute;
+      z-index: 1001;
+      right: 15%;
+      padding: 10px;
+      margin: 0;
+    }
+  }
 }

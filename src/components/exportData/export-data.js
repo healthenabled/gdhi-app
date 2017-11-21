@@ -76,32 +76,27 @@ export default Vue.extend({
       ]
     }
   },
-
-  props: ['healthData'],
+  props: ['healthData', 'displayName'],
 
   mounted () {
     this.download(this.healthData)
   },
 
   methods: {
-    download: function (healthIndicatorData) {
-      const countryData = Object.assign({}, this.json_data[0])
-
-      _.each(countryData, function (index, data) {
-        countryData[data] = 'Missing / Not Available'
-      })
-
-      _.each(healthIndicatorData, (indicator) => {
-        _.each(indicator.categories, (category) => {
-          countryData['Category ' + category.id] = 'Phase  ' + category.phase
-          _.each(category.indicators, (indicator) => {
-            countryData['Indicator ' + indicator.id] = 'Phase  ' + indicator.score
+    download: function (countryHealthIndicatorData) {
+      _.each(countryHealthIndicatorData, (country) => {
+        const countryData = Object.assign({}, this.json_data[0])
+        _.each(countryData, function (index, data) {
+          countryData[data] = 'Missing / Not Available'
+          _.each(country.categories, (category) => {
+            countryData['Category ' + category.id] = 'Phase  ' + category.phase
+            _.each(category.indicators, (indicator) => {
+              countryData['Indicator ' + indicator.id] = 'Phase  ' + indicator.score
+            })
           })
         })
-
-        countryData['Country Name'] = indicator.countryName
-        console.log(indicator.countryName)
-        countryData['Overall Phase'] = 'Phase  ' + indicator.countryPhase
+        countryData['Country Name'] = country.countryName
+        countryData['Overall Phase'] = 'Phase  ' + country.countryPhase
         this.json_data.push(countryData)
       })
     }

@@ -1,10 +1,16 @@
 <div class="map-layer">
   <div class="map-container content-width">
+
     <indicator-panel></indicator-panel>
     <mapLegend></mapLegend>
+
     <div id="map">
 
     </div>
-
+    <div class="export home">
+      <span v-if="globalHealthIndicators[0]">
+        <export-data :healthData="globalHealthIndicators" displayName="Export Data For All Countries"></export-data>
+      </span>
+    </div>
   </div>
 </div>
