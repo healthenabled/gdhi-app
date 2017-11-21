@@ -28,13 +28,24 @@
   }
 }
 
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .leaflet-overlay-pane {
+    transform: translate3d(60px,0, 0) scale(0.9);
+  }
+}
 
-
-
+@media screen and (min-width: 1500px) {
+  .leaflet-overlay-pane {
+    transform: translate3d(-190px, -83px, 0) scale(1.25);
+  }
+}
 
 .leaflet-left .leaflet-control {
   margin-left: 301px;
 }
-.leaflet-top .leaflet-control {
-  margin-top: 7px;
+
+@media screen and (min-width: 1640px) {
+  .leaflet-top .leaflet-control {
+    top: 40px;
+  }
 }
