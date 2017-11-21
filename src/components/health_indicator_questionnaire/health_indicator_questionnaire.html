@@ -5,9 +5,9 @@
     <div class="health-indicator-questionnaire-contact-info-heading">Contact Information</div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
-        <label for="countryName">Country Name</label>*
-        <input type="input" class="form-control" id="countryName" name="countryName" v-validate="'required'" :class="{'has-error': errors.has('countryName') }">
-        <span v-show="errors.has('countryName')" class="error-info">{{ errors.first('countryName') }}</span>
+        <label for="countryName">Country Name</label>
+        <input :class="{'has-error': errors.has('countryName') }" type="input" class="form-control" id="countryName" name="countryName" v-validate="'required'" v-model="countryId">
+        <span v-show="errors.has('countryName')" class="error-info">{{ errors.first('countryName') }} </span>
       </div>
       <div class="form-group">
         <label for="Organisation">Organisation</label>
@@ -106,35 +106,27 @@
                   required></textarea>
       </div>
     </div>
-  </form>
-  <div class="table">
-    <div class="table-row table-header">
-      <div class="table-row-item column-flex-grow-sno border-right-no align-header-text">No.</div>
-      <div class="table-row-item align-header-text">Category</div>
-      <!--<div class="table-row-item align-header-text column-flex-grow-sno">No.</div>-->
-      <div class="table-row-item align-header-text"></div>
-    </div>
-
-    <div v-for="category in questionnaire" class="table-row">
-      <div class="table-row-item table-font column-flex-grow" data-header="No.">
-        <span class="align-No">{{category.categoryId}}</span>
-      </div>
-      <div class="table-row-item indicator-data" data-header="Category" :id="category.categoryName">
-        {{category.categoryName}}
+    <div class="health-indicator-questionnaire-contact-info-heading">Indicator Details</div>
+    <div class="table">
+      <div class="table-row table-header">
+        <div class="table-row-item column-flex-grow-sno border-right-no align-header-text">No.</div>
+        <div class="table-row-item align-header-text">Category</div>
+        <div class="table-row-item align-header-text indicator-resize"></div>
       </div>
 
-      <!--<div class="table-row-item containers column-flex-grow-sno" data-header="sNo.">-->
-      <!--<div v-for="indicator in category.indicators" class="table-font half-containers">-->
-      <!--<span class="align-No">{{indicator.indicatorId}}</span>-->
-      <!--</div>-->
-      <!--</div>-->
-
-      <div class="table-row-item containers" data-header="Indicator">
-        <div v-for="indicator in category.indicators" class="medium-font half-containers">
-          <div :class="{'has-error': errors.has(indicator.indicatorId) || errors.has('rationale')}">
+      <div v-for="category in questionnaire" class="table-row">
+        <div class="table-row-item table-font column-flex-grow" data-header="No.">
+          <span class="align-No">{{category.categoryId}}</span>
+        </div>
+        <div class="table-row-item indicator-data" data-header="Category" :id="category.categoryName">
+          {{category.categoryName}}
+        </div>
+        <div class="table-row-item containers" data-header="Indicator">
+          <div v-for="indicator in category.indicators"
+               :class="(errors.has(indicator.indicatorId) || errors.has('rationale')) ? 'has-error' : 'container-items'">
             <div class="accordian">
-              <div class="block-with-text bold-text">{{indicator.indicatorName}}</div>
-              <div class="block-with-text">{{indicator.indicatorDefinition}}</div>
+              <div class="bold-text">{{indicator.indicatorName}}</div>
+              <div>{{indicator.indicatorDefinition}}</div>
             </div>
             <span class='expand-btn' @click="onIndicatorExpand(indicator)">{{indicator.expandCollapseBtn}}</span>
             <div class="accordian-content" :class="{hide: !indicator.showIndicator}">
@@ -142,21 +134,21 @@
                 <input type="radio" :name="indicator.indicatorId" v-validate="'required'"
                        v-model="healthIndicators[indicator.indicatorId].score"
                        :value="score.score"/>
-                {{score.score}} - {{score.scoreDefinition}}
+                <span class="content-spacing">{{score.score}} - {{score.scoreDefinition}}</span>
               </div>
-              <span v-show="errors.has(indicator.indicatorId)" class="error-info">Please select a value for above indicator</span><br/>
+              <span v-show="errors.has(indicator.indicatorId)" class="error-info">
+                Please select a value for above indicator</span><br/>
               Rationale or supporting text
               <textarea class="description" name="rationale"
                         v-model="healthIndicators[indicator.indicatorId].supportingText"
                         v-validate="'required'"></textarea>
-              <span v-show="errors.has('rationale')" class="error-info">{{ errors.first('rationale') }}</span>
-
+              <div v-show="errors.has('rationale')" class="error-info">{{ errors.first('rationale') }}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <button class="submit-btn" @click="submit()">Submit</button>
+    <button class="submit-btn" @click="submit()">Submit</button>
+  </form>
 </div>
 
