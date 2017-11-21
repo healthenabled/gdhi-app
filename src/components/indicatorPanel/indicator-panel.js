@@ -72,6 +72,10 @@ export default Vue.extend({
 
     showCountryDetails: function (countryId) {
       this.$router.push({path: `/countryProfile/${countryId}`})
+    },
+
+    showListOfCountries: function () {
+      this.$router.push({path: `/country_list`})
     }
   }
 })

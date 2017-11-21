@@ -1,0 +1,35 @@
+.countries-list {
+  background-color: $bg-beige;
+  &-heading {
+    font-size: 22px;
+    font-family: RobotoSlab-Regular;
+  }
+  &-description {
+    font-size: 11px;
+    line-height: 16px;
+
+  }
+
+  &-details {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    max-height: 100vh;
+
+    &-country {
+      display: flex;
+      flex-flow: row nowrap;
+      font-size: 12px;
+
+      &-name {
+        flex: 1 1 auto;
+        font-family: Roboto-Light;
+      }
+
+      &-score {
+        flex: 1 1 auto;
+        font-family: Roboto-Medium;
+      }
+  }
+}
+}

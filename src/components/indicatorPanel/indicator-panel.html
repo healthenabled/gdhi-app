@@ -20,7 +20,7 @@
         <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
       </div>
     </div>
-    <div class="indicator-panel-button">VIEW LIST OF COUNTRIES</div>
+    <div class="indicator-panel-button" @click="showListOfCountries()">VIEW LIST OF COUNTRIES</div>
   </div>
   <div class="indicator-panel-container" v-else>
     <div class="indicator-panel-container-name">{{country.countryName}}</div>
