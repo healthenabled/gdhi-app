@@ -5,7 +5,10 @@ import countrySearch from '../auto-search/auto-search'
 import common from '../../common/country'
 import VeeValidate from 'vee-validate'
 
-Vue.use(VeeValidate)
+const config = {
+  fieldsBagName: 'fieldBags'
+}
+Vue.use(VeeValidate, config)
 
 export default Vue.extend({
   components: {
