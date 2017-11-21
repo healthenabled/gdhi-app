@@ -27,14 +27,11 @@ export default Vue.extend({
   },
   mounted: function () {
     console.log('map mounted')
-    var self = this
-    EventBus.$on('Map:Searched', function (countryCode) {
-      worldMap.handleSearch(countryCode, self.onCountrySelection.bind(self))
-    })
+    EventBus.$on('Map:Searched', this.onSearchTriggered)
   },
   beforeDestroy () {
     console.log('map destroyed')
-    EventBus.$emit('showCountrySearch', false)
+    EventBus.$off('Map:Searched', this.onSearchTriggered)
   },
   methods: {
     fetchGlobalIndices: function () {
@@ -58,6 +55,9 @@ export default Vue.extend({
     },
     onCountrySelection (countryCode) {
       this.$emit('Map:Clicked', countryCode)
+    },
+    onSearchTriggered (countryCode) {
+      worldMap.handleSearch(countryCode, this.onCountrySelection.bind(this))
     }
   }
 })
