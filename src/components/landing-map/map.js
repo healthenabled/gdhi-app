@@ -28,7 +28,6 @@ export default Vue.extend({
     EventBus.$on('Map:Searched', function (countryCode) {
       worldMap.handleSearch(countryCode, self.onCountrySelection.bind(self))
     })
-    EventBus.$emit('showCountrySearch', true)
   },
   methods: {
     fetchGlobalIndices: function () {

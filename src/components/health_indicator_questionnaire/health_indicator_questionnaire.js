@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import healthIndicatorForm from './health_indicator_questionnaire.html'
 import axios from 'axios'
-import countrySearch from '../country-search/country_search'
+import countrySearch from '../auto-search/auto-search'
 
 export default Vue.extend({
   components: {

@@ -4,6 +4,7 @@ import content from '@/components/container/container.js'
 // import mapComponent from '@/components/map/map.js'
 import indicatorsInfoComp from '@/components/indicatorsInfo/indicators-info.js'
 import headerComp from '@/components/header/header.js'
+import autoSearch from '@/components/auto-search/auto-search.js'
 import footerComp from '@/components/footer/footer.vue'
 import countryProfile from '@/components/countryProfile/country-profile.js'
 import landingMap from '@/components/landing-map/map.js'
@@ -25,7 +26,10 @@ export default new Router({
       children: [
         {
           path: 'map',
-          component: landingMap,
+          components: {
+            routecontent: landingMap,
+            search: autoSearch
+          },
           children: [
             {
               path: ':foo'
@@ -34,19 +38,27 @@ export default new Router({
         },
         {
           path: 'countryProfile/:countryCode',
-          component: countryProfile
+          components: {
+            routecontent: countryProfile
+          }
         },
         {
           path: '/indicatorsInfo',
-          component: indicatorsInfoComp
+          components: {
+            routecontent: indicatorsInfoComp
+          }
         },
         {
           path: '/methodology',
-          component: methodologyComp
+          components: {
+            routecontent: methodologyComp
+          }
         },
         {
           path: '/health_indicator_questionnaire',
-          component: healthIndicatorQuestionnaire
+          components: {
+            routecontent: healthIndicatorQuestionnaire
+          }
         }
       ]
     }

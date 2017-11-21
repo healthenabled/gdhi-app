@@ -1,22 +1,15 @@
 import Vue from 'vue'
-import countrySearch from './country_search.html'
+import autoSearch from './auto-search.html'
 import easyAutocomplete from 'easy-autocomplete'
 import axios from 'axios'
 import $ from 'jquery'
 import {EventBus} from '../common/event-bus'
 
 export default Vue.extend({
-  template: countrySearch,
-  name: countrySearch,
-  props: ['show'],
-  data: function () {
-    return {show: false}
-  },
+  template: autoSearch,
+  name: 'auto-search',
   mounted () {
     this.loadCountries()
-    EventBus.$on('showCountrySearch', () => {
-      this.show = true
-    })
   },
   methods: {
     loadCountries: function () {
