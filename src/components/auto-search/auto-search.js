@@ -26,6 +26,7 @@ export default Vue.extend({
         getValue: 'name',
         list: {
           match: {enabled: true},
+          sort: {enabled: true},
           onChooseEvent: function () {
             var countryId = $('#search-box').getSelectedItemData().id
             console.log('Selected Country ID:' + countryId)
