@@ -1,16 +1,15 @@
 <div class="country-detail content-width content-centered">
   <div class="health-indicator-section">
-    <span class="country-name">{{healthIndicatorData.countryName}}</span>
-    <span v-if="healthIndicatorData.countryName">
-    </span>
+    <span class="country-name">{{healthIndicatorData[0].countryName}}</span>
+
     <div class="title">Overall Digital Health Phase</div>
     <div class="phase-content clearfix">
-      <div class="score" :id="'phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase}}</div>
+      <div class="score" :id="'phase' + healthIndicatorData[0].countryPhase">{{healthIndicatorData[0].countryPhase}}</div>
       <div class="phase-desc"><p>The overall score is an average of the scores for the
         19 GDHI indicators
       </p>
         <div class="health-indicators">
-          <div v-for="(catagory, index) in healthIndicatorData.categories" class="indicator-panel-container-category-section">
+          <div v-for="(catagory, index) in healthIndicatorData[0].categories" class="indicator-panel-container-category-section">
             <div class="category-bar">
               <div class="bar">
                 <div class="indicator-panel-container-category-section-name">{{catagory.name}}</div>
@@ -31,8 +30,12 @@
     </div>
   </div>
   <div class="detailed-indicators">
-  <div class="health-indicator-container">
-    <export-data :healthData="healthIndicatorData"></export-data>
+    <div class="export">
+      <span v-if="healthIndicatorData[0].countryName">
+        <export-data :healthData="healthIndicatorData"></export-data>
+      </span>
+    </div>
+    <div class="health-indicator-container">
     <development-indicators></development-indicators>
   </div>
   <country-summary></country-summary>

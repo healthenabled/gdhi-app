@@ -115,8 +115,14 @@
   flex-direction: column;
   height: 100%;
   overflow: auto;
-  .development-indicators {
+  .export {
+    margin-left: auto;
     margin-top: 60px;
+    color: $link-blue;
+    font-size: 12px;
+  }
+  .development-indicators {
+    margin-top: 10px;
     margin-left: 4px;
     margin-right: 4px;
     display: inline-block;

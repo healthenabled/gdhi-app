@@ -86,19 +86,24 @@ export default Vue.extend({
   methods: {
     download: function (healthIndicatorData) {
       const countryData = Object.assign({}, this.json_data[0])
+
       _.each(countryData, function (index, data) {
         countryData[data] = 'Missing / Not Available'
       })
-      _.each(healthIndicatorData.categories, (category) => {
-        countryData['Category ' + category.id] = 'Phase  ' + category.phase
-        _.each(category.indicators, (indicator) => {
-          countryData['Indicator ' + indicator.id] = 'Phase  ' + indicator.score
-        })
-      })
 
-      countryData['Country Name'] = healthIndicatorData.countryName
-      countryData['Overall Phase'] = 'Phase  ' + healthIndicatorData.countryPhase
-      this.json_data.push(countryData)
+      _.each(healthIndicatorData, (indicator) => {
+        _.each(indicator.categories, (category) => {
+          countryData['Category ' + category.id] = 'Phase  ' + category.phase
+          _.each(category.indicators, (indicator) => {
+            countryData['Indicator ' + indicator.id] = 'Phase  ' + indicator.score
+          })
+        })
+
+        countryData['Country Name'] = indicator.countryName
+        console.log(indicator.countryName)
+        countryData['Overall Phase'] = 'Phase  ' + indicator.countryPhase
+        this.json_data.push(countryData)
+      })
     }
   }
 })
