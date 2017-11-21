@@ -69,7 +69,7 @@
     <div class="table-row table-header">
       <div class="table-row-item column-flex-grow-sno border-right-no align-header-text">No.</div>
       <div class="table-row-item align-header-text">Category</div>
-      <div class="table-row-item align-header-text column-flex-grow-sno">No.</div>
+      <!--<div class="table-row-item align-header-text column-flex-grow-sno">No.</div>-->
       <div class="table-row-item align-header-text"></div>
     </div>
 
@@ -81,11 +81,11 @@
         {{category.categoryName}}
       </div>
 
-      <div class="table-row-item containers column-flex-grow-sno" data-header="sNo.">
-        <div v-for="indicator in category.indicators" class="table-font half-containers">
-          <span class="align-No">{{indicator.indicatorId}}</span>
-        </div>
-      </div>
+      <!--<div class="table-row-item containers column-flex-grow-sno" data-header="sNo.">-->
+        <!--<div v-for="indicator in category.indicators" class="table-font half-containers">-->
+          <!--<span class="align-No">{{indicator.indicatorId}}</span>-->
+        <!--</div>-->
+      <!--</div>-->
 
       <div class="table-row-item containers" data-header="Indicator">
         <div v-for="indicator in category.indicators" class="medium-font half-containers">
@@ -100,6 +100,7 @@
                    :value="score.score"/>
             {{score.scoreDefinition}}
           </div>
+          <textarea class="description"></textarea>
          </div>
         </div>
       </div>
