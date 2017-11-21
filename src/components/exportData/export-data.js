@@ -10,7 +10,7 @@ export default Vue.extend({
   data: function () {
     return {
       json_fields: {
-        'Country Name': 'Definition',
+        'Country Name': '',
         'Indicator 1': 'Indicator 1',
         'Indicator 2': 'Indicator 2',
         'Category 1': 'Category 1',
@@ -37,7 +37,7 @@ export default Vue.extend({
         'Indicator 18': 'Indicator 18',
         'Indicator 19': 'Indicator 19',
         'Category 7': 'Category 7',
-        'Overall Phase': 'Overall Phase'
+        'Overall Phase': ''
       },
       json_data: [{
         'Country Name': 'Country Name',
@@ -89,14 +89,14 @@ export default Vue.extend({
         _.each(countryData, function (index, data) {
           countryData[data] = 'Missing / Not Available'
           _.each(country.categories, (category) => {
-            countryData['Category ' + category.id] = 'Phase  ' + category.phase
+            countryData['Category ' + category.id] = category.phase === null ? 'Missing / Not Available' : 'Phase  ' + category.phase
             _.each(category.indicators, (indicator) => {
-              countryData['Indicator ' + indicator.id] = 'Phase  ' + indicator.score
+              countryData['Indicator ' + indicator.id] = indicator.score === null ? 'Missing / Not Available' : 'Phase  ' + indicator.score
             })
           })
         })
         countryData['Country Name'] = country.countryName
-        countryData['Overall Phase'] = 'Phase  ' + country.countryPhase
+        countryData['Overall Phase'] = country.countryPhase === null ? 'Missing / Not Available' : 'Phase  ' + country.countryPhase
         this.json_data.push(countryData)
       })
     }
