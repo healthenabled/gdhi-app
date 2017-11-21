@@ -40,7 +40,7 @@ export default {
             eventHandler.onMouseOut(e.target, self.lastMouseOverCountry)
           },
           'click': function (e) {
-            self.handleClick(e.target, self.lastClickedCountry, self.healthData, postClickCallBack)
+            self.handleClick(e.target, feature.properties.BRK_A3, self.lastClickedCountry, self.healthData, postClickCallBack)
           }
         })
       }
@@ -52,10 +52,10 @@ export default {
       return layer.feature.properties.BRK_A3 === countryCode
     })
     console.log('Searching', searchCountry[0])
-    this.handleClick(searchCountry[0], this.lastClickedCountry, this.healthData,
+    this.handleClick(searchCountry[0], countryCode, this.lastClickedCountry, this.healthData,
       postSearchCallBack)
   },
-  handleClick ($el, lastClickedCountry, healthData, postClickCallBack) {
+  handleClick ($el, countryCode, lastClickedCountry, healthData, postClickCallBack) {
     var clickState = eventHandler.onCountryClick($el, lastClickedCountry, healthData)
     if (clickState === 'CLICK_ON') {
       this.lastClickedCountry = $el
@@ -63,9 +63,15 @@ export default {
         'countryCode': $el.feature.properties.BRK_A3,
         'countryName': $el.feature.properties.NAME})
       this.map.fitBounds($el.getBounds())
-    } else {
+    } else if (clickState === 'RESET_CLICK') {
       this.lastClickedCountry = ''
       postClickCallBack({'type': 'GLOBAL'})
+      this.map.setView([44, -31], 2)
+    } else {
+      this.lastClickedCountry = ''
+      postClickCallBack({'type': 'COUNTRY',
+        'countryCode': countryCode,
+        'countryName': ''})
       this.map.setView([44, -31], 2)
     }
   }
