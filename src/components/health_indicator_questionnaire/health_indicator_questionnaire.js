@@ -22,7 +22,7 @@ export default Vue.extend({
       dataCollectorEmail: '',
       collectedDate: '',
       summary: '',
-      resources: '',
+      resources: [],
       contactName: '',
       contactDesignation: '',
       contactOrganization: '',
@@ -30,7 +30,7 @@ export default Vue.extend({
     }
     var healthIndicators = {}
     console.log('error', this.$validator)
-    return {countryId: '', questionnaire: {}, countrySummary, healthIndicators}
+    return {saved: false, countryId: '', questionnaire: {}, countrySummary, healthIndicators}
   },
   mounted: function () {
     this.getQuestionnaire()
@@ -57,10 +57,12 @@ export default Vue.extend({
     setUpHealthIndicators: function (data) {
       data.forEach((category) => {
         category.indicators.forEach(indicator => {
-          this.healthIndicators[indicator.indicatorId] = {categoryId: category.categoryId,
+          this.healthIndicators[indicator.indicatorId] = {
+            categoryId: category.categoryId,
             indicatorId: indicator.indicatorId,
             score: '',
-            supportingText: ''}
+            supportingText: ''
+          }
           this.$set(indicator, 'showIndicator', false)
           this.$set(indicator, 'expandCollapseBtn', '+')
         })
@@ -69,14 +71,20 @@ export default Vue.extend({
     submit: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          axios.post('/api/countries', {
-            countryId: this.countryId,
-            countrySummary: this.countrySummary,
-            healthIndicators: this.getHealthIndicators()
-          }).then(() => {
-            console.log('Details saved successfully')
-          })
+          this.save()
+        } else {
+          document.body.scrollTop = document.documentElement.scrollTop = 0
         }
+      })
+    },
+    save: function () {
+      axios.post('/api/countries', {
+        countryId: this.countryId,
+        countrySummary: this.countrySummary,
+        healthIndicators: this.getHealthIndicators()
+      }).then(() => {
+        document.body.scrollTop = document.documentElement.scrollTop = 0
+        this.saved = true
       })
     },
     getHealthIndicators: function () {
