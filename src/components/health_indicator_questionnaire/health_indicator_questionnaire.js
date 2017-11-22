@@ -32,7 +32,6 @@ export default Vue.extend({
       contactEmail: ''
     }
     var healthIndicators = {}
-    console.log('error', this.$validator)
     return {saved: false, countryId: '', questionnaire: {}, countrySummary, healthIndicators}
   },
   mounted: function () {
@@ -63,7 +62,7 @@ export default Vue.extend({
           this.healthIndicators[indicator.indicatorId] = {
             categoryId: category.categoryId,
             indicatorId: indicator.indicatorId,
-            score: '',
+            score: null,
             supportingText: ''
           }
           this.$set(indicator, 'showIndicator', false)
