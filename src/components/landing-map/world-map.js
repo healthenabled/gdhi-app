@@ -20,7 +20,7 @@ export default {
           healthData)
         return {
           'weight': 1,
-          'color': this.WHITE_COLOR_CODE,
+          'color': self.WHITE_COLOR_CODE,
           'fillColor': fillColorCode,
           'fillOpacity': 0.95,
           'id': feature.id
