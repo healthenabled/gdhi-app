@@ -1,35 +1,63 @@
 .countries-list {
-  background-color: $bg-beige;
-  &-heading {
-    font-size: 22px;
-    font-family: RobotoSlab-Regular;
+  list-style-type: none;
+  width: 83%;
+  overflow: auto;
+  margin: 0px auto;
+    &-heading {
+      padding-left: 10px;
+      font-size: 22px;
+      font-family: RobotoSlab-Regular;
+      display: inline-block;
+      margin-top: 60px;
+    }
+  &-section {
+    display: flex;
+    flex-direction: row;
+    &-description {
+      padding-left: 10px;
+      font-size: 11px;
+      line-height: 16px;
+      font-family: RobotoLight;
+      padding-top: 2px;
+      flex: 1 1 ;
+    }
+    &-export {
+      font-size: 12px;
+      color: $link-blue;
+    }
   }
-  &-description {
-    font-size: 11px;
-    line-height: 16px;
-
-  }
-
   &-details {
+    padding-top: 20px;
     display: flex;
     flex-flow: column wrap;
-    align-items: flex-start;
-    max-height: 100vh;
-
+    align-content: flex-start;
+    margin-left: -10px;
+    margin-top: -10px;
+    height: calc(100vh - 250px);
     &-country {
-      display: flex;
-      flex-flow: row nowrap;
-      font-size: 12px;
-
+        width:200px;
+        display: flex;
+        flex-flow: row nowrap;
+        font-size: 12px;
+        flex: 0 0 40px;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-right: 30px;
+        justify-content: space-between;
       &-name {
-        flex: 1 1 auto;
-        font-family: Roboto-Light;
+        font-family: 'RobotoLight';
       }
-
       &-score {
-        flex: 1 1 auto;
-        font-family: Roboto-Medium;
+        font-family: 'RobotoMedium';
       }
+    }
   }
 }
+
+@media (min-width: 1040px) {
+  .countries-list-details .countries-list-details-country {
+    max-width: calc(20% - 40px);
+  }
 }

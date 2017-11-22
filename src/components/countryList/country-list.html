@@ -1,16 +1,19 @@
 <div class="countries-list">
   <span class="countries-list-heading">List of Countries</span>
-  <div class="countries-list-description">The overall GDHI phases are listed below for each participating country. Country scores on 19 indicators determine the overall phase of digital health for a country.
-For a more detailed breakdown for each country, please visit the individual country page</div>
-  <div class="countries-list-details">
-    <div v-for="country in countryList" class="countries-list-details-country">
-      <div class="countries-list-details-country-name">{{country.countryName}}</div>
-      <div class="countries-list-details-country-score">{{country.overallPhase}}</div>
+  <div class="countries-list-section">
+    <div class="countries-list-section-description">
+      <p>The overall GDHI phases are listed below for each participating country. Country scores on 19 indicators determine the overall phase of digital health for a country.</p>
+    <p>For a more detailed breakdown for each country, please visit the individual country page</p></div>
+    <div class="countries-list-section-export">
+        <span v-if="globalHealthIndicators[0]">
+          <export-data :healthData="globalHealthIndicators" displayName="Export Data For All Countries"></export-data>
+        </span>
     </div>
   </div>
-  <div class="export home">
-      <span v-if="globalHealthIndicators[0]">
-        <export-data :healthData="globalHealthIndicators" displayName="Export Data For All Countries"></export-data>
-      </span>
-  </div>
+  <ul class="countries-list-details">
+    <li v-for="country in countryList" class="countries-list-details-country">
+      <span class="countries-list-details-country-name">{{country.countryName}}</span>
+      <span class="countries-list-details-country-score">{{country.overallPhase}}</span>
+    </li>
+  </ul>
 </div>
