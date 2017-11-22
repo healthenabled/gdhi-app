@@ -6,6 +6,7 @@ import _ from 'lodash'
 
 export default {
   BLACK_COLOR_CODE: '#000',
+  WHITE_COLOR_CODE: '#fff',
   lastClickedCountry: '',
   lastMouseOverCountry: '',
   drawMap: function (healthData, postClickCallBack) {
@@ -19,7 +20,7 @@ export default {
           healthData)
         return {
           'weight': 1,
-          'color': self.BLACK_COLOR_CODE,
+          'color': this.WHITE_COLOR_CODE,
           'fillColor': fillColorCode,
           'fillOpacity': 0.95,
           'id': feature.id
@@ -28,7 +29,7 @@ export default {
       onEachFeature: function (feature, layer) {
         if (feature.properties) {
           var popupString = '<div class="popup">'
-          popupString += feature.properties.NAME
+          popupString += feature.properties.NAME_LONG
           popupString += '</div>'
           layer.bindTooltip(popupString)
         }
