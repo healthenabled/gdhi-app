@@ -62,7 +62,7 @@ export default {
       postClickCallBack({'type': 'COUNTRY',
         'countryCode': $el.feature.properties.BRK_A3,
         'countryName': $el.feature.properties.NAME})
-      this.map.fitBounds($el.getBounds())
+      this.map.fitBounds($el.getBounds(), {'maxZoom': 7})
     } else if (clickState === 'RESET_CLICK') {
       this.lastClickedCountry = ''
       postClickCallBack({'type': 'GLOBAL'})
