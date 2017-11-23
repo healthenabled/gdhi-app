@@ -1,4 +1,4 @@
-<div class="health-indicator-questionnaire content-centered">
+<div class="health-indicator-questionnaire content-centered" id="top">
   <span v-if="saved" class="success">Form saved successfully</span>
   <div class="health-indicator-questionnaire-heading">List of Indicator Form</div>
   <form class="health-indicator-questionnaire-contact-info">
@@ -157,7 +157,7 @@
                 <input type="radio" :name="indicator.indicatorId"
                        v-model="healthIndicators[indicator.indicatorId].score"
                        :value="score.score"/>
-                <span class="content-spacing">{{score.score}} - {{score.scoreDefinition}}</span>
+                <span class="content-spacing"><span>{{score.score}} - </span><span>{{score.scoreDefinition}}</span></span>
               </div>
               <span v-show="errors.has(indicator.indicatorId)" class="error-info">
                 Please select a value for above indicator</span><br/>
@@ -170,6 +170,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="top">
+      <a class="arrow" href="#top"></a>
     </div>
   </form>
   <button class="submit-btn" @click="submit()">Submit</button>

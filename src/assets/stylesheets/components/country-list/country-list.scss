@@ -1,8 +1,10 @@
-.countries-list {
-  list-style-type: none;
-  width: 83%;
-  overflow: auto;
-  margin: 0px auto;
+.countries-container {
+  background: rgba(248,248,234,0.50);
+  .countries-list {
+    list-style-type: none;
+    width: 83%;
+    overflow: auto;
+    margin: 0px auto;
     &-heading {
       padding-left: 10px;
       font-size: 22px;
@@ -10,47 +12,47 @@
       display: inline-block;
       margin-top: 60px;
     }
-  &-section {
-    display: flex;
-    flex-direction: row;
-    &-description {
-      padding-left: 10px;
-      font-size: 11px;
-      line-height: 16px;
-      font-family: RobotoLight;
-      padding-top: 2px;
-      flex: 1 1 auto;
+    &-section {
+      display: flex;
+      flex-direction: row;
+      &-description {
+        padding-left: 10px;
+        font-size: 11px;
+        line-height: 16px;
+        font-family: RobotoLight;
+        padding-top: 2px;
+        flex: 1 1 auto;
+      }
+      &-export {
+        font-size: 12px;
+        color: $link-blue;
+      }
     }
-    &-export {
-      font-size: 12px;
-      color: $link-blue;
-    }
-  }
-  &-details {
-    padding-top: 20px;
-    display: flex;
-    flex-flow: column wrap;
-    align-content: flex-start;
-    margin-left: -10px;
-    margin-top: -10px;
-    height: calc(100vh - 250px);
-    &-country {
-        width:200px;
+    &-details {
+      padding-top: 20px;
+      display: flex;
+      flex-flow: column wrap;
+      align-content: flex-start;
+      margin-left: -10px;
+      margin-top: -10px;
+      height: calc(100vh - 250px);
+      &-country {
+        width: 200px;
         display: flex;
         flex-flow: row nowrap;
         font-size: 12px;
-        flex: 0 0 40px;
+        flex: 0 0 30px;
         box-sizing: border-box;
         padding: 10px;
         margin-left: 10px;
-        margin-top: 10px;
-        margin-right: 30px;
+        margin-right: 70px;
         justify-content: space-between;
-      &-name {
-        font-family: 'RobotoLight';
-      }
-      &-score {
-        font-family: 'RobotoMedium';
+        &-name {
+          font-family: 'RobotoLight';
+        }
+        &-score {
+          font-family: 'RobotoMedium';
+        }
       }
     }
   }
@@ -58,6 +60,6 @@
 
 @media (min-width: 1040px) {
   .countries-list-details .countries-list-details-country {
-    max-width: calc(20% - 40px);
+    max-width: calc(20% - 80px);
   }
 }

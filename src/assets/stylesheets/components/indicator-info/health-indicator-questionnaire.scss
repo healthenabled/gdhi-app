@@ -45,6 +45,7 @@
       height: 38px;
       font-family: Roboto-Regular;
       font-size: 16px;
+      padding-left: 1px;
     }
     .custom-width {
       width: 64.5%;
@@ -64,6 +65,7 @@
       padding-bottom: 12px;
       color: #444444;
       font-family: 'RobotoRegular';
+      text-align: justify;
     }
     .accordian-content {
       font-size: 12px;
@@ -137,7 +139,7 @@
   /*Error Validations */
   .error-info {
     font-size: x-small;
-    color:red;
+    color: red;
     .form-group {
       margin-bottom: 0;
     }
@@ -152,5 +154,23 @@
     color: darkgreen;
     font-family: 'RobotoSlabBold';
     font-size: 14px;
+  }
+}
+
+.top {
+  right: 30px;
+  bottom: 145px;
+  border: 1px solid #3F4D7C;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+
+  .arrow:before {
+    content: '\002303';
+    font-size: 20px;
+    padding: 15px 16px;
+    display: inline-block;
+    color: #3F4D7C;
   }
 }
