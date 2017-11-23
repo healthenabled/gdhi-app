@@ -1,18 +1,21 @@
 <div class="country-summary">
   <div class="country-summary-title">Country Summary</div>
-  <div class="country-text">{{countrySummaries.summary}}</div>
+  <div class="country-text" v-if="countrySummaries.summary">{{countrySummaries.summary}}</div>
+  <div class="error" v-else> No data available</div>
   <div class="country-summary-title">Resources</div>
-  <ul class="country-text">
+  <ul class="country-text" v-if="countrySummaries.resources">
     <li v-for="resource in countrySummaries.resources" class="country-summary-link">
       <a :href="resource" target="_blank">{{resource}}</a>
     </li>
   </ul>
+  <div class="error" v-else> No data available</div>
   <div class="country-summary-title">Contact</div>
     <div class="country-text">
-      <span class="country-summary-link">
+      <span class="country-summary-link" v-if="countrySummaries.contactName">
         <a :href="'mailto:' + countrySummaries.contactName" target="_blank">{{countrySummaries.contactName}}</a>,
       </span>
-      <span>{{countrySummaries.contactDesignation}},</span>
-      <span>{{countrySummaries.contactOrganization}}</span>
+      <span v-if="countrySummaries.contactDesignation">{{countrySummaries.contactDesignation}},</span>
+      <span v-if="countrySummaries.contactOrganization">{{countrySummaries.contactOrganization}}</span>
+      <span class="error" v-else>No data available</span>
     </div>
 </div>

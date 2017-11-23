@@ -30,6 +30,7 @@
   .phase-content {
     display: flex;
     padding-top: 10px;
+    padding-bottom: 20px;
 
     .score {
       width: 60px;
@@ -127,11 +128,15 @@
       padding-top: 0px;
     }
   }
+  .export-link {
+    padding-right: 6px;
+  }
 
   .country-summary {
     margin-top: 25px;
     font-family: Roboto-Regular;
     font-size: 12px;
+    padding-left: 8px;
 
     .country-summary-title {
       font-family: RobotoSlabRegular;
@@ -143,6 +148,10 @@
     }
     .country-summary-link {
       color: $link-blue;
+    }
+    .error {
+      color: red;
+      padding: 5px 0 10px 0;
     }
   }
 }
