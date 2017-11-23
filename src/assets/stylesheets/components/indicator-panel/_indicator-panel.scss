@@ -24,9 +24,14 @@
     align-items: center;
     height: 95%;
     margin: 15px 15px;
-
+    &-collapsible {
+      display: flex;
+    }
+    &-expand-btn {
+      cursor: pointer;
+    }
     &-name {
-      flex: 0 0 5%;
+      flex: 0 0 95%;
       font-weight: 600;
       align-self: left;
       position: relative;
