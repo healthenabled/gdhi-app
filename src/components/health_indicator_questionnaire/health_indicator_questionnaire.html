@@ -5,7 +5,7 @@
     <div class="health-indicator-questionnaire-contact-info-heading">Contact Information</div>
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
-        <label for="countryName">Country Name</label>
+        <label for="countryName">Country Name</label>*
         <input :class="errors.has('countryName') ? 'has-error form-control' : 'form-control'" type="input"
                id="countryName" name="countryName"
                v-validate="'required'"
@@ -32,7 +32,7 @@
         <label for="nameofPersonEnteringData">Name of person entering data</label>*
         <input type="input" name='feederName'
                :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'"
-               id="nameofPersonEnteringData"`
+               id="nameofPersonEnteringData"
                v-validate="'required'"
                v-model="countrySummary.dataFeederName"
                :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
