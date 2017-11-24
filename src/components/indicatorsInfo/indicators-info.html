@@ -36,13 +36,13 @@
 
         <div class="table-row-item containers" data-header="Indicator">
           <div v-for="indicator in category.indicators" class="medium-font half-containers">
-            <div class="block-with-text">{{indicator.indicatorName}}</div>
+            <div class="block-with-text" :title="indicator.indicatorName">{{indicator.indicatorName}}</div>
           </div>
         </div>
 
         <div class="table-row-item containers" data-header="Definition">
           <div v-for="indicator in category.indicators" class="half-containers">
-            <div class="block-with-text">{{indicator.indicatorDefinition}}</div>
+            <div class="block-with-text" :title="indicator.indicatorDefinition">{{indicator.indicatorDefinition}}</div>
           </div>
         </div>
       </div>

@@ -95,15 +95,22 @@
       font-size: 16px;
       color: #666666;
     }
-    .content-spacing {
-      padding-left: 10px;
-    }
     .bold-text {
       font-family: 'RobotoBold';
       padding-bottom: 6px;
     }
     .scores {
       margin-bottom: 10px;
+      display: flex;
+      .score-info {
+        padding-left: 10px;
+        flex: 1 1 96%;
+        display: flex;
+        margin-top: -4px;
+      }
+      .score-content {
+        padding-right: 5px;
+      }
     }
     .containers {
       flex-direction: column;
@@ -149,6 +156,9 @@
   }
   .has-error {
     border: 1px solid red !important;
+  }
+  .mandatory-field {
+    color: red;
   }
   .success {
     color: darkgreen;
