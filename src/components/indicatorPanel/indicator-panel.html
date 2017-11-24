@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="indicator-panel-error" v-else>No Global Health Indicators Available</div>
-    <div :class="!showIndicator ? 'hide' : 'show'">
+    <div :class="showIndicator ? 'hide' : 'show'">
       <div class="indicator-panel-container-category">
         <div v-for="(catagory, index) in globalHealthIndicators.categories"
              class="indicator-panel-container-category-section">

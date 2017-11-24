@@ -2,20 +2,27 @@
   margin: 60px auto;
   color: $black;
   padding-left: 2px;
-  .health-indicator-questionnaire-heading {
+  &-heading {
     font-family: 'RobotoSlabRegular';
     font-size: 22px;
   }
-  .health-indicator-questionnaire-contact-info {
+  &-contact-info {
     font-family: 'RobotoSlabBold';
     font-size: 18px;
-    .health-indicator-questionnaire-contact-info-heading {
+    &-heading {
       margin-bottom: 36px;
       margin-top: 32px;
     }
+    &-description {
+      font-size: 12px;
+      margin-bottom: -10px;
+      color: #444444;
+      font-family: 'RobotoRegular';
+      padding-top: 8px;
+    }
   }
   /*Form Layout */
-  .health-indicator-questionnaire-contact-form {
+  &-contact-form {
     display: flex;
     flex-direction: row;
     .form-group {
