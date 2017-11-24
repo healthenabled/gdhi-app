@@ -29,6 +29,8 @@
     }
     &-expand-btn {
       cursor: pointer;
+      font-size: 35px;
+      color: #666666;
     }
     &-name {
       flex: 0 0 95%;
@@ -225,6 +227,9 @@
     text-align: center;
     width: 90%;
     padding: 12px;
+  }
+  .show {
+    width: 100%;
   }
 }
 @media screen and (min-width: 1640px) {
