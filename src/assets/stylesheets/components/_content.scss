@@ -17,12 +17,13 @@
     margin-top: 60px;
     color: $link-blue;
     font-size: 12px;
+    font-family: 'RobotoLight';
     &.home {
       position: absolute;
       z-index: 1001;
-      right: 15%;
-      padding: 10px;
-      margin: 0 0 10px 0;
+      left: 15%;
+      padding: 10px 0px;
+      margin: 5px 0 0 0px;
     }
   }
 }
