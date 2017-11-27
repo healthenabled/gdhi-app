@@ -62,6 +62,12 @@ export default new Router({
           }
         },
         {
+          path: '/health_indicator_questionnaire/:countryCode',
+          components: {
+            routecontent: healthIndicatorQuestionnaire
+          }
+        },
+        {
           path: '/country_list',
           components: {
             routecontent: countryListComp

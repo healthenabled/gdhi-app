@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import healthIndicatorForm from './health_indicator_questionnaire.html'
+import editQuestionnaire from './edit-questionaire.js'
+import viewQuestionnaire from './view-questionaire.js'
 import axios from 'axios'
-import countrySearch from '../auto-search/auto-search'
-import common from '../../common/country'
+import _ from 'lodash'
+import expandCollapseHelper from './expand-collapse-helper'
 import VeeValidate from 'vee-validate'
 
 const config = {
@@ -12,7 +14,7 @@ Vue.use(VeeValidate, config)
 
 export default Vue.extend({
   components: {
-    countrySearch
+    editQuestionnaire, viewQuestionnaire
   },
   template: healthIndicatorForm,
   data: function () {
@@ -32,31 +34,24 @@ export default Vue.extend({
       contactEmail: ''
     }
     var healthIndicators = {}
-    return {saved: false, countryId: '', questionnaire: {}, countrySummary, healthIndicators}
+    return {questionnaire: {}, countrySummary, healthIndicators, showEdit: true}
   },
-  mounted: function () {
-    this.getQuestionnaire()
-    this.loadCountries()
+  created () {
+    if (this.$route.params['countryCode']) {
+      this.showEdit = false
+      this.prepareDataForViewForm(this.$route.params['countryCode'])
+    } else {
+      this.getQuestionnaire()
+    }
   },
   methods: {
-    loadCountries: function () {
-      common.loadCountries().then((response) => {
-        this.countries = response.data
-        var options = common.loadSearchData(this.countries, this.onCountrySelect.bind(this))
-        $('#countryName').easyAutocomplete(options)
-      })
-    },
-    onCountrySelect: function () {
-      var countryId = $('#countryName').getSelectedItemData().id
-      this.countryId = countryId
-    },
     getQuestionnaire: function () {
       axios.get('/api/health_indicator_options').then((response) => {
         this.questionnaire = response.data
-        this.setUpHealthIndicators(response.data)
+        this.setUpHealthIndicators(response.data, false)
       })
     },
-    setUpHealthIndicators: function (data) {
+    setUpHealthIndicators: function (data, isExpanded) {
       data.forEach((category) => {
         category.indicators.forEach(indicator => {
           this.healthIndicators[indicator.indicatorId] = {
@@ -65,36 +60,41 @@ export default Vue.extend({
             score: null,
             supportingText: ''
           }
-          this.$set(indicator, 'showIndicator', false)
-          this.$set(indicator, 'expandCollapseBtn', '+')
+          this.$set(indicator, 'showIndicator', isExpanded)
+          this.$set(indicator, 'expandCollapseBtn', expandCollapseHelper.getCaptionFor(
+            isExpanded))
         })
       })
     },
-    submit: function () {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.save()
-        } else {
-          document.body.scrollTop = document.documentElement.scrollTop = 0
-        }
+    fetchHealthScoresFor (countryCode) {
+      return axios.get(`/api/countries/${countryCode}/health_indicators`)
+    },
+    prepareDataForViewForm (countryCode) {
+      var self = this
+      axios.all([axios.get('/api/health_indicator_options'),
+        this.fetchHealthScoresFor(countryCode)])
+        .then(axios.spread(function (options, scores) {
+          self.questionnaire = options.data
+          self.setUpHealthIndicators(options.data, true)
+          self.applyScoresToModel(scores.data)
+        }))
+    },
+    applyScoresToModel (scores) {
+      let indicators = _.map(scores.categories, (category) => {
+        return category.indicators
       })
-    },
-    save: function () {
-      axios.post('/api/countries', {
-        countryId: this.countryId,
-        countrySummary: this.countrySummary,
-        healthIndicators: this.getHealthIndicators()
-      }).then(() => {
-        document.body.scrollTop = document.documentElement.scrollTop = 0
-        this.saved = true
+      indicators = _.flatten(indicators)
+      console.log('Indicatrs', indicators)
+      var self = this
+      console.log('self', self.healthIndicators)
+      _.each(self.healthIndicators, row => {
+        var indicatorScore = _.filter(indicators, indicator => {
+          return row.indicatorId === indicator.id
+        })
+        row.score = indicatorScore[0] ? indicatorScore[0].score : null
+        row.supportingText = indicatorScore[0] ? indicatorScore[0].supportingText : ''
       })
-    },
-    getHealthIndicators: function () {
-      return Object.entries(this.healthIndicators).map((entry) => entry[1])
-    },
-    onIndicatorExpand (indicator) {
-      indicator.showIndicator = !indicator.showIndicator
-      indicator.expandCollapseBtn = indicator.expandCollapseBtn === '+' ? '-' : '+'
+      console.log('Health score transformation', self.healthIndicators)
     }
   }
 })
