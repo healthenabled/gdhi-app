@@ -28,11 +28,17 @@
     .form-group {
       flex: 1 1 33.33%;
     }
+    .custom-form-width {
+      flex: 1 1 73.33%;
+    }
+    .custom-form-width-2 {
+      flex: 1 1 36.3%;
+    }
     .easy-autocomplete {
       width: 100% !important;
     }
     .easy-autocomplete input {
-      padding: 2px 0;
+      padding: 2px 11px;
       margin-bottom: 0;
       color: $black;
     }
@@ -42,7 +48,7 @@
       font-family: 'RobotoSlabRegular';
       font-size: 14px;
     }
-    .form-control {
+    .form-control, .custom-form-control {
       display: block;
       width: 94%;
       margin-bottom: 12px;
@@ -54,8 +60,11 @@
       font-size: 16px;
       padding-left: 1px;
     }
+    .custom-form-control{
+      width: 96.5%;
+    }
     .custom-width {
-      width: 64.5%;
+      width: 96.5%;
       height: 148px;
     }
   }
