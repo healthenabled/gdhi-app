@@ -64,10 +64,12 @@ export default {
         'countryCode': $el.feature.properties.BRK_A3,
         'countryName': $el.feature.properties.NAME})
       this.map.fitBounds($el.getBounds(), {'maxZoom': 7})
+      $('#search-box').val($el.feature.properties.NAME)
     } else if (clickState === 'RESET_CLICK') {
       this.lastClickedCountry = ''
       postClickCallBack({'type': 'GLOBAL'})
       this.map.setView([44, -31], 2)
+      $('#search-box').val('')
     } else {
       this.lastClickedCountry = ''
       postClickCallBack({'type': 'COUNTRY',
