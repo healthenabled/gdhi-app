@@ -4,11 +4,11 @@
 
     <div class="title">Overall Digital Health Phase</div>
     <div class="phase-content clearfix">
-      <div class="score" :id="'phase' + healthIndicatorData[0].countryPhase">{{healthIndicatorData[0].countryPhase}}</div>
+      <div v-if="healthIndicatorData[0]" class="score" :id="'phase' + healthIndicatorData[0].countryPhase">{{healthIndicatorData[0].countryPhase}}</div>
       <div class="phase-desc"><p>The overall score is an average of the scores for the
         19 GDHI indicators
       </p>
-        <div class="health-indicators">
+        <div v-if="healthIndicatorData[0]" class="health-indicators">
           <div v-for="(catagory, index) in healthIndicatorData[0].categories" class="indicator-panel-container-category-section">
             <div class="category-bar">
               <div class="bar">

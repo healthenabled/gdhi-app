@@ -3,23 +3,32 @@ import axios from 'axios'
 export default ({
 
   getGNIPerCapitaInKilo: function (gniPerCapita) {
-    return gniPerCapita ? gniPerCapita / 1000 + 'K' : null
+    return gniPerCapita ? gniPerCapita / 1000 + 'K' : 'NA'
   },
 
   getTotalPopulationInMillion: function (population) {
     var populationInMillion = population ? Number((population / 10000000).toFixed(2)) : null
-    return populationInMillion ? populationInMillion + 'M' : null
+    return populationInMillion ? populationInMillion + 'M' : 'NA'
   },
 
   getHealthExpenditureInPercentage: function (healthExpenditure) {
-    return healthExpenditure ? Number((healthExpenditure).toFixed(1)) + '%' : null
+    return healthExpenditure ? Number((healthExpenditure).toFixed(1)) + '%' : 'NA'
   },
 
   getAdultLiteracyInPercentage: function (adultLiteracy) {
-    return adultLiteracy ? Number((adultLiteracy).toFixed(1)) + '%' : null
+    return adultLiteracy ? Number((adultLiteracy).toFixed(1)) + '%' : 'NA'
   },
   getNCDDeathsInPercentage: function (ncdDeaths) {
-    return ncdDeaths ? Number((ncdDeaths).toFixed(1)) + '%' : null
+    return ncdDeaths ? Number((ncdDeaths).toFixed(1)) + '%' : 'NA'
+  },
+  getLifeExpectancy: function (lifeExpectancy) {
+    return lifeExpectancy === null ? 'NA' : lifeExpectancy
+  },
+  getUnder5Mortality: function (under5Mortality) {
+    return under5Mortality === null ? 'NA' : under5Mortality
+  },
+  getDoingBusinessIndex: function (doingBusinessIndex) {
+    return doingBusinessIndex === null ? 'NA' : doingBusinessIndex
   },
   getMinimalDevelopmentIndicatorsData: function (self, response) {
     var developmentIndicatorsData = [
@@ -31,7 +40,7 @@ export default ({
       },
       {
         'HEALTH': {
-          'Life expectancy at birth (years)': response.data.lifeExpectancy,
+          'Life expectancy at birth (years)': self.getLifeExpectancy(response.data.lifeExpectancy),
           'Health expenditure (% of GDP)': self.getHealthExpenditureInPercentage(response.data.healthExpenditure)
         }
       }
@@ -47,16 +56,16 @@ export default ({
           'Total population': self.getTotalPopulationInMillion(response.data.totalPopulation),
           'Adult literacy rate, population 15+ years, both sexes (%)':
             self.getAdultLiteracyInPercentage(response.data.adultLiteracy),
-          'Ease of doing business index': response.data.doingBusinessIndex
+          'Ease of doing business index': self.getDoingBusinessIndex(response.data.doingBusinessIndex)
         }
       },
       {
         'HEALTH': {
-          'Life expectancy at birth (years)': response.data.lifeExpectancy,
+          'Life expectancy at birth (years)': self.getLifeExpectancy(response.data.lifeExpectancy),
           'Health expenditure (% of GDP)': self.getHealthExpenditureInPercentage(response.data.healthExpenditure),
           'Cause of death, by non-communicable diseases (% of total)':
             self.getNCDDeathsInPercentage(response.data.totalNcdDeathsPerCapita),
-          'Mortality rate, under-5 (per 1,000 live births)': response.data.under5Mortality
+          'Mortality rate, under-5 (per 1,000 live births)': self.getUnder5Mortality(response.data.under5Mortality)
         }
       }
     ]

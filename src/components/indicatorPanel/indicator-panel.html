@@ -58,6 +58,6 @@
         </div>
       </div>
     </div>
-    <div class="indicator-panel-button" @click="showCountryDetails(healthIndicators.countryId)">VIEW DETAILS</div>
+    <div class="indicator-panel-button" v-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0" @click="showCountryDetails(healthIndicators.countryId)">VIEW DETAILS</div>
   </div>
 </div>
