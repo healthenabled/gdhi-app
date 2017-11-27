@@ -71,7 +71,6 @@
   }
   .category-bar {
     background: $light-grey;
-    padding-bottom: 10px;
     padding-top: 10px;
     overflow: auto;
   }
@@ -81,12 +80,17 @@
     margin-left: 18px;
   }
   .category-indicators {
-    background: $white;
+    //background: $white;
     float: left;
-    margin: 0 14px;
-    padding: 10px;
-    margin-top: 10px;
-    width: 90%;
+    //margin: 0 14px;
+    //padding: 10px;
+    //margin-top: 10px;
+    width: 100%;
+    .indicator {
+      background: $white;
+      padding: 7px;
+      margin: 10px 15px;
+    }
 
     .indicator-desc {
       width: 90%;
@@ -106,7 +110,9 @@
       font-family: 'RobotoItalic';
       color: $light-font-grey;
       font-size: 11px;
-      padding-bottom: 8px;
+      line-height: 1.3em;
+      width: 90%;
+      display: inline-block;
     }
   }
 }
