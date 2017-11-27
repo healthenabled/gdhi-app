@@ -2,10 +2,11 @@ import Vue from 'vue'
 import editForm from './edit-questionnaire.html'
 import axios from 'axios'
 import autoSuggest from '../auto-search/auto-search'
-import apiHelper from '../../common/country'
+import countryHelper from '../../common/country'
 import VeeValidate from 'vee-validate'
 import expandCollapseHelper from './expand-collapse-helper'
 
+VeeValidate.Validator.extend('countryName', countryHelper.countryNameValidator)
 const config = {
   fieldsBagName: 'fieldBags'
 }
@@ -23,9 +24,9 @@ export default Vue.extend({
   },
   methods: {
     loadCountries: function () {
-      apiHelper.loadCountries().then((response) => {
+      countryHelper.loadCountries().then((response) => {
         this.countries = response.data
-        var options = apiHelper.loadSearchData(this.countries, this.onCountrySelect.bind(this))
+        var options = countryHelper.loadSearchData(this.countries, this.onCountrySelect.bind(this))
         $('#countryName').easyAutocomplete(options)
       })
     },

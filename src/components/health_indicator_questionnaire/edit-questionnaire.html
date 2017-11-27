@@ -8,9 +8,9 @@
         <label for="countryName">Country Name</label>*
         <input :class="errors.has('countryName') ? 'has-error form-control' : 'form-control'" type="input"
                id="countryName" name="countryName"
-               v-validate="'required'"
+               v-validate="{required: true, countryName: this.countries}"
 
-               :title="errors.has('countryName') ? 'Country Name is required' :'Please Choose a Country'">
+               :title="errors.has('countryName') ? 'Country Name is either empty or invalid' :'Please Choose a Country'">
       </div>
       <div class="form-group">
         <label for="Organisation">Organisation</label>
