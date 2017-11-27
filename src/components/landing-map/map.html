@@ -9,7 +9,7 @@
     </div>
     <div class="export home">
       <span v-if="globalHealthIndicators[0]">
-        <export-data :healthData="globalHealthIndicators" displayName="Export Data For All Countries"></export-data>
+        <span class="pipe">| </span> <export-data :healthData="globalHealthIndicators" displayName="Export Data For All Countries"></export-data>
       </span>
     </div>
   </div>

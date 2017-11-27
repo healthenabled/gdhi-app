@@ -14,11 +14,8 @@
     width: 92%;
     margin: 0 auto;
   }
-  .ft-element {
-    &:after {
-      content: '|';
+  .ft-element-pipe {
       padding: 0 5px;
-    }
   }
   .float-right {
     float: right;
