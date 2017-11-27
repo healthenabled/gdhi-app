@@ -12,7 +12,7 @@
   <div class="country-summary-title">Contact</div>
     <div class="country-text">
       <span class="country-summary-link" v-if="countrySummaries.contactName">
-        <a :href="'mailto:' + countrySummaries.contactName" target="_blank">{{countrySummaries.contactName}}</a>,
+        <a :href="'mailto:' + countrySummaries.contactEmail" target="_blank">{{countrySummaries.contactName}}</a>,
       </span>
       <span v-if="countrySummaries.contactDesignation">{{countrySummaries.contactDesignation}},</span>
       <span v-if="countrySummaries.contactOrganization">{{countrySummaries.contactOrganization}}</span>
