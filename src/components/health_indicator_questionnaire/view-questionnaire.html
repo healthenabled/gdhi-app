@@ -156,9 +156,13 @@
                 <input type="radio" disabled :name="indicator.indicatorId"
                        v-model="healthIndicators[indicator.indicatorId].score"
                        :value="score.score"/>
-                <span class="content-spacing">{{score.score}} - {{score.scoreDefinition}}</span>
+                <div class="score-info">
+                  <span class="score-content">{{score.score}}</span>
+                  <span class="score-content">-</span>
+                  <span>{{score.scoreDefinition}}</span>
+                </div>
+                <!--<span class="content-spacing">{{score.score}} - {{score.scoreDefinition}}</span>-->
               </div>
-              <!--<span>Indicator id{{indicator.indicatorId}}</span>-->
               <span v-show="errors.has(indicator.indicatorId)" class="error-info">
                 Please select a value for above indicator</span><br/>
               Rationale or supporting text
