@@ -67,7 +67,7 @@ export default Vue.extend({
       })
     },
     fetchHealthScoresFor (countryCode) {
-      return axios.get(`/api/countries/${countryCode}/health_indicators`)
+      return axios.get(`/api/countries/${countryCode}`)
     },
     prepareDataForViewForm (countryCode) {
       var self = this
@@ -75,26 +75,21 @@ export default Vue.extend({
         this.fetchHealthScoresFor(countryCode)])
         .then(axios.spread(function (options, scores) {
           self.questionnaire = options.data
-          self.setUpHealthIndicators(options.data, true)
-          self.applyScoresToModel(scores.data)
+          self.countrySummary = scores.data.countrySummary
+          self.transformForView(scores.data.healthIndicators)
+          console.log('Health indicators', self.healthIndicators)
         }))
     },
-    applyScoresToModel (scores) {
-      let indicators = _.map(scores.categories, (category) => {
-        return category.indicators
-      })
-      indicators = _.flatten(indicators)
-      console.log('Indicatrs', indicators)
+    transformForView (healthindicators) {
       var self = this
-      console.log('self', self.healthIndicators)
-      _.each(self.healthIndicators, row => {
-        var indicatorScore = _.filter(indicators, indicator => {
-          return row.indicatorId === indicator.id
-        })
-        row.score = indicatorScore[0] ? indicatorScore[0].score : null
-        row.supportingText = indicatorScore[0] ? indicatorScore[0].supportingText : ''
+      _.each(healthindicators, (indicator) => {
+        self.healthIndicators[indicator.indicatorId] = {
+          categoryId: indicator.categoryId,
+          indicatorId: indicator.indicatorId,
+          score: indicator.score,
+          supportingText: indicator.supportingText
+        }
       })
-      console.log('Health score transformation', self.healthIndicators)
     }
   }
 })
