@@ -17,7 +17,7 @@ export default Vue.extend({
   components: { autoSuggest },
   props: ['questionnaire', 'countrySummary', 'healthIndicators'],
   data: function () {
-    return {saved: false, countryId: ''}
+    return {success: false, error: false, countryId: ''}
   },
   mounted () {
     this.loadCountries()
@@ -39,6 +39,8 @@ export default Vue.extend({
         if (result) {
           this.save()
         } else {
+          this.success = false
+          this.error = true
           document.body.scrollTop = document.documentElement.scrollTop = 0
         }
       })
@@ -50,7 +52,8 @@ export default Vue.extend({
         healthIndicators: this.getHealthIndicators()
       }).then(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0
-        this.saved = true
+        this.success = true
+        this.error = false
       })
     },
     getHealthIndicators: function () {
