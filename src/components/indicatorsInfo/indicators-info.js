@@ -27,7 +27,7 @@ export default Vue.extend({
   methods: {
 
     fetchCategoricalIndicators: function () {
-      return axios.get('/api/categorical_indicators')
+      return axios.get('/api/health_indicator_options')
     },
 
     getCategoryNames: function (categories) {
