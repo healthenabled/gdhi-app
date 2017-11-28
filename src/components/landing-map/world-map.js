@@ -30,6 +30,7 @@ export default {
       }
     })
     this.map = L.map('map', {attributionControl: false}).setView([44, -31], 2)
+    this.map.setMinZoom(2)
     L.control.attribution({position: 'bottomleft'}).addTo(this.map)
     this.map.addControl(new ResetButton())
     this.geoLayer = L.geoJson(countriesData, {
