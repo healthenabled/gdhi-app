@@ -11,8 +11,30 @@ export default {
   lastMouseOverCountry: '',
   drawMap: function (healthData, postClickCallBack) {
     this.healthData = healthData
-    this.map = L.map('map').setView([44, -31], 2)
     var self = this
+    var ResetButton = L.Control.extend({
+      options: {
+        position: 'topleft'
+      },
+      onAdd: function (map) {
+        var container = L.DomUtil.create('input')
+        container.type = 'button'
+        container.title = 'Reset Map Selections'
+        container.value = 'Reset'
+
+        container.style.backgroundColor = 'white'
+        container.style.backgroundSize = '30px 30px'
+        container.style.width = '30px'
+        container.style.height = '30px'
+        container.onclick = function () {
+          self.resetMap(postClickCallBack)
+        }
+
+        return container
+      }
+    })
+    this.map = L.map('map').setView([44, -31], 2)
+    this.map.addControl(new ResetButton())
     this.geoLayer = L.geoJson(countriesData, {
       style: function (feature) {
         console.log('in feature')
@@ -77,5 +99,11 @@ export default {
         'countryName': ''})
       this.map.setView([44, -31], 2)
     }
+  },
+  resetMap (postClickCallBack) {
+    eventHandler.resetLayer(this.lastClickedCountry, this.healthIndicators)
+    this.lastClickedCountry = ''
+    postClickCallBack({'type': 'GLOBAL'})
+    this.map.setView([44, -31], 2)
   }
 }

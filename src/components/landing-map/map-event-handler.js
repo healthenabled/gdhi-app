@@ -7,11 +7,12 @@ export default {
     var CLICK_ON = 'CLICK_ON'
     var COUNTRY_NOT_FOUND = 'COUNTRY_NOT_FOUND'
     if (lastClickedLayer !== '') {
-      lastClickedLayer.setStyle({
-        'fillOpacity': 0.95,
-        'fillColor': mapHelper.getColorCodeOf(lastClickedLayer.feature.properties.BRK_A3,
-          countryIndices)
-      })
+      this.resetLayer(lastClickedLayer, countryIndices)
+      // lastClickedLayer.setStyle({
+      //   'fillOpacity': 0.95,
+      //   'fillColor': mapHelper.getColorCodeOf(lastClickedLayer.feature.properties.BRK_A3,
+      //     countryIndices)
+      // })
     }
     if (layer) {
       if (lastClickedLayer && lastClickedLayer.feature.properties.BRK_A3 ===
@@ -30,5 +31,14 @@ export default {
   },
   onMouseOut: function (layer, lastMouseOverCountry) {
     layer.setStyle({'fillOpacity': 0.95})
+  },
+  resetLayer: function (layer, countryIndices) {
+    if (layer) {
+      layer.setStyle({
+        'fillOpacity': 0.95,
+        'fillColor': mapHelper.getColorCodeOf(layer.feature.properties.BRK_A3,
+          countryIndices)
+      })
+    }
   }
 }
