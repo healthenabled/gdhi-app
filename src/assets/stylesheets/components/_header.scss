@@ -54,6 +54,9 @@
       background-size: 15px;
     }
   }
+  .router-link-exact-active {
+    color: $font-grey-dark;
+  }
 }
 .header-elements__right {
   display: inline-flex;
