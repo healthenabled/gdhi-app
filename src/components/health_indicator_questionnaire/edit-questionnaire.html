@@ -153,7 +153,7 @@
         </div>
         <div class="table-row-item containers" data-header="Indicator">
           <div v-for="indicator in category.indicators"
-               :class="(errors.has(indicator.indicatorId) || errors.has('rationale')) ? 'has-error' : 'container-items'">
+               :class="errors.has('indicator_'+indicator.indicatorId+'_rationale') ? 'has-error' : 'container-items'">
             <div class="accordian">
               <div class="bold-text">{{indicator.indicatorName}}</div>
               <div>{{indicator.indicatorDefinition}}</div>
@@ -170,13 +170,11 @@
                   <span>{{score.scoreDefinition}}</span>
                 </div>
               </div>
-              <span v-show="errors.has(indicator.indicatorId)" class="error-info">
-                Please select a value for above indicator</span><br/>
               Rationale or supporting text
-              <textarea class="description" name="rationale"
+              <textarea class="description"  :name="'indicator_' + indicator.indicatorId + '_rationale'"
                         v-model="healthIndicators[indicator.indicatorId].supportingText"
                         v-validate="'required'"></textarea>
-              <div v-show="errors.has('rationale')" class="error-info">{{ errors.first('rationale') }}</div>
+              <div v-show="errors.has('indicator_'+indicator.indicatorId+'_rationale')" class="error-info">The rationale field is required.</div>
             </div>
           </div>
         </div>
