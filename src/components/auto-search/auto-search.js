@@ -21,6 +21,7 @@ export default Vue.extend({
       console.log(easyAutocomplete)
     },
     loadSearchData: function () {
+      var self = this
       var options = {
         data: this.countries,
         getValue: 'name',
@@ -29,8 +30,10 @@ export default Vue.extend({
           sort: {enabled: true},
           onChooseEvent: function () {
             var countryId = $('#search-box').getSelectedItemData().id
-            console.log('Selected Country ID:' + countryId)
             EventBus.$emit('Map:Searched', countryId)
+          },
+          onHideListEvent: function () {
+            self.$el.querySelector('#search-box').value = ''
           }
         }
       }

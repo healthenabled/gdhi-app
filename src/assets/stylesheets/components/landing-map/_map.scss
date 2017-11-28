@@ -31,7 +31,8 @@
 
 div#reset-btn:before {
   content: "\F021";
-  height: 16px;
+  height: 17px;
+  width: 12px;
   padding: 5px 9px;
   background: #fff;
   font-family: 'FontAwesome';
@@ -55,6 +56,12 @@ div#reset-btn:before {
   margin-left: 301px;
   top: 3px;
   margin-top: 0;
+  &.leaflet-control-attribution {
+    margin-left: 0;
+  }
+}
+.leaflet-bar {
+  border-radius: 0;
 }
 
 @media screen and (min-width: 1640px) {
