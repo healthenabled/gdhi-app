@@ -97,7 +97,7 @@ export default {
     }
   },
   resetMap (postClickCallBack) {
-    eventHandler.resetLayer(this.lastClickedCountry, this.healthIndicators)
+    eventHandler.resetLayer(this.lastClickedCountry, this.healthData)
     this.lastClickedCountry = ''
     postClickCallBack({'type': 'GLOBAL'})
     this.map.setView([44, -31], 2)
