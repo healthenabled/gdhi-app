@@ -13,8 +13,6 @@ export default Vue.extend({
       healthIndicators: {},
       globalHealthIndicators: {},
       showCountryDetail: true,
-      showIndicator: false,
-      expandCollapseBtn: '\u02C4',
       country: {}
     }
   },
@@ -78,10 +76,6 @@ export default Vue.extend({
 
     showListOfCountries: function () {
       this.$router.push({path: `/country_list`})
-    },
-    onExpand: function () {
-      this.showIndicator = !this.showIndicator
-      this.expandCollapseBtn = this.expandCollapseBtn === '\u02C4' ? '\u02C5' : '\u02C4'
     }
   }
 })

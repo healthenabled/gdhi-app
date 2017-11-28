@@ -34,7 +34,6 @@
     }
     &-name {
       flex: 0 0 95%;
-      font-weight: 600;
       align-self: left;
       position: relative;
       font-family: 'RobotoSlabRegular';
@@ -48,7 +47,7 @@
       text-transform: none;
       line-height: 1.5;
       font-family: 'RobotoLight';
-      padding-top: 4px;
+      padding-top: 5px;
     }
 
     &-context {

@@ -37,12 +37,12 @@
   display: flex;
   width: 100%;
   .logo-name {
-    max-width: 160px;
+    max-width: 190px;
     font-size: 23px;
     color: $logo-blue;
     font-family: 'RobotoSlabBold';
-
-
+    text-transform: uppercase;
+    letter-spacing: -0.1px;
   }
   .search-box {
     position: absolute;
