@@ -36,6 +36,7 @@
              :value="healthIndicators.countryPhase"></div>
       </div>
     </div>
+    <div class="indicator-panel-error" v-else-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0"></div>
     <div class="indicator-panel-error" v-else>No Digital Health Indicators Available</div>
     <div class="indicator-panel-container-category">
       <div v-for="(catagory, index) in healthIndicators.categories" class="indicator-panel-container-category-section">
