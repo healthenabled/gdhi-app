@@ -29,6 +29,15 @@
   }
 }
 
+div#reset-btn:before {
+  content: "\F021";
+  height: 16px;
+  padding: 5px 9px;
+  background: #fff;
+  font-family: 'FontAwesome';
+  display: inline-block;
+}
+
 
 @media screen and (min-width: 1200px) and (max-width: 1400px) {
   .leaflet-overlay-pane {

@@ -8,11 +8,6 @@ export default {
     var COUNTRY_NOT_FOUND = 'COUNTRY_NOT_FOUND'
     if (lastClickedLayer !== '') {
       this.resetLayer(lastClickedLayer, countryIndices)
-      // lastClickedLayer.setStyle({
-      //   'fillOpacity': 0.95,
-      //   'fillColor': mapHelper.getColorCodeOf(lastClickedLayer.feature.properties.BRK_A3,
-      //     countryIndices)
-      // })
     }
     if (layer) {
       if (lastClickedLayer && lastClickedLayer.feature.properties.BRK_A3 ===

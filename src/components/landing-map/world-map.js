@@ -17,15 +17,11 @@ export default {
         position: 'topleft'
       },
       onAdd: function (map) {
-        var container = L.DomUtil.create('input')
+        var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control ' +
+          'leaflet-control-custom')
         container.type = 'button'
         container.title = 'Reset Map Selections'
-        container.value = 'Reset'
-
-        container.style.backgroundColor = 'white'
-        container.style.backgroundSize = '30px 30px'
-        container.style.width = '30px'
-        container.style.height = '30px'
+        container.id = 'reset-btn'
         container.onclick = function () {
           self.resetMap(postClickCallBack)
         }
