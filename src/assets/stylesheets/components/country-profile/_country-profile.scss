@@ -72,7 +72,7 @@
   .category-bar {
     background: $light-grey;
     padding-top: 10px;
-    overflow: auto;
+    overflow: hidden;
   }
   .bar {
     width: calc(100% - 50px);
