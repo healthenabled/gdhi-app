@@ -8,9 +8,8 @@
 
     </div>
     <div class="export home">
-      <span v-if="globalHealthIndicators[0]">
-        <span class="pipe">| </span> <export-data :healthData="globalHealthIndicators" displayName="Export Data For All Countries"></export-data>
-      </span>
+        <span class="pipe">| </span>
+      <span><a href="/api/export_global_data">Export Data For All Countries</a></span>
     </div>
   </div>
 </div>
