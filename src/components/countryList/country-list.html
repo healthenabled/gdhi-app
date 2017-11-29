@@ -13,7 +13,7 @@
   </div>
   <ul class="countries-list-details">
     <li v-for="country in countryList" class="countries-list-details-country">
-      <span class="countries-list-details-country-name" @click="showCountryDetails(country.countryId)"><a>{{country.countryName}}</a></span>
+      <a href="javascript:void(0);"><span class="countries-list-details-country-name" @click="showCountryDetails(country.countryId)">{{country.countryName}}</span></a>
       <span class="countries-list-details-country-score">{{country.overallPhase}}</span>
     </li>
   </ul>
