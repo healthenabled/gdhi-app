@@ -82,6 +82,7 @@
   /* Table layout */
   .table {
     width: 100%;
+    margin-left: 0;
     .accordian {
       display: inline-block;
       width: calc(100% - 40px);
