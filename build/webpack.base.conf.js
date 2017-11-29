@@ -4,9 +4,6 @@ const utils = require('./utils')
 const config = require('../config')
 const webpack = require('webpack')
 const vueLoaderConfig = require('./vue-loader.conf')
-var ES6Promise = require("es6-promise");
-ES6Promise.polyfill();
-var axios = require("axios")
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -92,8 +89,7 @@ module.exports = {
       $: 'jquery',
       jquery: 'jquery',
       'window.jQuery': 'jquery',
-      jQuery: 'jquery',
-      Promise: 'es6-promise-promise'
+      jQuery: 'jquery'
     })
   ]
 }
