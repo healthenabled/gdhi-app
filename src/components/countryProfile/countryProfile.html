@@ -31,9 +31,8 @@
   </div>
   <div class="detailed-indicators">
     <div class="export">
-      <span class="export-link" v-if="healthIndicatorData[0].countryName">
-        <export-data :healthData="healthIndicatorData" displayName="Export Country Data"></export-data>
-      </span>
+      <span><a v-bind:href="url">Export Data</a></span>
+
     </div>
     <div class="health-indicator-container">
     <development-indicators></development-indicators>

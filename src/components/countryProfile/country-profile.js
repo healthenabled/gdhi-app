@@ -9,7 +9,8 @@ import _ from 'lodash'
 export default Vue.extend({
   data () {
     return {
-      healthIndicatorData: [{countryName: '', countryPhase: 'NA', categories: []}]
+      healthIndicatorData: [{countryName: '', countryPhase: 'NA', categories: []}],
+      url: ''
     }
   },
   template: countryProfile,
@@ -18,6 +19,7 @@ export default Vue.extend({
 
   created () {
     this.getHealthIndicatorsFor(this.$route.params.countryCode)
+    this.url = '/api/export_country_data/' + this.$route.params.countryCode
   },
   methods: {
     getHealthIndicatorsFor (countryCode) {
