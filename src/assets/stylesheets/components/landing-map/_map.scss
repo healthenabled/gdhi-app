@@ -27,6 +27,12 @@
     font-size: 12px;
     font-family: 'RobotoRegular';
   }
+  .legend-desc {
+    color: $font-grey-dark;
+    display: inline-block;
+    padding: 5px 0;
+    margin-left: -10px;
+  }
 }
 
 div#reset-btn:before {
