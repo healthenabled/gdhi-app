@@ -50,6 +50,7 @@ export default Vue.extend({
         }
         this.healthIndicators = healthIndicatorsData
         this.showCountryDetail = true
+        this.country.countryName = this.country.countryName ? this.country.countryName : healthIndicatorsData.countryName
       }).catch(e => {
         console.log('Error pulling health indicators data')
       })

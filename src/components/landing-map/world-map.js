@@ -82,9 +82,9 @@ export default {
       this.lastClickedCountry = $el
       postClickCallBack({'type': 'COUNTRY',
         'countryCode': $el.feature.properties.BRK_A3,
-        'countryName': $el.feature.properties.NAME})
+        'countryName': $el.feature.properties.NAME_LONG})
       this.map.fitBounds($el.getBounds(), {'maxZoom': 7})
-      $('#search-box').val($el.feature.properties.NAME)
+      $('#search-box').val($el.feature.properties.NAME_LONG)
     } else if (clickState === 'RESET_CLICK') {
       this.lastClickedCountry = ''
       postClickCallBack({'type': 'GLOBAL'})
