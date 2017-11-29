@@ -25,7 +25,10 @@
     flex-direction: row;
 
     .indicators-info-content-categories {
-      width: 25%
+      width: 235px;
+      position: fixed;
+      //margin-left: -360px;
+      //left: 34%;
     }
 
     .l-box {
@@ -51,6 +54,7 @@
   line-height: 1.5;
   width: 75%;
   cursor: default;
+  margin-left: 300px;
 
   .table-row {
     width: 100%;
