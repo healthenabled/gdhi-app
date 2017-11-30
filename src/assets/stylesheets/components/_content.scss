@@ -30,4 +30,10 @@
       margin-right: 8px;
     }
   }
+  //TODO: Hacky fix
+  @media screen and (min-width: 1200px) and (max-width: 1400px) {
+    .export.home {
+      left: 17%;
+    }
+  }
 }
