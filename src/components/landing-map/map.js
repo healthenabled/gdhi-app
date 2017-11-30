@@ -5,13 +5,12 @@ import indicatorPanel from '../indicatorPanel/indicator-panel.js'
 import mapLegend from '../legend/legend.js'
 import axios from 'axios'
 import worldMap from './world-map'
-import exportData from '../exportData/export-data.js'
 import helper from './map-helper'
 import _ from 'lodash'
 
 export default Vue.extend({
   components: {
-    indicatorPanel, mapLegend, exportData
+    indicatorPanel, mapLegend
   },
   template: mapTemplate,
   data () {

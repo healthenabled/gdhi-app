@@ -1,15 +1,12 @@
 import Vue from 'vue'
 import countryList from './country-list.html'
-import exportData from '../exportData/export-data.js'
 import axios from 'axios'
 import _ from 'lodash'
 
 export default Vue.extend({
   template: countryList,
   name: 'country-list',
-  components: {
-    exportData
-  },
+
   data () {
     return {
       countryList: [],
