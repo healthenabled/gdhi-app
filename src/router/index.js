@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import content from '@/components/container/container.js'
-// import mapComponent from '@/components/map/map.js'
 import indicatorsInfoComp from '@/components/indicatorsInfo/indicators-info.js'
 import headerComp from '@/components/header/header.js'
 import autoSearch from '@/components/auto-search/auto-search.js'
