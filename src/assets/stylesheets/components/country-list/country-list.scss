@@ -45,10 +45,14 @@
         box-sizing: border-box;
         padding: 10px;
         margin-left: 10px;
-        margin-right: 70px;
+        //margin-right: 70px;
         justify-content: space-between;
         &-name {
           font-family: 'RobotoLight';
+          &:hover {
+            text-decoration: underline;
+            color: $link-blue;
+          }
         }
         &-score {
           font-family: 'RobotoMedium';
@@ -60,6 +64,6 @@
 
 @media (min-width: 1040px) {
   .countries-list-details .countries-list-details-country {
-    max-width: calc(20% - 80px);
+    max-width: calc(20% - 30px);
   }
 }
