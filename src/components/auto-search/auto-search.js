@@ -31,9 +31,6 @@ export default Vue.extend({
             var countryId = $('#search-box').getSelectedItemData().id
             EventBus.$emit('Map:Searched', countryId)
           }
-          // onHideListEvent: function () {
-          //   self.$el.querySelector('#search-box').value = ''
-          // }
         }
       }
       $('#search-box').easyAutocomplete(options)
