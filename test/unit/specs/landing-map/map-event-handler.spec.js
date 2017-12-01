@@ -105,7 +105,7 @@ describe('Event Handler', () => {
     expect(clickState).to.equal('RESET_CLICK')
   })
 
-  it.only('clicking the same country with previous selection', () => {
+  it.only('clicking the country with previous selection', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'SGP'
     }}
@@ -126,6 +126,17 @@ describe('Event Handler', () => {
 
     expect(clickState).to.equal('CLICK_ON')
 
+  })
+
+  it.only('Trigerring a country which is not present should reset previous selection', () => {
+    layer.feature = {'properties': {
+      'BRK_A3': 'SGP'
+    }}
+    mockLayer.expects('setStyle').once().
+      withArgs({ fillColor: '#11184B', fillOpacity: 0.95 })
+    var clickState = eventHandler.onCountryClick('', layer, countryIndices)
+
+    expect(clickState).to.equal('COUNTRY_NOT_FOUND')
   })
 
 })
