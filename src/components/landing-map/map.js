@@ -35,7 +35,7 @@ export default Vue.extend({
   methods: {
     fetchGlobalIndices: function () {
       var self = this
-      axios.get('/api/countries_health_indicator_scores')
+      return axios.get('/api/countries_health_indicator_scores')
         .then(function (globalHealthIndices) {
           self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
           self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
