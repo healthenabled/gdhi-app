@@ -5,7 +5,6 @@ const countryIndices = [{
   'countryName': 'Afghanistan',
   'countryPhase': 5,
   'overallScore': 4.75,
-  'colorCode': '#11184B',
   'categories': [{
     'id': 1,
     'name': 'Leadership and Governance',

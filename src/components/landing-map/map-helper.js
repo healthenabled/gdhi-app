@@ -11,7 +11,7 @@ export default {
   },
   getColorCodeOf (country, countryIndices) {
     var matchedCountry = this.getMatchedCountry(country, countryIndices)
-    return matchedCountry ? matchedCountry.colorCode : '#606060'
+    return matchedCountry ? this.getColorCodeFor(matchedCountry.countryPhase) : '#606060'
   },
   getMatchedCountry (countryCode, countryIndices) {
     let matchedCountry = _.filter(countryIndices,
