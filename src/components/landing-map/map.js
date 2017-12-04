@@ -5,8 +5,6 @@ import indicatorPanel from '../indicatorPanel/indicator-panel.js'
 import mapLegend from '../legend/legend.js'
 import axios from 'axios'
 import worldMap from './world-map'
-import helper from './map-helper'
-import _ from 'lodash'
 
 export default Vue.extend({
   components: {
@@ -38,22 +36,8 @@ export default Vue.extend({
       return axios.get('/api/countries_health_indicator_scores')
         .then(function (globalHealthIndices) {
           self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
-          self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
-            globalHealthIndices)
-          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self))
+          worldMap.drawMap(self.globalHealthIndicators, self.onCountrySelection.bind(self))
         })
-    },
-    mergeColorCodeToHealthIndicators: function (globalHealthIndices) {
-      var globalHealthIndicesWithScores = _.filter(globalHealthIndices.data.countryHealthScores, function (country) {
-        return country.overallScore != null
-      })
-      var collection = globalHealthIndicesWithScores
-      _.forEach(collection, function (value) {
-        _.merge(value, {
-          'colorCode': helper.getColorCodeFor(value['countryPhase'])
-        })
-      })
-      return collection
     },
     onCountrySelection (countryCode) {
       this.$emit('Map:Clicked', countryCode)
