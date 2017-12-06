@@ -36,7 +36,8 @@ export default Vue.extend({
     },
     submit: function () {
       this.$validator.validateAll().then((result) => {
-        if (result) {
+        var isValid = result && this.validateCountryId()
+        if (isValid) {
           this.save()
         } else {
           this.success = false
@@ -44,6 +45,15 @@ export default Vue.extend({
           document.body.scrollTop = document.documentElement.scrollTop = 0
         }
       })
+    },
+    validateCountryId: function () {
+      let selectedCountry = this.countries.find((country) => country.name === $('#countryName').val())
+      if (selectedCountry) {
+        this.countryId = selectedCountry.id
+        return true
+      } else {
+        return false
+      }
     },
     save: function () {
       axios.post('/api/countries', {
