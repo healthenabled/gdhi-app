@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import countrySummary from './country-summary.html'
+import thumbnailMap from '../landing-map/map'
 import axios from 'axios'
 
 export default Vue.extend({
   template: countrySummary,
   name: 'country-summary',
+  components: {thumbnailMap},
   data () {
     return {
       countrySummaries: {}

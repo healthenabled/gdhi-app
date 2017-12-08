@@ -1,9 +1,16 @@
 import L from 'leaflet'
-import countriesData from '../../assets/countries_mega.json'
+import countriesData from '../../assets/countries_lakes.json'
 import helper from './map-helper'
 import eventHandler from './map-event-handler'
 import _ from 'lodash'
 
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.imagePath = ''
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require('../../assets/img/marker-icon-2x.png'),
+  iconUrl: require('../../assets/img/marker-icon.png'),
+  shadowUrl: require('../../assets/img/marker-shadow.png')
+})
 export default {
   BLACK_COLOR_CODE: '#000',
   WHITE_COLOR_CODE: '#fff',
@@ -29,9 +36,10 @@ export default {
         return container
       }
     })
-    this.map = L.map('map', {attributionControl: false}).setView([44, -31], 2)
-    this.map.setMinZoom(2)
+    this.map = L.map('map', {attributionControl: false}).setView([44, -31], 0)
+    // this.map.setMinZoom(2)
     L.control.attribution({position: 'bottomleft'}).addTo(this.map)
+    // this.map.fitWorld()
     this.map.addControl(new ResetButton())
     this.geoLayer = L.geoJson(countriesData, {
       style: function (feature) {
@@ -47,12 +55,12 @@ export default {
         }
       },
       onEachFeature: function (feature, layer) {
-        if (feature.properties) {
-          var popupString = '<div class="popup">'
-          popupString += feature.properties.NAME_LONG
-          popupString += '</div>'
-          layer.bindTooltip(popupString)
-        }
+        // if (feature.properties) {
+        //   var popupString = '<div class="popup">'
+        //   popupString += feature.properties.NAME_LONG
+        //   popupString += '</div>'
+        //   layer.bindTooltip(popupString, {permanent: true, direction: 'center', className: 'countryLabel'})
+        // }
         layer.on({
           'mousemove': function (e) {
             eventHandler.onMouseMove(e.target, self.lastMouseOverCountry)
@@ -83,7 +91,19 @@ export default {
       postClickCallBack({'type': 'COUNTRY',
         'countryCode': $el.feature.properties.BRK_A3,
         'countryName': $el.feature.properties.NAME_LONG})
-      this.map.fitBounds($el.getBounds(), {'maxZoom': 7})
+      console.log('boundary', $el)
+      // this.map.panTo(new L.LatLng(e.latlng.lat, e.latlng.lng))
+      // this.map.setView([e.latlng.lat, e.latlng.lng])
+      console.log('Center', $el.getBounds().getCenter())
+      this.map.fitBounds($el.getBounds(), {'maxZoom': 5})
+      $el.bindTooltip($el.feature.properties.NAME_LONG,
+        {permanent: true, direction: 'center', className: 'countryLabel'})
+      var pointXY = L.point(-101.1, 38.1)
+      console.log('LatLng', this.map.layerPointToLatLng(pointXY))
+      // L.marker(this.map.layerPointToLatLng(pointXY)).addTo(this.map)
+      // L.marker([$el.getCenter().lat, $el.getCenter().lng]
+      // ).addTo(this.map)
+      // this.map.panTo(new L.LatLng(e.latlng.lat, e.latlng.lng))
       // TODO: Hacky fix
       $('#search-box').val($el.feature.properties.NAME_LONG)
     } else if (clickState === 'RESET_CLICK') {

@@ -2,13 +2,14 @@ import Vue from 'vue'
 import mapTemplate from './map.html'
 import { EventBus } from '../common/event-bus'
 import indicatorPanel from '../indicatorPanel/indicator-panel.js'
+import mapFilter from '../map-filter/map-filter.js'
 import mapLegend from '../legend/legend.js'
 import axios from 'axios'
 import worldMap from './world-map'
 
 export default Vue.extend({
   components: {
-    indicatorPanel, mapLegend
+    indicatorPanel, mapLegend, mapFilter
   },
   template: mapTemplate,
   data () {

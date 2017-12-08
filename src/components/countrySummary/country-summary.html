@@ -1,7 +1,17 @@
 <div class="country-summary">
   <div class="country-summary-title">Country Summary</div>
-  <div class="country-text" v-if="countrySummaries.summary">{{countrySummaries.summary}}</div>
-  <div class="error" v-else> No data available</div>
+  <div class="thumbnail-map">
+    Thumbnail map
+    <thumbnailMap></thumbnailMap>
+  </div>
+  <!--<div class="country-text" v-if="countrySummaries.summary">{{countrySummaries.summary}}</div>-->
+  <div class="country-text">India is progressing towards the implementation of digital health.
+    For this, Govt. of India is introducing Integrated Health Information Platform where
+    National Level  Health Information exchange will be setup for interoperability of EHR.
+    Further, to harness the use of mobile phones in India, Govt. of India is planning to
+    roll out National Level Health Helpline where remote advisory will be provided to
+    general public on health related issues.</div>
+  <!--<div class="error" v-else> No data available</div>-->
   <div class="country-summary-title">Resources</div>
   <ul class="country-text" v-if="countrySummaries.resources">
     <li v-for="resource in countrySummaries.resources" class="country-summary-link">
