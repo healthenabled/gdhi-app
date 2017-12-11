@@ -23,6 +23,7 @@ export default Vue.extend({
       if ($clickedEl.type === 'COUNTRY') {
         this.country.countryName = $clickedEl.countryName
         this.country.countryCode = $clickedEl.countryCode
+        this.countryLayer = $clickedEl.countryLayer
         console.log('Listening', this.country.countryCode)
         this.getIndicators(this, this.country.countryCode)
       } else if ($clickedEl.type === 'GLOBAL') {
@@ -72,7 +73,8 @@ export default Vue.extend({
     },
 
     showCountryDetails: function (countryId) {
-      this.$router.push({path: `/countryProfile/${countryId}`})
+      this.$router.push({path: `/countryProfile/${countryId}`,
+        params: { countryLayer: this.countryLayer }})
     },
 
     showListOfCountries: function () {

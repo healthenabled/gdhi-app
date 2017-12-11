@@ -12,6 +12,7 @@ export default Vue.extend({
       url: ''
     }
   },
+  props: ['countryLayer'],
   template: countryProfile,
 
   components: { developmentIndicators, countrySummary },
@@ -19,6 +20,10 @@ export default Vue.extend({
   created () {
     this.getHealthIndicatorsFor(this.$route.params.countryCode)
     this.url = '/api/export_country_data/' + this.$route.params.countryCode
+    console.log('Props', this.countryLayer, this.$route.params.countryLayer)
+  },
+  mounted () {
+    console.log('Props', this.countryLayer, this.$route.params.countryLayer)
   },
   methods: {
     getHealthIndicatorsFor (countryCode) {
