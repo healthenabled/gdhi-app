@@ -8,7 +8,8 @@ export default Vue.extend({
   data () {
     return {
       countrySummaries: {},
-      mapEnv: process.env.MAP_KEY
+      mapEnv: process.env.MAP_KEY,
+      countryName: ''
     }
   },
   created () {
@@ -21,6 +22,7 @@ export default Vue.extend({
       axios.get(countrySummaryUrl)
         .then(response => {
           self.countrySummaries = response.data
+          self.countryName = (self.countrySummaries.countryName) ? self.countrySummaries.countryName : countryCode
         }).catch(e => {
           console.log('Error pulling development indicators data')
         })
