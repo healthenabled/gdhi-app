@@ -1,6 +1,11 @@
 <div class="country-summary">
   <div class="country-summary-title">Country Summary</div>
-  <div class="country-text" v-if="countrySummaries.summary">{{countrySummaries.summary}}</div>
+  <div class="country-text" v-if="countrySummaries.summary">
+    <img class="country-image"
+         :src="'https://maps.googleapis.com/maps/api/staticmap?center='+ countrySummaries.countryName + '&size=125x125&maptype=roadmap&key=' + mapEnv"
+    />
+    <div>{{countrySummaries.summary}}</div>
+  </div>
   <div class="error" v-else> No data available</div>
   <div class="country-summary-title">Resources</div>
   <ul class="country-text" v-if="countrySummaries.resources">

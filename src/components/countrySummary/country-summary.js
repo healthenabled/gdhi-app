@@ -7,7 +7,8 @@ export default Vue.extend({
   name: 'country-summary',
   data () {
     return {
-      countrySummaries: {}
+      countrySummaries: {},
+      mapEnv: process.env.MAP_KEY
     }
   },
   created () {

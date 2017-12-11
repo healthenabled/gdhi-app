@@ -4,5 +4,5 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  MAP_KEY: '"AIzaSyBBPC6AuPOJuy7vbLnHDwQkIMXdD5fMseI"'
+  MAP_KEY: '"AIzaSyDuALs75XmG9G0cJPSbYZyMHj8k46akA80"'
 })
