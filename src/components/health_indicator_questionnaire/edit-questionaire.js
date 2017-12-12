@@ -34,24 +34,29 @@ export default Vue.extend({
       var countryId = $('#countryName').getSelectedItemData().id
       this.countryId = countryId
     },
+    validateCallback: function (result) {
+      var isValid = result && this.validateCountryId()
+      if (isValid) {
+        this.save()
+      } else {
+        this.success = false
+        this.error = true
+        document.body.scrollTop = document.documentElement.scrollTop = 0
+      }
+    },
     submit: function () {
-      this.$validator.validateAll().then((result) => {
-        var isValid = result && this.validateCountryId()
-        if (isValid) {
-          this.save()
-        } else {
-          this.success = false
-          this.error = true
-          document.body.scrollTop = document.documentElement.scrollTop = 0
-        }
-      })
+      this.$validator.validateAll().then(this.validateCallback.bind(this))
+    },
+    getSelectedCountryName: function () {
+      return $('#countryName').val()
     },
     validateCountryId: function () {
-      let selectedCountry = this.countries.find((country) => country.name === $('#countryName').val())
+      let selectedCountry = this.countries.find((country) => country.name === this.getSelectedCountryName())
       if (selectedCountry) {
         this.countryId = selectedCountry.id
         return true
       } else {
+        this.countryId = ''
         return false
       }
     },
