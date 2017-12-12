@@ -19,15 +19,16 @@ export default Vue.extend({
   methods: {
     getCountrySummary (countryCode) {
       const countrySummaryUrl = '/api/countries/' + countryCode + '/country_summary'
-      var self = this
       axios.get(countrySummaryUrl)
-        .then(response => {
-          self.countrySummaries = response.data
-          self.countryName = (self.countrySummaries.countryName) ? self.countrySummaries.countryName : countryCode
-          $('.loading').hide()
-        }).catch(e => {
+        .then((response) => this.countryListCallback(response, countryCode))
+        .catch(e => {
           console.log('Error pulling development indicators data')
         })
+    },
+    countrySummaryCallback (response, countryCode) {
+      this.countrySummaries = response.data
+      this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode
+      $('.loading').hide()
     }
   }
 })
