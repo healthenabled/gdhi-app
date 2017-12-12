@@ -75,7 +75,7 @@ describe('Event Handler', () => {
     mockLayer.verify()
     mockLayer.restore()
   })
-  it.only('should reset layer to original color', () => {
+  it('should reset layer to original color', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'SGP'
     }}
@@ -84,7 +84,7 @@ describe('Event Handler', () => {
     eventHandler.resetLayer(layer, countryIndices)
   })
 
-  it.only('clicking a country with no previous country selected', () => {
+  it('clicking a country with no previous country selected', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'SGP'
     }}
@@ -94,7 +94,7 @@ describe('Event Handler', () => {
     expect(clickState).to.equal('CLICK_ON')
   })
 
-  it.only('clicking the same country should reset country', () => {
+  it('clicking the same country should reset country', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'SGP'
     }}
@@ -105,7 +105,7 @@ describe('Event Handler', () => {
     expect(clickState).to.equal('RESET_CLICK')
   })
 
-  it.only('clicking the country with previous selection', () => {
+  it('clicking the country with previous selection', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'SGP'
     }}
@@ -128,7 +128,7 @@ describe('Event Handler', () => {
 
   })
 
-  it.only('Trigerring a country which is not present should reset previous selection', () => {
+  it('Trigerring a country which is not present should reset previous selection', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'SGP'
     }}

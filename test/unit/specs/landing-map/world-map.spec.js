@@ -73,7 +73,7 @@ describe('World Map', () => {
     mapStub.restore()
   })
 
-  it.only('should zoom and pass country name on clicking country', () => {
+  it('should zoom and pass country name on clicking country', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'AFG',
       'NAME_LONG': 'Afghanistan'
@@ -87,7 +87,7 @@ describe('World Map', () => {
     expect(worldMap.lastClickedCountry).to.equal(layer)
   })
 
-  it.only('should reset map and pass global on clicking same country', () => {
+  it('should reset map and pass global on clicking same country', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'AFG',
       'NAME_LONG': 'Afghanistan'
@@ -99,7 +99,7 @@ describe('World Map', () => {
     expect(worldMap.lastClickedCountry).to.equal('')
   })
 
-  it.only('should reset map and pass country code on clicking unknown country', () => {
+  it('should reset map and pass country code on clicking unknown country', () => {
     layer.feature = {'properties': {
       'BRK_A3': 'SIA',
       'NAME_LONG': ''

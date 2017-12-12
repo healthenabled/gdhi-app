@@ -27,20 +27,20 @@ const countryIndices = [{
 }]
 
 describe('Map Helper', () => {
-  it.only('should get color code for score', () => {
+  it('should get color code for score', () => {
     expect(mapHelper.getColorCodeFor(4)).to.equal('#225E8E')
   })
-  it.only('should get color code for score > 5', () => {
+  it('should get color code for score > 5', () => {
     expect(mapHelper.getColorCodeFor(7)).to.equal('#606060')
   })
   // TODO: check if this required
   // it.only('should get color code for score = 0', () => {
   //   expect(mapHelper.getColorCodeFor(0)).to.equal('#606060')
   // })
-  it.only('should get color code for score = NA', () => {
+  it('should get color code for score = NA', () => {
     expect(mapHelper.getColorCodeFor('NA')).to.equal('#606060')
   })
-  it.only('should get color code for country code', () => {
+  it('should get color code for country code', () => {
     expect(mapHelper.getColorCodeOf('AFG', countryIndices)).to.equal('#11184B')
   })
 })

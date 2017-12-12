@@ -14,7 +14,7 @@ describe("should test country list", () => {
     sandBox.restore()
   })
 
-  it.only('should set data', () => {
+  it('should set data', () => {
     var indices = {"data": {}}
 
     indices.data.countryHealthScores = [{

@@ -15,7 +15,7 @@ describe('Map vue component', () => {
   afterEach(() => {
     sandBox.restore()
   })
-  it.only('should fetch global health indices', (done) => {
+  it('should fetch global health indices', (done) => {
     var countryHealthScores = [{
       'countryId': 'AFG',
       'countryName': 'Afghanistan',

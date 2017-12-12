@@ -15,31 +15,31 @@ describe('Questionnaire.vue', () => {
   afterEach(() => {
     sandBox.restore()
   })
-  it.only('country id should be that of the selected country', () => {
+  it('country id should be that of the selected country', () => {
     sandBox.stub(ques, "getSelectedCountryName").returns("INDIA")
     expect(ques.countryId).to.equal('')
     expect(ques.validateCountryId()).to.equal(true)
     expect(ques.countryId).to.equal("IND")
   })
-  it.only('country id should be reset to new value', () => {
+  it('country id should be reset to new value', () => {
     sandBox.stub(ques, "getSelectedCountryName").returns("INDIA")
     ques.countryId = "JPN"
     expect(ques.validateCountryId()).to.equal(true)
     expect(ques.countryId).to.equal("IND")
   })
-  it.only('country id should be set only if name matches', () => {
+  it('country id should be set only if name matches', () => {
     sandBox.stub(ques, "getSelectedCountryName").returns("IND")
     ques.countryId = 'JPN'
     expect(ques.validateCountryId()).to.equal(false)
     expect(ques.countryId).to.equal('')
   })
-  it.only('country id should be set only if name matches exactly', () => {
+  it('country id should be set only if name matches exactly', () => {
     sandBox.stub(ques, "getSelectedCountryName").returns("India")
     ques.countryId = 'JPN'
     expect(ques.validateCountryId()).to.equal(false)
     expect(ques.countryId).to.equal('')
   })
-  it.only('should call save only if vee validate and country validation succeeds', () => {
+  it('should call save only if vee validate and country validation succeeds', () => {
     let saveSpy = sinon.spy()
     ques.save = saveSpy
     sandBox.stub(ques, "validateCountryId").returns(true)
@@ -47,7 +47,7 @@ describe('Questionnaire.vue', () => {
     expect(saveSpy.called).to.equal(true);
   })
 
-  it.only('should not call save even if either of vee validate or country validation fails', () => {
+  it('should not call save even if either of vee validate or country validation fails', () => {
     let saveSpy = sinon.spy()
     ques.save = saveSpy
     var stub = sandBox.stub(ques, "validateCountryId").returns(false)

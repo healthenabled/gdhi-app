@@ -13,10 +13,10 @@ describe('Questionnaire.vue', () => {
   afterEach(() => {
     sandBox.restore()
   })
-  it.only("should set showEdit to true by default", () => {
+  it("should set showEdit to true by default", () => {
     expect(ques.showEdit).to.equal(true)
   })
-  it.only("should transform health indicators",  () => {
+  it("should transform health indicators",  () => {
     var data = [{
       "categoryId": 1,
       "categoryName": "c1",
@@ -66,7 +66,7 @@ describe('Questionnaire.vue', () => {
       })
     })
   })
-  it.only('should transform data for view form', () => {
+  it('should transform data for view form', () => {
     var options = {}
     var scores = {}
     options.data = [{
