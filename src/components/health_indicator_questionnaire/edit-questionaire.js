@@ -20,6 +20,7 @@ export default Vue.extend({
     return {success: false, error: false, countryId: ''}
   },
   mounted () {
+    $('.loading').show()
     this.loadCountries()
   },
   methods: {
@@ -28,6 +29,7 @@ export default Vue.extend({
         this.countries = response.data
         var options = countryHelper.loadSearchData(this.countries, this.onCountrySelect.bind(this))
         $('#countryName').easyAutocomplete(options)
+        $('.loading').hide()
       })
     },
     onCountrySelect: function () {
@@ -61,6 +63,7 @@ export default Vue.extend({
       }
     },
     save: function () {
+      $('.loading').show()
       axios.post('/api/countries', {
         countryId: this.countryId,
         countrySummary: this.countrySummary,
@@ -69,6 +72,7 @@ export default Vue.extend({
         document.body.scrollTop = document.documentElement.scrollTop = 0
         this.success = true
         this.error = false
+        $('.loading').hide()
       })
     },
     getHealthIndicators: function () {

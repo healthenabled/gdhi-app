@@ -18,6 +18,7 @@ export default Vue.extend({
   },
 
   mounted () {
+    $('.loading').show()
     this.getGlobalHealthIndicators()
     this.$parent.$on('Map:Clicked', ($clickedEl) => {
       if ($clickedEl.type === 'COUNTRY') {
@@ -66,7 +67,9 @@ export default Vue.extend({
         }
         this.globalHealthIndicators = globalHealthIndicatorsData
         this.showCountryDetail = false
+        $('.loading').hide()
       }).catch(e => {
+        $('.loading').hide()
         console.log('Error pulling health indicators data')
       })
     },

@@ -35,12 +35,14 @@ export default Vue.extend({
   methods: {
     fetchGlobalIndices: function () {
       var self = this
+      $('.loading').show()
       return axios.get('/api/countries_health_indicator_scores')
         .then(function (globalHealthIndices) {
           self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
           self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
             globalHealthIndices)
           worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self))
+          $('.loading').hide()
         })
     },
     mergeColorCodeToHealthIndicators: function (globalHealthIndices) {

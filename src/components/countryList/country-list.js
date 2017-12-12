@@ -16,6 +16,7 @@ export default Vue.extend({
 
   mounted () {
     var self = this
+    $('.loading').show()
     self.getListOfCountries().then(globalHealthIndices => {
       self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
       this.listCountries(globalHealthIndices.data.countryHealthScores)
@@ -34,6 +35,7 @@ export default Vue.extend({
           countryId: country.countryId
         }
         this.countryList.push(countryDetail)
+        $('.loading').hide()
       })
     },
     showCountryDetails: function (countryId) {

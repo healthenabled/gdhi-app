@@ -13,6 +13,7 @@ export default Vue.extend({
     }
   },
   created () {
+    $('.loading').show()
     this.getCountrySummary(this.$route.params.countryCode)
   },
   methods: {
@@ -23,6 +24,7 @@ export default Vue.extend({
         .then(response => {
           self.countrySummaries = response.data
           self.countryName = (self.countrySummaries.countryName) ? self.countrySummaries.countryName : countryCode
+          $('.loading').hide()
         }).catch(e => {
           console.log('Error pulling development indicators data')
         })

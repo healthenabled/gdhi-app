@@ -17,15 +17,15 @@ export default Vue.extend({
 
   created () {
     var self = this
+    $('.loading').show()
     self.fetchCategoricalIndicators().then(response => {
       self.categoricalIndicators = response.data
-
       self.categoryNames = self.getCategoryNames(response.data)
+      $('.loading').hide()
     })
   },
 
   methods: {
-
     fetchCategoricalIndicators: function () {
       return axios.get('/api/health_indicator_options')
     },

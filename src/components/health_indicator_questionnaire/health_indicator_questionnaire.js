@@ -39,6 +39,7 @@ export default Vue.extend({
   created () {
     if (this.$route.params['countryCode']) {
       this.showEdit = false
+      $('.loading').show()
       this.prepareDataForViewForm(this.$route.params['countryCode'])
     } else {
       this.getQuestionnaire()
@@ -63,6 +64,7 @@ export default Vue.extend({
           this.$set(indicator, 'showIndicator', isExpanded)
           this.$set(indicator, 'expandCollapseBtn', expandCollapseHelper.getCaptionFor(
             isExpanded))
+          $('.loading').hide()
         })
       })
     },
@@ -73,6 +75,7 @@ export default Vue.extend({
       this.questionnaire = options.data
       this.countrySummary = scores.data.countrySummary
       this.transformForView(scores.data.healthIndicators)
+      $('.loading').hide()
     },
     prepareDataForViewForm (countryCode) {
       axios.all([axios.get('/api/health_indicator_options'),

@@ -15,6 +15,7 @@ export default Vue.extend({
   },
   methods: {
     getDevelopmentIndicatorsFor (countryCode) {
+      $('.loading').show()
       httpRequests.getDevelopmentIndicators(this, countryCode, false)
     }
   }
