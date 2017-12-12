@@ -15,15 +15,15 @@ export default Vue.extend({
   },
 
   mounted () {
-    var self = this
     $('.loading').show()
-    self.getListOfCountries().then(globalHealthIndices => {
-      self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
-      this.listCountries(globalHealthIndices.data.countryHealthScores)
-    })
+    self.getListOfCountries().then(this.countryListCallback.bind(this))
   },
 
   methods: {
+    countryListCallback: function (globalHealthIndices) {
+      this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
+      this.listCountries(globalHealthIndices.data.countryHealthScores)
+    },
     getListOfCountries: function () {
       return axios.get('/api/countries_health_indicator_scores')
     },
