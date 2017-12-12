@@ -16,7 +16,7 @@ export default Vue.extend({
 
   mounted () {
     $('.loading').show()
-    self.getListOfCountries().then(this.countryListCallback.bind(this))
+    this.getListOfCountries().then(this.countryListCallback.bind(this))
   },
 
   methods: {

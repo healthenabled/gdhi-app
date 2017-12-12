@@ -2,7 +2,7 @@
   <div class="country-summary-title">Country Summary</div>
   <div class="country-text">
     <img class="country-image"
-         :src="'https://maps.googleapis.com/maps/api/staticmap?center='+ countryName + '&size=100x100&maptype=roadmap&key=' + mapEnv"
+         :src="'https://maps.googleapis.com/maps/api/staticmap?center='+ countryName + '&zoom=2&size=100x100&maptype=roadmap&key=' + mapEnv"
     />
     <div v-if="countrySummaries.summary">{{countrySummaries.summary}}</div>
     <div class="error" v-else> No data available</div>
