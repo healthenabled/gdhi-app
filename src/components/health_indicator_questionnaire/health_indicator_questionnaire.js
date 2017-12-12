@@ -69,16 +69,15 @@ export default Vue.extend({
     fetchHealthScoresFor (countryCode) {
       return axios.get(`/api/countries/${countryCode}`)
     },
+    viewFormCallback (options, scores) {
+      this.questionnaire = options.data
+      this.countrySummary = scores.data.countrySummary
+      this.transformForView(scores.data.healthIndicators)
+    },
     prepareDataForViewForm (countryCode) {
-      var self = this
       axios.all([axios.get('/api/health_indicator_options'),
         this.fetchHealthScoresFor(countryCode)])
-        .then(axios.spread(function (options, scores) {
-          self.questionnaire = options.data
-          self.countrySummary = scores.data.countrySummary
-          self.transformForView(scores.data.healthIndicators)
-          console.log('Health indicators', self.healthIndicators)
-        }))
+        .then(axios.spread(this.viewFormCallback.bind(this)))
     },
     transformForView (healthindicators) {
       var self = this
