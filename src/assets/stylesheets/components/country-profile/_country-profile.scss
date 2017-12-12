@@ -148,14 +148,12 @@
     .country-text {
       margin-top: 8px;
       margin-bottom: 20px;
-      display: flex;
-      flex-direction: row;
       text-align: justify;
-      flex: 1 1 100%;
     }
     .country-image {
       margin-right: 4px;
       height: 100px;
+      float: left;
     }
     .country-summary-link {
       color: $link-blue;
