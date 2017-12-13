@@ -8,6 +8,25 @@
   position: relative;
 }
 
+.filter-section {
+  position: absolute;
+  z-index: 2001;
+  right: 0;
+  height: 34px;
+  display: flex;
+  font-size: 12px;
+  margin-top: 5px;
+  .filter-1 {
+    margin-right: 5px;
+    color: #555;
+    border: $table-border;
+  }
+  .filter-2 {
+    color: #555;
+    border: $table-border;
+  }
+}
+
 #map {
   height: calc(100vh - 130px);
   background: $bg-beige;

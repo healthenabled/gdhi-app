@@ -2,7 +2,7 @@ import Vue from 'vue'
 import map from '@/components/landing-map/map.js'
 import worldMap from '@/components/landing-map/world-map.js'
 import axios from 'axios'
-import {} from '../../../../src/app.js'
+import {} from '../../../../src/filter.js'
 
 describe('Map vue component', () => {
   let sandBox, vueMap
