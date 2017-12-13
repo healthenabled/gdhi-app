@@ -59,6 +59,7 @@ describe("should test indicator panel", () => {
       ]
     }
 
+    indicatorPanel.country = {}
     indicatorPanel.getHealthIndicatorCallback(response)
 
     expect(indicatorPanel.healthIndicators).to.deep.equal(response.data)
