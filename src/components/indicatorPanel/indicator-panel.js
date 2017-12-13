@@ -41,37 +41,39 @@ export default Vue.extend({
     getHealthIndicators: function (context, countryId) {
       const healthIndicatorsUrl = '/api/countries/' + countryId + '/health_indicators'
       axios.get(healthIndicatorsUrl)
-      .then(response => {
-        var healthIndicatorsData = {
-          'countryId': response.data.countryId,
-          'countryName': response.data.countryName,
-          'overallScore': response.data.overallScore,
-          'categories': response.data.categories,
-          'countryPhase': response.data.countryPhase
-        }
-        this.healthIndicators = healthIndicatorsData
-        this.showCountryDetail = true
-        this.country.countryName = this.country.countryName ? this.country.countryName : healthIndicatorsData.countryName
-      }).catch(e => {
+      .then(this.getHealthIndicatorCallback.bind(this)).catch(e => {
         console.log('Error pulling health indicators data')
       })
+    },
+    getHealthIndicatorCallback: function (response) {
+      var healthIndicatorsData = {
+        'countryId': response.data.countryId,
+        'countryName': response.data.countryName,
+        'overallScore': response.data.overallScore,
+        'categories': response.data.categories,
+        'countryPhase': response.data.countryPhase
+      }
+      this.healthIndicators = healthIndicatorsData
+      this.showCountryDetail = true
+      this.country.countryName = this.country.countryName ? this.country.countryName : healthIndicatorsData.countryName
     },
 
     getGlobalHealthIndicators: function () {
       const globalHealthIndicatorsUrl = '/api/global_health_indicators'
       axios.get(globalHealthIndicatorsUrl)
-      .then(response => {
-        var globalHealthIndicatorsData = {
-          'overallCountryScore': response.data.overAllScore,
-          'categories': response.data.categories
-        }
-        this.globalHealthIndicators = globalHealthIndicatorsData
-        this.showCountryDetail = false
-        $('.loading').hide()
-      }).catch(e => {
+      .then(this.getGlobalHealthIndicatorCallback.bind(this)).catch(e => {
         $('.loading').hide()
         console.log('Error pulling health indicators data')
       })
+    },
+    getGlobalHealthIndicatorCallback: function (response) {
+      var globalHealthIndicatorsData = {
+        'overallCountryScore': response.data.overAllScore,
+        'categories': response.data.categories
+      }
+      this.globalHealthIndicators = globalHealthIndicatorsData
+      this.showCountryDetail = false
+      $('.loading').hide()
     },
 
     showCountryDetails: function (countryId) {
