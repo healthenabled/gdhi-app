@@ -15,12 +15,12 @@
   </ul>
   <div class="error" v-else> No data available</div>
   <div class="country-summary-title">Contact</div>
-    <div class="country-text">
+    <div class="country-text" v-if="countrySummaries.contactName">
       <span class="country-summary-link" v-if="countrySummaries.contactName">
         <a :href="'mailto:' + countrySummaries.contactEmail" target="_blank">{{countrySummaries.contactName}}</a>,
       </span>
       <span v-if="countrySummaries.contactDesignation">{{countrySummaries.contactDesignation}},</span>
       <span v-if="countrySummaries.contactOrganization">{{countrySummaries.contactOrganization}}</span>
-      <span class="error" v-else>No data available</span>
     </div>
+    <span class="error" v-else>No data available</span>
 </div>
