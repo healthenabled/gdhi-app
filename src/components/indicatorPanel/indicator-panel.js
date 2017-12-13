@@ -13,7 +13,10 @@ export default Vue.extend({
       healthIndicators: {},
       globalHealthIndicators: {},
       showCountryDetail: true,
-      country: {}
+      country: {},
+      categoryFilter: window.appProperties.getCategoryFilter(),
+      phaseFilter: window.appProperties.getPhaseFilter()
+
     }
   },
 
@@ -29,6 +32,9 @@ export default Vue.extend({
       } else if ($clickedEl.type === 'GLOBAL') {
         this.getGlobalHealthIndicators()
       }
+    })
+    this.$parent.$on('filtered', (category) => {
+      this.getGlobalHealthIndicators()
     })
   },
 
@@ -59,7 +65,8 @@ export default Vue.extend({
     },
 
     getGlobalHealthIndicators: function () {
-      const globalHealthIndicatorsUrl = '/api/global_health_indicators'
+      var windowProperties = window.appProperties
+      const globalHealthIndicatorsUrl = '/api/global_health_indicators?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter()
       axios.get(globalHealthIndicatorsUrl)
       .then(this.getGlobalHealthIndicatorCallback.bind(this)).catch(e => {
         $('.loading').hide()

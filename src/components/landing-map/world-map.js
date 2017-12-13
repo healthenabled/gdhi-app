@@ -29,6 +29,10 @@ export default {
         return container
       }
     })
+    if (this.map !== undefined) {
+      this.map.off()
+      this.map.remove()
+    }
     this.map = L.map('map', {attributionControl: false}).setView([44, -31], 2)
     this.map.setMinZoom(2)
     L.control.attribution({position: 'bottomleft'}).addTo(this.map)
