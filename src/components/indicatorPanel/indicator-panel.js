@@ -15,8 +15,9 @@ export default Vue.extend({
       showCountryDetail: true,
       country: {},
       categoryFilter: window.appProperties.getCategoryFilter(),
-      phaseFilter: window.appProperties.getPhaseFilter()
-
+      phaseFilter: window.appProperties.getPhaseFilter(),
+      indicatorPanelTitle: this.getIndicatorContainerName(),
+      phaseTitle: this.getPhaseTitle()
     }
   },
 
@@ -33,12 +34,41 @@ export default Vue.extend({
         this.getGlobalHealthIndicators()
       }
     })
-    this.$parent.$on('filtered', (category) => {
+    this.$parent.$on('filtered', () => {
+      this.categoryFilter = window.appProperties.getCategoryFilter()
+      this.phaseFilter = window.appProperties.getPhaseFilter()
+      this.setIndicatorTitle()
       this.getGlobalHealthIndicators()
     })
   },
 
   methods: {
+
+    setIndicatorTitle: function () {
+      this.indicatorPanelTitle = this.getIndicatorContainerName()
+      this.phaseTitle = this.getPhaseTitle()
+    },
+
+    getIndicatorContainerName: function () {
+      var indicatorPanelTitle = ''
+      if (this.categoryFilter) {
+        indicatorPanelTitle = this.getCategoryAsTitle()
+      } else {
+        indicatorPanelTitle = 'State of Digital Health around the world today'
+      }
+      return indicatorPanelTitle
+    },
+
+    getCategoryAsTitle: function () {
+      var category = this.globalHealthIndicators.categories[0]
+      return category ? category.name : 'Selected Category has No Phase'
+    },
+
+    getPhaseTitle: function () {
+      var phaseTitle = this.phaseFilter ? 'Phase '.concat(this.phaseFilter) : 'Global Average'
+      return this.categoryFilter ? phaseTitle : ''
+    },
+
     getIndicators: function (context, countryId) {
       this.getHealthIndicators(context, countryId)
       httpRequests.getDevelopmentIndicators(context, countryId, true)

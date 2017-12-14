@@ -1,14 +1,19 @@
 <div class="indicator-panel">
   <div class="indicator-panel-container" v-if="!showCountryDetail">
     <div class="indicator-panel-container-collapsible">
-      <div class="indicator-panel-container-name">State of Digital Health around the world today</div>
+      <div class="indicator-panel-container-name">
+          {{indicatorPanelTitle}}
+        <div>
+          {{phaseTitle}}
+        </div>
+      </div>
     </div>
     <div class="indicator-panel-container-desc">
       The Global Digital Health Index (GDHI) is an interactive web-based resource that aims to track, monitor, and
       assess the enabling environment for digital health throughout the world.
     </div>
     <div class="indicator-panel-container-category" v-if="globalHealthIndicators.overallCountryScore">
-      <div class="indicator-panel-container-category-section">
+      <div class="indicator-panel-container-category-section" v-if="!categoryFilter">
         <span class="indicator-panel-container-category-section-name">Overall</span>
         <div
           :class="'indicator-panel-container-category-section-phase phase' + globalHealthIndicators.overallCountryScore"
@@ -16,14 +21,14 @@
       </div>
     </div>
     <div class="indicator-panel-error" v-else>No Global Health Indicators Available</div>
-      <div class="indicator-panel-container-category">
-        <div v-for="(catagory, index) in globalHealthIndicators.categories"
-             class="indicator-panel-container-category-section">
-          <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
-          <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase"
-               :value="catagory.phase"></div>
-        </div>
+    <div class="indicator-panel-container-category" v-if="categoryFilter || !phaseFilter">
+      <div v-for="(catagory, index) in globalHealthIndicators.categories"
+           class="indicator-panel-container-category-section">
+        <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
+        <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase"
+             :value="catagory.phase"></div>
       </div>
+    </div>
     <div class="indicator-panel-button" @click="showListOfCountries()">VIEW LIST OF COUNTRIES</div>
   </div>
   <div class="indicator-panel-container" v-else>
