@@ -17,7 +17,8 @@ export default Vue.extend({
       categoryFilter: window.appProperties.getCategoryFilter(),
       phaseFilter: window.appProperties.getPhaseFilter(),
       indicatorPanelTitle: this.getIndicatorContainerName(),
-      phaseTitle: this.getPhaseTitle()
+      phaseTitle: '',
+      isListOfCategoriesApplicable: this.areCategoriesApplicable()
     }
   },
 
@@ -35,18 +36,24 @@ export default Vue.extend({
       }
     })
     this.$parent.$on('filtered', () => {
-      this.categoryFilter = window.appProperties.getCategoryFilter()
-      this.phaseFilter = window.appProperties.getPhaseFilter()
-      this.setIndicatorTitle()
       this.getGlobalHealthIndicators()
     })
   },
 
   methods: {
 
-    setIndicatorTitle: function () {
+    setIndicatorTitleAndCategoryApplicability: function () {
       this.indicatorPanelTitle = this.getIndicatorContainerName()
       this.phaseTitle = this.getPhaseTitle()
+      this.isListOfCategoriesApplicable = this.areCategoriesApplicable()
+    },
+
+    areCategoriesApplicable: function () {
+      return this.categoryFilter || this.isNoFilterPresent()
+    },
+
+    isNoFilterPresent: function () {
+      return !this.categoryFilter && !this.phaseFilter
     },
 
     getIndicatorContainerName: function () {
@@ -66,7 +73,7 @@ export default Vue.extend({
 
     getPhaseTitle: function () {
       var phaseTitle = this.phaseFilter ? 'Phase '.concat(this.phaseFilter) : 'Global Average'
-      return this.categoryFilter ? phaseTitle : ''
+      return this.globalHealthIndicators.categories.length > 0 && this.categoryFilter ? phaseTitle : ''
     },
 
     getIndicators: function (context, countryId) {
@@ -109,6 +116,9 @@ export default Vue.extend({
         'categories': response.data.categories
       }
       this.globalHealthIndicators = globalHealthIndicatorsData
+      this.categoryFilter = window.appProperties.getCategoryFilter()
+      this.phaseFilter = window.appProperties.getPhaseFilter()
+      this.setIndicatorTitleAndCategoryApplicability()
       this.showCountryDetail = false
       $('.loading').hide()
     },

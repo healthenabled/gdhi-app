@@ -25,7 +25,8 @@ export default Vue.extend({
       this.listCountries(globalHealthIndices.data.countryHealthScores)
     },
     getListOfCountries: function () {
-      return axios.get('/api/countries_health_indicator_scores')
+      var windowProperties = window.appProperties
+      return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
     },
     listCountries: function (countriesDetails) {
       _.each(countriesDetails, country => {

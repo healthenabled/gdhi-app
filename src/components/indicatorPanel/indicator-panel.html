@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="indicator-panel-error" v-else>No Global Health Indicators Available</div>
-    <div class="indicator-panel-container-category" v-if="categoryFilter || !phaseFilter">
+    <div class="indicator-panel-container-category" v-if="isListOfCategoriesApplicable">
       <div v-for="(catagory, index) in globalHealthIndicators.categories"
            class="indicator-panel-container-category-section">
         <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
