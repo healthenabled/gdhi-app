@@ -36,6 +36,11 @@ export default Vue.extend({
   mounted: function () {
     console.log('map mounted')
     EventBus.$on('Map:Searched', this.onSearchTriggered)
+    this.$on('Map:Clicked', ($clickedEl) => {
+      if ($clickedEl.type === 'GLOBAL') {
+        this.resetFilters()
+      }
+    })
   },
   beforeDestroy () {
     console.log('map destroyed')
@@ -50,6 +55,13 @@ export default Vue.extend({
       this.$emit('filtered')
       this.fetchGlobalIndices()
     },
+
+    resetFilters: function () {
+      this.categoryValue = ''
+      this.phaseValue = ''
+      this.filter()
+    },
+
     fetchGlobalIndices: function () {
       var self = this
       $('.loading').show()

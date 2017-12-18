@@ -15,10 +15,10 @@ export default Vue.extend({
       showCountryDetail: true,
       country: {},
       categoryFilter: window.appProperties.getCategoryFilter(),
-      phaseFilter: window.appProperties.getPhaseFilter(),
       indicatorPanelTitle: this.getIndicatorContainerName(),
       phaseTitle: '',
-      isListOfCategoriesApplicable: this.areCategoriesApplicable()
+      isListOfCategoriesApplicable: this.areCategoriesApplicable(),
+      isNoGlobalHealthIndicators: false
     }
   },
 
@@ -46,6 +46,7 @@ export default Vue.extend({
       this.indicatorPanelTitle = this.getIndicatorContainerName()
       this.phaseTitle = this.getPhaseTitle()
       this.isListOfCategoriesApplicable = this.areCategoriesApplicable()
+      this.isNoGlobalHealthIndicators = this.isNoGlobalHealthIndicatorsPresent()
     },
 
     areCategoriesApplicable: function () {
@@ -61,19 +62,23 @@ export default Vue.extend({
       if (this.categoryFilter) {
         indicatorPanelTitle = this.getCategoryAsTitle()
       } else {
-        indicatorPanelTitle = 'State of Digital Health around the world today'
+        indicatorPanelTitle = this.phaseFilter ? 'Overall' : 'State of Digital Health around the world today'
       }
       return indicatorPanelTitle
     },
 
     getCategoryAsTitle: function () {
       var category = this.globalHealthIndicators.categories[0]
-      return category ? category.name : 'Selected Category has No Phase'
+      return category ? category.name : 'No countries available for the selected criteria'
+    },
+
+    isNoGlobalHealthIndicatorsPresent: function () {
+      return this.globalHealthIndicators.categories.length === 0
     },
 
     getPhaseTitle: function () {
       var phaseTitle = this.phaseFilter ? 'Phase '.concat(this.phaseFilter) : 'Global Average'
-      return this.globalHealthIndicators.categories.length > 0 && this.categoryFilter ? phaseTitle : ''
+      return this.isNoGlobalHealthIndicatorsPresent() || this.isNoFilterPresent() ? '' : phaseTitle
     },
 
     getIndicators: function (context, countryId) {
