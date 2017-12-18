@@ -9,7 +9,7 @@ export default Vue.extend({
     return {
       countrySummaries: {},
       mapEnv: process.env.MAP_KEY,
-      countryName: ''
+      countryName: this.$route.params.countryCode.slice(0, 2) // Google supports only 2 characters of country code.
     }
   },
   created () {
@@ -27,7 +27,7 @@ export default Vue.extend({
     },
     countrySummaryCallback (response, countryCode) {
       this.countrySummaries = response.data
-      this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode
+      this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode.slice(0, 2)
       $('.loading').hide()
     }
   }
