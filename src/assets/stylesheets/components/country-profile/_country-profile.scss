@@ -145,6 +145,7 @@
     .country-summary-title {
       font-family: RobotoSlabRegular;
       font-size: 14px;
+      clear: left;
     }
     .country-text {
       margin-top: 8px;
@@ -155,13 +156,15 @@
       margin-right: 4px;
       height: 100px;
       float: left;
+      margin-bottom: 5px;
     }
     .country-summary-link {
       color: $link-blue;
     }
     .error {
       color: red;
-      padding: 5px 0 10px 0;
+      padding: 5px 0 0 0;
+      margin-bottom: 15px;
     }
   }
 }
