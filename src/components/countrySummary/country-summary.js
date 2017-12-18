@@ -20,7 +20,7 @@ export default Vue.extend({
     getCountrySummary (countryCode) {
       const countrySummaryUrl = '/api/countries/' + countryCode + '/country_summary'
       axios.get(countrySummaryUrl)
-        .then((response) => this.countryListCallback(response, countryCode))
+        .then((response) => this.countrySummaryCallback(response, countryCode))
         .catch(e => {
           console.log('Error pulling development indicators data')
         })
