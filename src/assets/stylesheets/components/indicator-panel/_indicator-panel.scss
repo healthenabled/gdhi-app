@@ -9,6 +9,7 @@
   z-index: 1000;
   max-height: calc(100vh - 130px);
   overflow-y: auto;
+  overflow-x: hidden;
   &-error {
     font-size: 12px;
     font-family: 'RobotoSlabRegular';
@@ -33,7 +34,7 @@
       color: #666666;
     }
     &-name {
-      flex: 0 0 95%;
+      //flex: 0 0 95%;
       align-self: left;
       position: relative;
       font-family: 'RobotoSlabRegular';
