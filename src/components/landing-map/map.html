@@ -5,26 +5,29 @@
     <mapLegend></mapLegend>
 
     <div class="filter-section">
-      <select class="filter-1" v-model="categoryValue" @change=filter() name="test_select1">
-        <option value="">Overall</option>
-        <option v-for="category in categories"  v-bind:value="category.categoryId">
-          {{category.categoryName}}
-        </option>
-      </select>
-
-      <select class="filter-2" v-model="phaseValue" @change=filter() name="test_select2">
-        <option value="">All</option>
-        <option v-for="phase in phases" v-bind:value="phase.phaseValue">
-          {{phase.phaseName}}
-        </option>
-      </select>
+      <div class="filter-indicator">
+        <select class="filter-1" v-model="categoryValue" @change=filter() name="test_select1">
+          <option value="">Overall</option>
+          <option v-for="category in categories" v-bind:value="category.categoryId">
+            {{category.categoryName}}
+          </option>
+        </select>
+      </div>
+      <div class="phase-indicator">
+        <select class="filter-2" v-model="phaseValue" @change=filter() name="test_select2">
+          <option value="">All</option>
+          <option v-for="phase in phases" v-bind:value="phase.phaseValue">
+            {{phase.phaseName}}
+          </option>
+        </select>
+      </div>
     </div>
 
     <div id="map">
     </div>
 
     <div class="export home">
-        <span class="pipe">| </span>
+      <span class="pipe">| </span>
       <span><a href="/api/export_global_data">Export Data For All Countries</a></span>
     </div>
   </div>
