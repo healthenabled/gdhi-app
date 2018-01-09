@@ -149,18 +149,13 @@
 
     .country-contact {
       font-family: RobotoSlabRegular;
-      font-size: 12px;
+      font-size: 14px;
       padding-bottom: 8px;
     }
 
     .country-map {
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 0px 4px 0 rgba(173, 173, 173, 0.5);
-      border-radius: 2px;
-      margin-left: -4px;
-      margin-right: 4px;
-      height: 128px;
+      margin-bottom: 10px;
+      height: 114px;
       overflow-y: auto;
       overflow-x: hidden;
       .country-map-section {
