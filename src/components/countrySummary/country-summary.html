@@ -1,9 +1,23 @@
 <div class="country-summary">
+  <div class="country-map">
+    <div class="country-map-section">
+    <div class="country-contact">MAP</div>
+    <img class="country-image"
+         :src="'https://maps.googleapis.com/maps/api/staticmap?center='+ countryName + '&zoom=2&size=125x100&maptype=roadmap&key=' + mapEnv"
+    />
+    </div>
+    <div class="country-contact">KEY CONTACTS</div>
+    <div v-if="countrySummaries.contactName">
+        <span class="country-summary-link" v-if="countrySummaries.contactName">
+          <a :href="'mailto:' + countrySummaries.contactEmail" target="_blank">{{countrySummaries.contactName}}</a>,
+        </span>
+      <span v-if="countrySummaries.contactDesignation">{{countrySummaries.contactDesignation}},</span>
+      <span v-if="countrySummaries.contactOrganization">{{countrySummaries.contactOrganization}}</span>
+    </div>
+    <div class="error" v-else>No data available</div>
+  </div>
   <div class="country-summary-title">Country Summary</div>
   <div class="country-text">
-    <img class="country-image"
-         :src="'https://maps.googleapis.com/maps/api/staticmap?center='+ countryName + '&zoom=2&size=100x100&maptype=roadmap&key=' + mapEnv"
-    />
     <div v-if="countrySummaries.summary">{{countrySummaries.summary}}</div>
     <div class="error" v-else> No data available</div>
   </div>
@@ -14,13 +28,4 @@
     </li>
   </ul>
   <div class="error" v-else> No data available</div>
-  <div class="country-summary-title">Contact</div>
-    <div class="country-text" v-if="countrySummaries.contactName">
-      <span class="country-summary-link" v-if="countrySummaries.contactName">
-        <a :href="'mailto:' + countrySummaries.contactEmail" target="_blank">{{countrySummaries.contactName}}</a>,
-      </span>
-      <span v-if="countrySummaries.contactDesignation">{{countrySummaries.contactDesignation}},</span>
-      <span v-if="countrySummaries.contactOrganization">{{countrySummaries.contactOrganization}}</span>
-    </div>
-  <div class="error" v-else>No data available</div>
 </div>

@@ -146,15 +146,36 @@
       font-size: 14px;
       clear: left;
     }
+
+    .country-contact {
+      font-family: RobotoSlabRegular;
+      font-size: 12px;
+      padding-bottom: 8px;
+    }
+
+    .country-map {
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 0px 4px 0 rgba(173, 173, 173, 0.5);
+      border-radius: 2px;
+      margin-left: -4px;
+      margin-right: 4px;
+      height: 128px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      .country-map-section {
+        float: left;
+      }
+    }
     .country-text {
       margin-top: 8px;
       margin-bottom: 20px;
       text-align: justify;
     }
     .country-image {
-      margin-right: 4px;
+      margin-right: 20px;
       height: 100px;
-      float: left;
+      width: 125px;
       margin-bottom: 3px;
     }
     .country-summary-link {
