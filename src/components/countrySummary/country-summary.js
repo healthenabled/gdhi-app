@@ -7,22 +7,28 @@ export default Vue.extend({
   name: 'country-summary',
   data () {
     return {
-      countrySummaries: {}
+      countrySummaries: {},
+      mapEnv: process.env.MAP_KEY,
+      countryName: this.$route.params.countryCode.slice(0, 2) // Google supports only 2 characters of country code.
     }
   },
   created () {
+    $('.loading').show()
     this.getCountrySummary(this.$route.params.countryCode)
   },
   methods: {
     getCountrySummary (countryCode) {
       const countrySummaryUrl = '/api/countries/' + countryCode + '/country_summary'
-      var self = this
       axios.get(countrySummaryUrl)
-        .then(response => {
-          self.countrySummaries = response.data
-        }).catch(e => {
+        .then((response) => this.countrySummaryCallback(response, countryCode))
+        .catch(e => {
           console.log('Error pulling development indicators data')
         })
+    },
+    countrySummaryCallback (response, countryCode) {
+      this.countrySummaries = response.data
+      this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode.slice(0, 2)
+      $('.loading').hide()
     }
   }
 })

@@ -8,7 +8,7 @@ import _ from 'lodash'
 export default Vue.extend({
   data () {
     return {
-      healthIndicatorData: [{countryName: '', countryPhase: 'NA', categories: []}],
+      healthIndicatorData: {countryName: '', countryPhase: 'NA', categories: []},
       url: ''
     }
   },
@@ -23,18 +23,18 @@ export default Vue.extend({
   methods: {
     getHealthIndicatorsFor (countryCode) {
       axios.get(`/api/countries/${countryCode}/health_indicators`)
-        .then(response => {
-          this.healthIndicatorData.pop()
-          this.healthIndicatorData.push(response.data)
-          this.initialise()
-        })
+        .then(this.healthIndicatorCallback.bind(this))
     },
-    onCategoryExpand (category, index) {
+    healthIndicatorCallback (response) {
+      this.healthIndicatorData = response.data
+      this.initialise()
+    },
+    onCategoryExpand (category) {
       category.showIndicator = !category.showIndicator
       category.expandCollapseBtn = category.expandCollapseBtn === '+' ? '-' : '+'
     },
     initialise () {
-      _.each(this.healthIndicatorData[0].categories, (category) => {
+      _.each(this.healthIndicatorData.categories, (category) => {
         this.$set(category, 'showIndicator', false)
         this.$set(category, 'expandCollapseBtn', '+')
       })

@@ -101,6 +101,7 @@
       font-family: 'RobotoSlabBold';
       display: inline-block;
       color: $white;
+      font-size: 12px !important;
       vertical-align: top;
     }
     .indicator-score-desc {
@@ -123,7 +124,6 @@
     margin-top: 10px;
     margin-left: 4px;
     margin-right: 4px;
-    display: inline-block;
     box-shadow: 0 0px 4px 0 rgba(173, 173, 173, 0.50);
     border-radius: 2px;
     background-color: $white;
@@ -144,17 +144,42 @@
     .country-summary-title {
       font-family: RobotoSlabRegular;
       font-size: 14px;
+      clear: left;
+    }
+
+    .country-contact {
+      font-family: RobotoSlabRegular;
+      font-size: 14px;
+      padding-bottom: 8px;
+    }
+
+    .country-map {
+      margin-bottom: 10px;
+      height: 114px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      .country-map-section {
+        float: left;
+      }
     }
     .country-text {
       margin-top: 8px;
       margin-bottom: 20px;
+      text-align: justify;
+    }
+    .country-image {
+      margin-right: 20px;
+      height: 100px;
+      width: 125px;
+      margin-bottom: 3px;
     }
     .country-summary-link {
       color: $link-blue;
     }
     .error {
       color: red;
-      padding: 5px 0 10px 0;
+      padding: 5px 0 0 0;
+      margin-bottom: 15px;
     }
   }
 }

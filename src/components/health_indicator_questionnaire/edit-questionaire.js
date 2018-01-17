@@ -20,6 +20,7 @@ export default Vue.extend({
     return {success: false, error: false, countryId: ''}
   },
   mounted () {
+    $('.loading').show()
     this.loadCountries()
   },
   methods: {
@@ -28,24 +29,41 @@ export default Vue.extend({
         this.countries = response.data
         var options = countryHelper.loadSearchData(this.countries, this.onCountrySelect.bind(this))
         $('#countryName').easyAutocomplete(options)
+        $('.loading').hide()
       })
     },
     onCountrySelect: function () {
       var countryId = $('#countryName').getSelectedItemData().id
       this.countryId = countryId
     },
+    validateCallback: function (result) {
+      var isValid = result && this.validateCountryId()
+      if (isValid) {
+        this.save()
+      } else {
+        this.success = false
+        this.error = true
+        document.body.scrollTop = document.documentElement.scrollTop = 0
+      }
+    },
     submit: function () {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.save()
-        } else {
-          this.success = false
-          this.error = true
-          document.body.scrollTop = document.documentElement.scrollTop = 0
-        }
-      })
+      this.$validator.validateAll().then(this.validateCallback.bind(this))
+    },
+    getSelectedCountryName: function () {
+      return $('#countryName').val()
+    },
+    validateCountryId: function () {
+      let selectedCountry = this.countries.find((country) => country.name === this.getSelectedCountryName())
+      if (selectedCountry) {
+        this.countryId = selectedCountry.id
+        return true
+      } else {
+        this.countryId = ''
+        return false
+      }
     },
     save: function () {
+      $('.loading').show()
       axios.post('/api/countries', {
         countryId: this.countryId,
         countrySummary: this.countrySummary,
@@ -54,6 +72,7 @@ export default Vue.extend({
         document.body.scrollTop = document.documentElement.scrollTop = 0
         this.success = true
         this.error = false
+        $('.loading').hide()
       })
     },
     getHealthIndicators: function () {

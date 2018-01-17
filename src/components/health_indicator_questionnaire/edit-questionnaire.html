@@ -154,7 +154,7 @@
     <div class="health-indicator-questionnaire-contact-form">
       <div class="form-group">
         <label for="resource1">Resource 1</label><span class="mandatory-field">*</span>
-        <input type="text" name="resource1" id="resource1" name="resource1"
+        <input type="text" name="resource1" id="resource1"
                v-model="countrySummary.resources[0]" v-validate="'required'"
                :class="errors.has('resource1') ? 'has-error form-control' : 'form-control'"/>
       </div>
@@ -207,8 +207,8 @@
                        v-model="healthIndicators[indicator.indicatorId].score"
                        :value="score.score"/>
                 <div class="score-info">
-                  <span class="score-content">{{score.score}}</span>
-                  <span class="score-content">-</span>
+                  <span :class="score.score ? 'score-content' : ''">{{score.score}}</span>
+                  <span class="score-content" v-if="score.score !== null">-</span>
                   <span>{{score.scoreDefinition}}</span>
                 </div>
               </div>
@@ -223,7 +223,7 @@
       </div>
     </div>
     <div class="top">
-      <a class="arrow" href="#"></a>
+      <a class="arrow" href="#"><span class="fa fa-angle-up"></span></a>
     </div>
   </form>
   <button class="submit-btn" @click="submit()">Submit</button>

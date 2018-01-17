@@ -166,7 +166,7 @@
     margin-top: 20px;
     height: 46px;
     width: 163px;
-    margin-bottom: 20px;
+    margin-bottom: 45px;
     margin-right: 3px;
   }
 
@@ -208,10 +208,9 @@
   height: 50px;
   position: fixed;
 
-  .arrow:before {
-    content: '\002303';
-    font-size: 20px;
-    padding: 15px 16px;
+  .arrow {
+    font-size: 38px;
+    padding: 0px 13px;
     display: inline-block;
     color: #3F4D7C;
   }

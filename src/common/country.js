@@ -4,7 +4,7 @@ export default ({
   countryNameValidator: {
     getMessage: field => 'Please select a valid country name.',
     validate (val, countries) {
-      return countries.filter(country => country.name && country.name.includes(val)).length > 0
+      return countries.filter(country => country.name && country.name === val).length > 0
     }
   },
   loadSearchData: function (list, selectCallBack) {

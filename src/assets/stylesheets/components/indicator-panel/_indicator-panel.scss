@@ -9,6 +9,7 @@
   z-index: 1000;
   max-height: calc(100vh - 130px);
   overflow-y: auto;
+  overflow-x: hidden;
   &-error {
     font-size: 12px;
     font-family: 'RobotoSlabRegular';
@@ -24,21 +25,17 @@
     align-items: center;
     height: 95%;
     margin: 15px 15px;
-    &-collapsible {
-      display: flex;
-    }
     &-expand-btn {
       cursor: pointer;
       font-size: 35px;
       color: #666666;
     }
     &-name {
-      flex: 0 0 95%;
-      align-self: left;
       position: relative;
       font-family: 'RobotoSlabRegular';
       font-size: 22px;
       text-transform: none;
+      width: 100%;
     }
 
     &-desc {
@@ -48,6 +45,7 @@
       line-height: 1.5;
       font-family: 'RobotoLight';
       padding-top: 5px;
+      width: 100%;
     }
 
     &-context {

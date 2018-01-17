@@ -8,6 +8,58 @@
   position: relative;
 }
 
+.filter-section {
+  position: absolute;
+  z-index: 999;
+  right: 0;
+  height: 34px;
+  display: flex;
+  font-size: 12px;
+  margin-top: 5px;
+
+  .filter-indicator, .phase-indicator {
+    height: 34px;
+    display: flex;
+  }
+
+  .filter-1 {
+    margin-right: 5px;
+    color: #555;
+    width: 218px;
+    padding-left: 5px;
+    border: $table-border;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+  }
+
+  .filter-2 {
+    @extend .filter-1;
+    width: 75px;
+    margin-right: 0;
+  }
+  
+  /* IE11 hide native button */
+  select::-ms-expand {
+    display: none;
+  }
+}
+
+.filter-indicator:after {
+  content: '\F078';
+  font: normal normal normal 12px/1 FontAwesome;
+  color: #555;
+  right: 88px;
+  padding: 11px 0px 0px 8px;
+  position: absolute;
+  pointer-events: none;
+}
+
+.phase-indicator:after {
+  @extend .filter-indicator:after;
+  right: 5px;
+}
+
 #map {
   height: calc(100vh - 130px);
   background: $bg-beige;

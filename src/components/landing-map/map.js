@@ -14,34 +14,81 @@ export default Vue.extend({
   },
   template: mapTemplate,
   data () {
+    // Todo: Remove mapData and directly return data
     this.mapData = {
       globalHealthIndices: [],
       lastSelectedCountry: '',
-      globalHealthIndicators: []
+      globalHealthIndicators: [],
+      categoryValue: '',
+      phaseValue: '',
+      categories: [],
+      phases: []
     }
     return this.mapData
   },
   created () {
+    this.categoryValue = window.appProperties.getCategoryFilter()
+    this.phaseValue = window.appProperties.getPhaseFilter()
     this.fetchGlobalIndices()
+    this.fetchCategoricalIndicators()
+    this.fetchPhases()
   },
   mounted: function () {
     console.log('map mounted')
     EventBus.$on('Map:Searched', this.onSearchTriggered)
+    this.$on('Map:Clicked', ($clickedEl) => {
+      if ($clickedEl.type === 'GLOBAL') {
+        this.resetFilters()
+      }
+    })
   },
   beforeDestroy () {
     console.log('map destroyed')
     EventBus.$off('Map:Searched', this.onSearchTriggered)
   },
   methods: {
+
+    filter: function () {
+      console.log('selected cat id ' + this.categoryValue)
+      window.appProperties.setCategoryFilter({categoryId: this.categoryValue})
+      window.appProperties.setPhaseFilter({phaseId: this.phaseValue})
+      this.$emit('filtered')
+      this.fetchGlobalIndices()
+    },
+
+    resetFilters: function () {
+      this.categoryValue = ''
+      this.phaseValue = ''
+      this.filter()
+    },
+
     fetchGlobalIndices: function () {
       var self = this
-      axios.get('/api/countries_health_indicator_scores')
+      $('.loading').show()
+      var windowProperties = window.appProperties
+      return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
         .then(function (globalHealthIndices) {
           self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
           self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
             globalHealthIndices)
           worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self))
+          $('.loading').hide()
         })
+    },
+    fetchCategoricalIndicators: function () {
+      var self = this
+      return axios.get('/api/health_indicator_options').then(function (categories) {
+        self.categories = categories.data
+      })
+    },
+    fetchPhases: function () {
+      var self = this
+      self.phases = [{phaseValue: 1, phaseName: 'Phase 1'},
+        {phaseValue: 2, phaseName: 'Phase 2'},
+        {phaseValue: 3, phaseName: 'Phase 3'},
+        {phaseValue: 4, phaseName: 'Phase 4'},
+        {phaseValue: 5, phaseName: 'Phase 5'}]
+      return self.phases
     },
     mergeColorCodeToHealthIndicators: function (globalHealthIndices) {
       var globalHealthIndicesWithScores = _.filter(globalHealthIndices.data.countryHealthScores, function (country) {

@@ -15,16 +15,18 @@ export default Vue.extend({
   },
 
   mounted () {
-    var self = this
-    self.getListOfCountries().then(globalHealthIndices => {
-      self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
-      this.listCountries(globalHealthIndices.data.countryHealthScores)
-    })
+    $('.loading').show()
+    this.getListOfCountries().then(this.countryListCallback.bind(this))
   },
 
   methods: {
+    countryListCallback: function (globalHealthIndices) {
+      this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
+      this.listCountries(globalHealthIndices.data.countryHealthScores)
+    },
     getListOfCountries: function () {
-      return axios.get('/api/countries_health_indicator_scores')
+      var windowProperties = window.appProperties
+      return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
     },
     listCountries: function (countriesDetails) {
       _.each(countriesDetails, country => {
@@ -34,6 +36,7 @@ export default Vue.extend({
           countryId: country.countryId
         }
         this.countryList.push(countryDetail)
+        $('.loading').hide()
       })
     },
     showCountryDetails: function (countryId) {

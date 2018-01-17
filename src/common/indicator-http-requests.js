@@ -79,7 +79,9 @@ export default ({
       .then(response => {
         context.developmentIndicators = isMinimal ? self.getMinimalDevelopmentIndicatorsData(self, response)
                                                   : self.getDevelopmentIndicatorsData(self, response)
+        $('.loading').hide()
       }).catch(e => {
+        $('.loading').hide()
         console.log('Error pulling development indicators data')
       })
   }

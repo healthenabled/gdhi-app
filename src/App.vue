@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <div class="loading">
+      <div class="error"></div>
+    </div>
     <layout></layout>
   </div>
 </template>

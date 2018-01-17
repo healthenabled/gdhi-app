@@ -37,3 +37,55 @@ body, html {
    margin: 0;
 
  }
+
+/* Spinner */
+.loading {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: #000 center;
+  z-index: 2001;
+  opacity: 0.5;
+
+  .error {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 180px;
+    height: 100px;
+    margin: auto;
+    font-size: 35px;
+    color: $grey;
+  }
+
+  .error:before {
+    content: "Loading";
+  }
+
+  .error:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-animation: ellipsis steps(5,end) 900ms infinite;
+    animation: ellipsis steps(5,end) 900ms infinite;
+    content: "\2026"; /* ascii code for the ellipsis character */
+    width: 0px;
+  }
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}
+
