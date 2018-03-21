@@ -1,14 +1,14 @@
-import Vue from 'vue'
-import errorTemplate from './error.html'
+import Vue from 'vue';
+import errorTemplate from './error.html';
 
 export default Vue.extend({
   template: errorTemplate,
-  data () {
+  data() {
     return {
-      errorMessage: 'Page Not Found!.'
-    }
+      errorMessage: 'Page Not Found!.',
+    };
   },
-  mounted () {
-    $('.loading').hide()
-  }
-})
+  mounted() {
+    $('.loading').hide();
+  },
+});

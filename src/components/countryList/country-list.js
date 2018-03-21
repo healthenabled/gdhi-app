@@ -1,46 +1,46 @@
-import Vue from 'vue'
-import countryList from './country-list.html'
-import axios from 'axios'
-import _ from 'lodash'
+import Vue from 'vue';
+import countryList from './country-list.html';
+import axios from 'axios';
+import _ from 'lodash';
 
 export default Vue.extend({
   name: 'CountryList',
 
-  data () {
+  data() {
     return {
       countryList: [],
-      globalHealthIndicators: []
-    }
+      globalHealthIndicators: [],
+    };
   },
 
-  mounted () {
-    $('.loading').show()
-    this.getListOfCountries().then(this.countryListCallback.bind(this))
+  mounted() {
+    $('.loading').show();
+    this.getListOfCountries().then(this.countryListCallback.bind(this));
   },
 
   methods: {
-    countryListCallback: function (globalHealthIndices) {
-      this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
-      this.listCountries(globalHealthIndices.data.countryHealthScores)
+    countryListCallback(globalHealthIndices) {
+      this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
+      this.listCountries(globalHealthIndices.data.countryHealthScores);
     },
-    getListOfCountries: function () {
-      var windowProperties = window.appProperties
-      return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
+    getListOfCountries() {
+      const windowProperties = window.appProperties;
+      return axios.get(`/api/countries_health_indicator_scores?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`);
     },
-    listCountries: function (countriesDetails) {
+    listCountries(countriesDetails) {
       _.each(countriesDetails, country => {
-        var countryDetail = {
+        const countryDetail = {
           countryName: country.countryName,
           overallPhase: country.countryPhase,
-          countryId: country.countryId
-        }
-        this.countryList.push(countryDetail)
-        $('.loading').hide()
-      })
+          countryId: country.countryId,
+        };
+        this.countryList.push(countryDetail);
+        $('.loading').hide();
+      });
     },
-    showCountryDetails: function (countryId) {
-      this.$router.push({path: `/countryProfile/${countryId}`})
-    }
+    showCountryDetails(countryId) {
+      this.$router.push({ path: `/countryProfile/${countryId}` });
+    },
   },
   template: countryList,
-})
+});

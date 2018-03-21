@@ -1,18 +1,16 @@
 export default {
-  'expandCaption': '+',
-  'collapseCaption': '-',
-  toggleCaption (caption) {
+  expandCaption: '+',
+  collapseCaption: '-',
+  toggleCaption(caption) {
     if (caption === this.expandCaption) {
-      return this.collapseCaption
-    } else {
-      return this.expandCaption
+      return this.collapseCaption;
     }
+    return this.expandCaption;
   },
-  getCaptionFor (isExpanded) {
+  getCaptionFor(isExpanded) {
     if (isExpanded) {
-      return this.collapseCaption
-    } else {
-      return this.expandCaption
+      return this.collapseCaption;
     }
-  }
-}
+    return this.expandCaption;
+  },
+};

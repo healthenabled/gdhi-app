@@ -5,22 +5,22 @@ export default Vue.extend({
   props: {
     questionnaire: {
       type: Object,
-      default: function () {
+      default() {
         return {};
-      }
+      },
     },
     countrySummary: {
       type: Object,
-      default: function () {
+      default() {
         return {};
-      }
+      },
     },
     healthIndicators: {
       type: Object,
-      default: function () {
+      default() {
         return {};
-      }
-    }
+      },
+    },
   },
   template: viewForm,
-})
+});

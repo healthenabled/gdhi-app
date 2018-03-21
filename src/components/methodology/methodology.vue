@@ -21,10 +21,10 @@
           of recommended indicators into a user-friendly and manageable list.
         </li>
       </ul>
-      <p>List of GDHI Indicators. 
-        <a 
-          href="/indicatorsInfo" 
-          class="link">See here</a> 
+      <p>List of GDHI Indicators.
+        <a
+          href="/indicatorsInfo"
+          class="link">See here</a>
       </p>
       <p>Data Collection and Verification</p>
       <p> We work with country partners who are leading digital health efforts in their respective countries to collect
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'Methodology'
-  }
+export default {
+  name: 'Methodology',
+};
 </script>

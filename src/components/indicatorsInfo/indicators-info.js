@@ -1,38 +1,38 @@
-import Vue from 'vue'
-import indicatorsInfo from './indicators-info.html'
-import axios from 'axios'
-import _ from 'lodash'
+import Vue from 'vue';
+import indicatorsInfo from './indicators-info.html';
+import axios from 'axios';
+import _ from 'lodash';
 
 export default Vue.extend({
   name: 'IndicatorsInfo',
 
-  data () {
+  data() {
     return {
       categoricalIndicators: [],
-      categoryNames: []
+      categoryNames: [],
 
-    }
+    };
   },
 
-  created () {
-    var self = this
-    $('.loading').show()
+  created() {
+    const self = this;
+    $('.loading').show();
     self.fetchCategoricalIndicators().then(response => {
-      self.categoricalIndicators = response.data
-      self.categoryNames = self.getCategoryNames(response.data)
-      $('.loading').hide()
-    })
+      self.categoricalIndicators = response.data;
+      self.categoryNames = self.getCategoryNames(response.data);
+      $('.loading').hide();
+    });
   },
 
   methods: {
-    fetchCategoricalIndicators: function () {
-      return axios.get('/api/health_indicator_options')
+    fetchCategoricalIndicators() {
+      return axios.get('/api/health_indicator_options');
     },
 
-    getCategoryNames: function (categories) {
-      return _.uniq(_.map(categories, 'categoryName'))
-    }
+    getCategoryNames(categories) {
+      return _.uniq(_.map(categories, 'categoryName'));
+    },
   },
   template: indicatorsInfo,
 
-})
+});

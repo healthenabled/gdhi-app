@@ -1,22 +1,22 @@
-import colors from '../common/color-codes.js'
-import _ from 'lodash'
+import colors from '../common/color-codes.js';
+import _ from 'lodash';
 
 export default {
-  getColorCodeFor (score) {
-    var colorCodes = colors.getColorCodes()
-    var colorHashArray = colorCodes.filter(function (c) {
-      return score === null ? 'NA' : c['score'] === JSON.stringify(score)
-    })
-    return colorHashArray.length !== 0 ? colorHashArray[0]['color'] : '#606060'
+  getColorCodeFor(score) {
+    const colorCodes = colors.getColorCodes();
+    const colorHashArray = colorCodes.filter((c) => (score === null ? 'NA' : c.score === JSON.stringify(score)));
+    return colorHashArray.length !== 0 ? colorHashArray[0].color : '#606060';
   },
-  getColorCodeOf (country, countryIndices) {
-    var matchedCountry = this.getMatchedCountry(country, countryIndices)
-    return matchedCountry ? matchedCountry.colorCode : '#606060'
+  getColorCodeOf(country, countryIndices) {
+    const matchedCountry = this.getMatchedCountry(country, countryIndices);
+    return matchedCountry ? matchedCountry.colorCode : '#606060';
   },
-  getMatchedCountry (countryCode, countryIndices) {
-    let matchedCountry = _.filter(countryIndices,
-      (countryObj) => { return countryObj.countryId === countryCode })
+  getMatchedCountry(countryCode, countryIndices) {
+    const matchedCountry = _.filter(
+      countryIndices,
+      (countryObj) => countryObj.countryId === countryCode,
+    );
     return matchedCountry && matchedCountry.length >
-    0 ? matchedCountry[0] : null
-  }
-}
+    0 ? matchedCountry[0] : null;
+  },
+};
