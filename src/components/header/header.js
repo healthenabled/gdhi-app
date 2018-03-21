@@ -2,7 +2,6 @@ import Vue from 'vue'
 import header from './header.html'
 
 export default Vue.extend({
-  template: header,
   name: 'Header',
 
   data () {
@@ -11,5 +10,6 @@ export default Vue.extend({
       developmentIndicators: [],
       healthIndicators: {}
     }
-  }
+  },
+  template: header,
 })

@@ -4,8 +4,7 @@ import axios from 'axios'
 import httpRequests from '../../common/indicator-http-requests'
 
 export default Vue.extend({
-  template: indicatorPanel,
-  name: 'indicator-panel',
+  name: 'IndicatorPanel',
 
   data () {
     return {
@@ -135,5 +134,6 @@ export default Vue.extend({
     showListOfCountries: function () {
       this.$router.push({path: `/country_list`})
     }
-  }
+  },
+  template: indicatorPanel,
 })

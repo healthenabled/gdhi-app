@@ -4,8 +4,7 @@ import axios from 'axios'
 import _ from 'lodash'
 
 export default Vue.extend({
-  template: indicatorsInfo,
-  name: 'indicators-info',
+  name: 'IndicatorsInfo',
 
   data () {
     return {
@@ -33,6 +32,7 @@ export default Vue.extend({
     getCategoryNames: function (categories) {
       return _.uniq(_.map(categories, 'categoryName'))
     }
-  }
+  },
+  template: indicatorsInfo,
 
 })

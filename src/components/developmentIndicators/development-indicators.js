@@ -3,8 +3,7 @@ import developmentIndicatorsTemplate from './development-indicators.html'
 import httpRequests from '../../common/indicator-http-requests'
 
 export default Vue.extend({
-  template: developmentIndicatorsTemplate,
-  name: 'development-indicators',
+  name: 'DevelopmentIndicators',
   data () {
     return {
       developmentIndicators: []
@@ -18,5 +17,6 @@ export default Vue.extend({
       $('.loading').show()
       httpRequests.getDevelopmentIndicators(this, countryCode, false)
     }
-  }
+  },
+  template: developmentIndicatorsTemplate,
 })

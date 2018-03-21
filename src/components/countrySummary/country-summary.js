@@ -3,8 +3,7 @@ import countrySummary from './country-summary.html'
 import axios from 'axios'
 
 export default Vue.extend({
-  template: countrySummary,
-  name: 'country-summary',
+  name: 'CountrySummary',
   data () {
     return {
       countrySummaries: {},
@@ -30,5 +29,6 @@ export default Vue.extend({
       this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode.slice(0, 2)
       $('.loading').hide()
     }
-  }
+  },
+  template: countrySummary,
 })

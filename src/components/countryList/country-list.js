@@ -4,8 +4,7 @@ import axios from 'axios'
 import _ from 'lodash'
 
 export default Vue.extend({
-  template: countryList,
-  name: 'country-list',
+  name: 'CountryList',
 
   data () {
     return {
@@ -42,5 +41,6 @@ export default Vue.extend({
     showCountryDetails: function (countryId) {
       this.$router.push({path: `/countryProfile/${countryId}`})
     }
-  }
+  },
+  template: countryList,
 })

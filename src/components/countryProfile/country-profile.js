@@ -6,15 +6,14 @@ import axios from 'axios'
 import _ from 'lodash'
 
 export default Vue.extend({
+
+  components: { developmentIndicators, countrySummary },
   data () {
     return {
       healthIndicatorData: {countryName: '', countryPhase: 'NA', categories: []},
       url: ''
     }
   },
-  template: countryProfile,
-
-  components: { developmentIndicators, countrySummary },
 
   created () {
     this.getHealthIndicatorsFor(this.$route.params.countryCode)
@@ -39,5 +38,6 @@ export default Vue.extend({
         this.$set(category, 'expandCollapseBtn', '+')
       })
     }
-  }
+  },
+  template: countryProfile,
 })

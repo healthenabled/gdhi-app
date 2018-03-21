@@ -13,9 +13,27 @@ const config = {
 Vue.use(VeeValidate, config)
 
 export default Vue.extend({
-  template: editForm,
   components: { autoSuggest },
-  props: ['questionnaire', 'countrySummary', 'healthIndicators'],
+  props: {
+    questionnaire: {
+      type: Object,
+      default: function () {
+        return {};
+      }
+    },
+    countrySummary: {
+      type: Object,
+      default: function () {
+        return {};
+      }
+    },
+    healthIndicators: {
+      type: Object,
+      default: function () {
+        return {};
+      }
+    }
+  },
   data: function () {
     return {success: false, error: false, countryId: ''}
   },
@@ -83,5 +101,6 @@ export default Vue.extend({
       indicator.expandCollapseBtn = expandCollapseHelper.toggleCaption(
         indicator.expandCollapseBtn)
     }
-  }
+  },
+  template: editForm,
 })

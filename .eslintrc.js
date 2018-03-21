@@ -2,19 +2,15 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
   parserOptions: {
+    parser: 'babel-eslint',
     sourceType: 'module'
   },
   env: {
     browser: true,
   },
-  // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-  extends: 'standard',
-  // required to lint *.vue files
-  plugins: [
-    'html'
-  ],
+  // https://github.com/vuejs/eslint-plugin-vue
+  extends: 'plugin:vue/strongly-recommended',
   // add your custom rules here
   'rules': {
     // allow paren-less arrow functions

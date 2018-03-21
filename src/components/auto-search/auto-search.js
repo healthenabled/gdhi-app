@@ -6,8 +6,7 @@ import $ from 'jquery'
 import {EventBus} from '../common/event-bus'
 
 export default Vue.extend({
-  template: autoSearch,
-  name: 'auto-search',
+  name: 'AutoSearch',
   mounted () {
     this.loadCountries()
   },
@@ -35,5 +34,6 @@ export default Vue.extend({
       }
       $('#search-box').easyAutocomplete(options)
     }
-  }
+  },
+  template: autoSearch,
 })

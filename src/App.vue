@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <div class="loading">
-      <div class="error"></div>
+      <div class="error" />
     </div>
-    <layout></layout>
+    <layout />
   </div>
 </template>
 
 <script>
   import Layout from './components/layout/layout.vue'
 export default {
-    name: 'app',
+    name: 'App',
     components: {
       Layout
     }

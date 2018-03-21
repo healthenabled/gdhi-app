@@ -12,7 +12,6 @@ export default Vue.extend({
   components: {
     indicatorPanel, mapLegend
   },
-  template: mapTemplate,
   data () {
     // Todo: Remove mapData and directly return data
     this.mapData = {
@@ -108,5 +107,6 @@ export default Vue.extend({
     onSearchTriggered (countryCode) {
       worldMap.handleSearch(countryCode, this.onCountrySelection.bind(this))
     }
-  }
+  },
+  template: mapTemplate,
 })

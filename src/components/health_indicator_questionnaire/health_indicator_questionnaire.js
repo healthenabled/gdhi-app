@@ -16,7 +16,6 @@ export default Vue.extend({
   components: {
     editQuestionnaire, viewQuestionnaire
   },
-  template: healthIndicatorForm,
   data: function () {
     var countrySummary = {
       dataFeederName: '',
@@ -93,5 +92,6 @@ export default Vue.extend({
         }
       })
     }
-  }
+  },
+  template: healthIndicatorForm,
 })
