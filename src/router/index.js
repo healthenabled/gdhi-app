@@ -10,6 +10,7 @@ import landingMap from '@/components/landing-map/map.js'
 import methodologyComp from '@/components/methodology/methodology.vue'
 import healthIndicatorQuestionnaire from '@/components/health_indicator_questionnaire/health_indicator_questionnaire.js'
 import countryListComp from '@/components/countryList/country-list.js'
+import errorComp from '@/components/error-handler/404-error.js'
 
 Vue.use(Router)
 
@@ -70,6 +71,12 @@ export default new Router({
           path: '/country_list',
           components: {
             routecontent: countryListComp
+          }
+        },
+        {
+          path: '*',
+          components: {
+            routecontent: errorComp
           }
         }
       ]
