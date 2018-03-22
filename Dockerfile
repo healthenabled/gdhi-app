@@ -13,3 +13,6 @@ RUN npm run package
 FROM centos/httpd
 
 COPY --from=0 $PWD/gdhi-app/dist /var/www/html
+COPY httpd.conf /etc/httpd/conf/
+
+EXPOSE 80
