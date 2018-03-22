@@ -35,7 +35,7 @@ export default Vue.extend({
     },
   },
   data() {
-    return { success: false, error: false, countryId: '' };
+    return { success: false, error: false, exception:false, countryId: '' };
   },
   mounted() {
     $('.loading').show();
@@ -89,6 +89,11 @@ export default Vue.extend({
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         this.success = true;
         this.error = false;
+        $('.loading').hide();
+      }).catch(() => {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        this.success = false;
+        this.exception = true;
         $('.loading').hide();
       });
     },

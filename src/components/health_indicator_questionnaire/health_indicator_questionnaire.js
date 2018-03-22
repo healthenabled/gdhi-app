@@ -51,6 +51,9 @@ export default Vue.extend({
       axios.get('/api/health_indicator_options').then((response) => {
         this.questionnaire = response.data;
         this.setUpHealthIndicators(response.data, false);
+      })
+      .catch(() => {
+        $('.loading').hide();
       });
     },
     setUpHealthIndicators(data, isExpanded) {
