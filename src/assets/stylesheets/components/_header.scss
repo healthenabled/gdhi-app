@@ -50,11 +50,12 @@
     }
     input {
       padding: 5px;
+      max-width: 90%;
     }
-    img {
+    .autocomplete__icon {
       display: none;
     }
-    autocomplete__results__item:hover {
+    .autocomplete__results__item:hover {
       background: $autocomplete-highlight;
     }
   }
