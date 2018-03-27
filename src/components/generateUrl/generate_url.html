@@ -1,0 +1,19 @@
+<div>
+    <input type="text" id="url-box" value="hello" readonly>
+    <button @click="copyUrl()">Copy url</button>
+    <div class="search-box hd-element">
+            <autocomplete
+                    id="search-box"
+                    :source="countries"
+                    resultsValue="unique_id"
+                    placeholder="Search by country name"
+                    input-class="search-box-container"
+                    @selected="onCountrySelect"
+                    />
+                </autocomplete>
+            </div>
+    <div>  
+        <button class="btn" @click="generateUrl()">Generate URL</button>
+    </div>
+</div>
+
