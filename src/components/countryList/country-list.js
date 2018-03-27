@@ -39,7 +39,7 @@ export default Vue.extend({
       });
     },
     showCountryDetails(countryId) {
-      this.$router.push({ path: `/countryProfile/${countryId}` });
+      this.$router.push({ path: `/country_profile/${countryId}` });
     },
   },
   template: countryList,

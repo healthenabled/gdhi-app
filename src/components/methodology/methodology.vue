@@ -23,7 +23,7 @@
       </ul>
       <p>List of GDHI Indicators.
         <a
-          href="/indicatorsInfo"
+          href="/indicators_info"
           class="link">See here</a>
       </p>
       <p>Data Collection and Verification</p>

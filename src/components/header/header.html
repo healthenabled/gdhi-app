@@ -1,9 +1,11 @@
 <div class="header">
   <div class="header-width">
     <div class="header-elements">
-      <span class="logo-name hd-element">Global Digital Health Index</span>
+      <span
+        class="logo-name hd-element"><router-link :to="{path: '/map'}">Global Digital Health Index</router-link></span>
       <span class="hd-element xs-length"><router-link :to="{path: '/map'}">World Map</router-link></span>
-      <span class="hd-element xl-length"><router-link :to="{path: '/indicatorsInfo'}">List of Indicators</router-link></span>
+      <span class="hd-element xl-length"><router-link :to="{path: '/indicators_info'}">List of
+        Indicators</router-link></span>
       <router-view name="search"></router-view>
     </div>
   </div>

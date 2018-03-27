@@ -38,13 +38,13 @@ export default new Router({
           ],
         },
         {
-          path: 'countryProfile/:countryCode',
+          path: 'country_profile/:countryCode',
           components: {
             routecontent: countryProfile,
           },
         },
         {
-          path: '/indicatorsInfo',
+          path: '/indicators_info',
           components: {
             routecontent: indicatorsInfoComp,
           },
