@@ -26,6 +26,10 @@ export default new Router({
       },
       children: [
         {
+          path: '/',
+          redirect: "/map"
+        },
+        {
           path: 'map',
           components: {
             routecontent: landingMap,
