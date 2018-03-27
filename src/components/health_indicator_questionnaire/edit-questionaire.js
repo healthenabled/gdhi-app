@@ -5,18 +5,17 @@ import autoSuggest from '../auto-search/auto-search';
 import countryHelper from '../../common/country';
 import VeeValidate from 'vee-validate';
 import expandCollapseHelper from './expand-collapse-helper';
+import Autocomplete from 'vuejs-auto-complete'
 
-VeeValidate.Validator.extend('countryName', countryHelper.countryNameValidator);
 const config = {
   fieldsBagName: 'fieldBags',
 };
 Vue.use(VeeValidate, config);
-
 export default Vue.extend({
-  components: { autoSuggest },
+  components: { Autocomplete },
   props: {
     questionnaire: {
-      type: Object,
+      type: Array,
       default() {
         return {};
       },
@@ -33,18 +32,15 @@ export default Vue.extend({
         return {};
       },
     },
-
-
     showEdit: {
           type: Boolean,
           default() {
             return true;
           },
         },
-
   },
   data() {
-    return { success: false, error: false, exception:false, countryId: '' };
+    return { success: false, error: false, exception:false, countryId: '', countries: []};
   },
   mounted() {
     $('.loading').show();
@@ -54,17 +50,15 @@ export default Vue.extend({
     loadCountries() {
       countryHelper.loadCountries().then((response) => {
         this.countries = response.data;
-        const options = countryHelper.loadSearchData(this.countries, this.onCountrySelect.bind(this));
-        $('#countryName').easyAutocomplete(options);
         $('.loading').hide();
       });
     },
-    onCountrySelect() {
-      const countryId = $('#countryName').getSelectedItemData().id;
-      this.countryId = countryId;
+    onCountrySelect(selectedItem) {
+      this.countryId = selectedItem.value;
     },
     validateCallback(result) {
       const isValid = result && this.validateCountryId();
+
       if (isValid) {
         this.save();
       } else {
@@ -76,11 +70,8 @@ export default Vue.extend({
     submit() {
       this.$validator.validateAll().then(this.validateCallback.bind(this));
     },
-    getSelectedCountryName() {
-      return $('#countryName').val();
-    },
     validateCountryId() {
-      const selectedCountry = this.countries.find((country) => country.name === this.getSelectedCountryName());
+      const selectedCountry = this.countries.find((country) => country.id === this.countryId);
       if (selectedCountry) {
         this.countryId = selectedCountry.id;
         return true;

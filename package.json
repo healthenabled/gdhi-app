@@ -23,7 +23,8 @@
     "normalize.css": "^7.0.0",
     "vee-validate": "2.0.0-rc.22",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuejs-auto-complete": "^0.6.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
