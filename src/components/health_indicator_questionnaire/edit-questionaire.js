@@ -2,7 +2,6 @@ import Vue from 'vue';
 import editForm from './edit-questionnaire.html';
 import axios from 'axios';
 import autoSuggest from '../auto-search/auto-search';
-import countryHelper from '../../common/country';
 import VeeValidate from 'vee-validate';
 import expandCollapseHelper from './expand-collapse-helper';
 import Autocomplete from 'vuejs-auto-complete'
@@ -48,7 +47,7 @@ export default Vue.extend({
   },
   methods: {
     loadCountries() {
-      countryHelper.loadCountries().then((response) => {
+      axios.get('/api/countries').then((response) => {
         this.countries = response.data;
         $('.loading').hide();
       });
@@ -58,7 +57,6 @@ export default Vue.extend({
     },
     validateCallback(result) {
       const isValid = result && this.validateCountryId();
-
       if (isValid) {
         this.save();
       } else {

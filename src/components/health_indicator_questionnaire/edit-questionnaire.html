@@ -12,11 +12,13 @@
         <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
         <span v-if="showEdit">
         <autocomplete
-        :source="countries"
-        placeholder="enter country name to select"
-        input-class="errors.has('countryName') ? 'has-error form-control' : 'form-control'"
-        @selected="onCountrySelect"
-        v-validate="'required'"
+          id="countryName"
+          name="countryName"
+          :source="countries"
+          placeholder="enter country name to select"
+          :class="errors.has('countryName') ? 'has-error form-control' : 'form-control'"
+          @selected="onCountrySelect"
+          v-validate="'required'"
         />
         </span>
         <span v-else>

@@ -15,27 +15,20 @@ describe('Questionnaire.vue', () => {
   afterEach(() => {
     sandBox.restore()
   })
-  xit('country id should be that of the selected country', () => {
-    sandBox.stub(ques, "getSelectedCountryName").returns("INDIA")
-    expect(ques.countryId).to.equal('')
+  it('country id should be that of the selected country', () => {
+    ques.onCountrySelect({ value: 'IND'})
     expect(ques.validateCountryId()).to.equal(true)
     expect(ques.countryId).to.equal("IND")
   })
-  xit('country id should be reset to new value', () => {
-    sandBox.stub(ques, "getSelectedCountryName").returns("INDIA")
+  it('country id should be reset to new value', () => {
     ques.countryId = "JPN"
+    ques.onCountrySelect({ value: 'IND'})
     expect(ques.validateCountryId()).to.equal(true)
     expect(ques.countryId).to.equal("IND")
   })
-  xit('country id should be set only if name matches', () => {
-    sandBox.stub(ques, "getSelectedCountryName").returns("IND")
+  it('country id should be set only if name matches', () => {
     ques.countryId = 'JPN'
-    expect(ques.validateCountryId()).to.equal(false)
-    expect(ques.countryId).to.equal('')
-  })
-  xit('country id should be set only if name matches exactly', () => {
-    sandBox.stub(ques, "getSelectedCountryName").returns("India")
-    ques.countryId = 'JPN'
+    ques.onCountrySelect({ value: 'IDN'})
     expect(ques.validateCountryId()).to.equal(false)
     expect(ques.countryId).to.equal('')
   })
