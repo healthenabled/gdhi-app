@@ -33,6 +33,15 @@ export default Vue.extend({
         return {};
       },
     },
+
+
+    showEdit: {
+          type: Boolean,
+          default() {
+            return true;
+          },
+        },
+
   },
   data() {
     return { success: false, error: false, exception:false, countryId: '' };
