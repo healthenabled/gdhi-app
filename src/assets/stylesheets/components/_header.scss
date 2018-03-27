@@ -1,30 +1,26 @@
 .header {
   width: 100%;
   background: $white;
-  font-family: 'RobotoMedium';
   position: fixed;
   top: 0;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  font-size: 14px;
+  @extend .box-shadow;
+  z-index: 3;
+  line-height: 1;
 
   .header-width {
     margin: 0 auto;
     width: 92%;
   }
   .hd-element {
+    padding: 15px 0px;
+    @extend .header-regular;
+    display: inline-block;
+    min-width: 140px;
     display: flex;
-    align-items: flex-end;
-    padding: 20px 0px;
-  }
-  .xl-length {
-    padding-left: 25px;
-    color: $link-blue;
-  }
-
-  .xs-length {
-    padding-left: 25px;
-    color: $link-blue;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box;
   }
   .hide {
     display: none;
@@ -36,17 +32,16 @@
   width: 100%;
   .logo-name {
     max-width: 190px;
-    font-size: 23px;
     color: $logo-blue;
-    font-family: 'RobotoSlabBold';
     text-transform: uppercase;
     letter-spacing: -0.1px;
     cursor: default;
+    @extend .logo-font;
   }
   .search-box {
     position: absolute;
     right: 75px;
-    top: 18px;
+    top: 8px;
     &-container {
       width: 100%;
       font-size: 12px;
@@ -54,9 +49,12 @@
       background-size: 15px;
     }
   }
+  a {
+    border-bottom: 4px solid transparent;
+  }
   .router-link-exact-active {
-    color: $font-grey-dark;
-    cursor: default;
+    border-bottom: 4px solid $logo-blue;
+    background: $selected-menu;
   }
 }
 .header-elements__right {

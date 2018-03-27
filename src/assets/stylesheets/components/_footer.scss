@@ -1,15 +1,10 @@
 .footer {
   width: 100%;
-  background: #fff;
-  height: 35px;
-  font-size: 12px;
-  font-family: 'RobotoLight';
-  position: fixed;
-  bottom: 0;
-  padding: 10px 0;
+  background: $logo-blue;
+  color: $white;
+  padding: 15px 0;
   box-sizing: border-box;
-  color: $link-blue;
-  z-index: 1000;
+  z-index: 3;
   .footer-width {
     width: 92%;
     margin: 0 auto;
@@ -17,8 +12,7 @@
   .ft-element-pipe {
       padding: 0 5px;
   }
-  .float-right {
-    float: right;
-    color: #404E7B;
+  .contact {
+    @extend .copy-italics;
   }
 }

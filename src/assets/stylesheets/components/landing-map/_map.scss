@@ -10,7 +10,7 @@
 
 .filter-section {
   position: absolute;
-  z-index: 999;
+  z-index: 3;
   right: 0;
   height: 34px;
   display: flex;
@@ -69,8 +69,9 @@
   right: 0px;
   bottom: 30px;
   color: $white;
-  z-index: 2000;
+  z-index: 3;
   cursor: default;
+  list-style: none;
   .l-box {
     text-align: center;
     height: 23px;
@@ -111,7 +112,7 @@ div#reset-btn:before {
 }
 
 .leaflet-left .leaflet-control {
-  margin-left: 301px;
+  margin-left: 351px;
   top: 3px;
   margin-top: 0;
   &.leaflet-control-attribution {
@@ -126,4 +127,14 @@ div#reset-btn:before {
   .leaflet-top .leaflet-control {
     top: 40px;
   }
+}
+
+.leaflet-pane {
+  z-index: 1;
+}
+.leaflet-map-pane svg {
+  z-index: 2;
+}
+.leaflet-top, .leaflet-bottom {
+  z-index: 1;
 }
