@@ -13,12 +13,13 @@ export default Vue.extend({
     data() {
       return { 
         countries: [],
-        countryUUID: ""
+        countryUUID: "",
+        generatedURL:""
       };
     },
     methods: {
       loadCountries() {
-        axios.get('/api/countries')
+        return axios.get('/api/countries')
           .then(response => {
             this.countries = response.data;
           });
@@ -27,8 +28,7 @@ export default Vue.extend({
         this.countryUUID = selectedItem.value;
       },
       generateUrl(){
-        var generatedUrl = location.origin + "/health_indicator_questionnaire/" + this.countryUUID;
-        document.getElementById('url-box').value = generatedUrl;
+        this.generatedURL = location.origin + "/health_indicator_questionnaire/" + this.countryUUID;
       },
       copyUrl() {
         document.getElementById("url-box").select();

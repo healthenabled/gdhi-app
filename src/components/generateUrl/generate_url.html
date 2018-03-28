@@ -1,5 +1,5 @@
 <div>
-    <input type="text" id="url-box" value="hello" readonly>
+    <input v-model="generatedURL" type="text" id="url-box" readonly>
     <button @click="copyUrl()">Copy url</button>
     <div class="search-box hd-element">
             <autocomplete
