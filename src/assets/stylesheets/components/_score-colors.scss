@@ -1,26 +1,26 @@
 // Update variables in SCSS if changed.
-#phaseNA {
+#phaseNA, .phaseNA {
   background-color: $na;
 }
-#phasenull {
+#phasenull, .phasenull {
   background-color: $na;
   font-size: 40px;
 }
-#phase0 {
+#phase0, .phase0 {
   background-color: $score1;
 }
-#phase1 {
+#phase1, .phase1 {
   background-color: $score1;
 }
-#phase2 {
+#phase2, .phase2 {
   background-color: $score2;
 }
-#phase3 {
+#phase3, .phase3 {
   background-color: $score3;
 }
-#phase4 {
+#phase4, .phase4 {
   background-color: $score4;
 }
-#phase5 {
+#phase5, .phase5 {
   background-color: $score5;
 }

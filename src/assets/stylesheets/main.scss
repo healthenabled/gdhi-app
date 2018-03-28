@@ -105,6 +105,27 @@ body, html {
   text-align: right;
 }
 
+.list-with-bullets {
+  margin: 10px;
+  li {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+    margin: 5px 0;
+  }
+  
+}
+.link-blue {
+  color: $logo-blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.page-title {
+  font-family: 'RobotoSlabBold', 'sans-serif';
+  font-size: 2.14em;
+  margin: 20px 0;
+}
+
 .copy {
   font-size: 1em;
   font-weight: $regular;

@@ -1,68 +1,18 @@
-.countries-container {
-  background: rgba(248,248,234,0.50);
-  .countries-list {
-    list-style-type: none;
-    width: 90%;
-    overflow: auto;
-    margin: 0px auto;
-    &-heading {
-      padding-left: 10px;
-      font-size: 22px;
-      font-family: RobotoSlab-Regular;
-      display: inline-block;
-      margin-top: 60px;
-    }
-    &-section {
-      display: flex;
-      flex-direction: row;
-      &-description {
-        padding-left: 10px;
-        font-size: 11px;
-        line-height: 16px;
-        font-family: RobotoLight;
-        padding-top: 2px;
-        flex: 1 1 auto;
-      }
-      &-export {
-        font-size: 12px;
-        color: $link-blue;
-      }
-    }
-    &-details {
-      padding-top: 20px;
-      display: flex;
-      flex-flow: column wrap;
-      align-content: flex-start;
-      margin-left: -10px;
-      margin-top: -10px;
-      height: calc(100vh - 250px);
-      &-country {
-        width: 200px;
-        display: flex;
-        flex-flow: row nowrap;
-        font-size: 12px;
-        flex: 0 0 30px;
-        box-sizing: border-box;
-        padding: 10px;
-        margin-left: 10px;
-        justify-content: space-between;
-        &-name {
-          font-family: 'RobotoLight';
-          &:hover {
-            text-decoration: underline;
-            color: $link-blue;
-          }
-        }
-        &-score {
-          font-family: 'RobotoMedium';
-        }
-      }
-    }
+.countries-list-details {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin-top: 20px;
+  .country-name{
+    width: 240px;
+    display: inline-block;
   }
-}
-
-@media (min-width: 1040px) {
-  .countries-list-details .countries-list-details-country {
-    max-width: calc(20% - 30px);
+  .country-score {
+    display: inline-block;
+    margin: 5px 20px;
+    padding: 10px;
+    color: $white;
+    min-width: 20px;
+    text-align: center;
   }
 }

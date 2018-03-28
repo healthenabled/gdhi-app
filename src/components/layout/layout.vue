@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="full-height">
     <router-view name="header" />
     <router-view name="container" />
     <router-view name="footer" />
