@@ -235,6 +235,9 @@ input[type='text'], input[type='email'], textarea {
   &:last-child {
     margin-bottom: 0px;
   }
+  &:only-child {
+    margin-bottom: 20px;
+  }
   @media screen and (max-width: 1024px) {
     flex-wrap: wrap;
     margin: 5px 0;
@@ -359,7 +362,12 @@ input[type='text'], input[type='email'], textarea {
 .error-info {
   color: $negative;
 }
-
+.named-anchor {
+  display: block;
+  position: relative;
+  top: -100px;
+  visibility: hidden;
+}
 /* Create a custom radio button */
 .checkmark {
   position: absolute;

@@ -19,6 +19,9 @@ export default Vue.extend({
     $('.loading').show();
     self.fetchCategoricalIndicators().then(response => {
       self.categoricalIndicators = response.data;
+      self.categoricalIndicators.forEach((category)=> {
+        this.$set(category, 'showCategory', true);
+      });
       self.categoryNames = self.getCategoryNames(response.data);
       $('.loading').hide();
     });
@@ -31,6 +34,9 @@ export default Vue.extend({
 
     getCategoryNames(categories) {
       return _.uniq(_.map(categories, 'categoryName'));
+    },
+    onCategoryExpand(category) {
+      category.showCategory = !category.showCategory;
     },
   },
   template: indicatorsInfo,

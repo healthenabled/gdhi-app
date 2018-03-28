@@ -1,0 +1,30 @@
+.category-names {
+  position: fixed;
+  list-style: none;
+  li {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+}
+.indicators {
+  margin-left: 33.33%;
+}
+.indicator-id, .indicator-name {
+  display: inline-block;
+  vertical-align: top;
+}
+.indicator-id {
+  min-width: 20px;
+}
+.indicator-name {
+  max-width: calc(100% - 30px);
+}
+.table-header {
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 10px;
+}
+.indicators-info {
+  .accordion-content {
+    border-top: 0px;
+  }
+}
