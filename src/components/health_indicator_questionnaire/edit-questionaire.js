@@ -1,10 +1,9 @@
-import Vue from 'vue';
-import editForm from './edit-questionnaire.html';
-import axios from 'axios';
-import autoSuggest from '../auto-search/auto-search';
-import VeeValidate from 'vee-validate';
-import expandCollapseHelper from './expand-collapse-helper';
-import Autocomplete from 'vuejs-auto-complete'
+import Vue from "vue";
+import editForm from "./edit-questionnaire.html";
+import axios from "axios";
+import VeeValidate from "vee-validate";
+import expandCollapseHelper from "./expand-collapse-helper";
+import Autocomplete from "vuejs-auto-complete";
 
 const config = {
   fieldsBagName: 'fieldBags',
@@ -16,7 +15,7 @@ export default Vue.extend({
     questionnaire: {
       type: Array,
       default() {
-        return {};
+        return [];
       },
     },
     countrySummary: {

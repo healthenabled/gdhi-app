@@ -33,7 +33,7 @@ export default Vue.extend({
     };
     const healthIndicators = {};
     return {
-      questionnaire: {}, countrySummary, healthIndicators, showEdit: true,
+      questionnaire: [], countrySummary, healthIndicators, showEdit: true,
     };
   },
   created() {
