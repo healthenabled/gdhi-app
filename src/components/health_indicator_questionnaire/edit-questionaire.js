@@ -98,9 +98,8 @@ export default Vue.extend({
     getHealthIndicators() {
       return Object.entries(this.healthIndicators).map((entry) => entry[1]);
     },
-    onIndicatorExpand(indicator) {
-      indicator.showIndicator = !indicator.showIndicator;
-      indicator.expandCollapseBtn = expandCollapseHelper.toggleCaption(indicator.expandCollapseBtn);
+    onCategoryExpand(category) {
+      category.showCategory = !category.showCategory;
     },
   },
   template: editForm,

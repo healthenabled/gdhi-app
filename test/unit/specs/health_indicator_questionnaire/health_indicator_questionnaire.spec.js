@@ -51,19 +51,13 @@ describe('Questionnaire.vue', () => {
 
     expect(ques.healthIndicators).to.deep.equal(expected)
     data.forEach(datum => {
-      datum.indicators.forEach(indicator => {
-        expect(indicator.showIndicator).to.equal(false)
-        expect(indicator.expandCollapseBtn).to.equal('+')
-      })
+      expect(datum.showCategory).to.equal(false)
     })
 
     ques.setUpHealthIndicators(data, true)
 
     data.forEach(datum => {
-      datum.indicators.forEach(indicator => {
-        expect(indicator.showIndicator).to.equal(true)
-        expect(indicator.expandCollapseBtn).to.equal('-')
-      })
+      expect(datum.showCategory).to.equal(true)
     })
   })
   it('should transform data for view form', () => {

@@ -1,217 +1,36 @@
-.health-indicator-questionnaire {
-  margin: 60px auto;
-  color: $black;
-  padding-left: 2px;
-  &-heading {
-    font-family: 'RobotoSlabRegular';
-    font-size: 22px;
+.indicator-items {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid $border-color;
+}
+.indicator-definition {
+  color: $font-grey;
+}
+.scores {
+  margin: 10px 0;
+  .score-info {
+    display: inline-block;
+    max-width: 90%;
   }
-  &-contact-info {
-    font-family: 'RobotoSlabBold';
-    font-size: 18px;
-    &-heading {
-      margin-bottom: 36px;
-      margin-top: 32px;
-    }
-    &-publish {
-      font-size: 12px;
-      vertical-align: middle;
-      color: $font-grey;
-    }
-    &-description {
-      font-size: 12px;
-      margin-bottom: -10px;
-      color: #444444;
-      font-family: 'RobotoRegular';
-      padding-top: 8px;
-    }
-  }
-  /*Form Layout */
-  &-contact-form {
-    display: flex;
-    flex-direction: row;
-    .form-group {
-      flex: 1 1 33.33%;
-    }
-    .custom-form-width {
-      flex: 1 1 73.33%;
-    }
-    .custom-form-width-2 {
-      flex: 1 1 36.3%;
-    }
-    .easy-autocomplete {
-      width: 100% !important;
-    }
-    .easy-autocomplete input {
-      padding: 2px 11px;
-      margin-bottom: 0;
-      color: $black;
-    }
-    label {
-      display: inline-block;
-      margin-bottom: 8px;
-      font-family: 'RobotoSlabRegular';
-      font-size: 14px;
-    }
-    .form-control, .custom-form-control {
-      display: block;
-      width: 94%;
-      margin-bottom: 12px;
-      background: #FFFFFF;
-      border: 1px solid #CCCCCC;
-      border-radius: 2px;
-      height: 38px;
-      font-family: Roboto-Regular;
-      font-size: 16px;
-      padding-left: 1px;
-    }
-    .custom-form-control{
-      width: 96.5%;
-    }
-    .custom-width {
-      width: 96.5%;
-      height: 148px;
-    }
-    .publish {
-      font-size: 12px;
-      vertical-align: middle;
-      color: $font-grey;
-    }
-  }
-
-  /* Table layout */
-  .table {
-    width: 100%;
-    margin-left: 0;
-    .accordian {
-      display: inline-block;
-      width: calc(100% - 40px);
-      font-size: 12px;
-      padding-top: 12px;
-      padding-left: 12px;
-      padding-bottom: 12px;
-      color: #444444;
-      font-family: 'RobotoRegular';
-      text-align: justify;
-    }
-    .accordian-content {
-      font-size: 12px;
-      padding-top: 12px;
-      color: #444444;
-      padding-top: 12px;
-      padding-right: 50px;
-      padding-left: 24px;
-      padding-bottom: 12px;
-      font-family: 'RobotoRegular';
-    }
-    .column-flex-grow-sno {
-      flex-grow: 0.1;
-    }
-    .column-flex-grow {
-      flex-grow: 0.1;
-    }
-    .indicator-resize {
-      flex-grow: 2;
-      padding-left: 0;
-    }
-    .expand-btn {
-      padding-top: 12px;
-      display: inline-block;
-      vertical-align: top;
-      cursor: pointer;
-      font-size: 16px;
-      color: #666666;
-    }
-    .bold-text {
-      font-family: 'RobotoBold';
-      padding-bottom: 6px;
-    }
-    .scores {
-      margin-bottom: 10px;
-      display: flex;
-      .score-info {
-        padding-left: 10px;
-        flex: 1 1 96%;
-        display: flex;
-        margin-top: -4px;
-      }
-      .score-content {
-        padding-right: 5px;
-      }
-    }
-    .containers {
-      flex-direction: column;
-      flex-grow: 2;
-      flex-wrap: nowrap;
-      max-width: 100%;
-      padding-left: 0;
-      border-bottom: none;
-
-      .container-items {
-        border-bottom: 1px solid $grey;
-      }
-    }
-    .description {
-      width: 96%;
-      height: 60px;
-    }
-  }
-  .submit-btn {
-    background: #3F4D7C;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
-    border-radius: 3px;
-    color: #fff;
-    border: none;
-    float: right;
-    margin-top: 20px;
-    height: 46px;
-    width: 163px;
-    margin-bottom: 45px;
-    margin-right: 3px;
-  }
-
-  /*Error Validations */
-  .error-info {
-    font-size: x-small;
-    color: red;
-    .form-group {
-      margin-bottom: 0;
-    }
-  }
-  .hide {
-    display: none;
-  }
-  .has-error {
-    border: 1px solid red !important;
-  }
-  .mandatory-field {
-    color: red;
-  }
-  .success {
-    color: darkgreen;
-    font-family: 'RobotoSlabBold';
-    font-size: 14px;
-  }
-  .error {
-    color: red;
-    font-family: 'RobotoSlabBold';
-    font-size: 14px;
+  * {
+    vertical-align: top;
   }
 }
-
-.top {
-  right: 30px;
-  bottom: 145px;
-  border: 1px solid #3F4D7C;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  position: fixed;
-
-  .arrow {
-    font-size: 38px;
-    padding: 0px 13px;
-    display: inline-block;
-    color: #3F4D7C;
+.header-bold {
+  margin: 20px 0;
+}
+.button-container {
+  margin-top : 20px;
+  .btn {
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.description_container {
+  flex-wrap: wrap;
+  label {
+    display: block;
   }
 }

@@ -57,6 +57,7 @@ export default Vue.extend({
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {
+        this.$set(category, 'showCategory', isExpanded);
         category.indicators.forEach(indicator => {
           this.healthIndicators[indicator.indicatorId] = {
             categoryId: category.categoryId,
@@ -64,8 +65,6 @@ export default Vue.extend({
             score: null,
             supportingText: '',
           };
-          this.$set(indicator, 'showIndicator', isExpanded);
-          this.$set(indicator, 'expandCollapseBtn', expandCollapseHelper.getCaptionFor(isExpanded));
           $('.loading').hide();
         });
       });

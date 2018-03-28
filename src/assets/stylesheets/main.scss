@@ -138,9 +138,20 @@ body, html {
   line-height: 1;
   font-family: "RobotoRegular", sans-serif;
 }
-
+.copy-small-italics {
+  font-size: 0.93em;
+  line-height: 1;
+  font-family: "RobotoItalic", sans-serif;
+}
 .box-shadow {
   box-shadow: 0px 2px 13.5px 1.5px rgba($shadow-grey, 0.2)
+}
+.box {
+  background: $white;
+  @extend .box-shadow;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px; 
 }
 .logo-font {
   font-family: 'RobotoSlabBold';
@@ -153,12 +164,210 @@ body, html {
 .float-right {
   float: right;
 }
-.btn-primary {
+input[type='text'], input[type='email'], textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  border: 1px solid $border-color;
+}
+.btn {
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+  min-width: 64px;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+  outline: none;
   border-radius: 5px;
-  background-color: $logo-blue;
   padding: 10px;
   display: inline-block;
   color: $white;
   @extend .sub-header;
   cursor: pointer;
+  &.btn-primary {
+    background-color: $logo-blue;
+    &:hover {
+      background-color: darken($logo-blue, 10%);
+    }
+  }
+  &.btn-green {
+    background-color: $positive;
+    &:hover {
+      background-color: darken($positive, 10%);
+    }
+  }
+}
+
+.row {
+  display: flex;
+  margin: 20px 0;
+  &:first-child {
+    margin-top: 0px;
+  }
+  &:last-child {
+    margin-bottom: 0px;
+  }
+  @media screen and (max-width: 1024px) {
+    flex-wrap: wrap;
+    margin: 5px 0;
+  }
+}
+.column-100percent {
+  width: 100%;
+}
+.column-50percent {
+  width: 50%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-33percent {
+  width: 33.33%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-66percent {
+  width: 66.67%;
+  margin-right: 20px;
+  .column-50percent{
+    flex-shrink: 1;
+    &:last-child {
+      margin-right: 20px;
+      @media screen and (max-width: 1024px) {
+        margin-right: 0px;
+      }
+    }    
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+
+.accordion-content {
+  display: none;
+  border-top: 1px solid $border-color;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+.accordion {
+  cursor: pointer;
+  position: relative;
+  &:after {
+    position: absolute;
+    right: 10px;
+    content: "\f078";
+    font-family: "FontAwesome";
+    top: 0px;
+  }
+  &.expanded {
+    .accordion-content {
+      display: block;
+    }
+    &:after {
+      content: "\f077";
+    }
+  }
+  .sub-header {
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+  }
+}
+.top {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+}
+
+
+//custom radio button
+/* Customize the label (the container) */
+.radio-container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  &:hover {
+    input ~ .checkmark {
+      background-color: darken($radio-bg, 10%);
+    }
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    &:checked ~ .checkmark {
+      background-color: $logo-blue;
+      &:after {
+        display: block;
+      }
+    }
+  }
+}
+.has-error {
+  border: 1px solid $negative !important;
+}
+.error-info {
+  color: $negative;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  // background-color: $radio-bg;
+  border: 1px solid $radio-bg;
+  border-radius: 50%;
+  &:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  &:after {
+    // top: 6px;
+    // left: 6px;
+    // width: 8px;
+    // height: 8px;
+    // border-radius: 50%;
+    // background: $white;
+    left: 7px;
+    top: 2px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
 }
