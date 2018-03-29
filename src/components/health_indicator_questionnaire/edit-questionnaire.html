@@ -7,8 +7,8 @@
       {{countrySummary.countryName}} - Health Indicator Questionnaire
     </span>
     <div class="float-right">
-        <button class="submit-btn btn btn-primary"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button>
-        <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="submit()"><i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
+      <button class="submit-btn btn btn-primary"> <i class="fa fa-floppy-o" @click="save()" aria-hidden="true"></i> Save as Draft</button>
+      <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="submit()"><i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
     </div>
   </div>
   <form class="health-indicator-questionnaire-contact-info clearfix">
@@ -24,29 +24,29 @@
       </div>
       <div class="row">
         <div class="form-group column-33percent">
-            <label for="nameofPersonEnteringData">Name of person entering data</label>
-            <span class="mandatory-field">*</span>
-            <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-            <input type="text" :disabled="!showEdit" name='feederName' :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'" id="nameofPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederName" :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
-          </div>
-          <div class="form-group column-33percent">
-            <label for="roleOfPersonEnteringData">Role of the person entering data</label>
-            <span class="mandatory-field">*</span>
-            <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-            <input type="text" :disabled="!showEdit" name="feederRole" :class="errors.has('feederRole') ? 'has-error form-control' : 'form-control'" id="roleOfPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederRole" :title="errors.has('feederRole') ? 'Role of the person entering data is required' : 'Please Enter Role of the person entering data'">
-          </div>
-          <div class="form-group column-33percent">
-            <label for="emailOfPersonEnteringData">Email of the person entering data</label>
-            <span class="mandatory-field">*</span>
-            <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-            <input type="email" :disabled="!showEdit" name='feederEmail' :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'" id="emailOfPersonEnteringData" v-validate="'required|email'" v-model="countrySummary.dataFeederEmail" :title="errors.has('feederEmail') ? 'Please enter valid email' : 'Enter email'">
-          </div>
+          <label for="nameofPersonEnteringData">Name of person entering data</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="text" :disabled="!showEdit" name='feederName' :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'" id="nameofPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederName" :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
+        </div>
+        <div class="form-group column-33percent">
+          <label for="roleOfPersonEnteringData">Role of the person entering data</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="text" :disabled="!showEdit" name="feederRole" :class="errors.has('feederRole') ? 'has-error form-control' : 'form-control'" id="roleOfPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederRole" :title="errors.has('feederRole') ? 'Role of the person entering data is required' : 'Please Enter Role of the person entering data'">
+        </div>
+        <div class="form-group column-33percent">
+          <label for="emailOfPersonEnteringData">Email of the person entering data</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="email" :disabled="!showEdit" name='feederEmail' :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'" id="emailOfPersonEnteringData" v-validate="'required|email'" v-model="countrySummary.dataFeederEmail" :title="errors.has('feederEmail') ? 'Please enter valid email' : 'Enter email'">
+        </div>
       </div>
       <div class="row">
         <div class="form-group column-33percent">
           <label for="nameofPersonCollectedData">Name of the person who collected data</label>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="text"  :disabled="!showEdit" class="form-control" id="nameofPersonCollectedData" v-model="countrySummary.dataCollectorName">
+          <input type="text" :disabled="!showEdit" class="form-control" id="nameofPersonCollectedData" v-model="countrySummary.dataCollectorName">
         </div>
         <div class="form-group column-33percent">
           <label for="roleofPersonCollectedData">Role of the person who collected data</label>
@@ -91,15 +91,16 @@
           <label for="Organisation">Organisation of the country contact</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="text" :disabled="!showEdit" class="form-control" id="Organisation" name="Organisation" v-model="countrySummary.contactOrganization" :title="errors.has('contactOrganization') ? 'Please enter Organisation' : 'Enter Organisation of the country contact'" :class="errors.has('contactOrganization') ? 'has-error form-control' : 'form-control'">
+          <input type="text" :disabled="!showEdit" class="form-control" id="Organisation" name="Organisation" v-model="countrySummary.contactOrganization" :title="errors.has('contactOrganization') ? 'Please enter Organisation' : 'Enter Organisation of the country contact'"
+            :class="errors.has('contactOrganization') ? 'has-error form-control' : 'form-control'">
         </div>
       </div>
     </div>
     <div class="health-indicator-questionnaire-contact-info-heading header-bold">Resource Information
-        <span class="fa fa-eye health-indicator-questionnaire-contact-info-publish" title="These details will be displayed publicly on the GDHI platform"></span>
-        <div class="health-indicator-questionnaire-contact-info-description copy-small">
-          Please provide links to digital health related resources for your country.</div>
-      </div>
+      <span class="fa fa-eye health-indicator-questionnaire-contact-info-publish" title="These details will be displayed publicly on the GDHI platform"></span>
+      <div class="health-indicator-questionnaire-contact-info-description copy-small">
+        Please provide links to digital health related resources for your country.</div>
+    </div>
     <div class="box">
       <div class="row">
         <div class="form-group column-33percent">
@@ -131,35 +132,35 @@
     </div>
     <div v-for="category in questionnaire" class="">
       <div class="box" data-header="No.">
-        <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'" >
-            <div class="sub-header" @click="onCategoryExpand(category)">{{category.categoryId}} - {{category.categoryName}}</div>
-            <div class="accordion-content">
-              <div class="" data-header="Indicators">
-                <div v-for="indicator in category.indicators" :class="errors.has('indicator_'+indicator.indicatorId+'_rationale') ? 'has-error indicator-items' : 'indicator-items'">
-                    <div>{{indicator.indicatorName}}</div>
-                    <div class="copy-small-italics indicator-definition">{{indicator.indicatorDefinition}}</div>
-                    <div v-for="score in indicator.scores" class="scores">
-                      <label class="radio-container">
+        <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'">
+          <div class="sub-header" @click="onCategoryExpand(category)">{{category.categoryId}} - {{category.categoryName}}</div>
+          <div class="accordion-content">
+            <div class="" data-header="Indicators">
+              <div v-for="indicator in category.indicators" :class="errors.has('indicator_'+indicator.indicatorId+'_rationale') ? 'has-error indicator-items' : 'indicator-items'">
+                <div>{{indicator.indicatorName}}</div>
+                <div class="copy-small-italics indicator-definition">{{indicator.indicatorDefinition}}</div>
+                <div v-for="score in indicator.scores" class="scores">
+                  <label class="radio-container">
                           <span :class="score.score ? 'score-content' : ''">{{score.score}}</span>
                           <span class="score-content" v-if="score.score !== null">-</span>
                           <span>{{score.scoreDefinition}}</span>
                           <input type="radio" :disabled="!showEdit" :name="indicator.indicatorId" v-model="healthIndicators[indicator.indicatorId].score" :value="score.score" />
                           <span class="checkmark"></span>
                         </label>
-                    </div>
-                    <div class="row description_container">
-                      <label>Rationale or supporting text</label>
-                      <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate="'required'"></textarea>
-                      <div v-show="errors.has('indicator_'+indicator.indicatorId+'_rationale')" class="error-info">The rationale field is required.</div>
-                    </div>
-                  </div>
+                </div>
+                <div class="row description_container">
+                  <label>Rationale or supporting text</label>
+                  <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate="'required'"></textarea>
+                  <div v-show="errors.has('indicator_'+indicator.indicatorId+'_rationale')" class="error-info">The rationale field is required.</div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
-        
       </div>
-    
+
+    </div>
+
     <div class="top">
       <a class="arrow" href="#"><span class="fa  fa-chevron-circle-up fa-3x"></span></a>
     </div>

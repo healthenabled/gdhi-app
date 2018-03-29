@@ -66,7 +66,7 @@ export default Vue.extend({
     },
     save() {
       $('.loading').show();
-      axios.post('/api/countries', {
+      axios.post('/api/countries/save', {
         countryId: this.countrySummary.countryId,
         countrySummary: this.countrySummary,
         healthIndicators: this.getHealthIndicators(),
