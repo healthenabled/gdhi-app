@@ -16,19 +16,8 @@
           <label for="countryName">Country Name</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <span v-if="showEdit">
-            <autocomplete
-              id="countryName"
-              name="countryName"
-              :source="countries"
-              placeholder="enter country name to select"
-              :class="errors.has('countryName') ? 'has-error form-control' : 'form-control'"
-              @selected="onCountrySelect"
-              v-validate="'required'"
-            />
-          </span>
-          <span v-else>
-            <input :class="errors.has('countryName') ? 'has-error form-control' : 'form-control'" type="text" id="countryName" name="countryName" v-validate="{required: true, countryName: this.countries}" :title="errors.has('countryName') ? 'Country Name is either empty or invalid' :'Please Choose a Country'" v-model="countrySummary.countryName">
+          <span>
+            <input :class='form-control' type="text" id="countryName" name="countryName" v-model="countrySummary.countryName" disabled>
           </span>
         </div>
         <div class="collected-date column-33percent">

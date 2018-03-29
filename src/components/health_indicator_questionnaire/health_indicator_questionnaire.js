@@ -37,11 +37,12 @@ export default Vue.extend({
     };
   },
   created() {
-    if (this.$route.params.countryCode) {
-      this.showEdit = false;
+    if (this.$route.params.countryUUID) {
+      this.showEdit = true;
       $('.loading').show();
-      this.prepareDataForViewForm(this.$route.params.countryCode);
-    } else {
+    //   this.prepareDataForViewForm(this.$route.params.countryUUID);
+    // } else {
+      this.getCountrySummary(this.$route.params.countryUUID);
       this.getQuestionnaire();
     }
   },
@@ -54,6 +55,12 @@ export default Vue.extend({
       .catch(() => {
         $('.loading').hide();
       });
+    },
+    getCountrySummary(countryUUID) {
+      return axios.get(`/api/country_info/${countryUUID}`).then((response) => {
+        this.countrySummary.countryName = response.data.name;
+        this.countrySummary.countryId = response.data.id;
+      })
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {

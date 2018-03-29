@@ -15,47 +15,17 @@ describe('Questionnaire.vue', () => {
   afterEach(() => {
     sandBox.restore()
   })
-  it('country id should be that of the selected country', () => {
-    ques.onCountrySelect({ value: 'IND'})
-    expect(ques.validateCountryId()).to.equal(true)
-    expect(ques.countryId).to.equal("IND")
-  })
-  it('country id should be reset to new value', () => {
-    ques.countryId = "JPN"
-    ques.onCountrySelect({ value: 'IND'})
-    expect(ques.validateCountryId()).to.equal(true)
-    expect(ques.countryId).to.equal("IND")
-  })
-  it('country id should be set only if name matches', () => {
-    ques.countryId = 'JPN'
-    ques.onCountrySelect({ value: 'IDN'})
-    expect(ques.validateCountryId()).to.equal(false)
-    expect(ques.countryId).to.equal('')
-  })
-  it('should call save only if vee validate and country validation succeeds', () => {
+  it('should call save only if vee validate succeeds', () => {
     let saveSpy = sinon.spy()
     ques.save = saveSpy
-    sandBox.stub(ques, "validateCountryId").returns(true)
     ques.validateCallback(true)
     expect(saveSpy.called).to.equal(true);
   })
 
-  it('should not call save even if either of vee validate or country validation fails', () => {
+  it('should not call save even if either of vee validate fails', () => {
     let saveSpy = sinon.spy()
     ques.save = saveSpy
-    var stub = sandBox.stub(ques, "validateCountryId").returns(false)
-    ques.validateCallback(true)
-    expect(saveSpy.called).to.equal(false);
-    stub.restore()
-
-    stub = sandBox.stub(ques, "validateCountryId").returns(true)
     ques.validateCallback(false)
     expect(saveSpy.called).to.equal(false);
-    stub.restore()
-
-    stub = sandBox.stub(ques, "validateCountryId").returns(false)
-    ques.validateCallback(false)
-    expect(saveSpy.called).to.equal(false);
-    stub.restore()
   })
 })

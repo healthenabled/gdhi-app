@@ -51,11 +51,8 @@ export default Vue.extend({
         $('.loading').hide();
       });
     },
-    onCountrySelect(selectedItem) {
-      this.countryId = selectedItem.value;
-    },
     validateCallback(result) {
-      const isValid = result && this.validateCountryId();
+      const isValid = result;
       if (isValid) {
         this.save();
       } else {
@@ -67,19 +64,10 @@ export default Vue.extend({
     submit() {
       this.$validator.validateAll().then(this.validateCallback.bind(this));
     },
-    validateCountryId() {
-      const selectedCountry = this.countries.find((country) => country.id === this.countryId);
-      if (selectedCountry) {
-        this.countryId = selectedCountry.id;
-        return true;
-      }
-      this.countryId = '';
-      return false;
-    },
     save() {
       $('.loading').show();
       axios.post('/api/countries', {
-        countryId: this.countryId,
+        countryId: this.countrySummary.countryId,
         countrySummary: this.countrySummary,
         healthIndicators: this.getHealthIndicators(),
       }).then(() => {

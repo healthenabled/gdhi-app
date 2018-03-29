@@ -61,13 +61,7 @@ export default new Router({
           },
         },
         {
-          path: '/health_indicator_questionnaire',
-          components: {
-            routecontent: healthIndicatorQuestionnaire,
-          },
-        },
-        {
-          path: '/health_indicator_questionnaire/:countryCode',
+          path: '/health_indicator_questionnaire/:countryUUID',
           components: {
             routecontent: healthIndicatorQuestionnaire,
           },
