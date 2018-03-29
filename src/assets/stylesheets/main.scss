@@ -224,6 +224,11 @@ input[type='text'], input[type='email'], textarea {
       background-color: darken($logo-blue, 10%);
     }
   }
+  &.btn-secondary {
+    @extend .link-blue;
+    background: transparent;
+    box-shadow: none;
+  }
   &.btn-green {
     background-color: $positive;
     &:hover {

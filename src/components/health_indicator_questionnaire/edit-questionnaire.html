@@ -3,6 +3,9 @@
   <span v-if="error" class="error">Please correct the below highlighted fields.</span>
   <span v-if="exception" class="error">Something has gone wrong. Please refresh the Page.</span>
   <div class="clearfix button-container">
+    <span class="page-title">
+      {{countrySummary.countryName}} - Health Indicator Questionnaire
+    </span>
     <div class="float-right">
         <button class="submit-btn btn btn-primary"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button>
         <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="submit()"><i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
@@ -12,14 +15,6 @@
     <div class="health-indicator-questionnaire-contact-info-heading header-bold">Contact Information</div>
     <div class="box">
       <div class="row">
-        <div class="country-name column-66percent">
-          <label for="countryName">Country Name</label>
-          <span class="mandatory-field">*</span>
-          <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <span>
-            <input :class='form-control' type="text" id="countryName" name="countryName" v-model="countrySummary.countryName" disabled>
-          </span>
-        </div>
         <div class="collected-date column-33percent">
           <label for="date">Date for which data was collected (DD-MM-YYYY)</label>
           <span class="mandatory-field">*</span>
