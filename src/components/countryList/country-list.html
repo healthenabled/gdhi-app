@@ -11,8 +11,8 @@
   </div>
   <ul class="countries-list-details">
     <li v-for="country in countryList" class="countries-list-details-country">
+        <span :class="'country-score phase' + country.overallPhase">{{country.overallPhase}}</span>
       <span class="country-name link-blue" @click="showCountryDetails(country.countryId)">{{country.countryName}}</span>
-      <span :class="'country-score phase' + country.overallPhase">{{country.overallPhase}}</span>
     </li>
   </ul>
 </div>

@@ -105,6 +105,10 @@ body, html {
   text-align: right;
 }
 
+.text-underline {
+  text-decoration: underline;
+}
+
 .list-with-bullets {
   margin: 10px;
   li {
@@ -158,11 +162,13 @@ body, html {
   font-size: 0.93em;
   line-height: 1;
   font-family: "RobotoRegular", sans-serif;
+  margin: 5px 0;
 }
 .copy-small-italics {
   font-size: 0.93em;
   line-height: 1;
   font-family: "RobotoItalic", sans-serif;
+  margin: 5px 0;
 }
 .box-shadow {
   box-shadow: 0px 2px 13.5px 1.5px rgba($shadow-grey, 0.2)
@@ -305,7 +311,7 @@ input[type='text'], input[type='email'], textarea {
     right: 10px;
     content: "\f078";
     font-family: "FontAwesome";
-    top: 0px;
+    top: 15px;
   }
   &.expanded {
     .accordion-content {
@@ -319,6 +325,8 @@ input[type='text'], input[type='email'], textarea {
     position: relative;
     z-index: 2;
     text-transform: uppercase;
+    margin: -20px;
+    padding: 20px;
   }
 }
 .top {

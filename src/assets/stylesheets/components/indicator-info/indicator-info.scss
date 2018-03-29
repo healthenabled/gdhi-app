@@ -1,14 +1,29 @@
-.category-names {
-  position: fixed;
-  list-style: none;
-  li {
-    margin-bottom: 10px;
-    text-transform: uppercase;
+// .category-names {
+//   position: fixed;
+//   list-style: none;
+//   li {
+//     margin-bottom: 10px;
+//     text-transform: uppercase;
+//   }
+// }
+
+.indicators {
+  // margin-left: 33.33%; 
+  .row {
+    @media screen and (max-width: 1024px) {
+      flex-wrap: nowrap;
+    }
+  }
+  .column-50percent {
+    @media screen and (max-width: 1024px) {
+      width: 50%;
+      margin-right: 20px;
+      margin-top: 0px;
+    }
   }
 }
-.indicators {
-  margin-left: 33.33%;
-}
+
+
 .indicator-id, .indicator-name {
   display: inline-block;
   vertical-align: top;

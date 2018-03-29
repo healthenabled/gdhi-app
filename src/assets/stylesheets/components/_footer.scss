@@ -6,11 +6,11 @@
   box-sizing: border-box;
   z-index: 3;
   .footer-width {
-    width: 92%;
+    width: 90%;
     margin: 0 auto;
   }
   .ft-element-pipe {
-      padding: 0 5px;
+      padding: 0 20px;
   }
   .contact {
     @extend .copy-italics;

@@ -2,15 +2,17 @@
   <div class="indicators-info-content">
     <div class="indicators-info-content-categories">
       <div class="indicators-info-static">
-        <div class="indicator-info-static-heading page-title">List of indicators</div>
+        <div class="indicator-info-static-heading page-title">List of Indicators</div>
       </div>
       <div class="row">
-        <ul id="v-for-categoryNames" class="category-names column-33percent">
-          <li class="l-box sub-header" v-for="categoryName in categoryNames">
-            <a :href="'#' + categoryName">{{ categoryName }}</a>
-          </li>
-        </ul>
-        <div class="indicators column-66percent">
+        <!-- 
+          <ul id="v-for-categoryNames" class="category-names column-33percent">
+            <li class="l-box sub-header" v-for="categoryName in categoryNames">
+              <a :href="'#' + categoryName">{{ categoryName }}</a>
+            </li>
+          </ul>
+        -->
+        <div class="indicators">
           <div v-for="category in categoricalIndicators">
               <div class="box">
                 <a :name="category.categoryName" class="named-anchor"></a>
@@ -21,7 +23,7 @@
                   <div class="accordion-content">
                     <div class="row table-header header-regular">
                       <div class="column-50percent">
-                        <span class="indicator-id">ID</span>
+                        <span class="indicator-id">#</span>
                         <span class="indicator-name">Indicator</span>
                       </div>
                       <div class="column-50percent">

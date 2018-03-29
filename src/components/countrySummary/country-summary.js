@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import countrySummary from './country-summary.html';
 import axios from 'axios';
-import devMapKey from '../../common/common';
+import {devMapKey} from '../../common/common';
 
 export default Vue.extend({
   name: 'CountrySummary',
