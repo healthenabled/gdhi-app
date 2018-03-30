@@ -22,6 +22,7 @@ describe("should test country profile", () => {
       "countryName": "Ghana",
       "countryPhase": 4,
       "overallScore": 4,
+      "countryAlpha2Code": "PE",
       "categories": [{
         "categoryId": 1,
         "categoryName": "c1",
@@ -58,8 +59,7 @@ describe("should test country profile", () => {
     profile.healthIndicatorCallback(response)
     expect(profile.healthIndicatorData).to.deep.equal(response.data)
     response.data.categories.forEach(cat => {
-      expect(cat.showIndicator).to.equal(false)
-      expect(cat.expandCollapseBtn).to.equal('+')
+      expect(cat.showCategory).to.equal(false)
     })
   })
 })

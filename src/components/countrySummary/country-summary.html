@@ -1,9 +1,6 @@
 <div class="country-summary">
   <div class="country-map">
-    <div class="country-map-section">
-      <img class="country-image" :src="'https://maps.googleapis.com/maps/api/staticmap?center='+ countryName + '&zoom=2&size=125x100&maptype=roadmap&key=' + mapEnv" />
-    </div>
-    <div class="country-contact">Key Contacts</div>
+    <div class="country-contact header-bold no-margin-top">Key Contacts</div>
     <div v-if="countrySummaries.contactName">
       <span class="country-summary-link" v-if="countrySummaries.contactName">
           <a :href="'mailto:' + countrySummaries.contactEmail" target="_blank">{{countrySummaries.contactName}}</a>,
@@ -13,15 +10,15 @@
     </div>
     <div class="error" v-else>No data available</div>
   </div>
-  <div class="country-summary-title">Country Summary</div>
+  <div class="country-summary-title header-bold">Country Summary</div>
   <div class="country-text">
     <div v-if="countrySummaries.summary">{{countrySummaries.summary}}</div>
     <div class="error" v-else> No data available</div>
   </div>
-  <div class="country-summary-title">Resources</div>
+  <div class="country-summary-title header-bold">Resources</div>
   <ul class="country-text" v-if="countrySummaries.resources">
     <li v-for="resource in countrySummaries.resources" class="country-summary-link">
-      <a :href="resource.startsWith('http')? resource : 'http://'+resource" target="_blank">{{resource}}</a>
+      <a :href="resource.startsWith('http')? resource : 'http://'+resource" target="_blank" class="link-blue">{{resource}}</a>
     </li>
   </ul>
   <div class="error" v-else> No data available</div>

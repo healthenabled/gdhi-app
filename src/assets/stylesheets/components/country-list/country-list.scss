@@ -6,10 +6,15 @@
   .country-name{
     width: 240px;
     display: inline-block;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   .country-score {
     display: inline-block;
-    margin: 5px 20px;
+    margin: 5px 10px;
+    margin-left: 0px;
     padding: 10px;
     color: $white;
     min-width: 20px;

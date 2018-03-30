@@ -1,189 +1,40 @@
 .country-detail {
-  display: flex;
-  padding-bottom: 20px;
-}
-.health-indicator-section {
-  width: 70%;
-  display: flex;
-  flex: 1 1 50%;
-  flex-direction: column;
-  padding-top: 62px;
-  font-family: 'RobotoSlabRegular';
-  font-size: 12px;
-  margin-right: 18px;
-  padding-bottom: 20px;
-  .country-name {
-    font-size: 22px;
-    display: inline-block;
-    margin-bottom: 25px;
-    font-family: 'RobotoSlabRegular';
-  }
-  .title {
+  .sub-header {
     text-transform: uppercase;
   }
-  .back-text {
-    font-size: 12px;
-    color: $link-blue;
-    font-family: 'RobotoRegular';
-    display: block;
-    margin-bottom: 5px;
+  .score, .indicator-score {
+    padding: 10px;
+    color: $white;
+    text-align: center;
+    min-width: 20px;
+    display: inline-block;
+    vertical-align: middle;
   }
-  .phase-content {
-    display: flex;
-    padding-top: 10px;
-    padding-bottom: 20px;
-
-    .score {
-      width: 60px;
-      border: solid thin #dcdcdc;
-      height: 60px;
-      margin-right: 30px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-self: baseline;
-      font-size: 50px;
-      font-family: 'RobotoSlabBold';
-      color: $white;
-    }
-    .phase-desc {
-      float: left;
-      width: calc(100% - 100px);
-      font-family: 'RobotoMedium';
-    }
-
-    #expand-btn {
-      padding-top: 1px;
-      padding-left: 1px;
-      background: #fff;
-      text-align: center;
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      color: $link-blue;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .health-indicators {
-      margin-top: 20px;
+  .indicator {
+    margin-bottom: 10px;
+    border-bottom: 1px solid $border-color;
+  }
+  .indicator-desc {
+    width: calc(100% - 44px);
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 0;
+  }
+  .heading-row div {
+    display: inline-block;
+    padding: 10px 0;
+    border-bottom: 2px solid $border-color;
+    margin-bottom: 10px;
+    margin-left: -4px;
+    &:first-child {
+      width: calc(100% - 52px);
+      margin-left: 0px;
     }
   }
-  .category-bar {
-    background: $light-grey;
-    padding-top: 10px;
-    overflow: hidden;
+  .header-bold {
+    text-transform: capitalize;
   }
-  .bar {
-    width: calc(100% - 50px);
-    float: left;
-    margin-left: 18px;
-  }
-  .category-indicators {
-    float: left;
-    width: 100%;
-    .indicator {
-      background: $white;
-      padding: 7px;
-      margin: 10px 15px;
-    }
-
-    .indicator-desc {
-      width: 90%;
-      display: inline-block;
-      padding-bottom: 12px;
-      font-family: 'RobotoSlabRegular';
-      font-size: 12px;
-    }
-    .indicator-score {
-      padding: 4px 8px;
-      font-family: 'RobotoSlabBold';
-      display: inline-block;
-      color: $white;
-      font-size: 12px !important;
-      vertical-align: top;
-    }
-    .indicator-score-desc {
-      font-family: 'RobotoItalic';
-      color: $font-grey;
-      font-size: 11px;
-      line-height: 1.3em;
-      width: 90%;
-      display: inline-block;
-    }
+  .country-text {
+    list-style: none;
   }
 }
-.detailed-indicators {
-  display: flex;
-  flex: 1 1 50%;
-  flex-direction: column;
-  height: 100%;
-  overflow: auto;
-  .development-indicators {
-    margin-top: 10px;
-    margin-left: 4px;
-    margin-right: 4px;
-    box-shadow: 0 0px 4px 0 rgba(173, 173, 173, 0.50);
-    border-radius: 2px;
-    background-color: $white;
-    .indicator-panel-container-context-section {
-      padding-top: 0px;
-    }
-  }
-  .export-link {
-    padding-right: 6px;
-  }
-
-  .country-summary {
-    margin-top: 25px;
-    font-family: Roboto-Regular;
-    font-size: 12px;
-    padding-left: 8px;
-
-    .country-summary-title {
-      font-family: RobotoSlabRegular;
-      font-size: 14px;
-      clear: left;
-    }
-
-    .country-contact {
-      font-family: RobotoSlabRegular;
-      font-size: 14px;
-      padding-bottom: 8px;
-    }
-
-    .country-map {
-      margin-bottom: 10px;
-      height: 114px;
-      overflow-y: auto;
-      overflow-x: hidden;
-      .country-map-section {
-        float: left;
-      }
-    }
-    .country-text {
-      margin-top: 8px;
-      margin-bottom: 20px;
-      text-align: justify;
-    }
-    .country-image {
-      margin-right: 20px;
-      height: 100px;
-      width: 125px;
-      margin-bottom: 3px;
-    }
-    .country-summary-link {
-      color: $link-blue;
-    }
-    .error {
-      color: red;
-      padding: 5px 0 0 0;
-      margin-bottom: 15px;
-    }
-  }
-}
-
-
-
-

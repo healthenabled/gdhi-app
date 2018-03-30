@@ -24,3 +24,12 @@
 #phase5, .phase5 {
   background-color: $score5;
 }
+
+#phase0, .phase0,
+#phase1, .phase1,
+#phase2, .phase2,
+#phase3, .phase3,
+#phase4, .phase4,
+#phase5, .phase5 {
+  border-radius: 5px;
+}

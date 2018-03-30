@@ -30,7 +30,8 @@ describe("should test country summary", () => {
       "dataCollectorRole": "",
       "dataCollectorEmail": "",
       "collectedDate": "08-09-2001",
-      "resources": ["dfdf"]
+      "resources": ["dfdf"],
+      "countryAlpha2Code": "PE"
     }
 
     countrySummary.countrySummaryCallback(response, 'PER')

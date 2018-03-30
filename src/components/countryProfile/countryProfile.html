@@ -1,42 +1,63 @@
 <div class="country-detail content-width content-centered">
   <div class="health-indicator-section">
-    <span class="country-name">{{healthIndicatorData.countryName}}</span>
-
-    <div class="title">Overall Digital Health Phase</div>
-    <div class="phase-content clearfix">
-      <div v-if="healthIndicatorData" class="score" :id="'phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase}}</div>
-      <div class="phase-desc"><p>The overall score is an average of the scores for the
-        19 GDHI indicators
-      </p>
+    <div class="country-name page-title">
+      <img v-bind:src="flagSrc" width="50" class="flag" />
+      {{healthIndicatorData.countryName}}
+    </div>
+    <div class="row">
+      <div class="column-50percent">
+        <div class="box">
+            <div class="title sub-header">
+              Overall Digital Health Phase
+              <div v-if="healthIndicatorData" :class="'score float-right' + ' phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase}}</div>
+            </div>
+            <div class="phase-desc copy-italics">
+              <p>
+                The overall score is an average of the scores for the 19 GDHI indicators
+              </p>
+            </div>
+        </div>
         <div v-if="healthIndicatorData" class="health-indicators">
-          <div v-for="(catagory, index) in healthIndicatorData.categories" class="indicator-panel-container-category-section">
-            <div class="category-bar">
-              <div class="bar">
-                <div class="indicator-panel-container-category-section-name">{{catagory.name}}</div>
-                <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase" :value="catagory.phase"></div>
-              </div>
-              <span class="category-expand" id='expand-btn' @click="onCategoryExpand(catagory, index)">{{catagory.expandCollapseBtn}}</span>
-              <div class="category-indicators" v-if="catagory.showIndicator">
-                <div v-for="(indicator, index_indicator) in catagory.indicators" class="indicator">
-                  <div class="indicator-desc">{{indicator.name}}</div>
-                  <div class="indicator-score" :id="'phase' + indicator.score">{{(indicator.score !== null) ? indicator.score : 'NA'}}</div>
-                  <div class="indicator-score-desc">{{indicator.scoreDescription}}</div>
+            <div v-for="(category, index) in healthIndicatorData.categories" class="indicator-panel-container-category-section">
+              <div class="category-bar box">
+                <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'">
+                  <div class="indicator-panel-container-category-section-name sub-header" @click="onCategoryExpand(category, index)">{{category.name}}</div>
+                  <div :class="'indicator-panel-container-category-section-phase phase' + category.phase" :value="category.phase"></div>
+                  <div class="accordion-content">
+                      <div class="heading-row sub-header">
+                          <div class="">Indicator</div>
+                          <div class="">Score</div>
+                      </div>
+                      <div v-for="(indicator, index_indicator) in category.indicators" class="indicator">
+
+                        <div class="indicator-desc">
+                          {{indicator.name}}
+                          <div class="indicator-score-desc">{{indicator.scoreDescription}}</div>
+                        </div>
+                        <div :class="'indicator-score float-right' + ' phase' + indicator.score">{{(indicator.score !== null) ? indicator.score : 'NA'}}</div>
+                      </div>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
+      <div class="column-50percent">
+        <div class="health-indicator-container">
+          <development-indicators></development-indicators>
+        </div>
+        <div class="country-summary-container box">
+          <country-summary @summaryLoaded="onSummaryLoaded"></country-summary>
+        </div>
+      </div>
     </div>
+    
   </div>
   <div class="detailed-indicators">
     <div class="export">
       <span><a v-bind:href="url">Export Data</a></span>
 
     </div>
-    <div class="health-indicator-container">
-    <development-indicators></development-indicators>
-  </div>
-  <country-summary></country-summary>
+  
   </div>
 </div>

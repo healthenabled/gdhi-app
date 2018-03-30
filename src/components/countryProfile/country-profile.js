@@ -11,7 +11,7 @@ export default Vue.extend({
   data() {
     return {
       healthIndicatorData: { countryName: '', countryPhase: 'NA', categories: [] },
-      url: '',
+      flagSrc: ''
     };
   },
 
@@ -29,15 +29,16 @@ export default Vue.extend({
       this.initialise();
     },
     onCategoryExpand(category) {
-      category.showIndicator = !category.showIndicator;
-      category.expandCollapseBtn = category.expandCollapseBtn === '+' ? '-' : '+';
+      category.showCategory = !category.showCategory;
     },
     initialise() {
       _.each(this.healthIndicatorData.categories, (category) => {
-        this.$set(category, 'showIndicator', false);
-        this.$set(category, 'expandCollapseBtn', '+');
+        this.$set(category, 'showCategory', false);
       });
     },
+    onSummaryLoaded(flagSrc) {
+      this.flagSrc = flagSrc;
+    }
   },
   template: countryProfile,
 });
