@@ -37,7 +37,7 @@ export default Vue.extend({
         },
   },
   data() {
-    return { success: false, error: false, exception:false, countryId: '', countries: []};
+    return { countryId: '', countries: []};
   },
   mounted() {
     $('.loading').show();
@@ -55,9 +55,13 @@ export default Vue.extend({
         if (result) {
           this.saveData(true);
         } else {
-          this.success = false;
-          this.error = true;
           document.body.scrollTop = document.documentElement.scrollTop = 0;
+          this.$notify({
+            group: 'custom-template',
+            title: 'Error',
+            text: 'Please correct the below highlighted fields.',
+            type: 'error'
+          });
         }
       })
     },
@@ -78,14 +82,21 @@ export default Vue.extend({
         healthIndicators: this.getHealthIndicators(),
       }).then(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        this.success = true;
-        this.error = false;
-        this.exception = false;
+        this.$notify({
+          group: 'custom-template',
+          title: 'Success',
+          text: 'Form saved successfully!',
+          type: 'success'
+        });
         $('.loading').hide();
       }).catch(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        this.success = false;
-        this.exception = true;
+        this.$notify({
+          group: 'custom-template',
+          title: 'Error',
+          text: 'Something has gone wrong. Please refresh the Page!',
+          type: 'warn'
+        });
         $('.loading').hide();
       });
     },

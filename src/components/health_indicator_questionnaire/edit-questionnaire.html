@@ -1,7 +1,4 @@
 <div class="health-indicator-questionnaire content-centered">
-  <span v-if="success" class="success">Form saved successfully</span>
-  <span v-if="error" class="error">Please correct the below highlighted fields.</span>
-  <span v-if="exception" class="error">Something has gone wrong. Please refresh the Page.</span>
   <div class="clearfix button-container">
     <span class="page-title">
         <img v-if="countrySummary.alpha2Code" :src="'/static/img/flags/' + countrySummary.alpha2Code + '.svg'" width="50" class="flag" /> {{countrySummary.countryName}} - Health Indicator Questionnaire

@@ -2,12 +2,14 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import 'babel-polyfill';
 import Vue from 'vue';
+import Notifications from 'vue-notification'
 import App from './App';
 import router from './router';
 import {} from './global.js';
 
 Vue.config.productionTip = false;
 
+Vue.use(Notifications)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
