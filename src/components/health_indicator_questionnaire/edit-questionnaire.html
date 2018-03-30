@@ -7,7 +7,7 @@
       {{countrySummary.countryName}} - Health Indicator Questionnaire
     </span>
     <div class="float-right">
-      <button class="submit-btn btn btn-primary"> <i class="fa fa-floppy-o" @click="save()" aria-hidden="true"></i> Save as Draft</button>
+      <button class="submit-btn btn btn-primary" @click="save()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button>
       <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="submit()"><i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
     </div>
   </div>
@@ -19,7 +19,7 @@
           <label for="date">Date for which data was collected (DD-MM-YYYY)</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" v-model="countrySummary.collectedDate" v-validate="'required|date_format:DD-MM-YYYY'" :title="errors.has('collectedDate') ? 'Date for which data was collected is either empty or invalid' : 'Please Enter Date' ">
+          <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY'" :title="errors.has('collectedDate') ? 'Date for which data was collected is either empty or invalid' : 'Please Enter Date' ">
         </div>
       </div>
       <div class="row">
@@ -27,19 +27,19 @@
           <label for="nameofPersonEnteringData">Name of person entering data</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="text" :disabled="!showEdit" name='feederName' :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'" id="nameofPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederName" :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
+          <input type="text" :disabled="!showEdit" name='feederName' :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'" id="nameofPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederName" :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
         </div>
         <div class="form-group column-33percent">
           <label for="roleOfPersonEnteringData">Role of the person entering data</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="text" :disabled="!showEdit" name="feederRole" :class="errors.has('feederRole') ? 'has-error form-control' : 'form-control'" id="roleOfPersonEnteringData" v-validate="'required'" v-model="countrySummary.dataFeederRole" :title="errors.has('feederRole') ? 'Role of the person entering data is required' : 'Please Enter Role of the person entering data'">
+          <input type="text" :disabled="!showEdit" name="feederRole" :class="errors.has('feederRole') ? 'has-error form-control' : 'form-control'" id="roleOfPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederRole" :title="errors.has('feederRole') ? 'Role of the person entering data is required' : 'Please Enter Role of the person entering data'">
         </div>
         <div class="form-group column-33percent">
           <label for="emailOfPersonEnteringData">Email of the person entering data</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="email" :disabled="!showEdit" name='feederEmail' :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'" id="emailOfPersonEnteringData" v-validate="'required|email'" v-model="countrySummary.dataFeederEmail" :title="errors.has('feederEmail') ? 'Please enter valid email' : 'Enter email'">
+          <input type="email" :disabled="!showEdit" name='feederEmail' :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'" id="emailOfPersonEnteringData" v-validate.disable="'required|email'" v-model="countrySummary.dataFeederEmail" :title="errors.has('feederEmail') ? 'Please enter valid email' : 'Enter email'">
         </div>
       </div>
       <div class="row">
@@ -64,20 +64,21 @@
           <label for="nameofCountryContact">Name of the country contact</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="text" :disabled="!showEdit" name="countryContact" :class="errors.has('countryContact') ? 'has-error custom-form-control' : 'custom-form-control'" id="nameofCountryContact" v-validate="'required'" v-model="countrySummary.contactName" :title="errors.has('countryContact') ? 'Country contact is Required' : 'Country contact'">
+          <input type="text" :disabled="!showEdit" name="countryContact" :class="errors.has('countryContact') ? 'has-error custom-form-control' : 'custom-form-control'" id="nameofCountryContact" v-validate.disable="'required'" v-model="countrySummary.contactName"
+            :title="errors.has('countryContact') ? 'Country contact is Required' : 'Country contact'">
         </div>
         <div class="form-group column-33percent">
           <label for="roleofCountryContact">Role of the country contact</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="text" :disabled="!showEdit" name="contactRole" :class="errors.has('contactRole') ? 'has-error form-control' : 'form-control'" id="roleofCountryContact" v-validate="'required'" :title="errors.has('contactRole') ? 'Role of the country contact is Required' : 'Role of the country contact'"
+          <input type="text" :disabled="!showEdit" name="contactRole" :class="errors.has('contactRole') ? 'has-error form-control' : 'form-control'" id="roleofCountryContact" v-validate.disable="'required'" :title="errors.has('contactRole') ? 'Role of the country contact is Required' : 'Role of the country contact'"
             v-model="countrySummary.contactDesignation">
         </div>
         <div class="form-group column-33percent">
           <label for="emailofCountryContact">Email of the country contact</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="email" :disabled="!showEdit" name="contactEmail" :class="errors.has('contactEmail') ? 'has-error form-control' : 'form-control'" id="emailofCountryContact" v-validate="'required|email'" v-model="countrySummary.contactEmail" :title="errors.has('contactEmail') ? 'Please enter valid email' : 'Enter email'">
+          <input type="email" :disabled="!showEdit" name="contactEmail" :class="errors.has('contactEmail') ? 'has-error form-control' : 'form-control'" id="emailofCountryContact" v-validate.disable="'required|email'" v-model="countrySummary.contactEmail" :title="errors.has('contactEmail') ? 'Please enter valid email' : 'Enter email'">
         </div>
       </div>
       <div class="row">
@@ -85,7 +86,8 @@
           <label for="countrySummary">Country Summary</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <textarea name="countrySummary" rows="5" :disabled="!showEdit" :class="errors.has('countrySummary') ? 'has-error form-control custom-width' : 'form-control custom-width'" id="countrySummary" v-model="countrySummary.summary" v-validate="'required'" :title="errors.has('countrySummary') ? 'Country summary is Required' : 'Country summary'"></textarea>
+          <textarea name="countrySummary" rows="5" :disabled="!showEdit" :class="errors.has('countrySummary') ? 'has-error form-control custom-width' : 'form-control custom-width'" id="countrySummary" v-model="countrySummary.summary" v-validate.disable="'required'"
+            :title="errors.has('countrySummary') ? 'Country summary is Required' : 'Country summary'"></textarea>
         </div>
         <div class="column-33percent">
           <label for="Organisation">Organisation of the country contact</label>
@@ -105,25 +107,25 @@
       <div class="row">
         <div class="form-group column-33percent">
           <label for="resource1">Resource 1</label><span class="mandatory-field">*</span>
-          <input type="text" :disabled="!showEdit" name="resource1" id="resource1" v-model="countrySummary.resources[0]" v-validate="'required|url'" :class="errors.has('resource1') ? 'has-error form-control' : 'form-control'" />
+          <input type="text" :disabled="!showEdit" name="resource1" id="resource1" v-model="countrySummary.resources[0]" v-validate.disable="'required|url'" :class="errors.has('resource1') ? 'has-error form-control' : 'form-control'" />
         </div>
         <div class="form-group column-33percent">
           <label for="resource2">Resource 2</label>
-          <input type="text" :disabled="!showEdit" class="form-control" id="resource2" name="resource2" v-model="countrySummary.resources[1]" v-validate="'url'" />
+          <input type="text" :disabled="!showEdit" class="form-control" id="resource2" name="resource2" v-model="countrySummary.resources[1]" v-validate.disable="'url'" />
         </div>
         <div class="form-group column-33percent">
           <label for="resource3">Resource 3</label>
-          <input type="text" :disabled="!showEdit" class="form-control" id="resource3" name="resource3" v-model="countrySummary.resources[2]" v-validate="'url'" />
+          <input type="text" :disabled="!showEdit" class="form-control" id="resource3" name="resource3" v-model="countrySummary.resources[2]" v-validate.disable="'url'" />
         </div>
       </div>
       <div class="row column-66percent">
         <div class="form-group column-50percent">
           <label for="resource4">Resource 4</label>
-          <input type="text" :disabled="!showEdit" class="form-control" id="resource4" name="resource4" v-model="countrySummary.resources[3]" v-validate="'url'" />
+          <input type="text" :disabled="!showEdit" class="form-control" id="resource4" name="resource4" v-model="countrySummary.resources[3]" v-validate.disable="'url'" />
         </div>
         <div class="form-group column-50percent">
           <label for="resource5">Resource 5</label>
-          <input type="text" :disabled="!showEdit" class="form-control" id="resource5" name="resource5" v-model="countrySummary.resources[4]" v-validate="'url'" />
+          <input type="text" :disabled="!showEdit" class="form-control" id="resource5" name="resource5" v-model="countrySummary.resources[4]" v-validate.disable="'url'" />
         </div>
       </div>
     </div>
@@ -150,7 +152,7 @@
                 </div>
                 <div class="row description_container">
                   <label>Rationale or supporting text</label>
-                  <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate="'required'"></textarea>
+                  <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate.disable="'required'"></textarea>
                   <div v-show="errors.has('indicator_'+indicator.indicatorId+'_rationale')" class="error-info">The rationale field is required.</div>
                 </div>
               </div>

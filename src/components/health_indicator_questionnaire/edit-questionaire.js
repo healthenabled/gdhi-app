@@ -2,7 +2,6 @@ import Vue from "vue";
 import editForm from "./edit-questionnaire.html";
 import axios from "axios";
 import VeeValidate from "vee-validate";
-import expandCollapseHelper from "./expand-collapse-helper";
 import Autocomplete from "vuejs-auto-complete";
 
 const config = {
@@ -51,22 +50,29 @@ export default Vue.extend({
         $('.loading').hide();
       });
     },
-    validateCallback(result) {
-      const isValid = result;
-      if (isValid) {
-        this.save();
-      } else {
-        this.success = false;
-        this.error = true;
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-      }
-    },
     submit() {
-      this.$validator.validateAll().then(this.validateCallback.bind(this));
+      return this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.saveData(true);
+        } else {
+          this.success = false;
+          this.error = true;
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+        }
+      })
     },
-    save() {
+    save(){
+      this.saveData(false);
+    },
+    saveData(isSubmit) {
       $('.loading').show();
-      axios.post('/api/countries/save', {
+      let url;
+      if (isSubmit) {
+        url = '/api/countries/submit'
+      } else {
+        url = '/api/countries/save';
+      }
+      axios.post(url, {
         countryId: this.countrySummary.countryId,
         countrySummary: this.countrySummary,
         healthIndicators: this.getHealthIndicators(),
@@ -74,6 +80,7 @@ export default Vue.extend({
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         this.success = true;
         this.error = false;
+        this.exception = false;
         $('.loading').hide();
       }).catch(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
