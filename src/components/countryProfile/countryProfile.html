@@ -32,7 +32,7 @@
 
                         <div class="indicator-desc">
                           {{indicator.name}}
-                          <div class="indicator-score-desc">{{indicator.scoreDescription}}</div>
+                          <div class="indicator-score-desc copy-italics">{{indicator.scoreDescription}}</div>
                         </div>
                         <div :class="'indicator-score float-right' + ' phase' + indicator.score">{{(indicator.score !== null) ? indicator.score : 'NA'}}</div>
                       </div>

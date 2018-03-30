@@ -60,6 +60,7 @@ export default Vue.extend({
       return axios.get(`/api/country_info/${countryUUID}`).then((response) => {
         this.countrySummary.countryName = response.data.name;
         this.countrySummary.countryId = response.data.id;
+        this.countrySummary.alpha2Code = response.data.alpha2Code.toLowerCase();
       })
     },
     setUpHealthIndicators(data, isExpanded) {
