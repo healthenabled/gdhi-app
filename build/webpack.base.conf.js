@@ -96,6 +96,9 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: './src/assets/img/flags',
       to: utils.assetsPath('img/flags/')
+    }, {
+      from: './src/assets/countries_mega.json',
+      to: utils.assetsPath('data/')
     }])
   ]
 }

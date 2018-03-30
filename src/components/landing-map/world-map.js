@@ -1,8 +1,9 @@
 import L from 'leaflet';
-import countriesData from '../../assets/countries_mega.json';
+//import countriesData from '../../assets/countries_mega.json';
 import helper from './map-helper';
 import eventHandler from './map-event-handler';
 import _ from 'lodash';
+import axios from 'axios'
 
 export default {
   BLACK_COLOR_CODE: '#000',
@@ -37,9 +38,18 @@ export default {
     this.map.setMinZoom(2);
     L.control.attribution({ position: 'bottomleft' }).addTo(this.map);
     this.map.addControl(new ResetButton());
-    this.geoLayer = L.geoJson(countriesData, {
+    if (!self.countriesData) {
+      axios.get('/static/data/countries_mega.json')
+        .then(function (response) {
+        self.countriesData = response.data;
+        return self.addMapToLeaflet(self, response.data, healthData, postClickCallBack);
+      });
+    }
+    return this.addMapToLeaflet(this, this.countriesData, healthData, postClickCallBack);
+  },
+  addMapToLeaflet(self, data, healthData, postClickCallBack) {
+    self.geoLayer = L.geoJson(data, {
       style(feature) {
-        console.log('in feature');
         const fillColorCode = helper.getColorCodeOf(
           feature.properties.BRK_A3,
           healthData,
@@ -71,8 +81,8 @@ export default {
           },
         });
       },
-    }).addTo(this.map);
-    return this.geoLayer._layers;
+    }).addTo(self.map);
+    return self.geoLayer._layers;
   },
   handleSearch(countryCode, postSearchCallBack) {
     const searchCountry = _.filter(this.geoLayer._layers, (layer) => layer.feature.properties.BRK_A3 === countryCode);
