@@ -39,7 +39,7 @@ describe('Generate URL Component', ()=> {
     const data = {'data':  countries}
     const resolved = new Promise((resolve, reject) => resolve(data))
     sandBox.stub(axios, 'get').returns(resolved)
-    
+
     generateUrl.loadCountries()
       .then(() => {
         expect(generateUrl.countries).to.have.length(3)
@@ -50,5 +50,19 @@ describe('Generate URL Component', ()=> {
     generateUrl.countryUUID = "292507e3-e517-4206-ae0d-1590f10f1a07"
     generateUrl.generateUrl()
     expect(generateUrl.generatedURL).to.contain("/health_indicator_questionnaire/292507e3-e517-4206-ae0d-1590f10f1a07")
+  })
+
+  it('should save url generation status for selected country',()=>{
+    generateUrl.countryId = "IND"
+    const data = {'data':  'URL Generated Successfully'}
+    const resolved = new Promise((resolve, reject) => resolve(data))
+    sandBox.stub(axios, 'post').returns(resolved)
+
+    generateUrl.saveURLGenerationStatus()
+      .then((resolved) => {
+        expect(generateUrl.message).to.contain("URL Generated Successfully")
+      })
+
+
   })
 })
