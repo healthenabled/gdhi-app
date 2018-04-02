@@ -46,7 +46,7 @@ export default Vue.extend({
 
       saveURLGenerationStatus() {
         $('.loading').show();
-        let url = "/api/country/url_gen_status/"+this.countryId;
+        let url = "/api/country/"+this.countryId+"/url_gen_status";
         return axios.post(url, {
           countryId: this.countryId
         }).then((response) => {
