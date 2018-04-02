@@ -62,6 +62,9 @@ export default Vue.extend({
         this.countrySummary.countryId = response.data.id;
         this.countrySummary.alpha2Code = response.data.alpha2Code.toLowerCase();
       })
+      .catch(() => {
+        location.href = "/error";
+      })
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {
