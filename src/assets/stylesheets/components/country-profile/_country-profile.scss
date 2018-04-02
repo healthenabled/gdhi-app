@@ -18,7 +18,7 @@
     border-bottom: 1px solid $border-color;
   }
   .indicator-desc {
-    width: calc(100% - 44px);
+    width: calc(100% - 62px);
     display: inline-block;
     vertical-align: middle;
     padding: 10px 0;
@@ -39,5 +39,14 @@
   }
   .country-text {
     list-style: none;
+  }
+}
+
+//development indicators 
+.development-indicators {
+  .indicator {
+    width: 25%;
+    margin-right: 20px;
+    border: none;
   }
 }

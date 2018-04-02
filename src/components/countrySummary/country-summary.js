@@ -25,7 +25,6 @@ export default Vue.extend({
     countrySummaryCallback(response, countryCode) {
       this.countrySummaries = response.data;
       this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode.slice(0, 2);
-      this.$emit('summaryLoaded',`/static/img/flags/${response.data.countryAlpha2Code.toLowerCase()}.svg` );
       $('.loading').hide();
     },
   },

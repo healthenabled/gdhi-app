@@ -12,8 +12,7 @@
     width: 90%;
   }
   .hd-element {
-    padding: 15px 0px;
-    @extend .header-regular;
+    padding: 15px 0px;    
     display: inline-block;
     min-width: 140px;
     display: flex;
@@ -21,6 +20,9 @@
     justify-content: center;
     cursor: pointer;
     box-sizing: border-box;
+  }
+  a {
+    @extend .header-regular;
   }
   .hide {
     display: none;
@@ -43,6 +45,7 @@
     right: 75px;
     top: 8px;
     width: 240px;
+    @extend .copy;
     &-container {
       width: 100%;
       background: url('./assets/img/search.svg') no-repeat right 10px center;
@@ -51,6 +54,7 @@
     input {
       padding: 5px;
       max-width: 90%;
+      margin-top: 0px;
     }
     .autocomplete__icon {
       display: none;

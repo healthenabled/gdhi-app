@@ -4,7 +4,6 @@
 }
 #phasenull, .phasenull {
   background-color: $na;
-  font-size: 40px;
 }
 #phase0, .phase0 {
   background-color: $score1;
@@ -30,6 +29,7 @@
 #phase2, .phase2,
 #phase3, .phase3,
 #phase4, .phase4,
-#phase5, .phase5 {
+#phase5, .phase5,
+#phasenull, .phasenull {
   border-radius: 5px;
 }

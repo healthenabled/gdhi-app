@@ -26,6 +26,7 @@ export default Vue.extend({
     },
     healthIndicatorCallback(response) {
       this.healthIndicatorData = response.data;
+      this.flagSrc = `/static/img/flags/${response.data.countryAlpha2Code.toLowerCase()}.svg`;
       this.initialise();
     },
     onCategoryExpand(category) {
