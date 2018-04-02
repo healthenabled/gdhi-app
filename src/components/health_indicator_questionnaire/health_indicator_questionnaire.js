@@ -40,31 +40,12 @@ export default Vue.extend({
     if (this.$route.params.countryUUID) {
       this.showEdit = true;
       $('.loading').show();
-    //   this.prepareDataForViewForm(this.$route.params.countryUUID);
-    // } else {
-      this.getCountrySummary(this.$route.params.countryUUID);
-      this.getQuestionnaire();
+      this.prepareDataForViewForm(this.$route.params.countryUUID);
     }
   },
   methods: {
-    getQuestionnaire() {
-      axios.get('/api/health_indicator_options').then((response) => {
-        this.questionnaire = response.data;
-        this.setUpHealthIndicators(response.data, false);
-      })
-      .catch(() => {
-        $('.loading').hide();
-      });
-    },
-    getCountrySummary(countryUUID) {
-      return axios.get(`/api/country_info/${countryUUID}`).then((response) => {
-        this.countrySummary.countryName = response.data.name;
-        this.countrySummary.countryId = response.data.id;
-        this.countrySummary.alpha2Code = response.data.alpha2Code.toLowerCase();
-      })
-      .catch(() => {
-        location.href = "/error";
-      })
+    fetchHealthScoresFor(countryUUID) {
+      return axios.get(`/api/countries/${countryUUID}`);
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {
@@ -80,19 +61,26 @@ export default Vue.extend({
         });
       });
     },
-    fetchHealthScoresFor(countryCode) {
-      return axios.get(`/api/countries/${countryCode}`);
-    },
     viewFormCallback(options, scores) {
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      this.transformForView(scores.data.healthIndicators);
+      if(scores.data.healthIndicators.length == 0){
+        this.setUpHealthIndicators(options.data,false)
+      }else{
+        options.data.forEach((category) => {
+          this.$set(category, 'showCategory', false);
+        });
+        this.transformForView(scores.data.healthIndicators);
+      }
       $('.loading').hide();
     },
-    prepareDataForViewForm(countryCode) {
+    prepareDataForViewForm(countryUUID) {
       axios.all([axios.get('/api/health_indicator_options'),
-        this.fetchHealthScoresFor(countryCode)])
-        .then(axios.spread(this.viewFormCallback.bind(this)));
+        this.fetchHealthScoresFor(countryUUID)])
+        .then(axios.spread(this.viewFormCallback.bind(this)))
+        .catch(() => {
+          location.href = "/error";
+        });
     },
     transformForView(healthindicators) {
       const self = this;
@@ -103,6 +91,7 @@ export default Vue.extend({
           score: indicator.score,
           supportingText: indicator.supportingText,
         };
+
       });
     },
   },
