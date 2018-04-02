@@ -1,7 +1,4 @@
 <div class="content-centered">
-  <span v-if="success" class="success">{{message}}</span>
-  <span v-if="error" class="error">Error Occured While Saving URL</span>
-  <span v-if="exception" class="error">Something has gone wrong. Please refresh the Page.</span>
     <div>
         <div class="search-box hd-element">
             <autocomplete
@@ -11,10 +8,11 @@
                 placeholder="Search by country name"
                 input-class="search-box-container"
                 @selected="onCountrySelect"
+                @clear="onClearCountry"
                 />
             </autocomplete>
             <div>
-                <button class="btn btn-primary" @click="generateUrl()">Generate URL</button>
+                <button class="btn btn-primary" :class="disableGenerateBtn ? 'disabled ' : ''" @click="generateUrl()" :disabled="disableGenerateBtn">Generate URL</button>
             </div>
         </div>
     </div>

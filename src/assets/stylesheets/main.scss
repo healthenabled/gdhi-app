@@ -246,6 +246,10 @@ input[type='text'], input[type='email'], textarea {
       background-color: darken($positive, 10%);
     }
   }
+  &.disabled {
+    opacity: 0.5;
+    color: $font-grey;
+  }
   i {
     display: inline-block;
     margin-right: 5px;

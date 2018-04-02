@@ -72,6 +72,15 @@
   z-index: 3;
   cursor: default;
   list-style: none;
+  #phase0, .phase0,
+  #phase1, .phase1,
+  #phase2, .phase2,
+  #phase3, .phase3,
+  #phase4, .phase4,
+  #phase5, .phase5,
+  #phasenull, .phasenull {
+    border-radius: 0px;
+  }
   .l-box {
     text-align: center;
     height: 23px;

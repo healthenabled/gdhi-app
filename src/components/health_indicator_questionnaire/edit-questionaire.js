@@ -95,7 +95,7 @@ export default Vue.extend({
           group: 'custom-template',
           title: 'Error',
           text: 'Something has gone wrong. Please refresh the Page!',
-          type: 'warn'
+          type: 'error'
         });
         $('.loading').hide();
       });

@@ -14,7 +14,7 @@ export default Vue.extend({
       return {
         success: false,
         error: false,
-        exception:false,
+        disableGenerateBtn: true,
         countries: [],
         countryUUID: "",
         generatedURL:"",
@@ -34,6 +34,14 @@ export default Vue.extend({
         this.message='';
         this.countryId = selectedItem.selectedObject.id;
         this.countryUUID = selectedItem.value;
+        this.disableGenerateBtn = false
+      },
+      onClearCountry () {
+        this.generatedURL='';
+        this.message='';
+        this.countryId = '';
+        this.countryUUID = '';
+        this.disableGenerateBtn = true
       },
       generateUrl(){
         this.saveURLGenerationStatus();
@@ -42,6 +50,12 @@ export default Vue.extend({
       copyUrl() {
         document.getElementById("url-box").select();
         document.execCommand("Copy");
+        this.$notify({
+          group: 'custom-template',
+          title: 'Information',
+          text: 'URL Copied Successfully',
+          type: 'warn'
+        });
       },
 
       saveURLGenerationStatus() {
@@ -52,14 +66,22 @@ export default Vue.extend({
         }).then((response) => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.message = response.data;
-          this.success = true;
-          this.error = false;
-          this.exception = false;
+          this.$notify({
+            group: 'custom-template',
+            title: 'Success',
+            text: 'URL Generated sucessfully',
+            type: 'success'
+          });
           $('.loading').hide();
         }).catch(() => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.success = false;
-          this.exception = true;
+          this.$notify({
+            group: 'custom-template',
+            title: 'Error',
+            text: 'Something has gone wrong. Please refresh the Page!',
+            type: 'error'
+          });
           $('.loading').hide();
         });
       },
