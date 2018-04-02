@@ -65,11 +65,10 @@ export default Vue.extend({
           countryId: this.countryId
         }).then((response) => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
-          this.message = response.data;
           this.$notify({
             group: 'custom-template',
             title: 'Success',
-            text: 'URL Generated sucessfully',
+            text: response.data.msg,
             type: 'success'
           });
           $('.loading').hide();
