@@ -1,8 +1,15 @@
 <div class="country-detail content-width content-centered">
   <div class="health-indicator-section">
-    <div class="country-name page-title">
-      <img v-bind:src="flagSrc" width="50" class="flag" />
-      {{healthIndicatorData.countryName}}
+    <div class="clearfix">
+      <div class="country-name page-title">
+        <img v-bind:src="flagSrc" width="50" class="flag" />
+        {{healthIndicatorData.countryName}}
+      </div>
+      <div class="button-container float-right">
+        <div class="export">
+          <span><a v-bind:href="url" class=" btn btn-primary"><i class="fa  fa-file-excel-o fa-lg"></i>Export Country Data</a></span>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="column-50percent">
@@ -52,12 +59,5 @@
       </div>
     </div>
     
-  </div>
-  <div class="detailed-indicators">
-    <div class="export">
-      <span><a v-bind:href="url">Export Data</a></span>
-
-    </div>
-  
   </div>
 </div>

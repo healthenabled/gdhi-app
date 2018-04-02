@@ -1,9 +1,9 @@
 <div class="health-indicator-questionnaire content-centered">
-  <div class="clearfix button-container">
+  <div class="clearfix">
     <span class="page-title">
         <img v-if="countrySummary.alpha2Code" :src="'/static/img/flags/' + countrySummary.alpha2Code + '.svg'" width="50" class="flag" /> {{countrySummary.countryName}} - Health Indicator Questionnaire
     </span>
-    <div class="float-right">
+    <div class="float-right button-container">
       <button class="submit-btn btn btn-primary" @click="save()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button>
       <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="submit()"><i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
     </div>

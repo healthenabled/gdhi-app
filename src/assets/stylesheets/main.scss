@@ -128,6 +128,8 @@ body, html {
   font-family: 'RobotoSlabBold', 'sans-serif';
   font-size: 2.14em;
   margin: 20px 0;
+  max-width: 90%;
+  display: inline-block;
 }
 .highlight-text {
   font-family: "RobotoRegular", sans-serif;
@@ -243,6 +245,10 @@ input[type='text'], input[type='email'], textarea {
     &:hover {
       background-color: darken($positive, 10%);
     }
+  }
+  i {
+    display: inline-block;
+    margin-right: 5px;
   }
 }
 
