@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.17.0",
+    "date-input-polyfill": "^2.14.0",
     "font-awesome": "^4.7.0",
     "leaflet": "^1.2.0",
     "lodash": "^4.17.4",

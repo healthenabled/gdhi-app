@@ -18,7 +18,6 @@ export default Vue.extend({
     loadCountries() {
       axios.get('/api/countries')
         .then(response => {
-          console.log(response.data);
           this.countries = sortBy(response.data, ["name"]);
         });
     },

@@ -3,6 +3,7 @@ import editForm from "./edit-questionnaire.html";
 import axios from "axios";
 import VeeValidate from "vee-validate";
 import Autocomplete from "vuejs-auto-complete";
+import 'date-input-polyfill';
 
 const config = {
   fieldsBagName: 'fieldBags',
