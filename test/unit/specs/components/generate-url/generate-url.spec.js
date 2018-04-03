@@ -54,15 +54,30 @@ describe('Generate URL Component', ()=> {
 
   it('should save url generation status for selected country',()=>{
     generateUrl.countryId = "IND"
-    const data = {'data':  'URL Generated Successfully'}
+    const data = {'data':
+        {
+          countryId : "IND",
+          msg : "URL Generated Successfully"
+        }
+    }
     const resolved = new Promise((resolve, reject) => resolve(data))
     sandBox.stub(axios, 'post').returns(resolved)
 
     generateUrl.saveURLGenerationStatus()
-      .then((resolved) => {
-        expect(generateUrl.message).to.contain("URL Generated Successfully")
+      .then((response) => {
+        expect(generateUrl.message).to.contain(response.data.msg)
       })
-
-
   })
+
+  it('should show error message when any exception occurs in api side',()=>{
+    generateUrl.countryId = "IND";
+    sandBox.stub(axios, 'post').rejects();
+
+    generateUrl.saveURLGenerationStatus()
+      .catch((response) => {
+        expect(generateUrl.message).to.contain('Error While Saving the URL Generation Status');
+      })
+  })
+
+
 })

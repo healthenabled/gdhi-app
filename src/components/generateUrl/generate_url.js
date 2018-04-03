@@ -65,20 +65,22 @@ export default Vue.extend({
           countryId: this.countryId
         }).then((response) => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
+          this.message = response.data.msg;
           this.$notify({
             group: 'custom-template',
             title: 'Success',
-            text: response.data.msg,
+            text: this.message ,
             type: 'success'
           });
           $('.loading').hide();
-        }).catch(() => {
+        }).catch((response) => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.success = false;
+          this.message = 'Error While Saving the URL Generation Status';
           this.$notify({
             group: 'custom-template',
             title: 'Error',
-            text: 'Something has gone wrong. Please refresh the Page!',
+            text: this.message,
             type: 'error'
           });
           $('.loading').hide();
