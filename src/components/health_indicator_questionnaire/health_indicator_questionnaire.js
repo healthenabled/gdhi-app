@@ -67,7 +67,6 @@ export default Vue.extend({
     viewFormCallback(options, scores) {
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      debugger
       if(scores.data.healthIndicators.length == 0){
         this.setUpHealthIndicators(options.data,false)
       }else{
