@@ -2,7 +2,6 @@ import Vue from 'vue';
 import healthIndicatorForm from './health_indicator_questionnaire.html';
 import editQuestionnaire from './edit-questionaire.js';
 import axios from 'axios';
-import _ from 'lodash';
 import expandCollapseHelper from './expand-collapse-helper';
 import VeeValidate from 'vee-validate';
 
@@ -105,7 +104,7 @@ export default Vue.extend({
     },
     transformForView(healthindicators) {
       const self = this;
-      _.each(healthindicators, (indicator) => {
+      healthindicators.forEach((indicator) => {
         self.healthIndicators[indicator.indicatorId] = {
           categoryId: indicator.categoryId,
           indicatorId: indicator.indicatorId,

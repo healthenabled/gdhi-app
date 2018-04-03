@@ -6,7 +6,7 @@ import mapLegend from '../legend/legend.js'
 import axios from 'axios'
 import worldMap from './world-map'
 import helper from './map-helper'
-import _ from 'lodash'
+import { merge } from 'lodash'
 
 export default Vue.extend({
   components: {
@@ -96,15 +96,15 @@ export default Vue.extend({
       return self.phases
     },
     mergeColorCodeToHealthIndicators: function (globalHealthIndices) {
-      var globalHealthIndicesWithScores = _.filter(globalHealthIndices.data.countryHealthScores, function (country) {
+      var globalHealthIndicesWithScores = globalHealthIndices.data.countryHealthScores.filter((country) => {
         return country.overallScore != null
-      })
+      });
       var collection = globalHealthIndicesWithScores
-      _.forEach(collection, function (value) {
-        _.merge(value, {
+      collection.forEach((value) => {
+        merge(value, {
           'colorCode': helper.getColorCodeFor(value['countryPhase'])
         })
-      })
+      });
       return collection
     },
     onCountrySelection (countryCode) {

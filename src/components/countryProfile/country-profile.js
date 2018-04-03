@@ -3,7 +3,6 @@ import countryProfile from './countryProfile.html';
 import developmentIndicators from '../developmentIndicators/development-indicators.js';
 import countrySummary from '../countrySummary/country-summary.js';
 import axios from 'axios';
-import _ from 'lodash';
 
 export default Vue.extend({
 
@@ -33,7 +32,7 @@ export default Vue.extend({
       category.showCategory = !category.showCategory;
     },
     initialise() {
-      _.each(this.healthIndicatorData.categories, (category) => {
+      this.healthIndicatorData.categories.forEach((category) => {
         this.$set(category, 'showCategory', false);
       });
     },

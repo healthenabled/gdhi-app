@@ -2,7 +2,7 @@ import L from 'leaflet';
 //import countriesData from '../../assets/countries_mega.json';
 import helper from './map-helper';
 import eventHandler from './map-event-handler';
-import _ from 'lodash';
+import { filter } from 'lodash';
 import axios from 'axios'
 
 export default {
@@ -85,7 +85,7 @@ export default {
     return self.geoLayer._layers;
   },
   handleSearch(countryCode, postSearchCallBack) {
-    const searchCountry = _.filter(this.geoLayer._layers, (layer) => layer.feature.properties.BRK_A3 === countryCode);
+    const searchCountry = filter(this.geoLayer._layers, (layer) => layer.feature.properties.BRK_A3 === countryCode);
     console.log('Searching', searchCountry[0]);
     this.handleClick(
       searchCountry[0], countryCode, this.lastClickedCountry, this.healthData,

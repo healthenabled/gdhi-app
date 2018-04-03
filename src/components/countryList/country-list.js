@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import countryList from './country-list.html';
 import axios from 'axios';
-import _ from 'lodash';
 
 export default Vue.extend({
   name: 'CountryList',
@@ -30,7 +29,7 @@ export default Vue.extend({
       return axios.get(`/api/countries_health_indicator_scores?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`);
     },
     listCountries(countriesDetails) {
-      _.each(countriesDetails, country => {
+      countriesDetails.forEach((country) => {
         const countryDetail = {
           countryName: country.countryName,
           overallPhase: country.countryPhase,

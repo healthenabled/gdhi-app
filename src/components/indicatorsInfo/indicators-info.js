@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import indicatorsInfo from './indicators-info.html';
 import axios from 'axios';
-import _ from 'lodash';
+import { uniq } from 'lodash';
 
 export default Vue.extend({
   name: 'IndicatorsInfo',
@@ -38,7 +38,9 @@ export default Vue.extend({
     },
 
     getCategoryNames(categories) {
-      return _.uniq(_.map(categories, 'categoryName'));
+      return uniq(categories.map((category) => {
+        return category.categoryName
+      }));
     },
     onCategoryExpand(category) {
       category.showCategory = !category.showCategory;

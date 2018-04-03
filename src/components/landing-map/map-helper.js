@@ -1,5 +1,4 @@
 import colors from '../common/color-codes.js';
-import _ from 'lodash';
 
 export default {
   getColorCodeFor(score) {
@@ -12,10 +11,8 @@ export default {
     return matchedCountry ? matchedCountry.colorCode : '#606060';
   },
   getMatchedCountry(countryCode, countryIndices) {
-    const matchedCountry = _.filter(
-      countryIndices,
-      (countryObj) => countryObj.countryId === countryCode,
-    );
+    const matchedCountry = 
+      countryIndices.filter((countryObj) => countryObj.countryId === countryCode);
     return matchedCountry && matchedCountry.length >
     0 ? matchedCountry[0] : null;
   },
