@@ -2,6 +2,7 @@ import Vue from 'vue';
 import generateUrlTemplate from './generate_url.html';
 import Autocomplete from 'vuejs-auto-complete';
 import axios from 'axios';
+import { sortBy } from 'lodash';
 
 export default Vue.extend({
     template: generateUrlTemplate,
@@ -28,7 +29,7 @@ export default Vue.extend({
       loadCountries() {
         return axios.get('/api/countries')
           .then(response => {
-            this.countries = response.data;
+            this.countries = sortBy(response.data, ["name"]);
           });
       },
       onCountrySelect(selectedItem) {

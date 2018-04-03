@@ -3,6 +3,7 @@ import axios from 'axios';
 import { EventBus } from '../common/event-bus';
 import autoSearch from './auto-search.html';
 import Autocomplete from 'vuejs-auto-complete'
+import { sortBy } from 'lodash';
 
 export default Vue.extend({
   name: 'AutoSearch',
@@ -17,7 +18,8 @@ export default Vue.extend({
     loadCountries() {
       axios.get('/api/countries')
         .then(response => {
-          this.countries = response.data;
+          console.log(response.data);
+          this.countries = sortBy(response.data, ["name"]);
         });
     },
     onCountrySelect(selectedItem) {
