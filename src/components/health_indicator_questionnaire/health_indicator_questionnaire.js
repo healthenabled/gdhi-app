@@ -39,36 +39,14 @@ export default Vue.extend({
     if (this.$route.params.countryUUID) {
       this.showEdit = true;
       const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "block";
-
-    //   this.prepareDataForViewForm(this.$route.params.countryUUID);
-    // } else {
-      this.getCountrySummary(this.$route.params.countryUUID);
-      this.getQuestionnaire();
+          if(loadingElement)
+            loadingElement.style.display = "block";
+      this.prepareDataForViewForm(this.$route.params.countryUUID);
     }
   },
   methods: {
-    getQuestionnaire() {
-      axios.get('/api/health_indicator_options').then((response) => {
-        this.questionnaire = response.data;
-        this.setUpHealthIndicators(response.data, false);
-      })
-      .catch(() => {
-        const loadingElement = document.querySelector(".loading");
-        if(loadingElement)
-          loadingElement.style.display = "none";
-      });
-    },
-    getCountrySummary(countryUUID) {
-      return axios.get(`/api/country_info/${countryUUID}`).then((response) => {
-        this.countrySummary.countryName = response.data.name;
-        this.countrySummary.countryId = response.data.id;
-        this.countrySummary.alpha2Code = response.data.alpha2Code.toLowerCase();
-      })
-      .catch(() => {
-        location.href = "/error";
-      })
+    fetchHealthScoresFor(countryUUID) {
+      return axios.get(`/api/countries/${countryUUID}`);
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {
@@ -89,10 +67,18 @@ export default Vue.extend({
     viewFormCallback(options, scores) {
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      this.transformForView(scores.data.healthIndicators);
+      debugger
+      if(scores.data.healthIndicators.length == 0){
+        this.setUpHealthIndicators(options.data,false)
+      }else{
+        options.data.forEach((category) => {
+          this.$set(category, 'showCategory', false);
+        });
+        this.transformForView(scores.data.healthIndicators);
+      }
       const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "none";
+          if(loadingElement)
+            loadingElement.style.display = "none";
     },
     prepareDataForViewForm(countryUUID) {
       axios.all([axios.get('/api/health_indicator_options'),
