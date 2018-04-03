@@ -39,13 +39,37 @@ export default Vue.extend({
   created() {
     if (this.$route.params.countryUUID) {
       this.showEdit = true;
-      $('.loading').show();
-      this.prepareDataForViewForm(this.$route.params.countryUUID);
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "block";
+
+    //   this.prepareDataForViewForm(this.$route.params.countryUUID);
+    // } else {
+      this.getCountrySummary(this.$route.params.countryUUID);
+      this.getQuestionnaire();
     }
   },
   methods: {
-    fetchHealthScoresFor(countryUUID) {
-      return axios.get(`/api/countries/${countryUUID}`);
+    getQuestionnaire() {
+      axios.get('/api/health_indicator_options').then((response) => {
+        this.questionnaire = response.data;
+        this.setUpHealthIndicators(response.data, false);
+      })
+      .catch(() => {
+        const loadingElement = document.querySelector(".loading");
+        if(loadingElement)
+          loadingElement.style.display = "none";
+      });
+    },
+    getCountrySummary(countryUUID) {
+      return axios.get(`/api/country_info/${countryUUID}`).then((response) => {
+        this.countrySummary.countryName = response.data.name;
+        this.countrySummary.countryId = response.data.id;
+        this.countrySummary.alpha2Code = response.data.alpha2Code.toLowerCase();
+      })
+      .catch(() => {
+        location.href = "/error";
+      })
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {
@@ -57,22 +81,19 @@ export default Vue.extend({
             score: null,
             supportingText: '',
           };
-          $('.loading').hide();
+          const loadingElement = document.querySelector(".loading");
+          if(loadingElement)
+            loadingElement.style.display = "none";
         });
       });
     },
     viewFormCallback(options, scores) {
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      if(scores.data.healthIndicators.length == 0){
-        this.setUpHealthIndicators(options.data,false)
-      }else{
-        options.data.forEach((category) => {
-          this.$set(category, 'showCategory', false);
-        });
-        this.transformForView(scores.data.healthIndicators);
-      }
-      $('.loading').hide();
+      this.transformForView(scores.data.healthIndicators);
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "none";
     },
     prepareDataForViewForm(countryUUID) {
       axios.all([axios.get('/api/health_indicator_options'),

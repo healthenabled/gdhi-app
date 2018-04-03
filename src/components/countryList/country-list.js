@@ -14,7 +14,9 @@ export default Vue.extend({
   },
 
   mounted() {
-    $('.loading').show();
+    const loadingElement = document.querySelector(".loading");
+    if(loadingElement)
+      loadingElement.style.display = "block";
     this.getListOfCountries().then(this.countryListCallback.bind(this));
   },
 
@@ -35,7 +37,9 @@ export default Vue.extend({
           countryId: country.countryId,
         };
         this.countryList.push(countryDetail);
-        $('.loading').hide();
+        const loadingElement = document.querySelector(".loading");
+        if(loadingElement)
+          loadingElement.style.display = "none";
       });
     },
     showCountryDetails(countryId) {

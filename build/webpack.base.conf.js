@@ -87,12 +87,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jquery: 'jquery',
-      'window.jQuery': 'jquery',
-      jQuery: 'jquery'
-    }),
     new CopyWebpackPlugin([{
       from: './src/assets/img/flags',
       to: utils.assetsPath('img/flags/')

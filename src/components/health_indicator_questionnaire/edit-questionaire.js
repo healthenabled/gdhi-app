@@ -40,14 +40,18 @@ export default Vue.extend({
     return { countryId: '', countries: []};
   },
   mounted() {
-    $('.loading').show();
+    const loadingElement = document.querySelector(".loading");
+    if(loadingElement)
+      loadingElement.style.display = "block";
     this.loadCountries();
   },
   methods: {
     loadCountries() {
       axios.get('/api/countries').then((response) => {
         this.countries = response.data;
-        $('.loading').hide();
+        const loadingElement = document.querySelector(".loading");
+        if(loadingElement)
+          loadingElement.style.display = "none";
       });
     },
     submit() {
@@ -69,7 +73,9 @@ export default Vue.extend({
       this.saveData(false);
     },
     saveData(isSubmit) {
-      $('.loading').show();
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "none";
       let url;
       if (isSubmit) {
         url = '/api/countries/submit'
@@ -88,7 +94,9 @@ export default Vue.extend({
           text: 'Form saved successfully!',
           type: 'success'
         });
-        $('.loading').hide();
+        const loadingElement = document.querySelector(".loading");
+        if(loadingElement)
+          loadingElement.style.display = "none";
       }).catch(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         this.$notify({
@@ -97,7 +105,9 @@ export default Vue.extend({
           text: 'Something has gone wrong. Please refresh the Page!',
           type: 'error'
         });
-        $('.loading').hide();
+        const loadingElement = document.querySelector(".loading");
+        if(loadingElement)
+          loadingElement.style.display = "none";
       });
     },
     getHealthIndicators() {

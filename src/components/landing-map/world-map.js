@@ -102,14 +102,10 @@ export default {
         countryName: $el.feature.properties.NAME_LONG,
       });
       this.map.fitBounds($el.getBounds(), { maxZoom: 7 });
-      // TODO: Hacky fix
-      $('#search-box').val($el.feature.properties.NAME_LONG);
     } else if (clickState === 'RESET_CLICK') {
       this.lastClickedCountry = '';
       postClickCallBack({ type: 'GLOBAL' });
       this.map.setView([44, -31], 2);
-      // TODO: Hacky fix
-      $('#search-box').val('');
     } else {
       this.lastClickedCountry = '';
       postClickCallBack({
@@ -124,8 +120,5 @@ export default {
     eventHandler.resetLayer(this.lastClickedCountry, this.healthData);
     this.lastClickedCountry = '';
     postClickCallBack({ type: 'GLOBAL' });
-    this.map.setView([44, -31], 2);
-    // TODO: Hacky fix
-    $('#search-box').val('');
   },
 };

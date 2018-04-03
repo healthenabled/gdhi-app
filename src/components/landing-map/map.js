@@ -37,7 +37,10 @@ export default Vue.extend({
     EventBus.$on('Map:Searched', this.onSearchTriggered)
     this.$on('Map:Clicked', ($clickedEl) => {
       if ($clickedEl.type === 'GLOBAL') {
-        this.resetFilters()
+        this.resetFilters();
+        document.querySelector("#search-box input").value = '';
+      } else {
+        document.querySelector("#search-box input").value = $clickedEl.countryName;
       }
     })
   },
@@ -63,15 +66,18 @@ export default Vue.extend({
 
     fetchGlobalIndices: function () {
       var self = this
-      $('.loading').show()
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "block";
       var windowProperties = window.appProperties
       return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
         .then(function (globalHealthIndices) {
-          self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
+          self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
           self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
-            globalHealthIndices)
-          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self))
-          $('.loading').hide()
+            globalHealthIndices);
+          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self));
+          if(loadingElement)
+            loadingElement.style.display = "none";
         })
     },
     fetchCategoricalIndicators: function () {

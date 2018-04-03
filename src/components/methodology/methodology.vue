@@ -43,7 +43,9 @@
 export default {
   name: 'Methodology',
   mounted() {
-    $('.loading').hide();
+    const loadingElement = document.querySelector(".loading");
+    if(loadingElement)
+      loadingElement.style.display = "none";
   }
 };
 </script>

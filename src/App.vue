@@ -33,7 +33,9 @@
       </template>
     </notifications>
 
-    <div class="loading">
+    <div 
+      class="loading" 
+      id="loader">
       <div class="error" />
     </div>
     <layout />

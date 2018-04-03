@@ -10,8 +10,10 @@ export default Vue.extend({
     };
   },
   created() {
-    $('.loading').show();
-    this.getCountrySummary(this.$route.params.countryCode);
+    const loadingElement = document.querySelector(".loading");
+    loadingElement.style.display = "block";
+    if(loadingElement)
+      this.getCountrySummary(this.$route.params.countryCode);
   },
   methods: {
     getCountrySummary(countryCode) {
@@ -25,7 +27,9 @@ export default Vue.extend({
     countrySummaryCallback(response, countryCode) {
       this.countrySummaries = response.data;
       this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode.slice(0, 2);
-      $('.loading').hide();
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "none";
     },
   },
   template: countrySummary,

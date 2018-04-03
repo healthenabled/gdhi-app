@@ -9,6 +9,8 @@ export default Vue.extend({
     };
   },
   mounted() {
-    $('.loading').hide();
+    const loadingElement = document.querySelector(".loading");
+    if(loadingElement)
+      loadingElement.style.display = "none";
   },
 });

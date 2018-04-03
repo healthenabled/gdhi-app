@@ -16,14 +16,19 @@ export default Vue.extend({
 
   created() {
     const self = this;
-    $('.loading').show();
+    const loadingElement = document.querySelector(".loading");
+    if(loadingElement)
+      loadingElement.style.display = "block";
+
     self.fetchCategoricalIndicators().then(response => {
       self.categoricalIndicators = response.data;
       self.categoricalIndicators.forEach((category)=> {
         this.$set(category, 'showCategory', true);
       });
       self.categoryNames = self.getCategoryNames(response.data);
-      $('.loading').hide();
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "none";
     });
   },
 

@@ -75,13 +75,16 @@ export default ({
   getDevelopmentIndicators(context, countryId, isMinimal) {
     const developmentIndicatorsUrl = `/api/countries/${countryId}/development_indicators`;
     const self = this;
+    const loadingElement = document.querySelector(".loading");
     axios.get(developmentIndicatorsUrl)
       .then(response => {
         context.developmentIndicators = isMinimal ? self.getMinimalDevelopmentIndicatorsData(self, response)
           : self.getDevelopmentIndicatorsData(self, response);
-        $('.loading').hide();
-      }).catch(e => {
-        $('.loading').hide();
+          if(loadingElement)
+            loadingElement.style.display = "none";
+      }).catch((e) => {
+        if(loadingElement)
+          loadingElement.style.display = "none";
         console.log('Error pulling development indicators data');
       });
   },

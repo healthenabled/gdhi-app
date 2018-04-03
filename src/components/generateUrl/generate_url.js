@@ -8,7 +8,9 @@ export default Vue.extend({
     components: { Autocomplete },
     mounted() {
       this.loadCountries();
-      $('.loading').hide();
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "none";
     },
     data() {
       return {
@@ -59,7 +61,9 @@ export default Vue.extend({
       },
 
       saveURLGenerationStatus() {
-        $('.loading').show();
+        const loadingElement = document.querySelector(".loading");
+        if(loadingElement)
+          loadingElement.style.display = "block";
         let url = "/api/country/"+this.countryId+"/url_gen_status";
         return axios.post(url, {
           countryId: this.countryId
@@ -72,8 +76,10 @@ export default Vue.extend({
             text: this.message ,
             type: 'success'
           });
-          $('.loading').hide();
-        }).catch((response) => {
+          const loadingElement = document.querySelector(".loading");
+          if(loadingElement)
+            loadingElement.style.display = "none";
+        }).catch(() => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.success = false;
           this.message = 'Error While Saving the URL Generation Status';
@@ -83,7 +89,9 @@ export default Vue.extend({
             text: this.message,
             type: 'error'
           });
-          $('.loading').hide();
+          const loadingElement = document.querySelector(".loading");
+          if(loadingElement)
+            loadingElement.style.display = "none";
         });
       },
 

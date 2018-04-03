@@ -22,7 +22,9 @@ export default Vue.extend({
   },
 
   mounted() {
-    $('.loading').show();
+    const loadingElement = document.querySelector(".loading");
+    if(loadingElement)
+      loadingElement.style.display = "block";
     this.getGlobalHealthIndicators();
     this.$parent.$on('Map:Clicked', ($clickedEl) => {
       if ($clickedEl.type === 'COUNTRY') {
@@ -110,7 +112,9 @@ export default Vue.extend({
       const globalHealthIndicatorsUrl = `/api/global_health_indicators?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`;
       axios.get(globalHealthIndicatorsUrl)
         .then(this.getGlobalHealthIndicatorCallback.bind(this)).catch(e => {
-          $('.loading').hide();
+          const loadingElement = document.querySelector(".loading");
+          if(loadingElement)
+            loadingElement.style.display = "none";
           console.log('Error pulling health indicators data');
         });
     },
@@ -124,7 +128,9 @@ export default Vue.extend({
       this.phaseFilter = window.appProperties.getPhaseFilter();
       this.setIndicatorTitleAndCategoryApplicability();
       this.showCountryDetail = false;
-      $('.loading').hide();
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "none";
     },
 
     showCountryDetails(countryId) {

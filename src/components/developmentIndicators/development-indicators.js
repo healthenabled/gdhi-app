@@ -14,7 +14,9 @@ export default Vue.extend({
   },
   methods: {
     getDevelopmentIndicatorsFor(countryCode) {
-      $('.loading').show();
+      const loadingElement = document.querySelector(".loading");
+      if(loadingElement)
+        loadingElement.style.display = "block";
       httpRequests.getDevelopmentIndicators(this, countryCode, false);
     },
   },
