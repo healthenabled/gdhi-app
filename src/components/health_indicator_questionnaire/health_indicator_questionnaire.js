@@ -67,7 +67,7 @@ export default Vue.extend({
     viewFormCallback(options, scores) {
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      if(scores.data.status == "REVIEW_PENDING") {
+      if(scores.data.status == "REVIEW_PENDING" && !this.$route.path.match('review')) {
         this.showEdit = false;
       }
       if(scores.data.healthIndicators.length == 0){
