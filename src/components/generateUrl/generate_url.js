@@ -70,7 +70,18 @@ export default Vue.extend({
           countryId: this.countryId
         }).then((response) => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
-          this.message = response.data.msg;
+          if(response.data.success) {
+            this.message = "URL Generated Successfully";
+            if(response.data.existingStatus == "PUBLISHED") {
+              this.message = "Already published";
+            }
+          } else {
+            if(response.data.existingStatus == "NEW" || response.data.existingStatus == "DRAFT") {
+              this.message = "Awaiting Submission";
+            } else {
+              this.message = "Pending Review";
+            }
+          }
           this.$notify({
             group: 'custom-template',
             title: 'Success',
