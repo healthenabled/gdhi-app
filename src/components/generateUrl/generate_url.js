@@ -35,6 +35,7 @@ export default Vue.extend({
       onCountrySelect(selectedItem) {
         this.generatedURL='';
         this.message='';
+        this.warningMessage='';
         this.countryId = selectedItem.selectedObject.id;
         this.countryUUID = selectedItem.value;
         this.disableGenerateBtn = false
@@ -42,6 +43,7 @@ export default Vue.extend({
       onClearCountry () {
         this.generatedURL='';
         this.message='';
+        this.warningMessage='';
         this.countryId = '';
         this.countryUUID = '';
         this.disableGenerateBtn = true
@@ -73,21 +75,24 @@ export default Vue.extend({
           if(response.data.success) {
             this.message = "URL Generated Successfully";
             if(response.data.existingStatus == "PUBLISHED") {
-              this.message = "Already published";
+              this.warningMessage = "Country Data is Already Published";
             }
+            this.$notify({
+              group: 'custom-template',
+              title: 'Success',
+              text: this.message,
+              type: 'success'
+            });
           } else {
             if(response.data.existingStatus == "NEW" || response.data.existingStatus == "DRAFT") {
-              this.message = "Awaiting Submission";
+              this.warningMessage = "URL Not Generated as Country Representative is yet to submit data";
             } else {
-              this.message = "Pending Review";
+              this.warningMessage = "URL Not Generated as Country Data is Pending Review";
             }
           }
-          this.$notify({
-            group: 'custom-template',
-            title: 'Success',
-            text: this.message ,
-            type: 'success'
-          });
+          const infoElement = document.querySelector("#info-box");
+          infoElement.innerText = this.warningMessage;
+
           const loadingElement = document.querySelector(".loading");
           if(loadingElement)
             loadingElement.style.display = "none";
