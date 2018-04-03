@@ -58,6 +58,9 @@ export default Vue.extend({
       return this.$validator.validateAll().then((result) => {
         if (result) {
           this.saveData(true);
+          this.$router.go({
+            path: this.$router.path
+          });
         } else {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.$notify({
