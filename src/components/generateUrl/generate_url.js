@@ -22,7 +22,8 @@ export default Vue.extend({
         countryUUID: "",
         generatedURL:"",
         countryId:"",
-        message:""
+        message:"",
+        warningMessage: ""
       };
     },
     methods: {
@@ -75,7 +76,7 @@ export default Vue.extend({
           if(response.data.success) {
             this.message = "URL Generated Successfully";
             if(response.data.existingStatus == "PUBLISHED") {
-              this.warningMessage = "Country Data is already published";
+              this.warningMessage = "Already Published";
             }
             this.$notify({
               group: 'custom-template',
@@ -85,13 +86,13 @@ export default Vue.extend({
             });
           } else {
             if(response.data.existingStatus == "NEW" || response.data.existingStatus == "DRAFT") {
-              this.warningMessage = "Country Representative is in the process of submitting data";
+              this.warningMessage = "Submission under process";
             } else {
-              this.warningMessage = "Country data is pending review";
+              this.warningMessage = "Review Pending";
             }
           }
-          const infoElement = document.querySelector("#info-box");
-          infoElement.innerText = this.warningMessage;
+          // const infoElement = document.querySelector("#info-box");
+          // infoElement.innerText = this.warningMessage;
 
           const loadingElement = document.querySelector(".loading");
           if(loadingElement)

@@ -21,7 +21,7 @@
         <div class="float-right"><button class="btn btn-secondary" @click="copyUrl()">Copy url</button></div>
     </div>
     <div>
-        <div id="info-box"></div>
+        <div id="info-box" v-if="warningMessage.length"><i class="fa fa-lg fa-exclamation-triangle"/>{{warningMessage}}</div>
     </div>
 
 </div>

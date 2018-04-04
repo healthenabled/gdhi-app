@@ -333,6 +333,18 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   }
 }
 
+#info-box {
+  background: $nodiff;
+  padding: 5px;
+  display: inline-block;
+  border-left: 5px solid darken($nodiff, 25%);
+  margin-top: 5px;
+  i {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+
 .accordion-content {
   display: none;
   border-top: 1px solid $border-color;
