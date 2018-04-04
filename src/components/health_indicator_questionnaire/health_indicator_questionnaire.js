@@ -32,7 +32,7 @@ export default Vue.extend({
     };
     const healthIndicators = {};
     return {
-      questionnaire: [], countrySummary, healthIndicators, showEdit: true,
+      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status, isAdmin: false,
     };
   },
   created() {
@@ -67,7 +67,9 @@ export default Vue.extend({
     viewFormCallback(options, scores) {
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      if(scores.data.status == "REVIEW_PENDING" && !this.$route.path.match('review')) {
+      this.status = scores.data.status;
+      this.isAdmin = this.$route.path.match('review') != null;
+      if(scores.data.status == "REVIEW_PENDING" && !this.isAdmin) {
         this.showEdit = false;
       }
       if(scores.data.healthIndicators.length == 0){

@@ -4,7 +4,10 @@ import Questionnaire from '@/components/health_indicator_questionnaire/health_in
 describe('Questionnaire.vue', () => {
   let ques, sandBox
   before(() => {
-    var Constructor = Vue.extend(Questionnaire)
+    const scopedVue = Vue.extend()
+    const $route = { path: 'test', params:{} }
+    scopedVue.prototype.$route = $route
+    var Constructor = scopedVue.extend(Questionnaire)
     ques = new Constructor()//.$mount()
   })
   beforeEach(() => {

@@ -36,32 +36,34 @@ export default Vue.extend({
             return true;
           },
         },
+    status: {
+      type: String,
+      default() {
+        return "";
+      },
+    },
+    isAdmin: {
+          type: Boolean,
+          default() {
+            return false;
+          },
+        },
   },
   data() {
     return { countryId: '', countries: []};
   },
-  mounted() {
-    const loadingElement = document.querySelector(".loading");
-    if(loadingElement)
-      loadingElement.style.display = "block";
-    this.loadCountries();
-  },
   methods: {
-    loadCountries() {
-      axios.get('/api/countries').then((response) => {
-        this.countries = response.data;
-        const loadingElement = document.querySelector(".loading");
-        if(loadingElement)
-          loadingElement.style.display = "none";
-      });
-    },
     submit() {
       return this.$validator.validateAll().then((result) => {
         if (result) {
           this.saveData(true);
-          this.$router.go({
-            path: this.$router.path
+          this.$notify({
+            group: 'custom-template',
+            title: 'Success',
+            text: 'Form successfully submitted for Review',
+            type: 'success'
           });
+          this.showEdit = false;
         } else {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.$notify({
@@ -75,6 +77,9 @@ export default Vue.extend({
     },
     save(){
       this.saveData(false);
+    },
+    publish(){
+
     },
     saveData(isSubmit) {
       const loadingElement = document.querySelector(".loading");

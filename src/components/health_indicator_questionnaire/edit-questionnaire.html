@@ -4,8 +4,14 @@
         <img v-if="countrySummary.countryAlpha2Code" :src="'/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg'" width="50" class="flag" /> {{countrySummary.countryName}} - Health Indicator Questionnaire
     </span>
     <div class="float-right button-container">
-      <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="save()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button></span>
+      <span v-if="status === 'REVIEW_PENDING' && isAdmin">
+        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="save()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save </button></span>
+      <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="publish()"><i class="fa fa-check" aria-hidden="true"></i> Publish </button></span>
+      </span>
+      <span v-else>
+        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="save()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button></span>
       <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="submit()"><i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
+      </span>
     </div>
   </div>
   <form class="health-indicator-questionnaire-contact-info clearfix">
