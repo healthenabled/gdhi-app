@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import generateUrlTemplate from './generate_url.html';
-import Autocomplete from 'vuejs-auto-complete';
-import axios from 'axios';
-import { sortBy } from 'lodash';
+import Vue from "vue";
+import generateUrlTemplate from "./generate_url.html";
+import Autocomplete from "vuejs-auto-complete";
+import axios from "axios";
+import {sortBy} from "lodash";
 
 export default Vue.extend({
     template: generateUrlTemplate,
@@ -67,7 +67,7 @@ export default Vue.extend({
         const loadingElement = document.querySelector(".loading");
         if(loadingElement)
           loadingElement.style.display = "block";
-        let url = "/api/country/"+this.countryId+"/url_gen_status";
+        let url = "/api/countries/" + this.countryId + "/url_gen_status";
         return axios.post(url, {
           countryId: this.countryId
         }).then((response) => {
@@ -75,7 +75,7 @@ export default Vue.extend({
           if(response.data.success) {
             this.message = "URL Generated Successfully";
             if(response.data.existingStatus == "PUBLISHED") {
-              this.warningMessage = "Country Data is Already Published";
+              this.warningMessage = "Country Data is already published";
             }
             this.$notify({
               group: 'custom-template',
@@ -85,9 +85,9 @@ export default Vue.extend({
             });
           } else {
             if(response.data.existingStatus == "NEW" || response.data.existingStatus == "DRAFT") {
-              this.warningMessage = "URL Not Generated as Country Representative is yet to submit data";
+              this.warningMessage = "URL Not Generated as Country Representative is in the process of submitting data";
             } else {
-              this.warningMessage = "URL Not Generated as Country Data is Pending Review";
+              this.warningMessage = "URL Not Generated as Country data is pending review";
             }
           }
           const infoElement = document.querySelector("#info-box");
@@ -99,7 +99,7 @@ export default Vue.extend({
         }).catch(() => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.success = false;
-          this.message = 'Error While Saving the URL Generation Status';
+          this.message = 'Error While Generating URL for Country';
           this.$notify({
             group: 'custom-template',
             title: 'Error',
