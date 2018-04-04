@@ -64,6 +64,21 @@ export default Vue.extend({
         });
       });
     },
+    setUpDataForNewHealthIndicators(data, existingHealthIndicators) {
+      let existingIndicatorIds = existingHealthIndicators.map(indicator => indicator.indicatorId);
+      data.forEach((category) => {
+        category.indicators.forEach(indicator => {
+          if(!existingIndicatorIds.includes(indicator.indicatorId)) {
+            this.healthIndicators[indicator.indicatorId] = {
+              categoryId: category.categoryId,
+              indicatorId: indicator.indicatorId,
+              score: null,
+              supportingText: '',
+            };
+          }
+        });
+      });
+    },
     viewFormCallback(options, scores) {
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
@@ -75,6 +90,7 @@ export default Vue.extend({
       if(scores.data.healthIndicators.length == 0){
         this.setUpHealthIndicators(options.data,false)
       }else{
+        this.setUpDataForNewHealthIndicators(options.data, scores.data.healthIndicators);
         options.data.forEach((category) => {
           this.$set(category, 'showCategory', false);
         });
