@@ -67,7 +67,7 @@ export default Vue.extend({
         const loadingElement = document.querySelector(".loading");
         if(loadingElement)
           loadingElement.style.display = "block";
-        let url = "/api/countries/" + this.countryId + "/url_gen_status";
+        let url = "/api/countries/" + this.countryUUID + "/url_gen_status";
         return axios.post(url, {
           countryId: this.countryId
         }).then((response) => {
