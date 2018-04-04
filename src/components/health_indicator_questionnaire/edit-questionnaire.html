@@ -116,21 +116,21 @@
         </div>
         <div class="form-group column-33percent">
           <label for="resource2">Resource 2</label>
-          <input type="text" :disabled="!showEdit" class="form-control" id="resource2" name="resource2" v-model="countrySummary.resources[1]" v-validate.disable="'url'" />
+          <input type="text" :disabled="!showEdit" :class="errors.has('resource2') ? 'has-error form-control' : 'form-control'" id="resource2" name="resource2" v-model="countrySummary.resources[1]" v-validate.disable="'url'" />
         </div>
         <div class="form-group column-33percent">
           <label for="resource3">Resource 3</label>
-          <input type="text" :disabled="!showEdit" class="form-control" id="resource3" name="resource3" v-model="countrySummary.resources[2]" v-validate.disable="'url'" />
+          <input type="text" :disabled="!showEdit" :class="errors.has('resource3') ? 'has-error form-control' : 'form-control'" id="resource3" name="resource3" v-model="countrySummary.resources[2]" v-validate.disable="'url'" />
         </div>
       </div>
       <div class="row column-66percent">
         <div class="form-group column-50percent">
           <label for="resource4">Resource 4</label>
-          <input type="text" :disabled="!showEdit" class="form-control" id="resource4" name="resource4" v-model="countrySummary.resources[3]" v-validate.disable="'url'" />
+          <input type="text" :disabled="!showEdit" :class="errors.has('resource4') ? 'has-error form-control' : 'form-control'" id="resource4" name="resource4" v-model="countrySummary.resources[3]" v-validate.disable="'url'" />
         </div>
         <div class="form-group column-50percent">
           <label for="resource5">Resource 5</label>
-          <input type="text" :disabled="!showEdit" class="form-control" id="resource5" name="resource5" v-model="countrySummary.resources[4]" v-validate.disable="'url'" />
+          <input type="text" :disabled="!showEdit" :class="errors.has('resource5')  ? 'has-error form-control' : 'form-control'" id="resource5" name="resource5" v-model="countrySummary.resources[4]" v-validate.disable="'url'" />
         </div>
       </div>
     </div>
