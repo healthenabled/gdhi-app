@@ -138,7 +138,7 @@
           <div class="accordion-content">
             <div class="" data-header="Indicators">
               <div v-for="indicator in category.indicators" :class="errors.has('indicator_'+indicator.indicatorId+'_rationale') ? 'has-error indicator-items' : 'indicator-items'">
-                <div>{{indicator.indicatorName}}</div>
+                <div> {{indicator.indicatorCode}}. {{indicator.indicatorName}}</div>
                 <div class="copy-small-italics indicator-definition">{{indicator.indicatorDefinition}}</div>
                 <div v-for="score in indicator.scores" class="scores">
                   <label class="radio-container">
