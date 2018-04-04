@@ -85,9 +85,9 @@ export default Vue.extend({
             });
           } else {
             if(response.data.existingStatus == "NEW" || response.data.existingStatus == "DRAFT") {
-              this.warningMessage = "URL Not Generated as Country Representative is in the process of submitting data";
+              this.warningMessage = "Country Representative is in the process of submitting data";
             } else {
-              this.warningMessage = "URL Not Generated as Country data is pending review";
+              this.warningMessage = "Country data is pending review";
             }
           }
           const infoElement = document.querySelector("#info-box");
