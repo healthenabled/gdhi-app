@@ -11,9 +11,9 @@ export default Vue.extend({
   },
   created() {
     const loadingElement = document.querySelector(".loading");
-    loadingElement.style.display = "block";
     if(loadingElement)
-      this.getCountrySummary(this.$route.params.countryCode);
+      loadingElement.style.display = "block";
+    this.getCountrySummary(this.$route.params.countryCode);
   },
   methods: {
     getCountrySummary(countryCode) {
