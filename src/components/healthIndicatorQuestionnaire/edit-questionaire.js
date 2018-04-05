@@ -53,71 +53,59 @@ export default Vue.extend({
     return { countryId: '', countries: []};
   },
   methods: {
-    submit() {
-      return this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.saveData(true);
-          this.$notify({
-            group: 'custom-template',
-            title: 'Success',
-            text: 'Form successfully submitted for Review',
-            type: 'success'
-          });
-          this.showEdit = false;
-        } else {
-          document.body.scrollTop = document.documentElement.scrollTop = 0;
-          this.$notify({
-            group: 'custom-template',
-            title: 'Error',
-            text: 'Please correct the below highlighted fields.',
-            type: 'error'
-          });
-        }
-      })
+    notifier(props) {
+      this.$notify({
+        group: 'custom-template',
+        title: props.title,
+        text: props.message,
+        type: props.type
+      });
     },
-    save(){
-      this.saveData(false);
-    },
-    publish(){
-
-    },
-    saveData(isSubmit) {
+    saveData(action) {
       const loadingElement = document.querySelector(".loading");
       if(loadingElement)
         loadingElement.style.display = "none";
-      let url;
-      if (isSubmit) {
-        url = '/api/countries/submit'
-      } else {
-        url = '/api/countries/save';
-      }
+
+      let url = '/api/countries/'+ action;
+
       axios.post(url, {
         countryId: this.countrySummary.countryId,
         countrySummary: this.countrySummary,
         healthIndicators: this.getHealthIndicators(),
       }).then(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        this.$notify({
-          group: 'custom-template',
-          title: 'Success',
-          text: 'Form saved successfully!',
-          type: 'success'
-        });
         const loadingElement = document.querySelector(".loading");
         if(loadingElement)
           loadingElement.style.display = "none";
       }).catch(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        this.$notify({
-          group: 'custom-template',
-          title: 'Error',
-          text: 'Something has gone wrong. Please refresh the Page!',
-          type: 'error'
-        });
+        this.notifier({title: 'Error',message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
         const loadingElement = document.querySelector(".loading");
         if(loadingElement)
           loadingElement.style.display = "none";
       });
+    },
+    validator(action, successMessage){
+      return this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.saveData(action);
+          this.notifier({title: 'Success',message: successMessage, type: 'success'});
+          this.showEdit = false;
+        } else {
+          document.body.scrollTop = document.documentElement.scrollTop = 0;
+          this.notifier({title: 'Error',message: 'Please correct the below highlighted fields.', type: 'error'});
+        }
+      })
+    },
+    submit() {
+      return this.validator('submit', 'Form submitted for review');
+    },
+    save(){
+      this.saveData('save');
+      this.notifier({title: 'Success',message: 'Form saved successfully!', type: 'success'});
+    },
+    publish(){
+      return this.validator('publish', 'Data is now live');
     },
     getHealthIndicators() {
       return Object.entries(this.healthIndicators).map((entry) => entry[1]);
