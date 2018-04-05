@@ -12,7 +12,7 @@ export default Vue.extend({
     this.loadCountries();
   },
   data() {
-    return { countries: []};
+    return { countries: [], countryId: ''};
   },
   methods: {
     loadCountries() {

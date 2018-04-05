@@ -32,7 +32,6 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
-    new FriendlyErrorsPlugin(),
-    new BundleAnalyzerPlugin({analyzerPort: 8088})
+    new FriendlyErrorsPlugin()
   ]
 })
