@@ -97,6 +97,10 @@ export default Vue.extend({
         }
       })
     },
+    saveCorrection() {
+      this.saveData('saveCorrection');
+      this.notifier({title: 'Success',message: 'Form saved successfully!', type: 'success'});
+    },
     submit() {
       return this.validator('submit', 'Form submitted for review');
     },
