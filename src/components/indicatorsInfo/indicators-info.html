@@ -11,7 +11,7 @@
                 <a :name="category.categoryName" class="named-anchor"></a>
                 <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'">
                   <div class="align-No sub-header"  @click="onCategoryExpand(category)">
-                    {{category.categoryId}} - {{category.categoryName}}
+                    {{category.categoryName}}
                   </div>
                   <div class="accordion-content">
                     <div class="row table-header header-regular">
