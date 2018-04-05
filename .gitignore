@@ -22,6 +22,7 @@ pids
 # Coverage directory used by tools like istanbul
 coverage
 test/unit/coverage
+.nyc
 
 # Dependency directories
 node_modules/
