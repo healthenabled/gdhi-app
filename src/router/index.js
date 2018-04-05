@@ -8,7 +8,7 @@ import footerComp from '@/components/footer/footer.vue';
 import countryProfile from '@/components/countryProfile/country-profile.js';
 import landingMap from '@/components/landing-map/map.js';
 import methodologyComp from '@/components/methodology/methodology.vue';
-import healthIndicatorQuestionnaire from '@/components/health_indicator_questionnaire/health_indicator_questionnaire.js';
+import healthIndicatorQuestionnaire from '@/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js';
 import countryListComp from '@/components/countryList/country-list.js';
 import errorComp from '@/components/error-handler/404-error.js';
 import generateUrlComp from '@/components/generateUrl/generate_url.js';

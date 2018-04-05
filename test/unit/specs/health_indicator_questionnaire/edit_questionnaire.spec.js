@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Questionnaire from '@/components/health_indicator_questionnaire/edit-questionaire.js'
+import Questionnaire from '@/components/healthIndicatorQuestionnaire/edit-questionaire.js'
 import VeeValidate from "vee-validate";
 
 describe('Questionnaire.vue', () => {

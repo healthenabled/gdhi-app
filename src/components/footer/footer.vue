@@ -3,20 +3,20 @@
     <div class="footer-width">
       <span class="ft-element sub-header">
         <router-link
-          :to="{path: '/methodology'}" 
+          :to="{path: '/methodology'}"
           class="text-underline">Methodology
-        </router-link> 
+        </router-link>
         <span class="ft-element-pipe"> | </span>
       </span>
       <span class="ft-element sub-header">
-        <router-link 
-          :to="{path: '/indicators_info'}" 
-          class="text-underline" >List of Indicators
-        </router-link> 
+        <router-link
+          :to="{path: '/indicators_info'}"
+          class="text-underline" >Indicators
+        </router-link>
         <span class="ft-element-pipe"> | </span>
       </span>
       <span class="ft-element sub-header">
-        <a 
+        <a
           href="/api/export_global_data"
           class="text-underline">Export Data For All Countries
         </a>

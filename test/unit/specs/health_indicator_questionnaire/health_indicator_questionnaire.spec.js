@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Questionnaire from '@/components/health_indicator_questionnaire/health_indicator_questionnaire.js'
+import Questionnaire from '@/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js'
 
 describe('Questionnaire.vue', () => {
   let ques, sandBox
