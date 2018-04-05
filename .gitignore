@@ -23,6 +23,7 @@ pids
 coverage
 test/unit/coverage
 .nyc
+.nyc_output/
 
 # Dependency directories
 node_modules/
