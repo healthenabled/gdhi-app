@@ -5,6 +5,9 @@
         <img v-bind:src="flagSrc" width="50" class="flag" />
         {{healthIndicatorData.countryName}}
       </div>
+      <span>
+           As on {{healthIndicatorData.collectedDate}}
+      </span>
       <div class="button-container float-right">
         <div class="export">
           <span><a v-bind:href="url" class=" btn btn-primary"><i class="fa  fa-file-excel-o fa-lg"></i>Export Country Data</a></span>
@@ -58,6 +61,6 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
