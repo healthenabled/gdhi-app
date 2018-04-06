@@ -76,9 +76,11 @@ export default Vue.extend({
       });
     },
     viewFormCallback(options, scores) {
+      this.status = scores.data.status;
+      if(this.status === "PUBLISHED")
+        window.location.href = '/error';
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      this.status = scores.data.status;
       this.isAdmin = this.$route.path.match('review') != null;
       if(scores.data.status == "REVIEW_PENDING" && !this.isAdmin) {
         this.showEdit = false;
