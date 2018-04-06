@@ -5,7 +5,7 @@
         <img v-bind:src="flagSrc" width="50" class="flag" />
         {{healthIndicatorData.countryName}}
       </div>
-      <span v-if="healthIndicatorData.collectedDate !== ''">
+      <span id="collected-date" v-if="healthIndicatorData.collectedDate !== ''">
            As on {{healthIndicatorData.collectedDate}}
       </span>
       <div class="button-container float-right">

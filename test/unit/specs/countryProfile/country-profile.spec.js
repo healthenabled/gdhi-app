@@ -1,28 +1,24 @@
 import Vue from 'vue'
 import countryProfile from '@/components/countryProfile/country-profile.js'
+import {shallow} from '@vue/test-utils'
 
 describe("should test country profile", () => {
   let profile, sandBox
+  var response = {}
   before(() => {
     var Constructor = Vue.extend(countryProfile)
     profile = new Constructor()
   })
   beforeEach(() => {
     sandBox = sinon.sandbox.create()
-  })
-  afterEach(() => {
-    sandBox.restore()
-  })
 
-
-  it('should set health indicators', () => {
-    var response = {}
     response.data = {
       "countryId": "GHA",
       "countryName": "Ghana",
       "countryPhase": 4,
       "overallScore": 4,
       "countryAlpha2Code": "PE",
+      "collectedDate": "April 2018",
       "categories": [{
         "categoryId": 1,
         "categoryName": "c1",
@@ -56,10 +52,39 @@ describe("should test country profile", () => {
         }
       ]
     }
+  })
+  afterEach(() => {
+    sandBox.restore()
+  })
+
+
+  it('should set health indicators', () => {
+
     profile.healthIndicatorCallback(response)
     expect(profile.healthIndicatorData).to.deep.equal(response.data)
     response.data.categories.forEach(cat => {
       expect(cat.showCategory).to.equal(false)
     })
   })
+
+  it('should display as on date when it is not empty', () => {
+
+    const $route = {path: 'test', params: {countryCode: 'IND'}};
+    const wrapper = shallow(countryProfile, {
+      mocks: {
+        $route
+      },
+      data: {
+        healthIndicatorData: response.data
+      }
+    });
+
+    var actualDate = wrapper.vm.$el.querySelector('#collected-date').innerText;
+    console.log(actualDate);
+    expect(actualDate).to.match(/As on April 2018/);
+
+
+  })
+
+
 })

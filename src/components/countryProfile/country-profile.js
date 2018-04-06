@@ -10,7 +10,8 @@ export default Vue.extend({
   data() {
     return {
       healthIndicatorData: { countryName: '', countryPhase: 'NA', categories: [] },
-      flagSrc: ''
+      flagSrc: '',
+      url: ''
     };
   },
 
