@@ -2,6 +2,7 @@ import Vue from "vue";
 import editForm from "./edit-questionnaire.html";
 import axios from "axios";
 import VeeValidate from "vee-validate";
+import VModal from 'vue-js-modal';
 import Autocomplete from "vuejs-auto-complete";
 import 'date-input-polyfill';
 
@@ -9,6 +10,8 @@ const config = {
   fieldsBagName: 'fieldBags',
 };
 Vue.use(VeeValidate, config);
+Vue.use(VModal, { dialog: true });
+
 export default Vue.extend({
   components: { Autocomplete },
   props: {
@@ -108,15 +111,36 @@ export default Vue.extend({
       this.saveData('save');
       this.notifier({title: 'Success',message: 'Form saved successfully!', type: 'success'});
     },
-    publish(){
+    extracted: function () {
+      this.questionnaire.forEach((category) => {
+        this.$set(category, 'showCategory', true);
+      });
       return this.validator('publish', 'Data is now live');
+    },
+    publish(){
+      this.$modal.show('dialog', {
+        title: 'Confirmation',
+        text: "Publish health index form for "+ this.countrySummary.countryName +", this cannot be reverted",
+        buttons: [
+          {
+            title: 'Cancel'
+          },
+          {
+            title: 'Confirm',
+            handler: () => {
+              this.extracted();
+              this.$modal.hide('dialog');
+            }
+          }
+        ]
+      });
     },
     getHealthIndicators() {
       return Object.entries(this.healthIndicators).map((entry) => entry[1]);
     },
     onCategoryExpand(category) {
       category.showCategory = !category.showCategory;
-    },
+    }
   },
   template: editForm,
 });
