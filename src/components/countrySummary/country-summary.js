@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import countrySummary from './country-summary.html';
 import axios from 'axios';
+import common from '../../common/common'
 
 export default Vue.extend({
   name: 'CountrySummary',
@@ -10,9 +11,7 @@ export default Vue.extend({
     };
   },
   created() {
-    const loadingElement = document.querySelector(".loading");
-    if(loadingElement)
-      loadingElement.style.display = "block";
+    common.showLoading();
     this.getCountrySummary(this.$route.params.countryCode);
   },
   methods: {
@@ -27,9 +26,7 @@ export default Vue.extend({
     countrySummaryCallback(response, countryCode) {
       this.countrySummaries = response.data;
       this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode.slice(0, 2);
-      const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "none";
+      common.hideLoading();
     },
   },
   template: countrySummary,

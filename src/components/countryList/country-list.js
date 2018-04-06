@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import countryList from './country-list.html';
 import axios from 'axios';
+import common from '../../common/common'
 
 export default Vue.extend({
   name: 'CountryList',
@@ -13,9 +14,7 @@ export default Vue.extend({
   },
 
   mounted() {
-    const loadingElement = document.querySelector(".loading");
-    if(loadingElement)
-      loadingElement.style.display = "block";
+    common.showLoading();
     this.getListOfCountries().then(this.countryListCallback.bind(this));
   },
 
@@ -36,10 +35,9 @@ export default Vue.extend({
           countryId: country.countryId,
         };
         this.countryList.push(countryDetail);
-        const loadingElement = document.querySelector(".loading");
-        if(loadingElement)
-          loadingElement.style.display = "none";
+        common.hideLoading();
       });
+
     },
     showCountryDetails(countryId) {
       this.$router.push({ path: `/country_profile/${countryId}` });

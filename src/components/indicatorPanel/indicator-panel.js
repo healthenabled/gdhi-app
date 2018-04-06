@@ -2,6 +2,7 @@ import Vue from 'vue';
 import indicatorPanel from './indicator-panel.html';
 import axios from 'axios';
 import httpRequests from '../../common/indicator-http-requests';
+import common from '../../common/common'
 
 export default Vue.extend({
   name: 'IndicatorPanel',
@@ -22,9 +23,7 @@ export default Vue.extend({
   },
 
   mounted() {
-    const loadingElement = document.querySelector(".loading");
-    if(loadingElement)
-      loadingElement.style.display = "block";
+    common.showLoading();
     this.getGlobalHealthIndicators();
     this.$parent.$on('Map:Clicked', ($clickedEl) => {
       if ($clickedEl.type === 'COUNTRY') {
@@ -112,9 +111,7 @@ export default Vue.extend({
       const globalHealthIndicatorsUrl = `/api/global_health_indicators?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`;
       axios.get(globalHealthIndicatorsUrl)
         .then(this.getGlobalHealthIndicatorCallback.bind(this)).catch(e => {
-          const loadingElement = document.querySelector(".loading");
-          if(loadingElement)
-            loadingElement.style.display = "none";
+          common.hideLoading();
           console.log('Error pulling health indicators data');
         });
     },
@@ -128,9 +125,7 @@ export default Vue.extend({
       this.phaseFilter = window.appProperties.getPhaseFilter();
       this.setIndicatorTitleAndCategoryApplicability();
       this.showCountryDetail = false;
-      const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "none";
+      common.hideLoading();
     },
 
     showCountryDetails(countryId) {

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import indicatorsInfo from './indicators-info.html';
 import axios from 'axios';
 import { uniq } from 'lodash';
+import common from '../../common/common'
 
 export default Vue.extend({
   name: 'IndicatorsInfo',
@@ -16,9 +17,7 @@ export default Vue.extend({
 
   created() {
     const self = this;
-    const loadingElement = document.querySelector(".loading");
-    if(loadingElement)
-      loadingElement.style.display = "block";
+    common.showLoading();
 
     self.fetchCategoricalIndicators().then(response => {
       self.categoricalIndicators = response.data;
@@ -26,9 +25,7 @@ export default Vue.extend({
         this.$set(category, 'showCategory', true);
       });
       self.categoryNames = self.getCategoryNames(response.data);
-      const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "none";
+      common.hideLoading();
     });
   },
 

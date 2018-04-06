@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import developmentIndicatorsTemplate from './development-indicators.html';
 import httpRequests from '../../common/indicator-http-requests';
+import common from '../../common/common'
 
 export default Vue.extend({
   name: 'DevelopmentIndicators',
@@ -14,9 +15,7 @@ export default Vue.extend({
   },
   methods: {
     getDevelopmentIndicatorsFor(countryCode) {
-      const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "block";
+      common.showLoading();
       httpRequests.getDevelopmentIndicators(this, countryCode, false);
     },
   },

@@ -7,6 +7,7 @@ import axios from 'axios'
 import worldMap from './world-map'
 import helper from './map-helper'
 import { merge } from 'lodash'
+import common from '../../common/common'
 
 export default Vue.extend({
   components: {
@@ -66,9 +67,7 @@ export default Vue.extend({
 
     fetchGlobalIndices: function () {
       const self = this;
-      const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "block";
+      common.showLoading();
       const windowProperties = window.appProperties;
       return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
         .then(function (globalHealthIndices) {
@@ -76,8 +75,7 @@ export default Vue.extend({
           self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
             globalHealthIndices);
           worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self));
-          if(loadingElement)
-            loadingElement.style.display = "none";
+          common.hideLoading();
         })
     },
     fetchCategoricalIndicators: function () {

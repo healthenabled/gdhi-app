@@ -40,12 +40,12 @@
 </template>
 
 <script>
-export default {
-  name: 'Methodology',
-  mounted() {
-    const loadingElement = document.querySelector(".loading");
-    if(loadingElement)
-      loadingElement.style.display = "none";
-  }
-};
+  import common from '../../common/common'
+
+  export default {
+    name: 'Methodology',
+    mounted() {
+      common.hideLoading();
+    }
+  };
 </script>

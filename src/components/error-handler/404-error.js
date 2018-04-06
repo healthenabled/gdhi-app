@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import errorTemplate from './error.html';
+import common from '../../common/common'
 
 export default Vue.extend({
   template: errorTemplate,
@@ -9,8 +10,6 @@ export default Vue.extend({
     };
   },
   mounted() {
-    const loadingElement = document.querySelector(".loading");
-    if(loadingElement)
-      loadingElement.style.display = "none";
+    common.hideLoading();
   },
 });

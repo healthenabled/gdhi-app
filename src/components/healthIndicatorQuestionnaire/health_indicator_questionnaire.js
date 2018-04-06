@@ -3,6 +3,7 @@ import healthIndicatorForm from "./health_indicator_questionnaire.html";
 import editQuestionnaire from "./edit-questionaire.js";
 import axios from "axios";
 import VeeValidate from "vee-validate";
+import common from '../../common/common'
 
 const config = {
   fieldsBagName: 'fieldBags',
@@ -37,9 +38,7 @@ export default Vue.extend({
   created() {
     if (this.$route.params.countryUUID) {
       this.showEdit = true;
-      const loadingElement = document.querySelector(".loading");
-          if(loadingElement)
-            loadingElement.style.display = "block";
+      common.showLoading();
       this.prepareDataForViewForm(this.$route.params.countryUUID);
     }
   },
@@ -57,9 +56,7 @@ export default Vue.extend({
             score: null,
             supportingText: '',
           };
-          const loadingElement = document.querySelector(".loading");
-          if(loadingElement)
-            loadingElement.style.display = "none";
+          common.hideLoading();
         });
       });
     },
@@ -95,9 +92,7 @@ export default Vue.extend({
         });
         this.transformForView(scores.data.healthIndicators);
       }
-      const loadingElement = document.querySelector(".loading");
-          if(loadingElement)
-            loadingElement.style.display = "none";
+      common.hideLoading();
     },
     prepareDataForViewForm(countryUUID) {
       axios.all([axios.get('/api/health_indicator_options'),

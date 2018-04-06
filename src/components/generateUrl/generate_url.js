@@ -1,5 +1,6 @@
 import Vue from "vue";
 import generateUrlTemplate from "./generate_url.html";
+import common from "../../common/common";
 import Autocomplete from "vuejs-auto-complete";
 import axios from "axios";
 import {sortBy} from "lodash";
@@ -9,9 +10,7 @@ export default Vue.extend({
     components: { Autocomplete },
     mounted() {
       this.loadCountries();
-      const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "none";
+      common.hideLoading();
     },
     data() {
       return {
@@ -65,9 +64,7 @@ export default Vue.extend({
       },
 
       saveURLGenerationStatus() {
-        const loadingElement = document.querySelector(".loading");
-        if(loadingElement)
-          loadingElement.style.display = "block";
+        common.showLoading();
         let url = "/api/countries/" + this.countryUUID + "/url_gen_status";
         return axios.post(url, {
           countryId: this.countryId
@@ -91,9 +88,7 @@ export default Vue.extend({
               this.warningMessage = "Review Pending";
             }
           }
-          const loadingElement = document.querySelector(".loading");
-          if(loadingElement)
-            loadingElement.style.display = "none";
+          common.hideLoading();
         }).catch(() => {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.success = false;
@@ -104,9 +99,7 @@ export default Vue.extend({
             text: this.message,
             type: 'error'
           });
-          const loadingElement = document.querySelector(".loading");
-          if(loadingElement)
-            loadingElement.style.display = "none";
+          common.hideLoading();
         });
       },
 

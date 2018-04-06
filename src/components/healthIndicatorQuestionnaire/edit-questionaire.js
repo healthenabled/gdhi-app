@@ -5,6 +5,7 @@ import VeeValidate from "vee-validate";
 import Autocomplete from "vuejs-auto-complete";
 import 'date-input-polyfill';
 import VuejsDialog from "vuejs-dialog"
+import common from '../../common/common'
 
 const config = {
   fieldsBagName: 'fieldBags',
@@ -65,9 +66,7 @@ export default Vue.extend({
       });
     },
     saveData(action) {
-      const loadingElement = document.querySelector(".loading");
-      if(loadingElement)
-        loadingElement.style.display = "none";
+      common.hideLoading();
 
       let url = '/api/countries/'+ action;
 
@@ -77,15 +76,11 @@ export default Vue.extend({
         healthIndicators: this.getHealthIndicators(),
       }).then(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        const loadingElement = document.querySelector(".loading");
-        if(loadingElement)
-          loadingElement.style.display = "none";
+        common.hideLoading();
       }).catch(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         this.notifier({title: 'Error',message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
-        const loadingElement = document.querySelector(".loading");
-        if(loadingElement)
-          loadingElement.style.display = "none";
+        common.hideLoading();
       });
     },
     validator(action, successMessage){

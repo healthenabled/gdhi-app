@@ -1,4 +1,5 @@
 import axios from 'axios';
+import common from './common'
 
 export default ({
 
@@ -75,16 +76,13 @@ export default ({
   getDevelopmentIndicators(context, countryId, isMinimal) {
     const developmentIndicatorsUrl = `/api/countries/${countryId}/development_indicators`;
     const self = this;
-    const loadingElement = document.querySelector(".loading");
     axios.get(developmentIndicatorsUrl)
       .then(response => {
         context.developmentIndicators = isMinimal ? self.getMinimalDevelopmentIndicatorsData(self, response)
           : self.getDevelopmentIndicatorsData(self, response);
-          if(loadingElement)
-            loadingElement.style.display = "none";
+        common.hideLoading();
       }).catch((e) => {
-        if(loadingElement)
-          loadingElement.style.display = "none";
+        common.hideLoading();
         console.log('Error pulling development indicators data');
       });
   },
