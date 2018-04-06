@@ -22,8 +22,7 @@
         </a>
       </span>
       <span class="ft-element float-right contact">
-        <span class="">Contact : gdhi@globaldevincubator.org <span class="ft-element-pipe"> | </span></span>
-        <span>Data For November 2017</span>
+        <span class="">Contact : gdhi@globaldevincubator.org</span>
       </span>
     </div>
 
