@@ -8,7 +8,7 @@ describe('Generate URL Component', ()=> {
   let generateUrl
   let sandBox
   before(() => {
-    var Constructor = Vue.extend(generateUrlComp)
+    const Constructor = Vue.extend(generateUrlComp);
     generateUrl = new Constructor()
   })
   beforeEach(() => {

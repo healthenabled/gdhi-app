@@ -45,7 +45,7 @@ const geoData = {'type': 'FeatureCollection',
   ]}
 
 describe('World Map', () => {
-  var layer, mockLayer, callback, callBackSpy, mapStub
+  let layer, mockLayer, callback, callBackSpy, mapStub;
 
   beforeEach(() => {
     mapStub = sinon.stub(worldMap, 'drawMap').callsFake(function () {

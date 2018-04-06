@@ -4,7 +4,7 @@ import panel from '@/components/indicatorPanel/indicator-panel.js'
 describe("should test indicator panel", () => {
   let indicatorPanel, sandBox
   before(() => {
-    var Constructor = Vue.extend(panel)
+    const Constructor = Vue.extend(panel);
     indicatorPanel = new Constructor()
   })
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe("should test indicator panel", () => {
   })
 
   it("should set up data for health indicator for a country", () => {
-    var response = {}
+    const response = {};
     response.data = {
       "countryId": "GHA",
       "countryName": "Ghana",
@@ -68,7 +68,7 @@ describe("should test indicator panel", () => {
   })
 
   it("should set up data for global health indicator", () => {
-    var response = {}
+    const response = {};
     response.data = {
       "overallScore": 4,
       "categories": [{
@@ -88,10 +88,10 @@ describe("should test indicator panel", () => {
 
     indicatorPanel.getGlobalHealthIndicatorCallback(response)
 
-    var expected = {
+    const expected = {
       'overallCountryScore': response.data.overAllScore,
       'categories': response.data.categories
-    }
+    };
 
     expect(indicatorPanel.globalHealthIndicators).to.deep.equal(expected)
     expect(indicatorPanel.showCountryDetail).to.equal(false)

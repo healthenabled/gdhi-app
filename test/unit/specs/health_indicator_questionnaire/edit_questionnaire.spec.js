@@ -5,12 +5,12 @@ import VeeValidate from "vee-validate";
 describe('Questionnaire.vue', () => {
   let ques, sandBox
   before(() => {
-    var Constructor = Vue.extend(Questionnaire)
+    const Constructor = Vue.extend(Questionnaire);
     ques = new Constructor()//.$mount()
     Vue.use(VeeValidate);
   })
   beforeEach(() => {
-    var countries = [{id: "IND", name: "INDIA"},{id: "JPN", name: "Japan"},{id: "SRL", name: "SriLanka"}]
+    const countries = [{id: "IND", name: "INDIA"}, {id: "JPN", name: "Japan"}, {id: "SRL", name: "SriLanka"}];
     ques.countries = countries
     sandBox = sinon.sandbox.create()
   })

@@ -4,9 +4,9 @@ import {shallow} from '@vue/test-utils'
 
 describe("should test country profile", () => {
   let profile, sandBox
-  var response = {}
+  const response = {};
   before(() => {
-    var Constructor = Vue.extend(countryProfile)
+    const Constructor = Vue.extend(countryProfile);
     profile = new Constructor()
   })
   beforeEach(() => {
@@ -79,7 +79,7 @@ describe("should test country profile", () => {
       }
     });
 
-    var actualDate = wrapper.vm.$el.querySelector('#collected-date').innerText;
+    const actualDate = wrapper.vm.$el.querySelector('#collected-date').innerText;
     console.log(actualDate);
     expect(actualDate).to.match(/As on April 2018/);
 

@@ -65,11 +65,11 @@ export default Vue.extend({
     },
 
     fetchGlobalIndices: function () {
-      var self = this
+      const self = this;
       const loadingElement = document.querySelector(".loading");
       if(loadingElement)
         loadingElement.style.display = "block";
-      var windowProperties = window.appProperties
+      const windowProperties = window.appProperties;
       return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
         .then(function (globalHealthIndices) {
           self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
@@ -81,13 +81,13 @@ export default Vue.extend({
         })
     },
     fetchCategoricalIndicators: function () {
-      var self = this
+      const self = this;
       return axios.get('/api/health_indicator_options').then(function (categories) {
         self.categories = categories.data
       })
     },
     fetchPhases: function () {
-      var self = this
+      const self = this;
       self.phases = [{phaseValue: 1, phaseName: 'Phase 1'},
         {phaseValue: 2, phaseName: 'Phase 2'},
         {phaseValue: 3, phaseName: 'Phase 3'},
@@ -96,10 +96,10 @@ export default Vue.extend({
       return self.phases
     },
     mergeColorCodeToHealthIndicators: function (globalHealthIndices) {
-      var globalHealthIndicesWithScores = globalHealthIndices.data.countryHealthScores.filter((country) => {
+      const globalHealthIndicesWithScores = globalHealthIndices.data.countryHealthScores.filter((country) => {
         return country.overallScore != null
       });
-      var collection = globalHealthIndicesWithScores
+      const collection = globalHealthIndicesWithScores;
       collection.forEach((value) => {
         merge(value, {
           'colorCode': helper.getColorCodeFor(value['countryPhase'])

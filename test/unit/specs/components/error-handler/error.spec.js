@@ -4,7 +4,7 @@ import errorComp from '@/components/error-handler/404-error.js'
 describe('Error Component', ()=> {
   let error
   before(() => {
-    var Constructor = Vue.extend(errorComp)
+    const Constructor = Vue.extend(errorComp);
     error = new Constructor().$mount()
   })
   it('should display given error message', () => {

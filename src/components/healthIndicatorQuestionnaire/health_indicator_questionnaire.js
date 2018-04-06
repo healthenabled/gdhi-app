@@ -1,9 +1,8 @@
-import Vue from 'vue';
-import healthIndicatorForm from './health_indicator_questionnaire.html';
-import editQuestionnaire from './edit-questionaire.js';
-import axios from 'axios';
-import expandCollapseHelper from './expand-collapse-helper';
-import VeeValidate from 'vee-validate';
+import Vue from "vue";
+import healthIndicatorForm from "./health_indicator_questionnaire.html";
+import editQuestionnaire from "./edit-questionaire.js";
+import axios from "axios";
+import VeeValidate from "vee-validate";
 
 const config = {
   fieldsBagName: 'fieldBags',

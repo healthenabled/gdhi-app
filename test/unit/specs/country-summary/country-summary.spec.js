@@ -4,7 +4,7 @@ import summary from '@/components/countrySummary/country-summary.js'
 describe("should test country summary", () => {
   let countrySummary, sandBox
   before(() => {
-    var Constructor = Vue.extend(summary)
+    const Constructor = Vue.extend(summary);
     countrySummary = new Constructor()
   })
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe("should test country summary", () => {
     sandBox.restore()
   })
   it('should set data', () => {
-    var response = {}
+    const response = {};
     response.data = {
       "countryId": "PER",
       "countryName": "Peru",

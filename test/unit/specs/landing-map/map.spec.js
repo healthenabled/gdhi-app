@@ -7,7 +7,7 @@ import {} from '../../../../src/global.js'
 describe('Map vue component', () => {
   let sandBox, vueMap
   before(() => {
-    var Constructor = Vue.extend(map)
+    const Constructor = Vue.extend(map);
     vueMap = new Constructor()
   })
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('Map vue component', () => {
     sandBox.restore()
   })
   it('should fetch global health indices', (done) => {
-    var countryHealthScores = [{
+    const countryHealthScores = [{
       'countryId': 'AFG',
       'countryName': 'Afghanistan',
       'countryPhase': 5,
@@ -41,7 +41,7 @@ describe('Map vue component', () => {
           'supportingText': null
         }]
       }]
-    }]
+    }];
     const data = {'data': {'countryHealthScores': countryHealthScores}}
     const resolved = new Promise((resolve, reject) => resolve(data))
     sandBox.stub(axios, 'get').returns(resolved)

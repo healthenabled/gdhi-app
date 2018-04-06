@@ -7,7 +7,7 @@ describe('Questionnaire.vue', () => {
     const scopedVue = Vue.extend()
     const $route = { path: 'test', params:{} }
     scopedVue.prototype.$route = $route
-    var Constructor = scopedVue.extend(Questionnaire)
+    const Constructor = scopedVue.extend(Questionnaire);
     ques = new Constructor()//.$mount()
   })
   beforeEach(() => {
@@ -20,7 +20,7 @@ describe('Questionnaire.vue', () => {
     expect(ques.showEdit).to.equal(true)
   })
   it("should transform health indicators",  () => {
-    var data = [{
+    const data = [{
       "categoryId": 1,
       "categoryName": "c1",
       "indicators": [{
@@ -43,12 +43,12 @@ describe('Questionnaire.vue', () => {
         "indicatorDefinition": "ind3 def",
         "scores": [{"score": 0, "scoreDefinition": "ind3 0 def"}, {"score": 1, "scoreDefinition": "ind3 1 def"}]
       }]
-    }]
-    var expected = {
+    }];
+    const expected = {
       1: {categoryId: 1, indicatorId: 1, score: null, supportingText: ''},
       2: {categoryId: 2, indicatorId: 2, score: null, supportingText: ''},
       3: {categoryId: 2, indicatorId: 3, score: null, supportingText: ''}
-    }
+    };
 
     ques.setUpHealthIndicators(data, false)
 
@@ -64,8 +64,8 @@ describe('Questionnaire.vue', () => {
     })
   })
   it('should transform data for view form', () => {
-    var options = {}
-    var scores = {}
+    const options = {};
+    const scores = {};
     options.data = [{
       "categoryId": 1,
       "categoryName": "c1",
@@ -128,11 +128,11 @@ describe('Questionnaire.vue', () => {
           "supportingText": "sp3"
         }]
     }
-    var expected = {
+    const expected = {
       1: {categoryId: 1, indicatorId: 1, score: null, supportingText: 'sp1'},
       2: {categoryId: 2, indicatorId: 2, score: 2, supportingText: 'sp2'},
       3: {categoryId: 2, indicatorId: 3, score: 5, supportingText: 'sp3'}
-    }
+    };
 
     ques.viewFormCallback(options, scores)
 
