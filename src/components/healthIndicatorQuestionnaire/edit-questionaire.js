@@ -2,15 +2,15 @@ import Vue from "vue";
 import editForm from "./edit-questionnaire.html";
 import axios from "axios";
 import VeeValidate from "vee-validate";
-import VModal from 'vue-js-modal';
 import Autocomplete from "vuejs-auto-complete";
 import 'date-input-polyfill';
+import VuejsDialog from "vuejs-dialog"
 
 const config = {
   fieldsBagName: 'fieldBags',
 };
 Vue.use(VeeValidate, config);
-Vue.use(VModal, { dialog: true });
+Vue.use(VuejsDialog)
 
 export default Vue.extend({
   components: { Autocomplete },
@@ -111,29 +111,21 @@ export default Vue.extend({
       this.saveData('save');
       this.notifier({title: 'Success',message: 'Form saved successfully!', type: 'success'});
     },
-    extracted: function () {
+    getConfirmationDialog () {
+      let options = { okText: 'Confirm', cancelText: 'Cancel'};
+      return this.$dialog.confirm('Publish health index form for ' + this.countrySummary.countryName
+        + ', this cannot be reverted', options)
+        .then(() => {
+          return this.validator('publish', 'Data is now live');
+        }).catch(() => {
+          console.log('some error');
+        });
+    },
+    publish() {
       this.questionnaire.forEach((category) => {
         this.$set(category, 'showCategory', true);
       });
-      return this.validator('publish', 'Data is now live');
-    },
-    publish(){
-      this.$modal.show('dialog', {
-        title: 'Confirmation',
-        text: "Publish health index form for "+ this.countrySummary.countryName +", this cannot be reverted",
-        buttons: [
-          {
-            title: 'Cancel'
-          },
-          {
-            title: 'Confirm',
-            handler: () => {
-              this.extracted();
-              this.$modal.hide('dialog');
-            }
-          }
-        ]
-      });
+      this.getConfirmationDialog();
     },
     getHealthIndicators() {
       return Object.entries(this.healthIndicators).map((entry) => entry[1]);
