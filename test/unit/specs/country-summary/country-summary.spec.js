@@ -26,9 +26,9 @@ describe("should test country summary", () => {
       "dataFeederName": "ffsd",
       "dataFeederRole": "sdfds",
       "dataFeederEmail": "d@d.com",
-      "dataCollectorName": "",
-      "dataCollectorRole": "",
-      "dataCollectorEmail": "",
+      "dataApproverName": "",
+      "dataApproverRole": "",
+      "dataApproverEmail": "",
       "collectedDate": "08-09-2001",
       "resources": ["dfdf"],
       "countryAlpha2Code": "PE"

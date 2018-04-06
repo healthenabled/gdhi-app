@@ -38,7 +38,8 @@
           <label for="nameofPersonEnteringData">Name of person entering data</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="text" :disabled="!showEdit" name='feederName' :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'" id="nameofPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederName" :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
+          <input type="text" :disabled="!showEdit" name='feederName' :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'" id="nameofPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederName"
+                 :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
         </div>
         <div class="form-group column-33percent">
           <label for="roleOfPersonEnteringData">Role of the person entering data</label>
@@ -55,19 +56,25 @@
       </div>
       <div class="row">
         <div class="form-group column-33percent">
-          <label for="nameofPersonCollectedData">Name of the person who collected data</label>
-          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="text" :disabled="!showEdit" class="form-control" id="nameofPersonCollectedData" v-model="countrySummary.dataCollectorName">
+          <label for="nameofPersonApprovedData">Name of the approver</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="text" :disabled="!showEdit" class="form-control" id="nameofPersonApprovedData"  name="approvername" v-model="countrySummary.dataApproverName" :class="errors.has('approvername') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required'"
+                 :title="errors.has('approvername') ? 'Name of person approving data is required' : 'Please Enter Name of person approving data'">
         </div>
         <div class="form-group column-33percent">
-          <label for="roleofPersonCollectedData">Role of the person who collected data</label>
-          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="text" :disabled="!showEdit" class="form-control" id="roleofPersonCollectedData" v-model="countrySummary.dataCollectorRole">
+          <label for="roleofPersonApprovedData">Role of the approver</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="text" :disabled="!showEdit" class="form-control" id="roleofPersonApprovedData" name="approverrole" v-model="countrySummary.dataApproverRole" :class="errors.has('approverrole') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required'"
+                 :title="errors.has('approverrole') ? 'Role of person approving data is required' : 'Please Enter Role of person approving data'">
         </div>
         <div class="form-group column-33percent">
-          <label for="emailofPersonCollectedData">Email of the person who collected data</label>
-          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="email" :disabled="!showEdit" class="form-control" id="emailofPersonCollectedData" v-model="countrySummary.dataCollectorEmail">
+          <label for="emailofPersonApprovedData">Email of the approver</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="email" :disabled="!showEdit" class="form-control" id="emailofPersonApprovedData" name="approveremail" v-model="countrySummary.dataApproverEmail" :class="errors.has('approveremail') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required|email'"
+                 :title="errors.has('approveremail') ? 'Email of person approving data is required' : 'Please Enter Email of person approving data'">
         </div>
       </div>
       <div class="row">
