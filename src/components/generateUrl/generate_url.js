@@ -91,9 +91,6 @@ export default Vue.extend({
               this.warningMessage = "Review Pending";
             }
           }
-          // const infoElement = document.querySelector("#info-box");
-          // infoElement.innerText = this.warningMessage;
-
           const loadingElement = document.querySelector(".loading");
           if(loadingElement)
             loadingElement.style.display = "none";
