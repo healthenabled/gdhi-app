@@ -1,7 +1,7 @@
 <div class="health-indicator-questionnaire content-centered">
   <div class="clearfix">
     <span class="page-title">
-        <img v-if="countrySummary.countryAlpha2Code" :src="'/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg'" width="50" class="flag" /> {{countrySummary.countryName}} - Health Indicator Questionnaire
+        <img v-if="countrySummary.countryAlpha2Code" :src="'/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg'" width="50" class="flag" /> {{countrySummary.countryName}} - Digital Health Questionnaire
     </span>
     <div class="float-right button-container">
       <span v-if="status === 'REVIEW_PENDING' && isAdmin">
@@ -16,6 +16,11 @@
     </div>
   </div>
   <form class="health-indicator-questionnaire-contact-info clearfix">
+    <div class="copy-small-italics copy-blue">
+      Note: Global Digital Health Index Data will be displayed publicly. As such, please obtain approval for
+      submission from the relevant government agency (Ministry of Health, Digital Health Agency, etc.) and provide
+      the contact information of the approver.
+    </div>
     <div class="health-indicator-questionnaire-contact-info-heading header-bold">Contact Information</div>
     <div class="box">
       <div class="row">
