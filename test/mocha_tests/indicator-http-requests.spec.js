@@ -1,0 +1,133 @@
+import Obj from  "../../src/common/indicator-http-requests.js";
+import moxios from 'moxios';
+
+describe("Indicator HTTP Requests and Helper methods", () => {
+  const response = {
+    gniPerCapita: 1000,
+    totalPopulation: 1000000,
+    adultLiteracy: 70.22,
+    doingBusinessIndex: 22.22,
+    lifeExpectancy: 60,
+    healthExpenditure: 22.23,
+    totalNcdDeathsPerCapita: 22.2,
+    under5Mortality: 22
+  };
+  const developmentIndicatorsData = [
+    {
+      CONTEXT: {
+        'GNI per capita, atlas method (current US$)': Obj.getGNIPerCapitaInKilo(response.gniPerCapita),
+        'Total population': Obj.getTotalPopulationInMillion(response.totalPopulation),
+        'Adult literacy rate, population 15+ years, both sexes (%)':
+          Obj.getInPercenatge(response.adultLiteracy),
+        'Ease of doing business index': Obj.getValue(response.doingBusinessIndex),
+      },
+    },
+    {
+      HEALTH: {
+        'Life expectancy at birth (years)': Obj.getValue(response.lifeExpectancy),
+        'Health expenditure (% of GDP)': Obj.getInPercenatge(response.healthExpenditure),
+        'Cause of death, by non-communicable diseases (% of total)':
+          Obj.getInPercenatge(response.totalNcdDeathsPerCapita),
+        'Mortality rate, under-5 (per 1,000 live births)': Obj.getValue(response.under5Mortality),
+      },
+    },
+  ];
+  const minimalDevelopmentIndicatorsData = [
+    {
+      CONTEXT: {
+        'GNI per capita, atlas method (current US$)': Obj.getGNIPerCapitaInKilo(response.gniPerCapita),
+        'Total population': Obj.getTotalPopulationInMillion(response.totalPopulation),
+      },
+    },
+    {
+      HEALTH: {
+        'Life expectancy at birth (years)': Obj.getValue(response.lifeExpectancy),
+        'Health expenditure (% of GDP)': Obj.getInPercenatge(response.healthExpenditure),
+      },
+    },
+  ];
+  it("getGNIPerCapitaInKilo should return value in K or NA if the value is null or undefined", () => {
+    expect(Obj.getGNIPerCapitaInKilo(2000)).to.equal('2K');
+    expect(Obj.getGNIPerCapitaInKilo(25000)).to.equal('25K');
+    expect(Obj.getGNIPerCapitaInKilo(25450)).to.equal('25.45K');
+    expect(Obj.getGNIPerCapitaInKilo(undefined)).to.equal('NA');
+    expect(Obj.getGNIPerCapitaInKilo(null)).to.equal('NA');
+    expect(Obj.getGNIPerCapitaInKilo(0)).to.equal('NA');
+  });
+  it("getTotalPopulationInMillion should return value in M or NA if the value is null or undefined", () => {
+    expect(Obj.getTotalPopulationInMillion(20000000)).to.equal('2M');
+    expect(Obj.getTotalPopulationInMillion(22233432)).to.equal('2.22M');
+    expect(Obj.getTotalPopulationInMillion(undefined)).to.equal('NA');
+    expect(Obj.getTotalPopulationInMillion(null)).to.equal('NA');
+    expect(Obj.getTotalPopulationInMillion(0)).to.equal('NA');
+  });
+  it("getInPercenatge should append percent sign and return the value rounded off to one decimal or NA for null or undefined", () => {
+    expect(Obj.getInPercenatge(10.27)).to.equal('10.3%');
+    expect(Obj.getInPercenatge(10.24)).to.equal('10.2%');
+    expect(Obj.getInPercenatge(undefined)).to.equal('NA');
+    expect(Obj.getInPercenatge(null)).to.equal('NA');
+    expect(Obj.getInPercenatge(0)).to.equal('NA');
+  });
+  it("getValue should return the value if present or NA for null or undefined", () => {
+    expect(Obj.getValue(12)).to.equal(12);
+    expect(Obj.getValue(undefined)).to.equal('NA');
+    expect(Obj.getValue(null)).to.equal('NA');
+    expect(Obj.getValue(0)).to.equal('NA');
+  });
+  it ("should return the correct value when the getMinimalDevelopmentIndicatorsData is called", () => {
+    expect(Obj.getMinimalDevelopmentIndicatorsData(response)).to.deep.equal(minimalDevelopmentIndicatorsData);
+  });
+  it ("should return the correct value when the getDevelopmentIndicatorsData is called", () => {
+    expect(Obj.getDevelopmentIndicatorsData(response)).to.deep.equal(developmentIndicatorsData);
+  });
+  it ("should set the developmentIndicators data when getDevelopmentIndicators is called", (done) => {
+    const returnPromise = Obj.getDevelopmentIndicators('IND', false);
+    moxios.install();
+    moxios.stubRequest('/api/countries/IND/development_indicators', {
+      status: 200,
+      response: response
+    });
+    
+    moxios.wait(() => { 
+      returnPromise.then((value)=> {
+        expect(value).to.deep.equal(developmentIndicatorsData);
+      });
+      done()
+      moxios.uninstall();
+    });
+    
+  });
+  it ("should set the developmentIndicators data when getDevelopmentIndicators is called for minimal indicators", (done) => {
+    const returnPromise = Obj.getDevelopmentIndicators('IND', true);
+    moxios.install();
+    moxios.stubRequest('/api/countries/IND/development_indicators', {
+      status: 200,
+      response: response
+    });
+    
+    moxios.wait(() => { 
+      returnPromise.then((value)=> {
+        expect(value).to.deep.equal(minimalDevelopmentIndicatorsData);
+      });
+      done()
+      moxios.uninstall();
+    });
+  });
+
+  it ("should set the developmentIndicators data when getDevelopmentIndicators is called for minimal indicators", (done) => {
+    const returnPromise = Obj.getDevelopmentIndicators('IND', true);
+    moxios.install();
+    moxios.stubRequest('/api/countries/IND/development_indicators', {
+      status: 500,
+      response: "Erroe"
+    });
+    
+    moxios.wait(() => { 
+      returnPromise.then((value)=> {
+        expect(value).to.deep.equal("error");
+      });
+      done()
+      moxios.uninstall();
+    });
+  });
+})

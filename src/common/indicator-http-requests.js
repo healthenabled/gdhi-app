@@ -12,78 +12,67 @@ export default ({
     return populationInMillion ? `${populationInMillion}M` : 'NA';
   },
 
-  getHealthExpenditureInPercentage(healthExpenditure) {
-    return healthExpenditure ? `${Number((healthExpenditure).toFixed(1))}%` : 'NA';
+  getInPercenatge (value) {
+    return value ? `${Number((value).toFixed(1))}%` : 'NA';
   },
 
-  getAdultLiteracyInPercentage(adultLiteracy) {
-    return adultLiteracy ? `${Number((adultLiteracy).toFixed(1))}%` : 'NA';
+  getValue (value) {
+    return  !value ? 'NA' : value;
   },
-  getNCDDeathsInPercentage(ncdDeaths) {
-    return ncdDeaths ? `${Number((ncdDeaths).toFixed(1))}%` : 'NA';
-  },
-  getLifeExpectancy(lifeExpectancy) {
-    return lifeExpectancy === null ? 'NA' : lifeExpectancy;
-  },
-  getUnder5Mortality(under5Mortality) {
-    return under5Mortality === null ? 'NA' : under5Mortality;
-  },
-  getDoingBusinessIndex(doingBusinessIndex) {
-    return doingBusinessIndex === null ? 'NA' : doingBusinessIndex;
-  },
-  getMinimalDevelopmentIndicatorsData(self, response) {
+  
+  getMinimalDevelopmentIndicatorsData(response) {
+    let self = this;
     const developmentIndicatorsData = [
       {
         CONTEXT: {
-          'GNI per capita, atlas method (current US$)': self.getGNIPerCapitaInKilo(response.data.gniPerCapita),
-          'Total population': self.getTotalPopulationInMillion(response.data.totalPopulation),
+          'GNI per capita, atlas method (current US$)': self.getGNIPerCapitaInKilo(response.gniPerCapita),
+          'Total population': self.getTotalPopulationInMillion(response.totalPopulation),
         },
       },
       {
         HEALTH: {
-          'Life expectancy at birth (years)': self.getLifeExpectancy(response.data.lifeExpectancy),
-          'Health expenditure (% of GDP)': self.getHealthExpenditureInPercentage(response.data.healthExpenditure),
+          'Life expectancy at birth (years)': self.getValue(response.lifeExpectancy),
+          'Health expenditure (% of GDP)': self.getInPercenatge(response.healthExpenditure),
         },
       },
     ];
     return developmentIndicatorsData;
   },
 
-  getDevelopmentIndicatorsData(self, response) {
+  getDevelopmentIndicatorsData(response) {
+    var self = this;
     const developmentIndicatorsData = [
       {
         CONTEXT: {
-          'GNI per capita, atlas method (current US$)': self.getGNIPerCapitaInKilo(response.data.gniPerCapita),
-          'Total population': self.getTotalPopulationInMillion(response.data.totalPopulation),
+          'GNI per capita, atlas method (current US$)': self.getGNIPerCapitaInKilo(response.gniPerCapita),
+          'Total population': self.getTotalPopulationInMillion(response.totalPopulation),
           'Adult literacy rate, population 15+ years, both sexes (%)':
-            self.getAdultLiteracyInPercentage(response.data.adultLiteracy),
-          'Ease of doing business index': self.getDoingBusinessIndex(response.data.doingBusinessIndex),
+            this.getInPercenatge(response.adultLiteracy),
+          'Ease of doing business index': self.getValue(response.doingBusinessIndex),
         },
       },
       {
         HEALTH: {
-          'Life expectancy at birth (years)': self.getLifeExpectancy(response.data.lifeExpectancy),
-          'Health expenditure (% of GDP)': self.getHealthExpenditureInPercentage(response.data.healthExpenditure),
+          'Life expectancy at birth (years)': self.getValue(response.lifeExpectancy),
+          'Health expenditure (% of GDP)': self.getInPercenatge(response.healthExpenditure),
           'Cause of death, by non-communicable diseases (% of total)':
-            self.getNCDDeathsInPercentage(response.data.totalNcdDeathsPerCapita),
-          'Mortality rate, under-5 (per 1,000 live births)': self.getUnder5Mortality(response.data.under5Mortality),
+            self.getInPercenatge(response.totalNcdDeathsPerCapita),
+          'Mortality rate, under-5 (per 1,000 live births)': self.getValue(response.under5Mortality),
         },
       },
     ];
     return developmentIndicatorsData;
   },
 
-  getDevelopmentIndicators(context, countryId, isMinimal) {
+  getDevelopmentIndicators( countryId, isMinimal) {
     const developmentIndicatorsUrl = `/api/countries/${countryId}/development_indicators`;
     const self = this;
-    axios.get(developmentIndicatorsUrl)
+    return (axios.get(developmentIndicatorsUrl)
       .then(response => {
-        context.developmentIndicators = isMinimal ? self.getMinimalDevelopmentIndicatorsData(self, response)
-          : self.getDevelopmentIndicatorsData(self, response);
-        common.hideLoading();
+        return (isMinimal ? self.getMinimalDevelopmentIndicatorsData(response.data)
+          : self.getDevelopmentIndicatorsData(response.data));
       }).catch((e) => {
-        common.hideLoading();
-        console.log('Error pulling development indicators data');
-      });
+        return e;
+      }));
   },
 });
