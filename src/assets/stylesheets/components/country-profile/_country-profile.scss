@@ -1,6 +1,6 @@
 .country-detail {
-  .copy-italics{
-    color: $font-grey;
+  .copy-blue {
+    margin-top: 20px;
   }
   .sub-header {
     text-transform: uppercase;
@@ -18,10 +18,11 @@
     border-bottom: 1px solid $border-color;
   }
   .indicator-desc {
-    width: calc(100% - 62px);
+    width: calc(100% - 48px);
     display: inline-block;
     vertical-align: middle;
     padding: 10px 0;
+    margin-right: 20px;
   }
   .heading-row div {
     display: inline-block;
@@ -39,6 +40,20 @@
   }
   .country-text {
     list-style: none;
+  }
+  .header-section {
+    position: relative;
+  }
+  #collected-date {
+    position: absolute;
+    bottom: 20px;
+    left: 80px;
+  }
+  .accordion-content {
+    .indicator {
+      display: flex;
+      align-items: center;
+    }
   }
 }
 
