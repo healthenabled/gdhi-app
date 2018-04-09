@@ -74,6 +74,12 @@ describe("EditQuestionaire",()=>{
 
     component.vm.saveCorrection();
 
-    sinon.assert.calledWith(saveData,'saveCorrection', 'Form saved successfully!');
+    sinon.assert.calledWith(saveData,'saveCorrection');
+    sinon.assert.calledWith(notifier,{
+      title: 'Success',
+      message: 'Form saved successfully!',
+      type: 'success'
+    });
+
   });
 });
