@@ -1,19 +1,19 @@
 <div class="countries-container content-centered">
-<div class="countries-list">
-  <div class="countries-list-heading page-title">List of Countries</div>
-  <div class="countries-list-section-export text-right">
-      <span><a href="/api/export_global_data" class="link-blue">Export Data For All Countries</a></span>
+  <div class="countries-list">
+    <div class="countries-list-heading page-title">List of Countries</div>
+    <div class="countries-list-section-export text-right">
+        <span><a href="/api/export_global_data" class="link-blue">Export Data For All Countries</a></span>
+      </div>
+    <div class="countries-list-section clearfix">
+      <div class="countries-list-section-description">
+        <p>The overall GDHI phases are listed below for each participating country. Country scores on 19 indicators determine the overall phase of digital health for a country.</p>
+      <p>For a more detailed breakdown for each country, please visit the individual country page</p></div>
     </div>
-  <div class="countries-list-section clearfix">
-    <div class="countries-list-section-description">
-      <p>The overall GDHI phases are listed below for each participating country. Country scores on 19 indicators determine the overall phase of digital health for a country.</p>
-    <p>For a more detailed breakdown for each country, please visit the individual country page</p></div>
+    <ul class="countries-list-details">
+      <li v-for="country in countryList" class="countries-list-details-country">
+        <span :class="'country-score phase' + country.overallPhase">{{country.overallPhase ? country.overallPhase : "NA"}}</span>
+        <span class="country-name" @click="showCountryDetails(country.countryId)">{{country.countryName}}</span>
+      </li>
+    </ul>
   </div>
-  <ul class="countries-list-details">
-    <li v-for="country in countryList" class="countries-list-details-country">
-      <span :class="'country-score phase' + country.overallPhase">{{country.overallPhase ? country.overallPhase : "NA"}}</span>
-      <span class="country-name" @click="showCountryDetails(country.countryId)">{{country.countryName}}</span>
-    </li>
-  </ul>
-</div>
 </div>
