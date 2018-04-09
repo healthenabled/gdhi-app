@@ -2,7 +2,6 @@ import Vue from "vue";
 import editForm from "./edit-questionnaire.html";
 import axios from "axios";
 import VeeValidate from "vee-validate";
-import Autocomplete from "vuejs-auto-complete";
 import 'date-input-polyfill';
 import VuejsDialog from "vuejs-dialog"
 import common from '../../common/common'
@@ -11,10 +10,10 @@ const config = {
   fieldsBagName: 'fieldBags',
 };
 Vue.use(VeeValidate, config);
-Vue.use(VuejsDialog)
+Vue.use(VuejsDialog);
 
 export default Vue.extend({
-  components: { Autocomplete },
+  name: 'EditQuestionnaire',
   props: {
     questionnaire: {
       type: Array,
@@ -130,7 +129,7 @@ export default Vue.extend({
         .then(() => {
           return props.callBackMethod.apply(this, props.callBackArgs);
         }).catch(() => {
-          console.log('some error');
+          this.notifier({title: 'Error',message: 'Something went wrong', type: 'error'});
         });
     },
     publish() {
