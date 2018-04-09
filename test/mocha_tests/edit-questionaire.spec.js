@@ -65,6 +65,20 @@ describe("EditQuestionaire",()=>{
     sinon.assert.calledOnce(getConfirmationDialog)
   });
 
+  it("should save data and call notify on admin save correction",() => {
+    let saveData = sinon.spy();
+    let notifier = sinon.spy();
 
+    component.vm.saveData = saveData;
+    component.vm.notifier = notifier;
 
+    component.vm.saveCorrection();
+
+    sinon.assert.calledWith(saveData,'saveCorrection');
+    sinon.assert.calledWith(notifier,{
+      title: 'Success',
+      message: 'Form saved successfully!',
+      type: 'success'
+    });
+  });
 });
