@@ -83,6 +83,24 @@ export default Vue.extend({
         common.hideLoading();
       });
     },
+    deleteData() {
+      common.showLoading();
+      let url = '/api/countries/delete'
+
+      axios.post(url, {
+        countryId: this.countrySummary.countryId
+      }).then(() => {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        this.showEdit = false;
+        this.notifier({title: 'Success',message: 'Form Data Deleted Successfully. Redirecting to Admin Page', type: 'success'});
+        setTimeout(this.redirectToAdmin, 2000);
+        common.hideLoading();
+      }).catch(() => {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+        this.notifier({title: 'Error',message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
+        common.hideLoading();
+      });
+    },
     validator(action, successMessage){
       return this.$validator.validateAll().then((result) => {
         if (result) {
@@ -106,12 +124,11 @@ export default Vue.extend({
       this.saveData('save');
       this.notifier({title: 'Success',message: 'Form saved successfully!', type: 'success'});
     },
-    getConfirmationDialog () {
+    getConfirmationDialog (props) {
       let options = { okText: 'Confirm', cancelText: 'Cancel'};
-      return this.$dialog.confirm('Publish health index form for ' + this.countrySummary.countryName
-        + ', this cannot be reverted', options)
+      return this.$dialog.confirm(props.message , options)
         .then(() => {
-          return this.validator('publish', 'Data is now live');
+          return props.callBackMethod.apply(this, props.callBackArgs);
         }).catch(() => {
           console.log('some error');
         });
@@ -120,7 +137,15 @@ export default Vue.extend({
       this.questionnaire.forEach((category) => {
         this.$set(category, 'showCategory', true);
       });
-      this.getConfirmationDialog();
+      this.getConfirmationDialog({message: 'Publish health index form for ' + this.countrySummary.countryName
+        + ', this cannot be reverted', callBackMethod: this.validator, callBackArgs: ['publish', 'Data is now live']});
+    },
+    reject() {
+      this.getConfirmationDialog({message: 'Reject health index form for ' + this.countrySummary.countryName
+        + ', this cannot be reverted', callBackMethod: this.deleteData, callBackArgs: []});
+    },
+    redirectToAdmin() {
+      this.$router.push({ path: `/admin` });
     },
     getHealthIndicators() {
       return Object.entries(this.healthIndicators).map((entry) => entry[1]);
