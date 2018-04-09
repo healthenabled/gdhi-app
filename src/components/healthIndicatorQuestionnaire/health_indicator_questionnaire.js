@@ -1,6 +1,6 @@
 import Vue from "vue";
 import healthIndicatorForm from "./health_indicator_questionnaire.html";
-import editQuestionnaire from "./edit-questionaire.js";
+import EditQuestionnaire from "./edit-questionaire.js";
 import axios from "axios";
 import VeeValidate from "vee-validate";
 import common from '../../common/common'
@@ -12,7 +12,7 @@ Vue.use(VeeValidate, config);
 
 export default Vue.extend({
   components: {
-    editQuestionnaire
+    EditQuestionnaire
   },
   data() {
     const countrySummary = {
