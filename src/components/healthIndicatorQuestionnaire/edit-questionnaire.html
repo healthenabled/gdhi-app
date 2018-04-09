@@ -1,5 +1,5 @@
 <div class="health-indicator-questionnaire content-centered">
-  <div class="clearfix">
+  <div class="clearfix fixed-sub-header">
     <span class="page-title">
         <img v-if="countrySummary.countryAlpha2Code" :src="'/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg'" width="50" class="flag" /> {{countrySummary.countryName}} - Digital Health Questionnaire
     </span>
@@ -15,7 +15,7 @@
       </span>
     </div>
   </div>
-  <form class="health-indicator-questionnaire-contact-info clearfix">
+  <form class="health-indicator-questionnaire-contact-info clearfix sub-content">
     <div class="copy-small-italics copy-blue">
       Note: Global Digital Health Index Data will be displayed publicly. As such, please obtain approval for
       submission from the relevant government agency (Ministry of Health, Digital Health Agency, etc.) and provide

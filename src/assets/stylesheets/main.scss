@@ -430,6 +430,16 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   top: -100px;
   visibility: hidden;
 }
+.fixed-sub-header {
+  position: fixed;
+  top:88px;
+  width: 90%;
+  background: $body-bg;
+  z-index: 3;
+}
+.sub-content {
+  margin-top: 88px;
+}
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
