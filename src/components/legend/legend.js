@@ -10,4 +10,5 @@ export default Vue.extend({
     return this.object;
   },
   template: mapLegend,
+  name: "MapLegend"
 });

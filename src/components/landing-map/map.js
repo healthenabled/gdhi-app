@@ -2,7 +2,7 @@ import Vue from 'vue'
 import mapTemplate from './map.html'
 import { EventBus } from '../common/event-bus'
 import indicatorPanel from '../indicatorPanel/indicator-panel.js'
-import mapLegend from '../legend/legend.js'
+import MapLegend from '../legend/legend.js'
 import axios from 'axios'
 import worldMap from './world-map'
 import helper from './map-helper'
@@ -11,7 +11,7 @@ import common from '../../common/common'
 
 export default Vue.extend({
   components: {
-    indicatorPanel, mapLegend
+    indicatorPanel, MapLegend
   },
   data () {
     // Todo: Remove mapData and directly return data
