@@ -6,6 +6,7 @@ import VuejsDialog from "vuejs-dialog";
 import common from '../../common/common';
 import dateFormat from 'dateformat';
 import { generateFormPDF } from "../pdfHelper/pdf-generate";
+
 const config = {
   fieldsBagName: 'fieldBags',
 };
