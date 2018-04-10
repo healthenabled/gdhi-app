@@ -247,11 +247,18 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     @extend .link-blue;
     background: transparent;
     box-shadow: none;
+    color: $logo-blue;
   }
   &.btn-green {
     background-color: $positive;
     &:hover {
       background-color: darken($positive, 10%);
+    }
+  }
+  &.btn-red {
+    background-color: $negative;
+    &:hover {
+      background-color: darken($negative, 10%);
     }
   }
   &.disabled {
@@ -516,3 +523,22 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     @extend .copy-italics;
   }
 }
+
+// popup overrides
+.dg-content {
+  @extend .copy
+}
+.dg-content-body {
+  border-color: $border-color;
+}
+.dg-btn--cancel, .dg-btn--ok  {
+  @extend .btn;
+}
+.dg-btn--ok {
+  @extend .btn-green;
+}
+.dg-btn--cancel {
+  @extend .btn-red;
+}
+
+
