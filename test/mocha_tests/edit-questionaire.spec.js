@@ -1,22 +1,24 @@
 import {shallow} from "@vue/test-utils";
 import EditQuestionnaire from "../../src/components/healthIndicatorQuestionnaire/edit-questionaire.js";
+import VueRouter from 'vue-router';
 import moxios from "moxios";
 import sinon from "sinon";
 
 
 describe("EditQuestionaire",()=>{
   let component;
-
+  const router = new VueRouter()
   beforeEach(()=> {
     component = shallow(EditQuestionnaire, {
       propsData: {
         showEdit: true,
-        countrySummary: {resources: [''],countryId:'some-random-uuid'},
+        countrySummary: {countryName:'India',resources: [''],countryId:'some-random-uuid'},
         questionnaire: [],
         healthIndicators: {},
         status: "status",
         isAdmin: false
-      }
+      },
+      router
     });
   });
 
@@ -80,5 +82,72 @@ describe("EditQuestionaire",()=>{
       message: 'Form saved successfully!',
       type: 'success'
     });
+  });
+
+  it("should call getConfirmationDialog on click of Reject with the given params", () =>{
+    let getConfirmationDialog = sinon.spy();
+    let deleteData = sinon.spy();
+    component.vm.deleteData = deleteData;
+    component.vm.getConfirmationDialog = getConfirmationDialog;
+    component.vm.reject();
+
+    sinon.assert.calledWith(getConfirmationDialog,
+      { message: 'Reject health index form for India, this cannot be reverted',
+        callBackMethod: deleteData,
+        callBackArgs: []
+      })
+  });
+
+  it('should call delete api and redirect to admin page',  (done) => {
+    moxios.install();
+    let routerPush = sinon.spy(router, 'push');
+
+    component.vm.deleteData();
+
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      expect(request.config.method).to.equal("post");
+      expect(request.config.url).to.equal("/api/countries/delete");
+
+      let requestParams = JSON.parse(request.config.data);
+      expect(requestParams.countryId).to.equal('some-random-uuid');
+      request.respondWith({
+        status: 200,
+      }).then(() => {
+        sinon.assert.calledWith(routerPush,{ path: `/admin` });
+        done();
+      });
+    });
+    moxios.uninstall();
+  });
+
+  it('should call delete api and notify with error message on server error',  (done) => {
+    moxios.install();
+
+    let notifier = sinon.spy();
+    component.vm.notifier = notifier;
+
+    component.vm.deleteData();
+
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      expect(request.config.method).to.equal("post");
+      expect(request.config.url).to.equal("/api/countries/delete");
+
+      let requestParams = JSON.parse(request.config.data);
+      expect(requestParams.countryId).to.equal('some-random-uuid');
+      request.respondWith({
+        status: 500,
+      }).then(() => {
+        sinon.assert.calledWith(notifier,
+          {
+            title: 'Error',
+            message: 'Something has gone wrong. Please refresh the Page!',
+            type: 'error'}
+            );
+        done();
+      });
+    });
+    moxios.uninstall();
   });
 });

@@ -90,9 +90,7 @@ export default Vue.extend({
         countryId: this.countrySummary.countryId
       }).then(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        this.showEdit = false;
-        this.notifier({title: 'Success',message: 'Form Data Deleted Successfully. Redirecting to Admin Page', type: 'success'});
-        setTimeout(this.redirectToAdmin, 2000);
+        this.$router.push({ path: `/admin` });
         common.hideLoading();
       }).catch(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -104,8 +102,12 @@ export default Vue.extend({
       return this.$validator.validateAll().then((result) => {
         if (result) {
           this.saveData(action);
-          this.notifier({title: 'Success',message: successMessage, type: 'success'});
-          this.showEdit = false;
+          if (action === 'publish'){
+            this.$router.push({ path: `/admin` });
+          } else {
+            this.notifier({title: 'Success', message: successMessage, type: 'success'});
+            this.showEdit = false;
+          }
         } else {
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.notifier({title: 'Error',message: 'Please correct the below highlighted fields.', type: 'error'});
@@ -128,8 +130,6 @@ export default Vue.extend({
       return this.$dialog.confirm(props.message , options)
         .then(() => {
           return props.callBackMethod.apply(this, props.callBackArgs);
-        }).catch(() => {
-          this.notifier({title: 'Error',message: 'Something went wrong', type: 'error'});
         });
     },
     publish() {
@@ -137,14 +137,11 @@ export default Vue.extend({
         this.$set(category, 'showCategory', true);
       });
       this.getConfirmationDialog({message: 'Publish health index form for ' + this.countrySummary.countryName
-        + ', this cannot be reverted', callBackMethod: this.validator, callBackArgs: ['publish', 'Data is now live']});
+        + ', this cannot be reverted', callBackMethod: this.validator, callBackArgs: ['publish']});
     },
     reject() {
       this.getConfirmationDialog({message: 'Reject health index form for ' + this.countrySummary.countryName
         + ', this cannot be reverted', callBackMethod: this.deleteData, callBackArgs: []});
-    },
-    redirectToAdmin() {
-      this.$router.push({ path: `/admin` });
     },
     getHealthIndicators() {
       return Object.entries(this.healthIndicators).map((entry) => entry[1]);
