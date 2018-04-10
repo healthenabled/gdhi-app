@@ -12,4 +12,5 @@ export default Vue.extend({
   mounted() {
     common.hideLoading();
   },
+  name: "ErrorComp"
 });

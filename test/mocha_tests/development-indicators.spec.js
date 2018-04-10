@@ -40,31 +40,43 @@ describe("Development Indicators", () => {
     },
   },
 ];
-  it(" should set the local variable development indicators after the successful api call", () => {
+  it(" should set the local variable development indicators after the successful api call", (done) => {
+    moxios.install();
+    
     wrapper = mount(DevelopmentIndicators, {
       localVue,
-      router,
-      methods :{
-        getDevelopmentIndicatorsFor(countryCode) {
-          this.developmentIndicators = developmentIndicatorsData
-        }
-      }
+      router
     });
-    expect(wrapper.vm.developmentIndicators).to.deep.equal(developmentIndicatorsData);
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      request.resolve({data: responseData});
+      moxios.wait(() => {
+        expect(wrapper.vm.developmentIndicators).to.deep.equal(developmentIndicatorsData);
+        done();
+      });
+    });
+    moxios.uninstall();
   });
   it(" should render the html elements based on the response ", () => {
+    moxios.install();
+    
     wrapper = mount(DevelopmentIndicators, {
       localVue,
-      router,
-      data: {
-        developmentIndicators: developmentIndicatorsData
-      }
+      router
     });
-    expect(wrapper.findAll(".category").length).to.equal(developmentIndicatorsData.length);
-    const firstElement = wrapper.findAll(".category").at(0);
-    expect(firstElement.find(".header-bold").text()).to.equal(Object.keys(developmentIndicatorsData[0])[0].toLowerCase());
-    expect(firstElement.findAll(".indicator").length).to.equal(Object.keys(developmentIndicatorsData[0]["CONTEXT"]).length);
-    expect(firstElement.findAll(".indicator").at(0).find(".copy-grey").text()).to.equal(Object.keys(developmentIndicatorsData[0]["CONTEXT"])[0]);
-    expect(firstElement.findAll(".indicator").at(0).find(".highlight-text").text()).to.equal(Object.values(developmentIndicatorsData[0]["CONTEXT"])[0]);
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      request.resolve({data: responseData});
+      moxios.wait(() => {
+        expect(wrapper.findAll(".category").length).to.equal(developmentIndicatorsData.length);
+        const firstElement = wrapper.findAll(".category").at(0);
+        expect(firstElement.find(".header-bold").text()).to.equal(Object.keys(developmentIndicatorsData[0])[0].toLowerCase());
+        expect(firstElement.findAll(".indicator").length).to.equal(Object.keys(developmentIndicatorsData[0]["CONTEXT"]).length);
+        expect(firstElement.findAll(".indicator").at(0).find(".copy-grey").text()).to.equal(Object.keys(developmentIndicatorsData[0]["CONTEXT"])[0]);
+        expect(firstElement.findAll(".indicator").at(0).find(".highlight-text").text()).to.equal(Object.values(developmentIndicatorsData[0]["CONTEXT"])[0]);
+        done();
+      });
+    });
+    moxios.uninstall();
   });
 });

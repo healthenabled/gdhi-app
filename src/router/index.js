@@ -10,7 +10,7 @@ import landingMap from '@/components/landing-map/map.js';
 import methodologyComp from '@/components/methodology/methodology.vue';
 import healthIndicatorQuestionnaire from '@/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js';
 import countryListComp from '@/components/countryList/country-list.js';
-import errorComp from '@/components/error-handler/404-error.js';
+import ErrorComp from '@/components/error-handler/404-error.js';
 import generateUrlComp from '@/components/generateUrl/generate_url.js';
 
 Vue.use(Router);
@@ -87,7 +87,7 @@ export default new Router({
         {
           path: '*',
           components: {
-            routecontent: errorComp,
+            routecontent: ErrorComp,
           },
         },
       ],
