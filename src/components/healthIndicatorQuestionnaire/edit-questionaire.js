@@ -89,6 +89,9 @@ export default Vue.extend({
           this.notifier({title: 'Success',message: successMessage, type: 'success'});
           this.showEdit = false;
         } else {
+          this.questionnaire.forEach((category) => {
+            this.$set(category, 'showCategory', true);
+          });
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.notifier({title: 'Error',message: 'Please correct the below highlighted fields.', type: 'error'});
         }
@@ -111,8 +114,6 @@ export default Vue.extend({
         + ', this cannot be reverted. Do you want to continue?', options)
         .then(() => {
           return this.validator('publish', 'Data is now live');
-        }).catch(() => {
-          this.notifier({title: 'Error',message: 'Something went wrong', type: 'error'});
         });
     },
     publish() {
