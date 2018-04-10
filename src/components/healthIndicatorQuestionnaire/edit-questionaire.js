@@ -98,9 +98,7 @@ export default Vue.extend({
         countryId: this.countrySummary.countryId
       }).then(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
-        this.showEdit = false;
-        this.notifier({title: 'Success',message: 'Form Data Deleted Successfully. Redirecting to Admin Page', type: 'success'});
-        setTimeout(this.redirectToAdmin, 2000);
+        this.$router.push({ path: `/admin` });
         common.hideLoading();
       }).catch(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -111,8 +109,13 @@ export default Vue.extend({
     validator(action, successMessage){
       return this.$validator.validateAll().then((result) => {
         if (result) {
-          this.saveData(action, successMessage);
-          this.showEdit = false;
+          this.saveData(action);
+          if (action === 'publish'){
+            this.$router.push({ path: `/admin` });
+          } else {
+            this.notifier({title: 'Success', message: successMessage, type: 'success'});
+            this.showEdit = false;
+          }
         } else {
           this.questionnaire.forEach((category) => {
             this.$set(category, 'showCategory', true);
@@ -136,9 +139,7 @@ export default Vue.extend({
       return this.$dialog.confirm(props.message , options)
         .then(() => {
           return props.callBackMethod.apply(this, props.callBackArgs);
-        }).catch(() => {
-          console.log('some error');
-          });
+        });
     },
     publish() {
       this.questionnaire.forEach((category) => {
@@ -150,9 +151,6 @@ export default Vue.extend({
     reject() {
       this.getConfirmationDialog({message: 'Reject health index form for ' + this.countrySummary.countryName
         + ', this cannot be reverted', callBackMethod: this.deleteData, callBackArgs: []});
-    },
-    redirectToAdmin() {
-      this.$router.push({ path: `/admin` });
     },
     getHealthIndicators() {
       return Object.entries(this.healthIndicators).map((entry) => entry[1]);
