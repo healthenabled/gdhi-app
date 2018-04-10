@@ -10,15 +10,14 @@ export default Vue.extend({
       developmentIndicators: [],
     };
   },
-  created() {
+  mounted() {
     this.getDevelopmentIndicatorsFor(this.$route.params.countryCode);
   },
   methods: {
     getDevelopmentIndicatorsFor(countryCode) {
       common.showLoading();
-      const self = this;
       httpRequests.getDevelopmentIndicators(countryCode, false).then((response) => {
-        self.developmentIndicators = response;
+        this.developmentIndicators = response;
       });
     },
   },

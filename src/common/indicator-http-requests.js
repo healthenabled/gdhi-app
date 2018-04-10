@@ -64,7 +64,7 @@ export default ({
     return developmentIndicatorsData;
   },
 
-  getDevelopmentIndicators( countryId, isMinimal) {
+  getDevelopmentIndicators(countryId, isMinimal) {
     const developmentIndicatorsUrl = `/api/countries/${countryId}/development_indicators`;
     const self = this;
     return (axios.get(developmentIndicatorsUrl)

@@ -81,12 +81,12 @@ describe("Indicator HTTP Requests and Helper methods", () => {
     expect(Obj.getDevelopmentIndicatorsData(response)).to.deep.equal(developmentIndicatorsData);
   });
   it ("should set the developmentIndicators data when getDevelopmentIndicators is called", (done) => {
-    const returnPromise = Obj.getDevelopmentIndicators('IND', false);
     moxios.install();
     moxios.stubRequest('/api/countries/IND/development_indicators', {
       status: 200,
       response: response
     });
+    const returnPromise = Obj.getDevelopmentIndicators('IND', false);
     
     moxios.wait(() => { 
       returnPromise.then((value)=> {
@@ -98,34 +98,35 @@ describe("Indicator HTTP Requests and Helper methods", () => {
     
   });
   it ("should set the developmentIndicators data when getDevelopmentIndicators is called for minimal indicators", (done) => {
-    const returnPromise = Obj.getDevelopmentIndicators('IND', true);
     moxios.install();
     moxios.stubRequest('/api/countries/IND/development_indicators', {
       status: 200,
       response: response
     });
+    const returnPromise = Obj.getDevelopmentIndicators('IND', true);
     
     moxios.wait(() => { 
       returnPromise.then((value)=> {
         expect(value).to.deep.equal(minimalDevelopmentIndicatorsData);
       });
-      done()
+      done();
       moxios.uninstall();
     });
   });
 
   it ("should set the developmentIndicators data when getDevelopmentIndicators is called for minimal indicators", (done) => {
-    const returnPromise = Obj.getDevelopmentIndicators('IND', true);
     moxios.install();
-    moxios.stubRequest('/api/countries/IND/development_indicators', {
+    let errResp = errResp = {
       status: 500,
-      response: "Erroe"
-    });
+      response: { message: 'problem' },
+    };
+    const returnPromise = Obj.getDevelopmentIndicators('IND', true);
+    
+    moxios.stubRequest('/api/countries/IND/development_indicators', errResp);
     
     moxios.wait(() => { 
-      returnPromise.then((value)=> {
-        expect(value).to.deep.equal("error");
-      });
+      let request = moxios.requests.mostRecent();
+      request.reject(errResp);
       done()
       moxios.uninstall();
     });

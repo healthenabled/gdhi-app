@@ -1,5 +1,5 @@
 <div class="development-indicators">
-  <div v-for="indicatorCategory in developmentIndicators" class="box">
+  <div v-for="indicatorCategory in developmentIndicators" class="box category">
     <div class="header-bold no-margin-top">{{Object.keys(indicatorCategory)[0].toLowerCase()}}</div>
     <div v-for="indicators in indicatorCategory" class="row">
       <div v-for="(indicator, key) in indicators" class="text-center indicator">
