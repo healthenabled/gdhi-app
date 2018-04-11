@@ -37,7 +37,6 @@ describe("should test country summary", () => {
     countrySummary.countrySummaryCallback(response, 'PER')
 
     expect(countrySummary.countrySummaries).to.equal(response.data)
-    expect(countrySummary.countryName).to.equal(response.data.countryName)
 
     response.data.countryName = null
     response.data.countryId = response.data.countryId.slice(0, 2)
@@ -45,6 +44,5 @@ describe("should test country summary", () => {
     countrySummary.countrySummaryCallback(response, 'PER')
 
     expect(countrySummary.countrySummaries).to.equal(response.data)
-    expect(countrySummary.countryName).to.equal(response.data.countryId)
   })
 })
