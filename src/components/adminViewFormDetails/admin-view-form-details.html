@@ -1,0 +1,10 @@
+<div class="content-centered">
+  <div class="tabs">
+    <ul class="tablist">
+      <li v-for="tab in tabs" v-on:click="updateSelected(tab)" v-bind:class="{ 'current': selectedTab == tab.id }">{{tab.name}}</li>
+    </ul>
+    <div v-for="tab in tabs" class="tab-content" v-show="selectedTab == tab.id">
+      <p>{{tabContent}}</p>
+    </div>
+  </div>
+</div>
