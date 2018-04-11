@@ -16,7 +16,7 @@
     <div class="error" v-else> No data available</div>
   </div>
   <div class="country-summary-title header-bold">Resources</div>
-  <ul class="country-text" v-if="countrySummaries.resources.length > 0">
+  <ul class="country-text" v-if="countrySummaries.resources">
     <li v-for="resource in countrySummaries.resources" class="country-resource-link">
       <a :href="resource.startsWith('http')? resource : 'http://'+resource" target="_blank" class="link-blue">{{resource}}</a>
     </li>
