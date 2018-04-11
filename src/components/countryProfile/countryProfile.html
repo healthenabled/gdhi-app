@@ -35,11 +35,12 @@
                   <div :class="'indicator-panel-container-category-section-phase phase' + category.phase" :value="category.phase"></div>
                   <div class="accordion-content">
                       <div class="heading-row sub-header">
-                          <div class="">Indicator</div>
-                          <div class="">Score</div>
+                          <div class="indicator-id">#</div>
+                          <div class="indicator-name">Indicator</div>
+                          <div class="indicator-score-heading">Score</div>
                       </div>
                       <div v-for="(indicator, index_indicator) in category.indicators" class="indicator">
-
+                        <div class="indicator-id">{{indicator.code}}</div>
                         <div class="indicator-desc">
                           {{indicator.name}}
                           <div class="indicator-score-desc copy-italics copy-grey">{{indicator.indicatorDescription}}</div>

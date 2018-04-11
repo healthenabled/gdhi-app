@@ -24,15 +24,22 @@
     padding: 10px 0;
     margin-right: 20px;
   }
+  .indicator-id {
+    align-self: flex-start;
+    padding: 10px 0;
+  }
   .heading-row div {
     display: inline-block;
     padding: 10px 0;
     border-bottom: 2px solid $border-color;
     margin-bottom: 10px;
     margin-left: -4px;
+
     &:first-child {
-      width: calc(100% - 52px);
       margin-left: 0px;
+    }
+    &.indicator-name{
+      width: calc(100% - 92px);
     }
   }
   .header-bold {
