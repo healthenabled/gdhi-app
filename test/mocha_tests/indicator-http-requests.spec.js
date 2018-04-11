@@ -116,13 +116,11 @@ describe("Indicator HTTP Requests and Helper methods", () => {
 
   it ("should set the developmentIndicators data when getDevelopmentIndicators is called for minimal indicators", (done) => {
     moxios.install();
-    let errResp = errResp = {
+    let errResp = {
       status: 500,
       response: { message: 'problem' },
     };
     const returnPromise = Obj.getDevelopmentIndicators('IND', true);
-    
-    moxios.stubRequest('/api/countries/IND/development_indicators', errResp);
     
     moxios.wait(() => { 
       let request = moxios.requests.mostRecent();

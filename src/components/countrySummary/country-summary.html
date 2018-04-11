@@ -5,8 +5,8 @@
       <span class="country-summary-link" v-if="countrySummaries.contactName">
           <a :href="'mailto:' + countrySummaries.contactEmail" target="_blank" class="link-blue">{{countrySummaries.contactName}}</a>,
         </span>
-      <span v-if="countrySummaries.contactDesignation">{{countrySummaries.contactDesignation}},</span>
-      <span v-if="countrySummaries.contactOrganization">{{countrySummaries.contactOrganization}}</span>
+      <span v-if="countrySummaries.contactDesignation" class="country-designation">{{countrySummaries.contactDesignation}},</span>
+      <span v-if="countrySummaries.contactOrganization" class="country-org">{{countrySummaries.contactOrganization}}</span>
     </div>
     <div class="error" v-else>No data available</div>
   </div>
@@ -16,8 +16,8 @@
     <div class="error" v-else> No data available</div>
   </div>
   <div class="country-summary-title header-bold">Resources</div>
-  <ul class="country-text" v-if="countrySummaries.resources">
-    <li v-for="resource in countrySummaries.resources" class="country-summary-link">
+  <ul class="country-text" v-if="countrySummaries.resources.length > 0">
+    <li v-for="resource in countrySummaries.resources" class="country-resource-link">
       <a :href="resource.startsWith('http')? resource : 'http://'+resource" target="_blank" class="link-blue">{{resource}}</a>
     </li>
   </ul>

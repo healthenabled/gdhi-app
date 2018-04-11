@@ -8,9 +8,10 @@ export default Vue.extend({
   data() {
     return {
       countrySummaries: {},
+      error: ''
     };
   },
-  created() {
+  mounted() {
     common.showLoading();
     this.getCountrySummary(this.$route.params.countryCode);
   },
@@ -18,14 +19,15 @@ export default Vue.extend({
     getCountrySummary(countryCode) {
       const countrySummaryUrl = `/api/countries/${countryCode}/country_summary`;
       axios.get(countrySummaryUrl)
-        .then((response) => this.countrySummaryCallback(response, countryCode))
+        .then((response) => {
+          this.countrySummaryCallback(response, countryCode)
+        })
         .catch(e => {
-          console.log('Error pulling development indicators data');
+          this.error = e.response.message;
         });
     },
     countrySummaryCallback(response, countryCode) {
       this.countrySummaries = response.data;
-      this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode.slice(0, 2);
       common.hideLoading();
     },
   },
