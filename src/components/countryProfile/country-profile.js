@@ -15,7 +15,7 @@ export default Vue.extend({
     };
   },
 
-  created() {
+  mounted() {
     this.getHealthIndicatorsFor(this.$route.params.countryCode);
     this.url = `/api/export_country_data/${this.$route.params.countryCode}`;
   },
@@ -36,9 +36,6 @@ export default Vue.extend({
       this.healthIndicatorData.categories.forEach((category) => {
         this.$set(category, 'showCategory', false);
       });
-    },
-    onSummaryLoaded(flagSrc) {
-      this.flagSrc = flagSrc;
     }
   },
   template: countryProfile,

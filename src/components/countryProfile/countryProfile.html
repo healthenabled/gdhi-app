@@ -42,7 +42,7 @@
                       <div v-for="(indicator, index_indicator) in category.indicators" class="indicator">
                         <div class="indicator-id">{{indicator.code}}</div>
                         <div class="indicator-desc">
-                          {{indicator.name}}
+                          <span class="indicator-name-value">{{indicator.name}}</span>
                           <div class="indicator-score-desc copy-italics copy-grey">{{indicator.indicatorDescription}}</div>
                           <div class="indicator-score-desc copy-italics copy-blue">{{indicator.scoreDescription}}</div>
                         </div>
