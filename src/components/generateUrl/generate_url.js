@@ -4,10 +4,17 @@ import common from "../../common/common";
 import Autocomplete from "vuejs-auto-complete";
 import axios from "axios";
 import {sortBy} from "lodash";
+import VeeValidate from "vee-validate";
+
+const config = {
+  fieldsBagName: 'fieldBags',
+};
+Vue.use(VeeValidate, config);
+
 
 export default Vue.extend({
     template: generateUrlTemplate,
-    components: { Autocomplete },
+    components: { Autocomplete, VeeValidate },
     mounted() {
       this.loadCountries();
       common.hideLoading();
@@ -32,6 +39,14 @@ export default Vue.extend({
             this.countries = sortBy(response.data, ["name"]);
           });
       },
+      notifier(props) {
+        this.$notify({
+          group: props.group,
+          title: props.title,
+          text: props.text,
+          type: props.type
+        });
+      },
       onCountrySelect(selectedItem) {
         this.generatedURL='';
         this.message='';
@@ -55,14 +70,13 @@ export default Vue.extend({
       copyUrl() {
         document.getElementById("url-box").select();
         document.execCommand("Copy");
-        this.$notify({
+        this.notifier({
           group: 'custom-template',
           title: 'Information',
           text: 'URL Copied Successfully',
           type: 'warn'
         });
       },
-
       saveURLGenerationStatus() {
         common.showLoading();
         let url = "/api/countries/" + this.countryUUID + "/url_gen_status";
@@ -75,7 +89,7 @@ export default Vue.extend({
             if(response.data.existingStatus == "PUBLISHED") {
               this.warningMessage = "Already Published";
             }
-            this.$notify({
+            this.notifier({
               group: 'custom-template',
               title: 'Success',
               text: this.message,
@@ -93,7 +107,7 @@ export default Vue.extend({
           document.body.scrollTop = document.documentElement.scrollTop = 0;
           this.success = false;
           this.message = 'Error While Generating URL for Country';
-          this.$notify({
+          this.notifier({
             group: 'custom-template',
             title: 'Error',
             text: this.message,
