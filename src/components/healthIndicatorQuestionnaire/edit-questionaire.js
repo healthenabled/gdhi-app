@@ -136,12 +136,12 @@ export default Vue.extend({
       this.questionnaire.forEach((category) => {
         this.$set(category, 'showCategory', true);
       });
-      this.getConfirmationDialog({message: 'Publish health index form for ' + this.countrySummary.countryName
-        + ', this cannot be reverted', callBackMethod: this.validator, callBackArgs: ['publish']});
+      this.getConfirmationDialog({message: 'You are about to publish health index form for ' + this.countrySummary.countryName
+           + ', this cannot be reverted. Do you want to continue?', callBackMethod: this.validator, callBackArgs: ['publish']});
     },
     reject() {
-      this.getConfirmationDialog({message: 'Reject health index form for ' + this.countrySummary.countryName
-        + ', this cannot be reverted', callBackMethod: this.deleteData, callBackArgs: []});
+      this.getConfirmationDialog({message: 'You are about to reject health index form for ' + this.countrySummary.countryName
+        + ', this cannot be reverted. Do you want to continue?', callBackMethod: this.deleteData, callBackArgs: []});
     },
     getHealthIndicators() {
       return Object.entries(this.healthIndicators).map((entry) => entry[1]);

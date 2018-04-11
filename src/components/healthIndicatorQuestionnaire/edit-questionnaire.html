@@ -7,7 +7,7 @@
       <span v-if="status === 'REVIEW_PENDING' && isAdmin">
         <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="saveCorrection()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save </button></span>
         <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="publish()"><i class="fa fa-check" aria-hidden="true"></i> Publish </button></span>
-        <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="reject()"><i class="fa fa-check" aria-hidden="true"></i> Reject </button></span>
+        <span v-if="showEdit"><button class="submit-btn btn btn-red" @click="reject()"><i class="fa fa-times" aria-hidden="true"></i> Reject </button></span>
         <v-dialog/>
       </span>
       <span v-else>
