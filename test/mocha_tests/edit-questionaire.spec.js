@@ -8,6 +8,7 @@ import sinon from "sinon";
 describe("EditQuestionaire",()=>{
   let component;
   const router = new VueRouter()
+
   beforeEach(()=> {
     component = shallow(EditQuestionnaire, {
       propsData: {
