@@ -8,6 +8,14 @@ describe("Country List", () => {
   const localVue = createLocalVue();
   localVue.use(VueRouter);
   const router = new VueRouter();
+  window.appProperties = {
+    getCategoryFilter: function() {
+      return '';
+    },
+    getPhaseFilter: function() {
+      return '';
+    }
+  }
   let responseData = {
     "countryHealthScores":[
       {
