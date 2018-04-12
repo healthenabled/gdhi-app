@@ -15,7 +15,7 @@ export default Vue.extend({
     };
   },
 
-  created() {
+  mounted() {
     const self = this;
     common.showLoading();
 
