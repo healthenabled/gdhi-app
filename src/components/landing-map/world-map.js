@@ -42,6 +42,9 @@ export default {
       axios.get('/static/data/countries_mega.json')
         .then(function (response) {
         self.countriesData = response.data;
+        const mapLoader = document.querySelector(".loader");
+        if(mapLoader) 
+          mapLoader.style.display = "none";
         return self.addMapToLeaflet(self, response.data, healthData, postClickCallBack);
       });
     }

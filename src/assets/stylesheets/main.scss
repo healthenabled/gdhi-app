@@ -545,3 +545,9 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 }
 
 
+.loader {
+  position: fixed;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+}
