@@ -1,7 +1,8 @@
 <div class="health-indicator-questionnaire content-centered">
   <div class="clearfix fixed-sub-header">
     <span class="page-title">
-        <img v-if="countrySummary.countryAlpha2Code" :src="'/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg'" width="50" class="flag" /> {{countrySummary.countryName}} - Digital Health Questionnaire
+        <div v-if="countrySummary.countryAlpha2Code" class="flag" :style="{ backgroundImage: 'url(/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg)' }" ></div>
+        {{countrySummary.countryName}} - Digital Health Questionnaire
     </span>
     <div class="float-right button-container">
       <span v-if="status === 'REVIEW_PENDING' && isAdmin">

@@ -274,6 +274,9 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 .flag {
   display: inline-block;
   vertical-align: top;
+  width: 70px;
+  height: 52px;
+  background-size: contain;
 }
 .no-margin-top {
   margin-top: 0px;
@@ -445,7 +448,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   z-index: 3;
 }
 .sub-content {
-  margin-top: 88px;
+  margin-top: 96px;
 }
 /* Create a custom radio button */
 .checkmark {

@@ -2,7 +2,8 @@
   <div class="health-indicator-section">
     <div class="clearfix header-section">
       <div class="country-name page-title">
-        <img v-bind:src="flagSrc" width="70" class="flag" />
+        <div class="flag" :style="{ backgroundImage: 'url(' + flagSrc + ')' }" ></div>
+        
         {{healthIndicatorData.countryName}}
       </div>
       <span id="collected-date" v-if="healthIndicatorData.collectedDate !== ''" class="copy-italics copy-grey">

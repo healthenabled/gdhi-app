@@ -546,7 +546,6 @@ describe("Country Profile ", () => {
       let request = moxios.requests.mostRecent();
       request.resolve({data: healthIndicatorData});
       moxios.wait(() => {
-        expect(wrapper.find(".flag").attributes().src).to.equal(wrapper.vm.flagSrc);
         expect(wrapper.find(".country-name").text()).to.equal(healthIndicatorData.countryName);
         expect(wrapper.find("#collected-date").text()).to.equal(`As on ${healthIndicatorData.collectedDate}`);
         expect(wrapper.find(".export a").attributes().href).to.equal(wrapper.vm.url);
