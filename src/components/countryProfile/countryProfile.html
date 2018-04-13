@@ -19,7 +19,7 @@
         <div class="box">
             <div class="title sub-header">
               Overall Digital Health Phase
-              <div v-if="healthIndicatorData" :class="'score float-right' + ' phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase}}</div>
+              <div v-if="healthIndicatorData" :class="'score float-right' + ' phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase ? healthIndicatorData.countryPhase : "NA"}}</div>
             </div>
             <div class="phase-desc copy-italics copy-grey">
               <p>
