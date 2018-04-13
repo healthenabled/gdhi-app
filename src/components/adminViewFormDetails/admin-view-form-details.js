@@ -1,40 +1,83 @@
 import Vue from "vue";
 import adminViewFormDetails from './admin-view-form-details.html';
+import adminTable from '../displayTable/admin-table.js';
+import axios from "axios/index";
 
 export default Vue.extend({
   name:'AdminViewFormDetails',
+  components: { adminTable },
   data() {
     return {
       selectedTab: 0,
-      tabContent: {},
-      urlGeneratedInfo: { message: 'url Generated'},
-      reviewPendingDetails: { message: 'review pending'},
-      publishedData: { message: 'published data'},
+      tableColumns: [],
+      tableRows: [],
+      allData: [],
+      action:'',
       tabs: [
-        {id: 0, name:'URL Generated'},
+        {id: 0, name:'Awaiting Submission'},
         {id: 1, name:'Awaiting Approval'},
-        {id: 2, name:'Published Data'}
+        {id: 2, name:'Live Data'}
         ]
     };
   },
-  mounted(){
-    this.tabContent = this.urlGeneratedInfo;
+   mounted(){
+     this.loadAdminViewFormDetails();
   },
   methods: {
     updateSelected (tab) {
       this.selectedTab = tab.id;
-      this.tabContent = this.getTabData(tab);
+      this.getTabData(tab);
+    },
+    loadAdminViewFormDetails() {
+      return axios.get('/api/admin/view_form_details')
+        .then(response => {
+          this.allData = response.data;
+          this.updateSelected(this.tabs[0]);
+        });
+    },
+    actionHandler(action, countryUUID){
+      if(action === 'View Data'){
+        this.openUrl(location.origin + "/health_indicator_questionnaire/" + countryUUID);
+      }
+      else if(action === 'Review'){
+        this.openUrl(location.origin + "/health_indicator_questionnaire/" + countryUUID +"/review");
+      }
+    },
+    openUrl(url) {
+      window.open(url);
     },
     getTabData(tab){
       switch(tab){
         case this.tabs[0]:
-          return this.urlGeneratedInfo;
+           this.tableColumns = [
+             {propName: 'countryName' , displayName: 'Country'},
+             {propName: 'status' , displayName: 'Form Status'},
+             ];
+          this.tableRows = [...this.allData.NEW, ...this.allData.DRAFT];
+          this.action='View Data';
+          break;
         case this.tabs[1]:
-          return this.reviewPendingDetails;
+          this.tableColumns = [
+            {propName: 'countryName' , displayName: 'Country'},
+            {propName: 'contactName' , displayName: 'Contact Name'} ,
+            {propName: 'contactEmail' , displayName: 'Contact Email'}
+            ];
+          this.action='Review';
+          this.tableRows = this.allData.REVIEW_PENDING;
+          break;
         case this.tabs[2]:
-          return this.publishedData;
+          this.tableColumns = [
+            {propName: 'countryName' , displayName: 'Country'},
+            {propName: 'contactName' , displayName: 'Contact Name'} ,
+            {propName: 'contactEmail' , displayName: 'Contact Email'}
+            ];
+          this.action='View Live Data';
+          this.tableRows = this.allData.PUBLISHED;
+          break;
         default:
-          return {};
+          this.tableColumns= [];
+          this.tableRows = [];
+          break;
       }
     }
   },
