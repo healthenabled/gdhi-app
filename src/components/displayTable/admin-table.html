@@ -1,0 +1,16 @@
+<div>
+  <table id="fifthTable">
+    <thead>
+    <tr>
+      <th v-for="col in columns">{{col.displayName}}</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="row in rows">
+      <td v-for="col in columns">{{row[col.propName]}}</td>
+      <td><button class="btn btn-primary" @click="actionHandler(action, row.countryUUID)">{{action}}</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
