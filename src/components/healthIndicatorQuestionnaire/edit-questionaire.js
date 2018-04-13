@@ -2,9 +2,9 @@ import Vue from "vue";
 import editForm from "./edit-questionnaire.html";
 import axios from "axios";
 import VeeValidate from "vee-validate";
-import 'date-input-polyfill';
-import VuejsDialog from "vuejs-dialog"
-import common from '../../common/common'
+import VuejsDialog from "vuejs-dialog";
+import common from '../../common/common';
+import dateFormat from 'dateformat';
 
 const config = {
   fieldsBagName: 'fieldBags',
@@ -46,11 +46,17 @@ export default Vue.extend({
       },
     },
     isAdmin: {
-          type: Boolean,
-          default() {
-            return false;
-          },
-        },
+      type: Boolean,
+      default() {
+        return false;
+      },
+    },
+    today: {
+      type: String,
+      default() {
+        return dateFormat(new Date(), "dd-mm-yyyy");
+      }
+    }
   },
   data() {
     return { countryId: '', countries: []};

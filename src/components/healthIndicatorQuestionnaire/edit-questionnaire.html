@@ -26,10 +26,10 @@
     <div class="box">
       <div class="row">
         <div class="collected-date column-33percent">
-          <label for="date">Date for which data was collected (DD/MM/YYYY)</label>
+          <label for="date">Date for which data was collected (DD-MM-YYYY)</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="date" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:YYYY-MM-DD'" :title="errors.has('collectedDate') ? 'Date for which data was collected is either empty or invalid' : 'Please Enter Date' ">
+          <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" placeholder="DD-MM-YYYY" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="errors.has('collectedDate') ? 'Date for which data was collected is either empty or invalid' : 'Please Enter Date' ">
         </div>
         <div class="column-33percent"></div>
         <div class="column-33percent"></div>
