@@ -531,13 +531,13 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 .dg-content-body {
   border-color: $border-color;
 }
-.dg-btn--cancel, .dg-btn--ok  {
+.dg-container .dg-btn--cancel, .dg-container .dg-btn--ok  {
   @extend .btn;
 }
-.dg-btn--ok {
+.dg-container .dg-btn--ok {
   @extend .btn-green;
 }
-.dg-btn--cancel {
+.dg-container .dg-btn--cancel {
   @extend .btn-red;
 }
 
