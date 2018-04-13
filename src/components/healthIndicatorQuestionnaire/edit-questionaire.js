@@ -93,7 +93,7 @@ export default Vue.extend({
             this.$set(category, 'showCategory', true);
           });
           document.body.scrollTop = document.documentElement.scrollTop = 0;
-          this.notifier({title: 'Error',message: 'Please correct the below highlighted fields.', type: 'error'});
+          this.notifier({title: 'Error',message: 'Please correct the highlighted fields.', type: 'error'});
         }
       })
     },
