@@ -48,6 +48,11 @@ export default {
         return self.addMapToLeaflet(self, response.data, healthData, postClickCallBack);
       });
     }
+    else {
+      const mapLoader = document.querySelector(".loader");
+      if(mapLoader) 
+        mapLoader.style.display = "none";
+    }
     return this.addMapToLeaflet(this, this.countriesData, healthData, postClickCallBack);
   },
   addMapToLeaflet(self, data, healthData, postClickCallBack) {
