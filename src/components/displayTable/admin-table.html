@@ -3,7 +3,7 @@
     <thead>
     <tr>
       <th v-for="col in columns">{{col.displayName}}</th>
-      <th>Action</th>
+      <th v-if="rows.length>0">Action</th>
     </tr>
     </thead>
     <tbody>
