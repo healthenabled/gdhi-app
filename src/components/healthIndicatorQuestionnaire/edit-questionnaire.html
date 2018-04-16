@@ -29,7 +29,8 @@
           <label for="date">Date for which data was collected (DD-MM-YYYY)</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" placeholder="DD-MM-YYYY" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="errors.has('collectedDate') ? 'Date for which data was collected is either empty or invalid' : 'Please Enter Date' ">
+          <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" placeholder="DD-MM-YYYY" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="'Please Enter Date'">
+          <div v-show="errors.has('collectedDate')" class="error-info">Date for which data was collected is either empty or invalid</div>
         </div>
         <div class="column-33percent"></div>
         <div class="column-33percent"></div>
@@ -52,7 +53,8 @@
           <label for="emailOfPersonEnteringData">Email of the person entering data</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="email" :disabled="!showEdit" name='feederEmail' :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'" id="emailOfPersonEnteringData" v-validate.disable="'required|email'" v-model="countrySummary.dataFeederEmail" :title="errors.has('feederEmail') ? 'Please enter valid email' : 'Enter email'">
+          <input type="email" :disabled="!showEdit" name='feederEmail' :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'" id="emailOfPersonEnteringData" v-validate.disable="'required|email'" v-model="countrySummary.dataFeederEmail" :title="'Enter email'">
+          <div v-show="errors.has('feederEmail')" class="error-info">Please enter valid email</div>
         </div>
       </div>
       <div class="row">
@@ -75,7 +77,8 @@
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
           <input type="email" :disabled="!showEdit" class="form-control" id="emailofPersonApprovedData" name="approveremail" v-model="countrySummary.dataApproverEmail" :class="errors.has('approveremail') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required|email'"
-                 :title="errors.has('approveremail') ? 'Email of person approving data is required' : 'Please Enter Email of person approving data'">
+                 :title="'Please Enter Email of person approving data'">
+          <div v-show="errors.has('approveremail')" class="error-info">Please enter valid email</div>
         </div>
       </div>
       <div class="row">
@@ -97,7 +100,8 @@
           <label for="emailofCountryContact">Email of the country contact</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="email" :disabled="!showEdit" name="contactEmail" :class="errors.has('contactEmail') ? 'has-error form-control' : 'form-control'" id="emailofCountryContact" v-validate.disable="'required|email'" v-model="countrySummary.contactEmail" :title="errors.has('contactEmail') ? 'Please enter valid email' : 'Enter email'">
+          <input type="email" :disabled="!showEdit" name="contactEmail" :class="errors.has('contactEmail') ? 'has-error form-control' : 'form-control'" id="emailofCountryContact" v-validate.disable="'required|email'" v-model="countrySummary.contactEmail" :title="'Enter email'">
+          <div v-show="errors.has('contactEmail')" class="error-info">Please enter valid email</div>
         </div>
       </div>
       <div class="row">
@@ -112,8 +116,9 @@
           <label for="Organisation">Organisation of the country contact</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="text" :disabled="!showEdit" class="form-control" id="Organisation" name="Organisation" v-model="countrySummary.contactOrganization" :title="errors.has('contactOrganization') ? 'Please enter Organisation' : 'Enter Organisation of the country contact'"
-            :class="errors.has('contactOrganization') ? 'has-error form-control' : 'form-control'">
+          <input type="text" :disabled="!showEdit" id="Organisation" name="Organisation" v-validate.disable="'required'"
+                 :class="errors.has('Organisation') ? 'has-error form-control' : 'form-control'" v-model="countrySummary.contactOrganization"
+                 :title="errors.has('Organisation') ? 'Please enter Organisation' : 'Enter Organisation of the country contact'">
         </div>
       </div>
     </div>
