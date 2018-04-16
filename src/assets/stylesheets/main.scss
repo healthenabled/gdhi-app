@@ -274,11 +274,11 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 .flag {
   display: inline-block;
   vertical-align: top;
-  width: 69px;
+  width: 72px;
   background-repeat: no-repeat;
   background-position: center;
-  height: 52px;
-  background-size: contain;
+  height: 54px;
+  background-size: cover;
   border: 1px solid $black;
 }
 .no-margin-top {
