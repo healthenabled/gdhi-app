@@ -51,7 +51,7 @@ describe("AdminViewFormDetails",()=>{
       data : {
         tabs: [
           {id: 0, name:'Awaiting Submission'},
-          {id: 1, name:'Awaiting Approval'},
+          {id: 1, name:'Review Pending'},
           {id: 2, name:'Live Data'}
         ]
 
@@ -92,8 +92,6 @@ describe("AdminViewFormDetails",()=>{
   it("should call openUrl when actionHandler is invoked",() => {
     let openUrl = sinon.spy();
     component.vm.openUrl = openUrl;
-    component.vm.actionHandler('View Data','some-uuid');
-    sinon.assert.calledWith(openUrl, location.origin + "/health_indicator_questionnaire/some-uuid");
 
     component.vm.actionHandler('Review','some-uuid');
     sinon.assert.calledWith(openUrl, location.origin + "/health_indicator_questionnaire/some-uuid/review");
@@ -103,7 +101,7 @@ describe("AdminViewFormDetails",()=>{
 
   });
 
-  it.only("should populate the table rows when getTabData is called ",() => {
+  it("should populate the table rows when getTabData is called ",() => {
     component.vm.allData = responseData;
     component.vm.getTabData(component.vm.tabs[0]);
     expect(component.vm.tableRows).to.deep.equal([...responseData.NEW , ...responseData.DRAFT] );

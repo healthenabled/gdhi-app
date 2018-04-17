@@ -15,7 +15,7 @@ export default Vue.extend({
       action:'',
       tabs: [
         {id: 0, name:'Awaiting Submission'},
-        {id: 1, name:'Awaiting Approval'},
+        {id: 1, name:'Review Pending'},
         {id: 2, name:'Live Data'}
         ]
     };
@@ -36,10 +36,8 @@ export default Vue.extend({
         });
     },
     actionHandler(action, countryUUID){
-      if(action === 'View Data'){
-        this.openUrl(location.origin + "/health_indicator_questionnaire/" + countryUUID);
-      }
-      else if(action === 'Review'){
+
+      if(action === 'Review'){
         this.openUrl(location.origin + "/health_indicator_questionnaire/" + countryUUID +"/review");
       }
       else if(action === 'View Live Data'){
@@ -49,25 +47,31 @@ export default Vue.extend({
     openUrl(url) {
       window.open(url);
     },
+    wrapperOnTableRows(rows) {
+      rows.forEach(function(row,index) {
+        row.url = location.origin + "/health_indicator_questionnaire/" + row.countryUUID;
+      })
+    },
     getTabData(tab){
       if(this.allData == undefined) return;
       switch(tab){
         case this.tabs[0]:
            this.tableColumns = [
              {propName: 'countryName' , displayName: 'Country'},
-             {propName: 'status' , displayName: 'Form Status'},
+             {propName: 'status' , displayName: 'Status'},
              ];
 
            this.tableRows = [];
            if(this.allData.NEW != undefined)this.tableRows = [...this.tableRows , ...this.allData.NEW];
            if(this.allData.DRAFT != undefined)this.tableRows = [...this.tableRows , ...this.allData.DRAFT];
+           this.wrapperOnTableRows(this.tableRows);
            this.action='View Data';
           break;
         case this.tabs[1]:
           this.tableColumns = [
             {propName: 'countryName' , displayName: 'Country'},
-            {propName: 'contactName' , displayName: 'Contact Name'} ,
-            {propName: 'contactEmail' , displayName: 'Contact Email'}
+            {propName: 'contactName' , displayName: 'Country Contact Name'} ,
+            {propName: 'contactEmail' , displayName: 'Country Contact Email'}
             ];
           this.action='Review';
           this.tableRows = [];
@@ -76,8 +80,8 @@ export default Vue.extend({
         case this.tabs[2]:
           this.tableColumns = [
             {propName: 'countryName' , displayName: 'Country'},
-            {propName: 'contactName' , displayName: 'Contact Name'} ,
-            {propName: 'contactEmail' , displayName: 'Contact Email'}
+            {propName: 'contactName' , displayName: 'Country Contact Name'} ,
+            {propName: 'contactEmail' , displayName: 'Country Contact Email'}
             ];
           this.action='View Live Data';
           this.tableRows = [];

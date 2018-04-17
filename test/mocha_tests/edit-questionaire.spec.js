@@ -93,7 +93,7 @@ describe("EditQuestionaire",()=>{
     component.vm.reject();
 
     sinon.assert.calledWith(getConfirmationDialog,
-      { message: 'Reject health index form for India, this cannot be reverted',
+      { message: 'You are about to reject health index form for India, this cannot be reverted. Do you want to continue?',
         callBackMethod: deleteData,
         callBackArgs: []
       })
