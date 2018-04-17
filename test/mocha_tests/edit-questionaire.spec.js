@@ -30,7 +30,7 @@ describe("EditQuestionaire",()=>{
       status: 200
     });
 
-    component.vm.saveData('save');
+    component.vm.saveData('save', 'Success');
 
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
@@ -74,11 +74,6 @@ describe("EditQuestionaire",()=>{
 
     component.vm.saveCorrection();
 
-    sinon.assert.calledWith(saveData,'saveCorrection');
-    sinon.assert.calledWith(notifier,{
-      title: 'Success',
-      message: 'Form saved successfully!',
-      type: 'success'
-    });
+    sinon.assert.calledWith(saveData,'saveCorrection', 'Form saved successfully!');
   });
 });
