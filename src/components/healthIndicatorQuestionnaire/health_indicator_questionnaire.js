@@ -83,13 +83,16 @@ export default Vue.extend({
     },
     viewFormCallback(options, scores) {
       this.status = scores.data.status;
-      if(this.status === "PUBLISHED")
+      this.isAdmin = this.$route.path.match('review') != null;
+      if(this.status === "PUBLISHED" && !this.isAdmin)
         window.location.href = '/error';
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      this.isAdmin = this.$route.path.match('review') != null;
       if(scores.data.status == "REVIEW_PENDING" && !this.isAdmin) {
         this.showEdit = false;
+      }
+      if(scores.data.status !== "REVIEW_PENDING" && this.isAdmin) {
+        //this.showEdit = false;
       }
       if(scores.data.healthIndicators.length == 0){
         this.setUpHealthIndicators(options.data,false)
