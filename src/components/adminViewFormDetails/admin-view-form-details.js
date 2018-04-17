@@ -41,7 +41,7 @@ export default Vue.extend({
         this.openUrl(location.origin + "/health_indicator_questionnaire/" + countryUUID +"/review");
       }
       else if(action === 'View Live Data'){
-        this.openUrl(location.origin + "/health_indicator_questionnaire/" + countryUUID +"");
+        this.openUrl(location.origin + "/health_indicator_questionnaire/viewPublish/" + countryUUID );
       }
     },
     openUrl(url) {

@@ -32,19 +32,21 @@ export default Vue.extend({
     };
     const healthIndicators = {};
     return {
-      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status, isAdmin: false,
+      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status, isAdmin: false, isViewPublish: false
     };
   },
   created() {
     if (this.$route.params.countryUUID) {
       this.showEdit = true;
       common.showLoading();
+      this.isViewPublish = this.$route.path.match('viewPublish') != null;
       this.prepareDataForViewForm(this.$route.params.countryUUID);
     }
   },
   methods: {
     fetchHealthScoresFor(countryUUID) {
-      return axios.get(`/api/countries/${countryUUID}`);
+      if(!this.isViewPublish)return axios.get(`/api/countries/${countryUUID}`);
+      else return axios.get(`/api/countries/viewPublish/${countryUUID}`);
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {
@@ -84,15 +86,15 @@ export default Vue.extend({
     viewFormCallback(options, scores) {
       this.status = scores.data.status;
       this.isAdmin = this.$route.path.match('review') != null;
-      if(this.status === "PUBLISHED" && !this.isAdmin)
+      if(this.status === "PUBLISHED" && !this.isViewPublish)
         window.location.href = '/error';
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
       if(scores.data.status == "REVIEW_PENDING" && !this.isAdmin) {
         this.showEdit = false;
       }
-      if(scores.data.status !== "REVIEW_PENDING" && this.isAdmin) {
-        //this.showEdit = false;
+      if(this.isViewPublish) {
+        this.showEdit = false;
       }
       if(scores.data.healthIndicators.length == 0){
         this.setUpHealthIndicators(options.data,false)

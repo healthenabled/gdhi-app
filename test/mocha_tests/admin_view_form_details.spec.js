@@ -97,7 +97,7 @@ describe("AdminViewFormDetails",()=>{
     sinon.assert.calledWith(openUrl, location.origin + "/health_indicator_questionnaire/some-uuid/review");
 
     component.vm.actionHandler('View Live Data','some-uuid');
-    sinon.assert.calledWith(openUrl, location.origin + "/health_indicator_questionnaire/some-uuid");
+    sinon.assert.calledWith(openUrl, location.origin + "/health_indicator_questionnaire/viewPublish/some-uuid");
 
   });
 
