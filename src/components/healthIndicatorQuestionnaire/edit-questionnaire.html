@@ -26,7 +26,7 @@
     <div class="box">
       <div class="row">
         <div class="collected-date column-33percent">
-          <label for="date">Date for which data was collected (DD-MM-YYYY)</label>
+          <label for="date">Date on which data was collected (DD-MM-YYYY)</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
           <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" placeholder="DD-MM-YYYY" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="'Please Enter Date'">
@@ -164,7 +164,7 @@
             <div class="" data-header="Indicators">
               <div v-for="indicator in category.indicators" :class="errors.has('indicator_'+indicator.indicatorId+'_rationale') ? 'has-error indicator-items' : 'indicator-items'">
                 <div> {{indicator.indicatorCode}}. {{indicator.indicatorName}}</div>
-                <div class="copy-small-italics indicator-definition">{{indicator.indicatorDefinition}}</div>
+                <div class="copy-small-italics copy-blue indicator-definition">{{indicator.indicatorDefinition}}</div>
                 <div v-for="score in indicator.scores" class="scores">
                   <label class="radio-container">
                           <span :class="score.score ? 'score-content' : ''">{{score.score}}</span>
