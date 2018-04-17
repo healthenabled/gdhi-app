@@ -85,6 +85,12 @@ export default new Router({
           },
         },
         {
+          path: '/health_indicator_questionnaire/viewPublish/:countryUUID',
+          components: {
+            routecontent: healthIndicatorQuestionnaire,
+          },
+        },
+        {
           path: '*',
           components: {
             routecontent: errorComp,
