@@ -114,7 +114,7 @@ export default Vue.extend({
     },
     getConfirmationDialog () {
       let options = { okText: 'Confirm', cancelText: 'Cancel'};
-      return this.$dialog.confirm('You are about to publish health index form for ' + this.countrySummary.countryName
+      return this.$dialog.confirm('You are about to publish digital health index form for ' + this.countrySummary.countryName
         + ', this cannot be reverted. Do you want to continue?', options)
         .then(() => {
           return this.validator('publish', 'Data is now live');
