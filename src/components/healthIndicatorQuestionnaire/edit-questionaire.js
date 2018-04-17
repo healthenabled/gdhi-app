@@ -5,7 +5,7 @@ import VeeValidate from "vee-validate";
 import VuejsDialog from "vuejs-dialog";
 import common from '../../common/common';
 import dateFormat from 'dateformat';
-
+import { generateFormPDF } from "../pdfHelper/pdf-generate";
 const config = {
   fieldsBagName: 'fieldBags',
 };
@@ -131,6 +131,9 @@ export default Vue.extend({
     },
     onCategoryExpand(category) {
       category.showCategory = !category.showCategory;
+    },
+    generatePDF() {
+      generateFormPDF(this.countrySummary, this.questionnaire, this.healthIndicators);
     }
   },
   template: editForm,
