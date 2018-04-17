@@ -163,7 +163,7 @@
           <div class="sub-header" @click="onCategoryExpand(category)">{{category.categoryName}}</div>
           <div class="accordion-content">
             <div class="" data-header="Indicators">
-              <div v-for="indicator in category.indicators" :class="errors.has('indicator_'+indicator.indicatorId+'_rationale') ? 'has-error indicator-items' : 'indicator-items'">
+              <div v-for="indicator in category.indicators" :class="(errors.has('indicator_'+indicator.indicatorId+'_rationale')|| errors.has(indicator.indicatorId))? 'has-error indicator-items' : 'indicator-items'">
                 <div> {{indicator.indicatorCode}}. {{indicator.indicatorName}}   <span class="mandatory-field">*</span> </div>
                 <div class="copy-small-italics copy-blue indicator-definition">{{indicator.indicatorDefinition}}</div>
                 <div v-for="score in indicator.scores" class="scores">
@@ -171,14 +171,14 @@
                           <span :class="score.score ? 'score-content' : ''" v-if="score.score >= 0">{{score.score}}</span>
                           <span class="score-content" v-if="score.score >= 0">-</span>
                           <span>{{score.scoreDefinition}}</span>
-                          <input type="radio" :disabled="!showEdit" :name="indicator.indicatorId" v-model="healthIndicators[indicator.indicatorId].score" :value="score.score" />
+                          <input type="radio" :disabled="!showEdit" :name="indicator.indicatorId" v-model="healthIndicators[indicator.indicatorId].score" :value="score.score" v-validate.disable="'required'"/>
                           <span class="checkmark"></span>
                         </label>
                 </div>
                 <div class="row description_container">
                   <label>Rationale or supporting text</label>
                   <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate.disable="'required'"></textarea>
-                  <div v-show="errors.has('indicator_'+indicator.indicatorId+'_rationale')" class="error-info">The rationale field is required.</div>
+                  <div v-show="(errors.has('indicator_'+indicator.indicatorId+'_rationale') || errors.has(indicator.indicatorId))" class="error-info">The Indicator score and rationale field is required.</div>
                 </div>
               </div>
             </div>
