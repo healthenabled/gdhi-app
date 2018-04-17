@@ -70,7 +70,7 @@ export default Vue.extend({
         type: props.type
       });
     },
-    saveData(action) {
+    saveData(action, successMessage) {
       common.hideLoading();
 
       let url = '/api/countries/'+ action;
@@ -82,6 +82,7 @@ export default Vue.extend({
       }).then(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         common.hideLoading();
+        this.notifier({title: 'Success',message: successMessage, type: 'success'});
       }).catch(() => {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
         this.notifier({title: 'Error',message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
@@ -91,8 +92,7 @@ export default Vue.extend({
     validator(action, successMessage){
       return this.$validator.validateAll().then((result) => {
         if (result) {
-          this.saveData(action);
-          this.notifier({title: 'Success',message: successMessage, type: 'success'});
+          this.saveData(action, successMessage);
           this.showEdit = false;
         } else {
           this.questionnaire.forEach((category) => {
@@ -104,15 +104,13 @@ export default Vue.extend({
       })
     },
     saveCorrection() {
-      this.saveData('saveCorrection');
-      this.notifier({title: 'Success',message: 'Form saved successfully!', type: 'success'});
+      this.saveData('saveCorrection', 'Form saved successfully!');
     },
     submit() {
       return this.validator('submit', 'Form submitted for review');
     },
     save(){
-      this.saveData('save');
-      this.notifier({title: 'Success',message: 'Form saved successfully!', type: 'success'});
+      this.saveData('save', 'Form saved successfully!');
     },
     getConfirmationDialog () {
       let options = { okText: 'Confirm', cancelText: 'Cancel'};
