@@ -110,10 +110,12 @@ export default {
         countryName: $el.feature.properties.NAME_LONG,
       });
       this.map.fitBounds($el.getBounds(), { maxZoom: 7 });
-    } else if (clickState === 'RESET_CLICK') {
-      this.lastClickedCountry = '';
-      postClickCallBack({ type: 'GLOBAL' });
-      this.map.setView([44, -31], 2);
+    } else if (clickState === 'SELECT_COUNTRY') {
+      let findCountry = healthData.filter((data) => data.countryId === $el.feature.properties.BRK_A3);
+      if (findCountry.length) {
+        window.location.href = `/country_profile/${$el.feature.properties.BRK_A3}`;
+        this.resetMap(postClickCallBack);
+      }
     } else {
       this.lastClickedCountry = '';
       postClickCallBack({

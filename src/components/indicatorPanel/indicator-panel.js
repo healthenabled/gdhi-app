@@ -29,7 +29,6 @@ export default Vue.extend({
       if ($clickedEl.type === 'COUNTRY') {
         this.country.countryName = $clickedEl.countryName;
         this.country.countryCode = $clickedEl.countryCode;
-        console.log('Listening', this.country.countryCode);
         this.getIndicators(this, this.country.countryCode);
       } else if ($clickedEl.type === 'GLOBAL') {
         this.getGlobalHealthIndicators();
@@ -106,6 +105,7 @@ export default Vue.extend({
       };
       this.healthIndicators = healthIndicatorsData;
       this.showCountryDetail = true;
+      this.isNoGlobalHealthIndicators = true;
       this.country.countryName = this.country.countryName ? this.country.countryName : healthIndicatorsData.countryName;
     },
 

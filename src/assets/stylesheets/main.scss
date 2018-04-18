@@ -235,7 +235,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   padding: 10px;
   display: inline-block;
   color: $white;
-  @extend .sub-header;
+  @extend .copy-small;
   cursor: pointer;
   &.btn-primary {
     background-color: $logo-blue;

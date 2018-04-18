@@ -20,62 +20,62 @@ export function generateFormPDF(countrySummary, questionnaire, healthIndicators)
     .font("Helvetica-Bold")
     .text('Date for which data was collected (DD-MM-YYYY)')
     .font("Helvetica")
-    .text(countrySummary.collectedDate)
+    .text(countrySummary.collectedDate || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Name of person entering data')
     .font("Helvetica")
-    .text(countrySummary.dataFeederName)
+    .text(countrySummary.dataFeederName || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Role of the person entering data')
     .font("Helvetica")
-    .text(countrySummary.dataFeederRole)
+    .text(countrySummary.dataFeederRole || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Email of the person entering data')
     .font("Helvetica")
-    .text(countrySummary.dataFeederEmail)
+    .text(countrySummary.dataFeederEmail || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Name of the approver')
     .font("Helvetica")
-    .text(countrySummary.dataApproverName)
+    .text(countrySummary.dataApproverName || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Role of the approver')
     .font("Helvetica")
-    .text(countrySummary.dataApproverRole)
+    .text(countrySummary.dataApproverRole || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Email of the approver')
     .font("Helvetica")
-    .text(countrySummary.dataApproverEmail)
+    .text(countrySummary.dataApproverEmail || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Name of the country contact')
     .font("Helvetica")
-    .text(countrySummary.contactName)
+    .text(countrySummary.contactName || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Role of the country contact')
     .font("Helvetica")
-    .text(countrySummary.contactDesignation)
+    .text(countrySummary.contactDesignation || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Email of the country contact')
     .font("Helvetica")
-    .text(countrySummary.contactEmail)
+    .text(countrySummary.contactEmail || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Organisation of the country contact')
     .font("Helvetica")
-    .text(countrySummary.contactOrganization)
+    .text(countrySummary.contactOrganization || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
     .text('Country Summary')
     .font("Helvetica")
-    .text(countrySummary.summary);
+    .text(countrySummary.summary || '-');
   doc.moveDown();
   doc.fontSize(16)
     .font("Helvetica-Bold")
@@ -84,16 +84,26 @@ export function generateFormPDF(countrySummary, questionnaire, healthIndicators)
     });
   doc.moveDown();
   
+  if (countrySummary.resources.length === 0)
+    doc.fontSize(12)
+      .font("Helvetica")
+      .text('-');
+      
   for(let i = 0; i < countrySummary.resources.length; i++) {
     doc.fontSize(12)
       .font("Helvetica")
-      .text(countrySummary.resources[i]);
+      .text(countrySummary.resources[i] || '-');
   }
   doc.moveDown();
 
+  doc.fontSize(16)
+    .font("Helvetica-Bold")
+    .text("Indicator Details", {
+      underline: true
+    });
   questionnaire.forEach((category) => {
     doc.fontSize(16)
-      .font("Helvetica-Bold")
+      .font("Helvetica-BoldOblique")
       .text(category.categoryName, 72);
       doc.moveDown();
       category.indicators.forEach((indicator) => {
@@ -101,7 +111,9 @@ export function generateFormPDF(countrySummary, questionnaire, healthIndicators)
           .fontSize(12)
           .text(`${indicator.indicatorCode}. ${indicator.indicatorName}`, 72)
           .fillColor("#666")
-          .text(indicator.indicatorDefinition);
+          .font("Helvetica-Oblique")
+          .text(indicator.indicatorDefinition)
+          .font("Helvetica");
         doc.moveDown()
           .fillColor("#000");
           indicator.scores.forEach((score) => {
@@ -109,15 +121,19 @@ export function generateFormPDF(countrySummary, questionnaire, healthIndicators)
             const fontName = (healthIndicators[indicator.indicatorId].score === score.score) ? "Helvetica-Bold" : "Helvetica";
             if ((doc.y + 20) > 720) doc.addPage();
             const yVal = doc.y;
-
-              doc.circle(76, (yVal + 6) , 8)
+              doc.circle(76, (yVal + 6) , 6)
                 .lineWidth(2)
                 .fillAndStroke(fillColor, "#000");
               doc.fillColor("#000")
                 .font(fontName)
-                .text(score.scoreDefinition, 90);
-              doc.moveDown();
-          })
+                .text(score.scoreDefinition, 90)
+                .moveDown(0.5);
+          });
+          doc.moveDown();
+          doc.font("Helvetica-Bold")
+                .text("Rationale Or Supporting Text");
+          doc.font("Helvetica")
+            .text(healthIndicators[indicator.indicatorId].supportingText || "-")
           doc.moveDown();
           doc.moveDown();
       });

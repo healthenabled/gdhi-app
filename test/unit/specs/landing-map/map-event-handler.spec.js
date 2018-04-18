@@ -94,16 +94,6 @@ describe('Event Handler', () => {
     expect(clickState).to.equal('CLICK_ON')
   })
 
-  it('clicking the same country should reset country', () => {
-    layer.feature = {'properties': {
-      'BRK_A3': 'SGP'
-    }}
-    mockLayer.expects('setStyle').once().
-    withArgs({ fillColor: '#11184B', fillOpacity: 0.95 })
-    const clickState = eventHandler.onCountryClick(layer, layer, countryIndices);
-
-    expect(clickState).to.equal('RESET_CLICK')
-  })
 
   it('clicking the country with previous selection', () => {
     layer.feature = {'properties': {

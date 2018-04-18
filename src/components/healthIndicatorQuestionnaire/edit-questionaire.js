@@ -159,6 +159,7 @@ export default Vue.extend({
       category.showCategory = !category.showCategory;
     },
     generatePDF() {
+      this.notifier({title: 'Success',message: "Download Started Successfully", type: 'success'});
       generateFormPDF(this.countrySummary, this.questionnaire, this.healthIndicators);
     }
   },

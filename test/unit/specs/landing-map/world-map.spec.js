@@ -87,17 +87,6 @@ describe('World Map', () => {
     expect(worldMap.lastClickedCountry).to.equal(layer)
   })
 
-  it('should reset map and pass global on clicking same country', () => {
-    layer.feature = {'properties': {
-      'BRK_A3': 'AFG',
-      'NAME_LONG': 'Afghanistan'
-    }}
-
-    worldMap.handleClick(layer, 'AFG', layer, countryIndices, callBackSpy)
-    assert(callBackSpy.calledOnce)
-    expect(callBackSpy.getCall(0).args[0].type).to.equal('GLOBAL')
-    expect(worldMap.lastClickedCountry).to.equal('')
-  })
 
   it('should reset map and pass country code on clicking unknown country', () => {
     layer.feature = {'properties': {
