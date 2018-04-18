@@ -5,10 +5,10 @@ describe('Questionnaire.vue', () => {
   let ques, sandBox
   before(() => {
     const scopedVue = Vue.extend()
-    const $route = { path: 'test', params:{} }
+    const $route = { path: '/health_indicator_questionnaire/viewPublish/some-random-uuid', params:{countryUUID: "some-random-uuid"} }
     scopedVue.prototype.$route = $route
     const Constructor = scopedVue.extend(Questionnaire);
-    ques = new Constructor()//.$mount()
+    ques = new Constructor().$mount();
   })
   beforeEach(() => {
     sandBox = sinon.sandbox.create()
@@ -134,10 +134,13 @@ describe('Questionnaire.vue', () => {
       3: {categoryId: 2, indicatorId: 3, score: 5, supportingText: 'sp3'}
     };
 
+    expect(ques.isViewPublish).to.equal(false);
+    expect(ques.showEdit).to.equal(true);
+
     ques.viewFormCallback(options, scores)
 
     expect(ques.questionnaire).to.deep.equal(options.data)
     expect(ques.countrySummary).to.deep.equal(scores.data.countrySummary)
     expect(ques.healthIndicators).to.deep.equal(expected)
-  })
+  });
 })
