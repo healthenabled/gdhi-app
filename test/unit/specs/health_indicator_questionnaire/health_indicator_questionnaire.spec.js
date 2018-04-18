@@ -8,7 +8,7 @@ describe('Questionnaire.vue', () => {
     const $route = { path: '/health_indicator_questionnaire/viewPublish/some-random-uuid', params:{countryUUID: "some-random-uuid"} }
     scopedVue.prototype.$route = $route
     const Constructor = scopedVue.extend(Questionnaire);
-    ques = new Constructor().$mount();
+    ques = new Constructor()//.$mount();
   })
   beforeEach(() => {
     sandBox = sinon.sandbox.create()
