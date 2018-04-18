@@ -76,13 +76,7 @@ describe("EditQuestionaire",()=>{
 
     component.vm.saveCorrection();
 
-    sinon.assert.calledWith(saveData,'saveCorrection');
-    sinon.assert.calledWith(notifier,{
-      title: 'Success',
-      message: 'Form saved successfully!',
-      type: 'success'
-    });
-
+    sinon.assert.calledWith(saveData,'saveCorrection', 'Form saved successfully!');
   });
 
   it("should call getConfirmationDialog on click of Reject with the given params", () =>{
