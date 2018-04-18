@@ -1,39 +1,35 @@
 .content-container {
-  position: relative;
-  top: 90px;
-  width: 100%;
-  height: 100%;
+  padding-top: 85px;
+  min-height: calc(100% - 135px);
   .content-width {
-    width: 93%;
+    width: 90%;
     margin: 0 auto;
     height: 100%;
   }
   .content-centered {
-    width: 83%;
-    overflow: auto;
+    width: 90%;
+    margin: 0 auto;
   }
   .export {
     margin-left: auto;
-    margin-top: 60px;
-    color: $link-blue;
-    font-size: 12px;
-    font-family: 'RobotoLight';
+    color: $white;
+    @extend .copy;
     &.home {
       position: absolute;
-      z-index: 1001;
-      left: 15%;
+      z-index: 3;
+      left: 19%;
       padding: 10px 0px;
       margin: 5px 0 0 0px;
     }
     .pipe {
-      margin-left: -10px;
-      margin-right: 8px;
+      margin: 0px 20px;
+      display: inline-block;
     }
   }
   //TODO: Hacky fix
   @media screen and (min-width: 1200px) and (max-width: 1400px) {
     .export.home {
-      left: 17%;
+      left: 18%;
     }
   }
 }

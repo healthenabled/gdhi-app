@@ -2,19 +2,17 @@
   background: white;
   position: absolute;
   top:3px;
-  width: 300px;
-  box-shadow: 1px 1px 10px 1px #CCC;
-  text-transform: uppercase;
-  font-family: Roboto !important;
-  z-index: 1000;
-  max-height: calc(100vh - 130px);
+  width: 350px;
+  @extend .box-shadow, .copy;
+  border-radius: 5px;
+  z-index: 2;
+  max-height: calc(100vh - 170px);
   overflow-y: auto;
   overflow-x: hidden;
   &-error {
-    font-size: 12px;
-    font-family: 'RobotoSlabRegular';
     text-transform: capitalize;
-    color: red;
+    @extend .copy;
+    color: $negative;
     margin-top: 10px;
     text-align: left;
   }
@@ -32,34 +30,32 @@
     }
     &-name {
       position: relative;
-      font-family: 'RobotoSlabRegular';
-      font-size: 22px;
       text-transform: none;
       width: 100%;
+      @extend .header-bold;
     }
 
     &-desc {
-      font-size: 11px;
-      color: $font-grey-dark;
-      text-transform: none;
-      line-height: 1.5;
-      font-family: 'RobotoLight';
       padding-top: 5px;
       width: 100%;
+      @extend .copy;
     }
 
     &-context {
       width: 100%;
-      font-family: 'RobotoSlabRegular';
       &-name {
-        font-size: 12px;
+        @extend .header-bold;
+        text-transform: capitalize;
+        display: block;
+        border-bottom: 1px solid $border-color;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
       }
       &-details {
         display: flex;
         padding: 5px;
         margin-top: 3px;
         margin-bottom: 5px;
-        background: $score-background1;
         &-info {
           display: inline-block;
           width: 50%;
@@ -69,14 +65,13 @@
             text-align: center;
           }
           &-score {
-            font-size: 18px;
-            font-family: 'RobotoSlabRegular';
+            @extend .header-regular;
           }
           &-title {
-            font-size: 11px;
-            font-family: 'RobotoRegular';
-            color: $font-grey-dark;
+            color: $font-grey;
+            text-transform: uppercase;
             padding-top: 3px;
+            @extend .copy-small;
           }
         }
       }
@@ -120,38 +115,34 @@
     &-category {
       width: 100%;
       &-section {
-        padding-top: 8px;
+        margin-top: 15px;
         &-name {
-          font-size: 12px;
           text-transform: uppercase;
-          font-family: 'RobotoSlabRegular';
+          @extend .sub-header;
         }
         &-phase {
           position: relative;
-          background: #DFDCDF;
+          background: $border-color;
           border-radius: 15px;
           margin-top: 2px;
           width: 98%;
-          text-transform: uppercase;
-
+          text-transform: capitalize;
+          @extend .copy-small;
           &:before {
             content: '';
-            color: white;
-            font-weight: 600;
+            color: $white;
             position: absolute;
             overflow: hidden;
+            top: 1px;
             z-index: 1;
-            font-size: 11px;
             text-align: right;
-            margin-top: -1px;
             transform: translateX(-10px);
-            font-family: 'RobotoBold';
           }
 
           &:after {
             content: '';
             display: block;
-            height: 10px;
+            height: 16px;
             width: 0;
             border-radius: 15px;
             background-color: $na;
@@ -212,18 +203,7 @@
   }
 
   &-button {
-    border: 1px solid #404E7B;
-    background-color: #404E7B;
-    color: #FFF;
-    cursor: pointer;
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.15);
-    border-radius: 3px;
-    font-size: 12px;
-    font-family: 'RobotoSlabRegular';
-    margin-top: 12px;
-    text-align: center;
-    width: 90%;
-    padding: 12px;
+    margin-top: 10px;
   }
   .show {
     width: 100%;

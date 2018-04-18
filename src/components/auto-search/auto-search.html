@@ -1,3 +1,10 @@
-<div class="search-box hd-element">
-  <input id="search-box" class="search-box-container" type="text" placeholder="Search by country name"/>
+<div class="search-box hd-element" ref="autocomplete">
+ <autocomplete
+        id="search-box"
+        :source="countries"
+        placeholder="Search by country name"
+        input-class="search-box-container"
+        @selected="onCountrySelect"
+        />
+      </autocomplete>
 </div>

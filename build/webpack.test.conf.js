@@ -5,11 +5,21 @@ const utils = require('./utils')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
+const path = require('path');
 
 const webpackConfig = merge(baseWebpackConfig, {
   // use inline sourcemap for karma-sourcemap-loader
   module: {
-    rules: utils.styleLoaders()
+    rules: 
+      utils.styleLoaders().concat(
+      {
+        test: /\.(js|ts)/,
+        include: path.resolve('src'), // instrument only testing sources with Istanbul, after ts-loader runs
+        loader: 'istanbul-instrumenter-loader',
+        query: {
+            esModules: true
+        }
+    })
   },
   devtool: '#inline-source-map',
   resolveLoader: {

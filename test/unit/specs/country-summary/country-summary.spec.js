@@ -4,7 +4,7 @@ import summary from '@/components/countrySummary/country-summary.js'
 describe("should test country summary", () => {
   let countrySummary, sandBox
   before(() => {
-    var Constructor = Vue.extend(summary)
+    const Constructor = Vue.extend(summary);
     countrySummary = new Constructor()
   })
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe("should test country summary", () => {
     sandBox.restore()
   })
   it('should set data', () => {
-    var response = {}
+    const response = {};
     response.data = {
       "countryId": "PER",
       "countryName": "Peru",
@@ -26,17 +26,17 @@ describe("should test country summary", () => {
       "dataFeederName": "ffsd",
       "dataFeederRole": "sdfds",
       "dataFeederEmail": "d@d.com",
-      "dataCollectorName": "",
-      "dataCollectorRole": "",
-      "dataCollectorEmail": "",
+      "dataApproverName": "",
+      "dataApproverRole": "",
+      "dataApproverEmail": "",
       "collectedDate": "08-09-2001",
-      "resources": ["dfdf"]
+      "resources": ["dfdf"],
+      "countryAlpha2Code": "PE"
     }
 
     countrySummary.countrySummaryCallback(response, 'PER')
 
     expect(countrySummary.countrySummaries).to.equal(response.data)
-    expect(countrySummary.countryName).to.equal(response.data.countryName)
 
     response.data.countryName = null
     response.data.countryId = response.data.countryId.slice(0, 2)
@@ -44,6 +44,5 @@ describe("should test country summary", () => {
     countrySummary.countrySummaryCallback(response, 'PER')
 
     expect(countrySummary.countrySummaries).to.equal(response.data)
-    expect(countrySummary.countryName).to.equal(response.data.countryId)
   })
 })

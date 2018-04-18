@@ -1,51 +1,47 @@
-<div class="indicators-info">
+<div class="indicators-info content-centered">
   <div class="indicators-info-content">
-      <div class="indicators-info-content-categories">
+    <div class="indicators-info-content-categories">
       <div class="indicators-info-static">
-        <div class="indicator-info-static-heading">List of indicators</div>
+        <div class="indicator-info-static-heading page-title">Indicators</div>
       </div>
-      <ul id="v-for-categoryNames" class="category-names">
-        <li class="l-box" v-for="categoryName in categoryNames">
-          <a :href="'#' + categoryName">{{ categoryName }}</a>
-        </li>
-      </ul>
-    </div>
-     <div class="table">
-      <div class="table-row table-header">
-        <div class="table-row-item column-flex-grow-sno border-right-no align-header-text">No.</div>
-        <div class="table-row-item align-header-text">Category</div>
-        <div class="table-row-item align-header-text column-flex-grow-sno">No.</div>
-        <div class="table-row-item align-header-text">Indicator</div>
-        <div class="table-row-item align-header-text">Definition</div>
-      </div>
-
-      <div v-for="category in categoricalIndicators" class="table-row">
-        <div class="table-row-item table-font column-flex-grow" data-header="No.">
-          <span class="align-No">{{category.categoryId}}</span>
-        </div>
-        <div class="table-row-item indicator-data" data-header="Category" :id="category.categoryName">{{category.categoryName}}</div>
-
-        <div class="table-row-item containers column-flex-grow-sno" data-header="sNo.">
-          <div v-for="indicator in category.indicators" class="table-font half-containers">
-            <span class="align-No">{{indicator.indicatorId}}</span>
-          </div>
-        </div>
-
-        <div class="table-row-item containers" data-header="Indicator">
-          <div v-for="indicator in category.indicators" class="medium-font half-containers">
-            <div class="block-with-text" :title="indicator.indicatorName">{{indicator.indicatorName}}</div>
-          </div>
-        </div>
-
-        <div class="table-row-item containers" data-header="Definition">
-          <div v-for="indicator in category.indicators" class="half-containers">
-            <div class="block-with-text" :title="indicator.indicatorDefinition">{{indicator.indicatorDefinition}}</div>
-          </div>
+      <div class="row">
+        <div class="indicators">
+          <div v-for="category in categoricalIndicators">
+              <div class="box indicator-details">
+                <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'">
+                  <div class="align-No sub-header"  @click="onCategoryExpand(category)">
+                    {{category.categoryName}}
+                  </div>
+                  <div class="accordion-content">
+                    <div class="row table-header header-regular">
+                      <div class="column-50percent">
+                        <span class="indicator-id">#</span>
+                        <span class="indicator-name">Indicator</span>
+                      </div>
+                      <div class="column-50percent">
+                        <span>Definition</span>
+                      </div>
+                    </div>
+                    <div v-for="indicator in category.indicators">
+                      <div class="row indicator">
+                        <div class="column-50percent">
+                          <span class="indicator-id">{{indicator.indicatorCode}}</span>
+                          <span class="indicator-name">{{indicator.indicatorName}}</span>
+                        </div>
+                        <div class="column-50percent indicator-def">
+                          <span>{{indicator.indicatorDefinition}}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
     <div class="top">
-      <a class="arrow" href="#"><span class="fa fa-angle-up"></span></a>
+      <a class="arrow" href="#"><span class="fa  fa-chevron-circle-up fa-3x"></span></a>
     </div>
   </div>
 </div>

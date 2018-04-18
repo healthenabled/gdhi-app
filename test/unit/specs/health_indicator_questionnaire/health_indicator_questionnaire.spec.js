@@ -1,10 +1,13 @@
 import Vue from 'vue'
-import Questionnaire from '@/components/health_indicator_questionnaire/health_indicator_questionnaire.js'
+import Questionnaire from '@/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js'
 
 describe('Questionnaire.vue', () => {
   let ques, sandBox
   before(() => {
-    var Constructor = Vue.extend(Questionnaire)
+    const scopedVue = Vue.extend()
+    const $route = { path: 'test', params:{} }
+    scopedVue.prototype.$route = $route
+    const Constructor = scopedVue.extend(Questionnaire);
     ques = new Constructor()//.$mount()
   })
   beforeEach(() => {
@@ -17,7 +20,7 @@ describe('Questionnaire.vue', () => {
     expect(ques.showEdit).to.equal(true)
   })
   it("should transform health indicators",  () => {
-    var data = [{
+    const data = [{
       "categoryId": 1,
       "categoryName": "c1",
       "indicators": [{
@@ -40,35 +43,29 @@ describe('Questionnaire.vue', () => {
         "indicatorDefinition": "ind3 def",
         "scores": [{"score": 0, "scoreDefinition": "ind3 0 def"}, {"score": 1, "scoreDefinition": "ind3 1 def"}]
       }]
-    }]
-    var expected = {
+    }];
+    const expected = {
       1: {categoryId: 1, indicatorId: 1, score: null, supportingText: ''},
       2: {categoryId: 2, indicatorId: 2, score: null, supportingText: ''},
       3: {categoryId: 2, indicatorId: 3, score: null, supportingText: ''}
-    }
+    };
 
     ques.setUpHealthIndicators(data, false)
 
     expect(ques.healthIndicators).to.deep.equal(expected)
     data.forEach(datum => {
-      datum.indicators.forEach(indicator => {
-        expect(indicator.showIndicator).to.equal(false)
-        expect(indicator.expandCollapseBtn).to.equal('+')
-      })
+      expect(datum.showCategory).to.equal(false)
     })
 
     ques.setUpHealthIndicators(data, true)
 
     data.forEach(datum => {
-      datum.indicators.forEach(indicator => {
-        expect(indicator.showIndicator).to.equal(true)
-        expect(indicator.expandCollapseBtn).to.equal('-')
-      })
+      expect(datum.showCategory).to.equal(true)
     })
   })
   it('should transform data for view form', () => {
-    var options = {}
-    var scores = {}
+    const options = {};
+    const scores = {};
     options.data = [{
       "categoryId": 1,
       "categoryName": "c1",
@@ -107,9 +104,9 @@ describe('Questionnaire.vue', () => {
         "dataFeederName": "ffsd",
         "dataFeederRole": "sdfds",
         "dataFeederEmail": "d@d.com",
-        "dataCollectorName": "",
-        "dataCollectorRole": "",
-        "dataCollectorEmail": "",
+        "dataApproverName": "",
+        "dataApproverRole": "",
+        "dataApproverEmail": "",
         "collectedDate": "08-09-2001",
         "resources": ["dfdf"]
       },
@@ -131,11 +128,11 @@ describe('Questionnaire.vue', () => {
           "supportingText": "sp3"
         }]
     }
-    var expected = {
+    const expected = {
       1: {categoryId: 1, indicatorId: 1, score: null, supportingText: 'sp1'},
       2: {categoryId: 2, indicatorId: 2, score: 2, supportingText: 'sp2'},
       3: {categoryId: 2, indicatorId: 3, score: 5, supportingText: 'sp3'}
-    }
+    };
 
     ques.viewFormCallback(options, scores)
 

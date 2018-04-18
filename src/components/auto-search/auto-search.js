@@ -1,39 +1,30 @@
-import Vue from 'vue'
-import autoSearch from './auto-search.html'
-import easyAutocomplete from 'easy-autocomplete'
-import axios from 'axios'
-import $ from 'jquery'
-import {EventBus} from '../common/event-bus'
+import Vue from 'vue';
+import axios from 'axios';
+import { EventBus } from '../common/event-bus';
+import autoSearch from './auto-search.html';
+import Autocomplete from 'vuejs-auto-complete'
+import { sortBy } from 'lodash';
 
 export default Vue.extend({
-  template: autoSearch,
-  name: 'auto-search',
-  mounted () {
-    this.loadCountries()
+  name: 'AutoSearch',
+  components: { Autocomplete },
+  mounted() {
+    this.loadCountries();
+  },
+  data() {
+    return { countries: [], countryId: ''};
   },
   methods: {
-    loadCountries: function () {
+    loadCountries() {
       axios.get('/api/countries')
         .then(response => {
-          this.countries = response.data
-          this.loadSearchData()
-        })
-      console.log(easyAutocomplete)
+          this.countries = sortBy(response.data, ["name"]);
+        });
     },
-    loadSearchData: function () {
-      var options = {
-        data: this.countries,
-        getValue: 'name',
-        list: {
-          match: {enabled: true},
-          sort: {enabled: true},
-          onChooseEvent: function () {
-            var countryId = $('#search-box').getSelectedItemData().id
-            EventBus.$emit('Map:Searched', countryId)
-          }
-        }
-      }
-      $('#search-box').easyAutocomplete(options)
-    }
-  }
-})
+    onCountrySelect(selectedItem) {
+      this.countryId = selectedItem.value;
+      EventBus.$emit('Map:Searched', this.countryId);
+    },
+  },
+  template: autoSearch,
+});

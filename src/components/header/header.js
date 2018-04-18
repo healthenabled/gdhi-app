@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import header from './header.html'
+import Vue from 'vue';
+import header from './header.html';
 
 export default Vue.extend({
-  template: header,
   name: 'Header',
 
-  data () {
+  data() {
     return {
       countries: {},
       developmentIndicators: [],
-      healthIndicators: {}
-    }
-  }
-})
+      healthIndicators: {},
+    };
+  },
+  template: header,
+});

@@ -66,7 +66,7 @@ const geoData = {'type':'FeatureCollection', 'features': [
 ]}
 
 describe('Event Handler', () => {
-  var layer, mockLayer
+  let layer, mockLayer;
   beforeEach(() => {
     layer = L.geoJSON(geoData)
     mockLayer = sinon.mock(layer)
@@ -90,7 +90,7 @@ describe('Event Handler', () => {
     }}
     mockLayer.expects('setStyle').once().
     withArgs({ fillColor: '#CF0A01', fillOpacity: 0.95 })
-    var clickState = eventHandler.onCountryClick(layer, '', countryIndices)
+    const clickState = eventHandler.onCountryClick(layer, '', countryIndices);
     expect(clickState).to.equal('CLICK_ON')
   })
 
@@ -100,7 +100,7 @@ describe('Event Handler', () => {
     }}
     mockLayer.expects('setStyle').once().
     withArgs({ fillColor: '#11184B', fillOpacity: 0.95 })
-    var clickState = eventHandler.onCountryClick(layer, layer, countryIndices)
+    const clickState = eventHandler.onCountryClick(layer, layer, countryIndices);
 
     expect(clickState).to.equal('RESET_CLICK')
   })
@@ -117,12 +117,12 @@ describe('Event Handler', () => {
       .withArgs(
         { fillColor: '#CF0A01', fillOpacity: 0.95 })
 
-    var indLayer = Object.assign({}, layer)
+    const indLayer = Object.assign({}, layer);
     indLayer.feature = {'properties': {
       'BRK_A3': 'IND'
     }}
 
-    var clickState = eventHandler.onCountryClick(layer, indLayer, countryIndices)
+    const clickState = eventHandler.onCountryClick(layer, indLayer, countryIndices);
 
     expect(clickState).to.equal('CLICK_ON')
 
@@ -134,7 +134,7 @@ describe('Event Handler', () => {
     }}
     mockLayer.expects('setStyle').once().
       withArgs({ fillColor: '#11184B', fillOpacity: 0.95 })
-    var clickState = eventHandler.onCountryClick('', layer, countryIndices)
+    const clickState = eventHandler.onCountryClick('', layer, countryIndices);
 
     expect(clickState).to.equal('COUNTRY_NOT_FOUND')
   })

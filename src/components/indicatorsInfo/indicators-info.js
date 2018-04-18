@@ -1,38 +1,48 @@
-import Vue from 'vue'
-import indicatorsInfo from './indicators-info.html'
-import axios from 'axios'
-import _ from 'lodash'
+import Vue from 'vue';
+import indicatorsInfo from './indicators-info.html';
+import axios from 'axios';
+import { uniq } from 'lodash';
+import common from '../../common/common'
 
 export default Vue.extend({
-  template: indicatorsInfo,
-  name: 'indicators-info',
+  name: 'IndicatorsInfo',
 
-  data () {
+  data() {
     return {
       categoricalIndicators: [],
-      categoryNames: []
+      categoryNames: [],
 
-    }
+    };
   },
 
-  created () {
-    var self = this
-    $('.loading').show()
+  mounted() {
+    const self = this;
+    common.showLoading();
+
     self.fetchCategoricalIndicators().then(response => {
-      self.categoricalIndicators = response.data
-      self.categoryNames = self.getCategoryNames(response.data)
-      $('.loading').hide()
-    })
+      self.categoricalIndicators = response.data;
+      self.categoricalIndicators.forEach((category)=> {
+        this.$set(category, 'showCategory', true);
+      });
+      self.categoryNames = self.getCategoryNames(response.data);
+      common.hideLoading();
+    });
   },
 
   methods: {
-    fetchCategoricalIndicators: function () {
-      return axios.get('/api/health_indicator_options')
+    fetchCategoricalIndicators() {
+      return axios.get('/api/health_indicator_options');
     },
 
-    getCategoryNames: function (categories) {
-      return _.uniq(_.map(categories, 'categoryName'))
-    }
-  }
+    getCategoryNames(categories) {
+      return uniq(categories.map((category) => {
+        return category.categoryName
+      }));
+    },
+    onCategoryExpand(category) {
+      category.showCategory = !category.showCategory;
+    },
+  },
+  template: indicatorsInfo,
 
-})
+});

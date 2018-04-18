@@ -2,17 +2,17 @@ import Vue from 'vue'
 import mapTemplate from './map.html'
 import { EventBus } from '../common/event-bus'
 import indicatorPanel from '../indicatorPanel/indicator-panel.js'
-import mapLegend from '../legend/legend.js'
+import MapLegend from '../legend/legend.js'
 import axios from 'axios'
 import worldMap from './world-map'
 import helper from './map-helper'
-import _ from 'lodash'
+import { merge } from 'lodash'
+import common from '../../common/common'
 
 export default Vue.extend({
   components: {
-    indicatorPanel, mapLegend
+    indicatorPanel, MapLegend
   },
-  template: mapTemplate,
   data () {
     // Todo: Remove mapData and directly return data
     this.mapData = {
@@ -38,7 +38,10 @@ export default Vue.extend({
     EventBus.$on('Map:Searched', this.onSearchTriggered)
     this.$on('Map:Clicked', ($clickedEl) => {
       if ($clickedEl.type === 'GLOBAL') {
-        this.resetFilters()
+        this.resetFilters();
+        document.querySelector("#search-box input").value = '';
+      } else {
+        document.querySelector("#search-box input").value = $clickedEl.countryName;
       }
     })
   },
@@ -63,26 +66,26 @@ export default Vue.extend({
     },
 
     fetchGlobalIndices: function () {
-      var self = this
-      $('.loading').show()
-      var windowProperties = window.appProperties
+      const self = this;
+      common.showLoading();
+      const windowProperties = window.appProperties;
       return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
         .then(function (globalHealthIndices) {
-          self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores
+          self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
           self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
-            globalHealthIndices)
-          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self))
-          $('.loading').hide()
+            globalHealthIndices);
+          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self));
+          common.hideLoading();
         })
     },
     fetchCategoricalIndicators: function () {
-      var self = this
+      const self = this;
       return axios.get('/api/health_indicator_options').then(function (categories) {
         self.categories = categories.data
       })
     },
     fetchPhases: function () {
-      var self = this
+      const self = this;
       self.phases = [{phaseValue: 1, phaseName: 'Phase 1'},
         {phaseValue: 2, phaseName: 'Phase 2'},
         {phaseValue: 3, phaseName: 'Phase 3'},
@@ -91,15 +94,15 @@ export default Vue.extend({
       return self.phases
     },
     mergeColorCodeToHealthIndicators: function (globalHealthIndices) {
-      var globalHealthIndicesWithScores = _.filter(globalHealthIndices.data.countryHealthScores, function (country) {
+      const globalHealthIndicesWithScores = globalHealthIndices.data.countryHealthScores.filter((country) => {
         return country.overallScore != null
-      })
-      var collection = globalHealthIndicesWithScores
-      _.forEach(collection, function (value) {
-        _.merge(value, {
+      });
+      const collection = globalHealthIndicesWithScores;
+      collection.forEach((value) => {
+        merge(value, {
           'colorCode': helper.getColorCodeFor(value['countryPhase'])
         })
-      })
+      });
       return collection
     },
     onCountrySelection (countryCode) {
@@ -108,5 +111,6 @@ export default Vue.extend({
     onSearchTriggered (countryCode) {
       worldMap.handleSearch(countryCode, this.onCountrySelection.bind(this))
     }
-  }
+  },
+  template: mapTemplate,
 })

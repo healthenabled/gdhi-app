@@ -4,7 +4,7 @@ import countryList from '@/components/countryList/country-list.js'
 describe("should test country list", () => {
   let list, sandBox
   before(() => {
-    var Constructor = Vue.extend(countryList)
+    const Constructor = Vue.extend(countryList);
     list = new Constructor()
   })
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe("should test country list", () => {
   })
 
   it('should set data', () => {
-    var indices = {"data": {}}
+    const indices = {"data": {}};
 
     indices.data.countryHealthScores = [{
       "countryId": "GHA",
@@ -86,7 +86,7 @@ describe("should test country list", () => {
     }
     ]
 
-    var expectCountryList = [ {
+    const expectCountryList = [{
       "countryId": "GHA",
       "countryName": "Ghana",
       "overallPhase": 4
@@ -94,7 +94,7 @@ describe("should test country list", () => {
       "countryId": "IND",
       "countryName": "India",
       "overallPhase": 5
-    }]
+    }];
 
     list.countryListCallback(indices)
 

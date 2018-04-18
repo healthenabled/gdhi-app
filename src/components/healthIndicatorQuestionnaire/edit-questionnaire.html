@@ -1,0 +1,195 @@
+<div class="health-indicator-questionnaire content-centered">
+  <div class="clearfix fixed-sub-header">
+    <span class="page-title">
+        <div v-if="countrySummary.countryAlpha2Code" class="flag" :style="{ backgroundImage: 'url(/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg)' }" ></div>
+        {{countrySummary.countryName}} - Digital Health Questionnaire
+    </span>
+    <div class="float-right button-container">
+      <span v-if="status === 'REVIEW_PENDING' && isAdmin">
+        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="saveCorrection()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save </button></span>
+      <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="publish()"><i class="fa fa-check" aria-hidden="true"></i> Publish </button></span>
+        <v-dialog/>
+      </span>
+      <span v-else>
+        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="save()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button></span>
+      <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="submit()"><i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
+      </span>
+    </div>
+  </div>
+  <form class="health-indicator-questionnaire-contact-info clearfix sub-content">
+    <div class="copy-small-italics copy-blue">
+      Note: Global Digital Health Index Data will be displayed publicly. As such, please obtain approval for
+      submission from the relevant government agency (Ministry of Health, Digital Health Agency, etc.) and provide
+      the contact information of the approver.
+    </div>
+    <div class="health-indicator-questionnaire-contact-info-heading header-bold">Contact Information</div>
+    <div class="box">
+      <div class="row">
+        <div class="collected-date column-33percent">
+          <label for="date">Date on which data was collected (DD-MM-YYYY)</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
+          <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" placeholder="DD-MM-YYYY" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="'Please Enter Date'">
+          <div v-show="errors.has('collectedDate')" class="error-info">Date for which data was collected is either empty or invalid</div>
+        </div>
+        <div class="column-33percent"></div>
+        <div class="column-33percent"></div>
+      </div>
+      <div class="row">
+        <div class="form-group column-33percent">
+          <label for="nameofPersonEnteringData">Name of person entering data</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="text" :disabled="!showEdit" name='feederName' :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'" id="nameofPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederName"
+                 :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
+        </div>
+        <div class="form-group column-33percent">
+          <label for="roleOfPersonEnteringData">Role of the person entering data</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="text" :disabled="!showEdit" name="feederRole" :class="errors.has('feederRole') ? 'has-error form-control' : 'form-control'" id="roleOfPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederRole" :title="errors.has('feederRole') ? 'Role of the person entering data is required' : 'Please Enter Role of the person entering data'">
+        </div>
+        <div class="form-group column-33percent">
+          <label for="emailOfPersonEnteringData">Email of the person entering data</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="email" :disabled="!showEdit" name='feederEmail' :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'" id="emailOfPersonEnteringData" v-validate.disable="'required|email'" v-model="countrySummary.dataFeederEmail" :title="'Enter email'">
+          <div v-show="errors.has('feederEmail')" class="error-info">Please enter valid email</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group column-33percent">
+          <label for="nameofPersonApprovedData">Name of the approver</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="text" :disabled="!showEdit" class="form-control" id="nameofPersonApprovedData"  name="approvername" v-model="countrySummary.dataApproverName" :class="errors.has('approvername') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required'"
+                 :title="errors.has('approvername') ? 'Name of person approving data is required' : 'Please Enter Name of person approving data'">
+        </div>
+        <div class="form-group column-33percent">
+          <label for="roleofPersonApprovedData">Role of the approver</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="text" :disabled="!showEdit" class="form-control" id="roleofPersonApprovedData" name="approverrole" v-model="countrySummary.dataApproverRole" :class="errors.has('approverrole') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required'"
+                 :title="errors.has('approverrole') ? 'Role of person approving data is required' : 'Please Enter Role of person approving data'">
+        </div>
+        <div class="form-group column-33percent">
+          <label for="emailofPersonApprovedData">Email of the approver</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
+          <input type="email" :disabled="!showEdit" class="form-control" id="emailofPersonApprovedData" name="approveremail" v-model="countrySummary.dataApproverEmail" :class="errors.has('approveremail') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required|email'"
+                 :title="'Please Enter Email of person approving data'">
+          <div v-show="errors.has('approveremail')" class="error-info">Please enter valid email</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group column-33percent">
+          <label for="nameofCountryContact">Name of the country contact</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
+          <input type="text" :disabled="!showEdit" name="countryContact" :class="errors.has('countryContact') ? 'has-error custom-form-control' : 'custom-form-control'" id="nameofCountryContact" v-validate.disable="'required'" v-model="countrySummary.contactName"
+            :title="errors.has('countryContact') ? 'Country contact is Required' : 'Country contact'">
+        </div>
+        <div class="form-group column-33percent">
+          <label for="roleofCountryContact">Role of the country contact</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
+          <input type="text" :disabled="!showEdit" name="contactRole" :class="errors.has('contactRole') ? 'has-error form-control' : 'form-control'" id="roleofCountryContact" v-validate.disable="'required'" :title="errors.has('contactRole') ? 'Role of the country contact is Required' : 'Role of the country contact'"
+            v-model="countrySummary.contactDesignation">
+        </div>
+        <div class="form-group column-33percent">
+          <label for="emailofCountryContact">Email of the country contact</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
+          <input type="email" :disabled="!showEdit" name="contactEmail" :class="errors.has('contactEmail') ? 'has-error form-control' : 'form-control'" id="emailofCountryContact" v-validate.disable="'required|email'" v-model="countrySummary.contactEmail" :title="'Enter email'">
+          <div v-show="errors.has('contactEmail')" class="error-info">Please enter valid email</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column-66percent">
+          <label for="countrySummary">Country Summary</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
+          <textarea name="countrySummary" rows="5" :disabled="!showEdit" :class="errors.has('countrySummary') ? 'has-error form-control custom-width' : 'form-control custom-width'" id="countrySummary" v-model="countrySummary.summary" v-validate.disable="'required'"
+            :title="errors.has('countrySummary') ? 'Country summary is Required' : 'Country summary'"></textarea>
+        </div>
+        <div class="column-33percent">
+          <label for="Organisation">Organisation of the country contact</label>
+          <span class="mandatory-field">*</span>
+          <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
+          <input type="text" :disabled="!showEdit" id="Organisation" name="Organisation" v-validate.disable="'required'"
+                 :class="errors.has('Organisation') ? 'has-error form-control' : 'form-control'" v-model="countrySummary.contactOrganization"
+                 :title="errors.has('Organisation') ? 'Please enter Organisation' : 'Enter Organisation of the country contact'">
+        </div>
+      </div>
+    </div>
+    <div class="health-indicator-questionnaire-contact-info-heading header-bold">Resource Information
+      <span class="fa fa-eye health-indicator-questionnaire-contact-info-publish" title="These details will be displayed publicly on the GDHI platform"></span>
+      <div class="health-indicator-questionnaire-contact-info-description copy-small">
+        Please provide links to digital health related resources for your country.</div>
+    </div>
+    <div class="box">
+      <div class="row">
+        <div class="form-group column-33percent">
+          <label for="resource1">Resource 1</label><span class="mandatory-field">*</span>
+          <input type="text" :disabled="!showEdit" name="resource1" id="resource1" v-model="countrySummary.resources[0]" v-validate.disable="'required|url'" :class="errors.has('resource1') ? 'has-error form-control' : 'form-control'" />
+        </div>
+        <div class="form-group column-33percent">
+          <label for="resource2">Resource 2</label>
+          <input type="text" :disabled="!showEdit" :class="errors.has('resource2') ? 'has-error form-control' : 'form-control'" id="resource2" name="resource2" v-model="countrySummary.resources[1]" v-validate.disable="'url'" />
+        </div>
+        <div class="form-group column-33percent">
+          <label for="resource3">Resource 3</label>
+          <input type="text" :disabled="!showEdit" :class="errors.has('resource3') ? 'has-error form-control' : 'form-control'" id="resource3" name="resource3" v-model="countrySummary.resources[2]" v-validate.disable="'url'" />
+        </div>
+      </div>
+      <div class="row column-66percent">
+        <div class="form-group column-50percent">
+          <label for="resource4">Resource 4</label>
+          <input type="text" :disabled="!showEdit" :class="errors.has('resource4') ? 'has-error form-control' : 'form-control'" id="resource4" name="resource4" v-model="countrySummary.resources[3]" v-validate.disable="'url'" />
+        </div>
+        <div class="form-group column-50percent">
+          <label for="resource5">Resource 5</label>
+          <input type="text" :disabled="!showEdit" :class="errors.has('resource5')  ? 'has-error form-control' : 'form-control'" id="resource5" name="resource5" v-model="countrySummary.resources[4]" v-validate.disable="'url'" />
+        </div>
+      </div>
+    </div>
+    <div class="health-indicator-questionnaire-contact-info-heading header-bold">Indicator Details
+      <span title="Only the score for each indicator will be displayed publicly on the GDHI platform." class="fa fa-eye health-indicator-questionnaire-contact-info-publish"></span>
+    </div>
+    <div v-for="category in questionnaire" class="">
+      <div class="box" data-header="No.">
+        <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'">
+          <div class="sub-header" @click="onCategoryExpand(category)">{{category.categoryName}}</div>
+          <div class="accordion-content">
+            <div class="" data-header="Indicators">
+              <div v-for="indicator in category.indicators" :class="errors.has('indicator_'+indicator.indicatorId+'_rationale') ? 'has-error indicator-items' : 'indicator-items'">
+                <div> {{indicator.indicatorCode}}. {{indicator.indicatorName}}</div>
+                <div class="copy-small-italics copy-blue indicator-definition">{{indicator.indicatorDefinition}}</div>
+                <div v-for="score in indicator.scores" class="scores">
+                  <label class="radio-container">
+                          <span :class="score.score ? 'score-content' : ''">{{score.score}}</span>
+                          <span class="score-content" v-if="score.score !== null">-</span>
+                          <span>{{score.scoreDefinition}}</span>
+                          <input type="radio" :disabled="!showEdit" :name="indicator.indicatorId" v-model="healthIndicators[indicator.indicatorId].score" :value="score.score" />
+                          <span class="checkmark"></span>
+                        </label>
+                </div>
+                <div class="row description_container">
+                  <label>Rationale or supporting text</label>
+                  <span class="mandatory-field">*</span>
+                  <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate.disable="'required'"></textarea>
+                  <div v-show="errors.has('indicator_'+indicator.indicatorId+'_rationale')" class="error-info">The rationale field is required.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="top">
+      <a class="arrow" href="#"><span class="fa  fa-chevron-circle-up fa-3x"></span></a>
+    </div>
+  </form>
+</div>

@@ -1,34 +1,35 @@
-import Vue from 'vue'
-import countrySummary from './country-summary.html'
-import axios from 'axios'
+import Vue from 'vue';
+import countrySummary from './country-summary.html';
+import axios from 'axios';
+import common from '../../common/common'
 
 export default Vue.extend({
-  template: countrySummary,
-  name: 'country-summary',
-  data () {
+  name: 'CountrySummary',
+  data() {
     return {
       countrySummaries: {},
-      mapEnv: process.env.MAP_KEY,
-      countryName: this.$route.params.countryCode.slice(0, 2) // Google supports only 2 characters of country code.
-    }
+      error: ''
+    };
   },
-  created () {
-    $('.loading').show()
-    this.getCountrySummary(this.$route.params.countryCode)
+  mounted() {
+    common.showLoading();
+    this.getCountrySummary(this.$route.params.countryCode);
   },
   methods: {
-    getCountrySummary (countryCode) {
-      const countrySummaryUrl = '/api/countries/' + countryCode + '/country_summary'
+    getCountrySummary(countryCode) {
+      const countrySummaryUrl = `/api/countries/${countryCode}/country_summary`;
       axios.get(countrySummaryUrl)
-        .then((response) => this.countrySummaryCallback(response, countryCode))
-        .catch(e => {
-          console.log('Error pulling development indicators data')
+        .then((response) => {
+          this.countrySummaryCallback(response, countryCode)
         })
+        .catch(e => {
+          this.error = e.response.message;
+        });
     },
-    countrySummaryCallback (response, countryCode) {
-      this.countrySummaries = response.data
-      this.countryName = (this.countrySummaries.countryName) ? this.countrySummaries.countryName : countryCode.slice(0, 2)
-      $('.loading').hide()
-    }
-  }
-})
+    countrySummaryCallback(response, countryCode) {
+      this.countrySummaries = response.data;
+      common.hideLoading();
+    },
+  },
+  template: countrySummary,
+});

@@ -28,10 +28,10 @@ const countryIndices = [{
 
 describe('Map Helper', () => {
   it('should get color code for score', () => {
-    expect(mapHelper.getColorCodeFor(4)).to.equal('#225E8E')
+    expect(mapHelper.getColorCodeFor(4)).to.equal('#2575AE')
   })
-  it('should get color code for score > 5', () => {
-    expect(mapHelper.getColorCodeFor(7)).to.equal('#606060')
+  it('should get color code for score >= 5', () => {
+    expect(mapHelper.getColorCodeFor(5)).to.equal('#156DAE')
   })
   // TODO: check if this required
   // it.only('should get color code for score = 0', () => {

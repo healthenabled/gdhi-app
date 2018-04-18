@@ -1,22 +1,22 @@
-@import "~normalize.css/normalize.css";
-@import "components/all";
+@import "reset";
 @import "font";
 @import "./vendor/easy-autocomplete";
 @import "~leaflet/dist/leaflet.css";
 @import "~font-awesome/css/font-awesome.min.css";
+@import "components/all";
+
 
 body, html {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'RobotoRegular', sans-serif;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
+  font-size: 14px;
+  line-height: 1.42;
+  background: $body-bg;
+  color: $black-grey;
 }
- ul {
-   list-style: none;
-   margin: 0;
-   padding: 0;
- }
 
  #app {
    width: 100%;
@@ -46,7 +46,7 @@ body, html {
   bottom: 0;
   right: 0;
   background: #000 center;
-  z-index: 2001;
+  z-index: 4;
   opacity: 0.5;
 
   .error {
@@ -89,3 +89,468 @@ body, html {
   }
 }
 
+.full-height {
+  height: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.list-with-bullets {
+  margin: 10px;
+  li {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+    margin: 5px 0;
+  }
+
+}
+.link-blue {
+  color: $logo-blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.page-title {
+  font-family: 'RobotoSlabBold', 'sans-serif';
+  font-size: 2.14em;
+  margin: 20px 0;
+  max-width: 90%;
+  display: inline-block;
+}
+.highlight-text {
+  font-family: "RobotoRegular", sans-serif;
+  font-size: 1.5em;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.copy {
+  font-size: 1em;
+  font-weight: $regular;
+  font-family: "RobotoRegular", sans-serif;
+}
+.copy-italics {
+  font-size: 1em;
+  font-weight: $regular;
+  font-family: "RobotoItalic", sans-serif;
+}
+
+.header-regular {
+  font-size: 1.15em;
+  font-family: "RobotoRegular", sans-serif;
+  line-height: 1;
+}
+
+.header-bold {
+  font-size: 1.15em;
+  font-family: "RobotoBold", sans-serif;
+  line-height: 1;
+}
+
+.sub-header {
+  font-size: 1.07em;
+  font-family: "RobotoRegular", sans-serif;
+  line-height: 1;
+}
+.copy-small {
+  font-size: 0.93em;
+  line-height: 1;
+  font-family: "RobotoRegular", sans-serif;
+  margin: 5px 0;
+}
+.copy-small-italics {
+  font-size: 0.93em;
+  line-height: 1;
+  font-family: "RobotoItalic", sans-serif;
+  margin: 5px 0;
+}
+.copy-grey {
+  color: $font-grey;
+}
+.copy-blue {
+  color: $link-blue;
+}
+.box-shadow {
+  box-shadow: 0px 2px 13.5px 1.5px rgba($shadow-grey, 0.2)
+}
+.box {
+  background: $white;
+  @extend .box-shadow;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.logo-font {
+  font-family: 'RobotoSlabBold';
+  font-size: 23px;
+  line-height: 1.09em;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+input[type='text'], input[type='email'], textarea, input[type='date'] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  border: 1px solid $border-color-dark;
+  border-radius: 5px;
+  &:disabled {
+    background: $border-color;
+    color: $black;
+    opacity: 0.7;
+  }
+}
+.btn {
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+  min-width: 64px;
+  text-transform: uppercase;
+  text-align: center;
+  box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.1), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+  outline: none;
+  border-radius: 5px;
+  padding: 10px;
+  display: inline-block;
+  color: $white;
+  @extend .sub-header;
+  cursor: pointer;
+  &.btn-primary {
+    background-color: $logo-blue;
+    &:hover {
+      background-color: darken($logo-blue, 10%);
+    }
+  }
+  &.btn-secondary {
+    @extend .link-blue;
+    background: transparent;
+    box-shadow: none;
+    color: $logo-blue;
+  }
+  &.btn-green {
+    background-color: $positive;
+    &:hover {
+      background-color: darken($positive, 10%);
+    }
+  }
+  &.btn-red {
+    background-color: $negative;
+    &:hover {
+      background-color: darken($negative, 10%);
+    }
+  }
+  &.disabled {
+    opacity: 0.5;
+    color: $font-grey;
+  }
+  i {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+
+.flag {
+  display: inline-block;
+  vertical-align: top;
+  width: 72px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 54px;
+  background-size: cover;
+  border: 1px solid $black;
+}
+.no-margin-top {
+  margin-top: 0px;
+}
+.row {
+  display: flex;
+  margin: 20px 0;
+  &:first-child {
+    margin-top: 0px;
+  }
+  &:last-child {
+    margin-bottom: 0px;
+  }
+  &:only-child {
+    margin-bottom: 20px;
+  }
+  @media screen and (max-width: 1024px) {
+    flex-wrap: wrap;
+    margin: 5px 0;
+  }
+}
+.column-100percent {
+  width: 100%;
+}
+.column-50percent {
+  width: 50%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-33percent {
+  width: 33.33%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-66percent {
+  width: 66.67%;
+  margin-right: 20px;
+  .column-50percent{
+    flex-shrink: 1;
+    &:last-child {
+      margin-right: 20px;
+      @media screen and (max-width: 1024px) {
+        margin-right: 0px;
+      }
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+
+#info-box {
+  background: $nodiff;
+  padding: 5px;
+  display: inline-block;
+  border-left: 5px solid darken($nodiff, 25%);
+  margin-top: 5px;
+  i {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+
+.accordion-content {
+  display: none;
+  border-top: 1px solid $border-color;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+.accordion {
+  cursor: pointer;
+  position: relative;
+  &:after {
+    position: absolute;
+    right: 0px;
+    content: "\f078";
+    font-family: "FontAwesome";
+    top: 15px;
+  }
+  &.expanded {
+    .accordion-content {
+      display: block;
+    }
+    &:after {
+      content: "\f077";
+    }
+  }
+  .sub-header {
+    position: relative;
+    z-index: 2;
+    text-transform: uppercase;
+    margin: -20px;
+    padding: 20px;
+  }
+}
+.top {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+}
+.hide {
+  display: none;
+}
+
+
+//custom radio button
+/* Customize the label (the container) */
+.radio-container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  &:hover {
+    input ~ .checkmark {
+      background-color: darken($radio-bg, 10%);
+    }
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    &:checked ~ .checkmark {
+      background-color: $logo-blue;
+      &:after {
+        display: block;
+      }
+    }
+  }
+}
+.has-error {
+  border: 1px solid $negative !important;
+}
+.error-info {
+  color: $negative;
+}
+.named-anchor {
+  display: block;
+  position: relative;
+  top: -100px;
+  visibility: hidden;
+}
+.fixed-sub-header {
+  position: fixed;
+  top:88px;
+  width: 90%;
+  background: $body-bg;
+  z-index: 3;
+}
+.sub-content {
+  margin-top: 100px;
+}
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  // background-color: $radio-bg;
+  border: 1px solid $radio-bg;
+  border-radius: 50%;
+  &:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  &:after {
+    // top: 6px;
+    // left: 6px;
+    // width: 8px;
+    // height: 8px;
+    // border-radius: 50%;
+    // background: $white;
+    left: 7px;
+    top: 2px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+}
+
+
+//notification overrides
+.vue-notification {
+  font-size: 14px;
+  padding: 20px;
+  margin: 0 10px 10px;
+  &.success {
+    background: $positive;
+    border-left-color: darken($positive, 25%);
+    .custom-template-icon {
+      color: darken($positive, 25%);
+    }
+  }
+  &.error {
+    background: $negative;
+    border-left-color: darken($negative, 25%);
+    .custom-template-icon {
+      color: darken($negative, 25%);
+    }
+  }
+  &.warn {
+    background: $nodiff;
+    border-left-color: darken($nodiff, 25%);
+    .custom-template-icon {
+      color: darken($nodiff, 25%);
+    }
+  }
+  .row {
+    align-items: center;
+    margin: 0;
+  }
+  .custom-template-icon {
+    margin-right: 20px;
+
+  }
+  .header-bold {
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  .sub-header{
+    @extend .copy-italics;
+  }
+}
+
+// popup overrides
+.dg-content {
+  @extend .copy
+}
+.dg-content-body {
+  border-color: $border-color;
+}
+.dg-container .dg-btn--cancel, .dg-container .dg-btn--ok  {
+  @extend .btn;
+}
+.dg-container .dg-btn--ok {
+  @extend .btn-green;
+}
+.dg-container .dg-btn--cancel {
+  @extend .btn-red;
+}
+
+
+.loader {
+  position: fixed;
+  z-index: 5;
+  top: 50%;
+  left: 50%;
+}

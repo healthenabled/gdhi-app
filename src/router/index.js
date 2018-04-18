@@ -1,17 +1,19 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import content from '@/components/container/container.js'
-import indicatorsInfoComp from '@/components/indicatorsInfo/indicators-info.js'
-import headerComp from '@/components/header/header.js'
-import autoSearch from '@/components/auto-search/auto-search.js'
-import footerComp from '@/components/footer/footer.vue'
-import countryProfile from '@/components/countryProfile/country-profile.js'
-import landingMap from '@/components/landing-map/map.js'
-import methodologyComp from '@/components/methodology/methodology.vue'
-import healthIndicatorQuestionnaire from '@/components/health_indicator_questionnaire/health_indicator_questionnaire.js'
-import countryListComp from '@/components/countryList/country-list.js'
+import Vue from 'vue';
+import Router from 'vue-router';
+import content from '@/components/container/container.js';
+import indicatorsInfoComp from '@/components/indicatorsInfo/indicators-info.js';
+import headerComp from '@/components/header/header.js';
+import autoSearch from '@/components/auto-search/auto-search.js';
+import footerComp from '@/components/footer/footer.vue';
+import countryProfile from '@/components/countryProfile/country-profile.js';
+import landingMap from '@/components/landing-map/map.js';
+import methodologyComp from '@/components/methodology/methodology.vue';
+import healthIndicatorQuestionnaire from '@/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js';
+import countryListComp from '@/components/countryList/country-list.js';
+import ErrorComp from '@/components/error-handler/404-error.js';
+import generateUrlComp from '@/components/generateUrl/generate_url.js';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -21,58 +23,74 @@ export default new Router({
       components: {
         container: content,
         header: headerComp,
-        footer: footerComp
+        footer: footerComp,
       },
       children: [
+        {
+          path: '/',
+          redirect: "/map"
+        },
         {
           path: 'map',
           components: {
             routecontent: landingMap,
-            search: autoSearch
+            search: autoSearch,
           },
           children: [
             {
-              path: ':foo'
-            }
-          ]
+              path: ':foo',
+            },
+          ],
         },
         {
-          path: 'countryProfile/:countryCode',
+          path: 'country_profile/:countryCode',
           components: {
-            routecontent: countryProfile
-          }
+            routecontent: countryProfile,
+          },
         },
         {
-          path: '/indicatorsInfo',
+          path: '/indicators_info',
           components: {
-            routecontent: indicatorsInfoComp
-          }
+            routecontent: indicatorsInfoComp,
+          },
         },
         {
           path: '/methodology',
           components: {
-            routecontent: methodologyComp
-          }
+            routecontent: methodologyComp,
+          },
         },
         {
-          path: '/health_indicator_questionnaire',
+          path: '/health_indicator_questionnaire/:countryUUID',
           components: {
-            routecontent: healthIndicatorQuestionnaire
-          }
+            routecontent: healthIndicatorQuestionnaire,
+          },
         },
         {
-          path: '/health_indicator_questionnaire/:countryCode',
+          path: '/admin',
           components: {
-            routecontent: healthIndicatorQuestionnaire
-          }
+            routecontent: generateUrlComp,
+          },
         },
         {
           path: '/country_list',
           components: {
-            routecontent: countryListComp
-          }
-        }
-      ]
-    }
-  ]
-})
+            routecontent: countryListComp,
+          },
+        },
+        {
+          path: '/health_indicator_questionnaire/:countryUUID/review',
+          components: {
+            routecontent: healthIndicatorQuestionnaire,
+          },
+        },
+        {
+          path: '*',
+          components: {
+            routecontent: ErrorComp,
+          },
+        },
+      ],
+    },
+  ],
+});

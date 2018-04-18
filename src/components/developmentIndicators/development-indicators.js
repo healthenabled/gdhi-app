@@ -1,22 +1,25 @@
-import Vue from 'vue'
-import developmentIndicatorsTemplate from './development-indicators.html'
-import httpRequests from '../../common/indicator-http-requests'
+import Vue from 'vue';
+import developmentIndicatorsTemplate from './development-indicators.html';
+import httpRequests from '../../common/indicator-http-requests';
+import common from '../../common/common'
 
 export default Vue.extend({
-  template: developmentIndicatorsTemplate,
-  name: 'development-indicators',
-  data () {
+  name: 'DevelopmentIndicators',
+  data() {
     return {
-      developmentIndicators: []
-    }
+      developmentIndicators: [],
+    };
   },
-  created () {
-    this.getDevelopmentIndicatorsFor(this.$route.params.countryCode)
+  mounted() {
+    this.getDevelopmentIndicatorsFor(this.$route.params.countryCode);
   },
   methods: {
-    getDevelopmentIndicatorsFor (countryCode) {
-      $('.loading').show()
-      httpRequests.getDevelopmentIndicators(this, countryCode, false)
-    }
-  }
-})
+    getDevelopmentIndicatorsFor(countryCode) {
+      common.showLoading();
+      httpRequests.getDevelopmentIndicators(countryCode, false).then((response) => {
+        this.developmentIndicators = response;
+      });
+    },
+  },
+  template: developmentIndicatorsTemplate,
+});

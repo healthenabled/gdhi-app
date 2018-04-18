@@ -27,7 +27,7 @@
              :value="catagory.phase"></div>
       </div>
     </div>
-    <div class="indicator-panel-button" v-if="!isNoGlobalHealthIndicators" @click="showListOfCountries()">VIEW LIST OF COUNTRIES</div>
+    <div class="indicator-panel-button btn btn-primary" v-if="!isNoGlobalHealthIndicators" @click="showListOfCountries()">View List of Countries</div>
   </div>
   <div class="indicator-panel-container" v-else>
     <div class="indicator-panel-container-name">{{country.countryName}}</div>
@@ -50,7 +50,7 @@
     </div>
     <div class="indicator-panel-container-context">
       <div v-for="indicatorCategory in developmentIndicators" class="indicator-panel-container-context-section">
-        <span class="indicator-panel-container-context-name">{{Object.keys(indicatorCategory)[0]}}</span>
+        <span class="indicator-panel-container-context-name">{{Object.keys(indicatorCategory)[0].toLowerCase()}}</span>
         <div v-for="indicators in indicatorCategory" class="indicator-panel-container-context-details">
           <div v-for="(indicator, key) in indicators" class="indicator-panel-container-context-details-info">
             <span class="indicator-panel-container-context-details-info-score">{{indicator}}</span>
@@ -59,6 +59,6 @@
         </div>
       </div>
     </div>
-    <div class="indicator-panel-button" v-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0" @click="showCountryDetails(healthIndicators.countryId)">VIEW DETAILS</div>
+    <div class="indicator-panel-button btn btn-primary" v-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0" @click="showCountryDetails(healthIndicators.countryId)">View Details</div>
   </div>
 </div>
