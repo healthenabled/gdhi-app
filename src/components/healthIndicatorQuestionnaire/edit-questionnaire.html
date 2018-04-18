@@ -179,7 +179,7 @@
                 <div class="row description_container">
                   <label>Rationale or supporting text</label>
                   <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate.disable="'required'"></textarea>
-                  <div v-show="(errors.has('indicator_'+indicator.indicatorId+'_rationale') || errors.has(indicator.indicatorId))" class="error-info">The Indicator score and rationale field is required.</div>
+                  <div v-show="(errors.has('indicator_'+indicator.indicatorId+'_rationale') || errors.has(indicator.indicatorId))" class="error-info">Indicator score and rationale field is required.</div>
                 </div>
               </div>
             </div>
