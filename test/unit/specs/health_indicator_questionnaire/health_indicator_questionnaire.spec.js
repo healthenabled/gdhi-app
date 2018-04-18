@@ -134,7 +134,7 @@ describe('Questionnaire.vue', () => {
       3: {categoryId: 2, indicatorId: 3, score: 5, supportingText: 'sp3'}
     };
 
-    expect(ques.isViewPublish).to.equal(false);
+    expect(ques.isViewPublish).to.equal(true);
     expect(ques.showEdit).to.equal(true);
 
     ques.viewFormCallback(options, scores)
