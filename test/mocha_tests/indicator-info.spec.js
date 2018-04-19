@@ -1010,14 +1010,13 @@ describe ("Indicator Info ", () => {
     }
  ];
  beforeEach(() => {
+   moxios.install();
    wrapper = mount(IndicatorsInfo);
  })
  it("should call the API and update the local varaibles with correct data", (done) => {
-  moxios.install();
   moxios.wait(() => {
     let request = moxios.requests.mostRecent();
-    request.resolve({data: responseData});
-    moxios.wait(() => {
+    request.respondWith({statues: 200, response: responseData}).then(() => {
       expect(wrapper.vm.categoricalIndicators).to.deep.equal(responseData);
       wrapper.vm.categoricalIndicators.forEach((category)=> {
         expect(category['showCategory']).to.equal(true);
@@ -1029,14 +1028,11 @@ describe ("Indicator Info ", () => {
       done();
     });
   });
-  moxios.uninstall();
  });
  it("should render the html elements based on the data", (done) => {
-  moxios.install();
   moxios.wait(() => {
     let request = moxios.requests.mostRecent();
-    request.resolve({data: responseData});
-    moxios.wait(() => {
+    request.respondWith({statues: 200, response: responseData}).then(() => {
       expect(wrapper.findAll(".indicator-details").length).to.deep.equal(responseData.length);
       const firstIndicatorElement = wrapper.findAll(".indicator-details").at(0);
       expect(firstIndicatorElement.find(".sub-header").text()).to.equal(responseData[0].categoryName);
@@ -1047,20 +1043,19 @@ describe ("Indicator Info ", () => {
       done();
     });
   });
-  moxios.uninstall();
  });
  it("should update the showCategory variable of the category when the category name is clicked", (done) => {
-  moxios.install();
   moxios.wait(() => {
     let request = moxios.requests.mostRecent();
-    request.resolve({data: responseData});
-    moxios.wait(() => {
+    request.respondWith({statues: 200, response: responseData}).then(() => {
       const firstIndicatorElement = wrapper.findAll(".indicator-details").at(0);
       firstIndicatorElement.find(".sub-header").trigger('click')
       expect(wrapper.vm.categoricalIndicators[0]['showCategory']).to.equal(false);
       done();
     });
   });
-  moxios.uninstall();
+ });
+ afterEach(() => {
+  moxios.uninstall();   
  });
 })

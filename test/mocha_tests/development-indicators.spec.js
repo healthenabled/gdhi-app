@@ -40,34 +40,26 @@ describe("Development Indicators", () => {
     },
   },
 ];
+beforeEach(() => {
+  moxios.install();
+  wrapper = mount(DevelopmentIndicators, {
+    localVue,
+    router
+  });
+})
   it(" should set the local variable development indicators after the successful api call", (done) => {
-    moxios.install();
-    
-    wrapper = mount(DevelopmentIndicators, {
-      localVue,
-      router
-    });
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
-      request.resolve({data: responseData});
-      moxios.wait(() => {
+      request.respondWith({status: 200, response: responseData}).then(() => {
         expect(wrapper.vm.developmentIndicators).to.deep.equal(developmentIndicatorsData);
         done();
       });
     });
-    moxios.uninstall();
   });
   it(" should render the html elements based on the response ", () => {
-    moxios.install();
-    
-    wrapper = mount(DevelopmentIndicators, {
-      localVue,
-      router
-    });
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
-      request.resolve({data: responseData});
-      moxios.wait(() => {
+      request.respondWith({status: 200, response: responseData}).then(() => {
         expect(wrapper.findAll(".category").length).to.equal(developmentIndicatorsData.length);
         const firstElement = wrapper.findAll(".category").at(0);
         expect(firstElement.find(".header-bold").text()).to.equal(Object.keys(developmentIndicatorsData[0])[0].toLowerCase());
@@ -77,6 +69,8 @@ describe("Development Indicators", () => {
         done();
       });
     });
-    moxios.uninstall();
   });
+  afterEach(() => {
+    moxios.uninstall();
+  })
 });

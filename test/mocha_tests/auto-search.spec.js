@@ -12,37 +12,26 @@ describe("AutoSearch", () => {
     { id : 'POL', name: 'Poland', countryAlpha2Code: 'PL'},
     { id : 'AUS', name: 'Australia', countryAlpha2Code: 'AU'}
   ];
-  
-  beforeEach(()=> {
-    wrapper = mount(AutoSearch);
-  });
-
-  it("should contain the autocomplete component", () => {
-    expect(wrapper.contains(Autocomplete)).to.equal(true);
-  });
-  
-  it("should contain the countires value and source of autocomplete to be set to countries", (done) => {
-    expect(wrapper.vm.countries).to.deep.equal([]);
+  beforeEach(() => {
     moxios.install();
     moxios.stubRequest('/api/countries', {
       status: 200,
       response: countryData
     });
+    wrapper = mount(AutoSearch);
+  });
+  it("should contain the countires value, autocomplete component and source of autocomplete to be set to countries", (done) => {
     moxios.wait(() => {
       const sortedArray = sortBy(countryData, "name");
       expect(wrapper.vm.countries).to.deep.equal(sortedArray);
       const autocompleteComp = wrapper.find(Autocomplete);
+      expect(wrapper.contains(Autocomplete)).to.equal(true);
       expect(autocompleteComp.props().source).to.deep.equal(sortedArray);
       done()
     });
   });
 
   it("should set the country id when the onCountrySelect method", (done) => {
-    moxios.install();
-    moxios.stubRequest('/api/countries', {
-      status: 200,
-      response: countryData
-    });
     moxios.wait(() => {
       wrapper.vm.onCountrySelect({
           value: 'AUS',

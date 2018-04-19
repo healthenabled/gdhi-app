@@ -45,8 +45,8 @@ describe("AdminViewFormDetails",()=>{
       "contactEmail": "email"
     }]
   };
-
-  beforeEach(()=> {
+  beforeEach(() => {
+    moxios.install();
     component = mount(adminViewFormDetails, {
       data : {
         tabs: [
@@ -59,9 +59,8 @@ describe("AdminViewFormDetails",()=>{
       router
     });
   });
-
-  xit("should get admin view form details data",(done) => {
-    moxios.install();
+  it("should get admin view form details data",(done) => {
+    
     let updateSelected = sinon.spy();
     component.vm.updateSelected = updateSelected;
     component.vm.loadAdminViewFormDetails();
@@ -77,19 +76,39 @@ describe("AdminViewFormDetails",()=>{
         done();
       });
     });
-    moxios.uninstall();
   });
 
-  it("should call getTabData when updateSelected is called",() => {
-    let getTabData = sinon.spy();
-    component.vm.getTabData = getTabData;
-    component.vm.updateSelected({id: 0, name:'Awaiting Submission'});
-    sinon.assert.calledWith(getTabData, {id: 0, name:'Awaiting Submission'});
-    expect(component.vm.selectedTab).to.equal(0);
+  it("should call getTabData when updateSelected is called",(done) => {
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: responseData
+      }).then(() => {
+        let getTabData = sinon.spy();
+        component.vm.getTabData = getTabData;
+        component.vm.updateSelected({id: 0, name:'Awaiting Submission'});
+        sinon.assert.calledWith(getTabData, {id: 0, name:'Awaiting Submission'});
+        expect(component.vm.selectedTab).to.equal(0);
+        done();
+      });
+    });
+    moxios.uninstall();
   });
 
 
   it("should call openUrl when actionHandler is invoked",() => {
+    component = mount(adminViewFormDetails, {
+      data : {
+        tabs: [
+          {id: 0, name:'Awaiting Submission'},
+          {id: 1, name:'Review Pending'},
+          {id: 2, name:'Live Data'}
+        ]
+
+      },
+      router
+    });
     let openUrl = sinon.spy();
     component.vm.openUrl = openUrl;
 
@@ -102,6 +121,17 @@ describe("AdminViewFormDetails",()=>{
   });
 
   it("should populate the table rows when getTabData is called ",() => {
+    component = mount(adminViewFormDetails, {
+      data : {
+        tabs: [
+          {id: 0, name:'Awaiting Submission'},
+          {id: 1, name:'Review Pending'},
+          {id: 2, name:'Live Data'}
+        ]
+
+      },
+      router
+    });
     component.vm.allData = responseData;
     component.vm.getTabData(component.vm.tabs[0]);
     expect(component.vm.tableRows).to.deep.equal([...responseData.NEW , ...responseData.DRAFT] );
@@ -114,7 +144,9 @@ describe("AdminViewFormDetails",()=>{
 
 
   });
-
+  afterEach(() => {
+    moxios.uninstall();
+  })
 });
 
 

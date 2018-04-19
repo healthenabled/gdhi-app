@@ -1,7 +1,7 @@
 import Vue from "vue";
 import adminViewFormDetails from './admin-view-form-details.html';
 import adminTable from '../displayTable/admin-table.js';
-import axios from "axios/index";
+import axios from "axios";
 
 export default Vue.extend({
   name:'AdminViewFormDetails',
@@ -29,10 +29,12 @@ export default Vue.extend({
       this.selectedTab = tab.id;
     },
     loadAdminViewFormDetails() {
-      return axios.get('/api/admin/view_form_details')
+      axios.get('/api/admin/view_form_details')
         .then(response => {
           this.allData = response.data;
           this.updateSelected(this.tabs[0]);
+        }).catch((e) => {
+          console.log("Error");
         });
     },
     actionHandler(action, countryUUID){
