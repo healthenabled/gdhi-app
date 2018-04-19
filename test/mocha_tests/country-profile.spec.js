@@ -47,7 +47,7 @@ describe("Country Profile ", () => {
     });
  })
   it("should populate the data after successfull API call", (done) => {
-    
+
     moxios.wait(() => {
       expect(wrapper.vm.healthIndicatorData).to.deep.equal(healthIndicatorData);
       expect(wrapper.vm.flagSrc).to.deep.equal(`/static/img/flags/${healthIndicatorData.countryAlpha2Code.toLowerCase()}.svg`);
@@ -61,7 +61,7 @@ describe("Country Profile ", () => {
   it("should have the appropriate html elements based on the data", (done) => {
     moxios.wait(() => {
       expect(wrapper.find(".country-name").text()).to.equal(healthIndicatorData.countryName);
-      expect(wrapper.find("#collected-date").text()).to.equal(`As on ${healthIndicatorData.collectedDate}`);
+      expect(wrapper.find("#collected-date").text()).to.equal(`As on January 2018`);
       expect(wrapper.find(".export a").attributes().href).to.equal(wrapper.vm.url);
       expect(wrapper.find(".score").text()).to.equal(healthIndicatorData.countryPhase.toString());
       expect(wrapper.findAll(".category-bar").length).to.equal(healthIndicatorData.categories.length);
