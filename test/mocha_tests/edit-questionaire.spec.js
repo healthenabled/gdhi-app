@@ -1,14 +1,16 @@
+import Vue from 'vue';
 import {shallow} from "@vue/test-utils";
 import EditQuestionnaire from "../../src/components/healthIndicatorQuestionnaire/edit-questionaire.js";
 import VueRouter from 'vue-router';
 import moxios from "moxios";
 import sinon from "sinon";
-
+import VeeValidate from "vee-validate";
 
 describe("EditQuestionaire",()=>{
   let component;
   const router = new VueRouter()
   beforeEach(()=> {
+    Vue.use(VeeValidate);
     component = shallow(EditQuestionnaire, {
       propsData: {
         showEdit: true,
@@ -32,7 +34,7 @@ describe("EditQuestionaire",()=>{
       status: 200
     });
 
-    component.vm.saveData('save', 'Success');
+    component.vm.saveData('save');
 
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
@@ -46,7 +48,9 @@ describe("EditQuestionaire",()=>{
     moxios.uninstall();
   });
 
-  it("should set accordians to expanded on publish of data for validations ", () => {
+  it("should show publish confirm after validation is done", (done) => {
+    moxios.install();
+
     component.vm.questionnaire = [{
       categoryId: 1,
       categoryName: 'some category',
@@ -59,24 +63,91 @@ describe("EditQuestionaire",()=>{
 
     let getConfirmationDialog = sinon.spy();
     component.vm.getConfirmationDialog = getConfirmationDialog;
-    component.vm.publish();
+    let publishData = sinon.spy();
+    component.vm.publish = publishData;
 
-    expect(component.vm.questionnaire[0].showCategory).to.be.true;
-    expect(component.vm.questionnaire[1].showCategory).to.be.true;
+    sinon.stub(component.vm.$validator, 'validateAll').returns(new Promise((resolve, reject) => resolve(true)));
+    component.vm.validate('publish');
 
-    sinon.assert.calledOnce(getConfirmationDialog)
+    moxios.wait(() => {
+      expect(component.vm.questionnaire[0].showCategory).to.be.true;
+      expect(component.vm.questionnaire[1].showCategory).to.be.true;
+      sinon.assert.calledWith(getConfirmationDialog,
+        { message: 'You are about to publish digital health index form for India, this cannot be reverted. Do you want' +
+        ' to continue?',
+          callBackMethod: publishData,
+          callBackArgs: []
+        });
+      done();
+    });
+
+    moxios.uninstall();
   });
 
-  it("should save data and call notify on admin save correction",() => {
-    let saveData = sinon.spy();
-    let notifier = sinon.spy();
+  it("should not show publish confirm if data is not valid", (done) => {
+    moxios.install();
 
-    component.vm.saveData = saveData;
+    let getConfirmationDialog = sinon.spy();
+    component.vm.getConfirmationDialog = getConfirmationDialog;
+    let notifier = sinon.spy();
     component.vm.notifier = notifier;
 
-    component.vm.saveCorrection();
+    sinon.stub(component.vm.$validator, 'validateAll').returns(new Promise((resolve, reject) => resolve(false)));
+    component.vm.validate('publish');
 
-    sinon.assert.calledWith(saveData,'saveCorrection', 'Form saved successfully!');
+    moxios.wait(() => {
+      sinon.assert.notCalled(getConfirmationDialog);
+      sinon.assert.calledWith(notifier,
+        {
+          title: 'Error',
+          message: 'Please correct the highlighted fields.',
+          type: 'error'}
+      );
+      done();
+    });
+    moxios.uninstall();
+  });
+
+  it("should submit data when data is valid", (done) => {
+    moxios.install();
+
+    let saveData = sinon.spy();
+    component.vm.saveData = saveData;
+
+    sinon.stub(component.vm.$validator, 'validateAll').returns(new Promise((resolve, reject) => resolve(true)));
+    component.vm.validate('submit');
+
+    moxios.wait(() => {
+      sinon.assert.calledOnce(saveData);
+      done();
+    });
+
+    moxios.uninstall();
+  });
+
+  it("should not submit data when data is invalid", (done) => {
+    moxios.install();
+
+    let saveData = sinon.spy();
+    component.vm.saveData = saveData;
+    let notifier = sinon.spy();
+    component.vm.notifier = notifier;
+
+    sinon.stub(component.vm.$validator, 'validateAll').returns(new Promise((resolve, reject) => resolve(false)));
+    component.vm.validate('submit');
+
+    moxios.wait(() => {
+      sinon.assert.notCalled(saveData);
+      sinon.assert.calledWith(notifier,
+        {
+          title: 'Error',
+          message: 'Please correct the highlighted fields.',
+          type: 'error'}
+      );
+      done();
+    });
+
+    moxios.uninstall();
   });
 
   it("should call getConfirmationDialog on click of Reject with the given params", () =>{
