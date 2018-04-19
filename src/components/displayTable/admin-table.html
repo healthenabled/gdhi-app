@@ -1,5 +1,8 @@
 <div>
-  <table id="fifthTable">
+  <div class="error-info text-center subheader" v-if="!rows.length">
+    {{noRecordsMessage}}
+  </div>
+  <table id="fifthTable" v-if="rows.length">
     <thead>
     <tr>
       <th v-for="col in columns">{{col.displayName}}</th>

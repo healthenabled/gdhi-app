@@ -556,18 +556,30 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     list-style: none;
     li {
       display: inline-block;
-      border: 1px solid grey;
+      border: 1px solid $border-color-dark;
       border-bottom: 0;
-      padding: 0.2em 1em;
+      padding: 10px;
       margin-bottom: -1px;
+      background: $logo-blue;
+      margin-right: 5px;
+      border-radius: 5px 5px 0px 0px;
+      color: $white;
+      @extend .sub-header;
       &.current {
-        background-color: #ffe6eb;
+        background-color: $white;
+        color: $black;
+      }
+      &:hover {
+        opacity: 0.9;
       }
     }
   }
   .tab-content {
-    border: 1px solid grey;
+    border: 1px solid $border-color-dark;
     padding: 1em;
+    background: $white;
+    padding: 20px;
+    margin-bottom: 20px;
   }
 }
 
@@ -578,65 +590,42 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   left: 50%;
 }
 table {
-  font-family: 'Open Sans', sans-serif;
-  width: 750px;
   border-collapse: collapse;
-  border: 3px solid #44475C;
-  margin: 10px 10px 0 10px;
-}
-
-table th {
-  text-transform: uppercase;
-  text-align: left;
-  background: #44475C;
-  color: #FFF;
-  cursor: pointer;
-  padding: 8px;
-  min-width: 30px;
-}
-table th:hover {
-  background: #717699;
-}
-table td {
-  text-align: left;
-  padding: 8px;
-  border-right: 2px solid #7D82A8;
-}
-table td:last-child {
-  border-right: none;
+  border: 1px solid $border-color-dark;
+  width: 100%;
+  th {
+    text-transform: uppercase;
+    text-align: left;
+    background: $logo-blue;
+    color: #FFF;
+    cursor: pointer;
+    padding: 8px;
+    min-width: 30px;
+    &:hover {
+      background: lighten($black-grey, 10%);
+    }
+  }
+  td {
+    text-align: left;
+    padding: 10px;
+    border-right: 1px solid $border-color-dark;
+    border-collapse: collapse;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .btn {
+    margin: 0px;
+  }
 }
 table tbody tr:nth-child(2n) td {
-  background: #D4D8F9;
+  background: $body-bg;
 }
-
-table {
-  font-family: 'Open Sans', sans-serif;
-  width: 75%;
-  border-collapse: collapse;
-  border: 3px solid #44475C;
-  margin: 10px 10px 0 10px;
-}
-
-table th {
-  text-transform: uppercase;
-  text-align: left;
-  background: #44475C;
-  color: #FFF;
-  cursor: pointer;
-  padding: 8px;
-  min-width: 30px;
-}
-table th:hover {
-  background: #717699;
-}
-table td {
-  text-align: left;
-  padding: 8px;
-  border-right: 2px solid #7D82A8;
-}
-table td:last-child {
-  border-right: none;
-}
-table tbody tr:nth-child(2n) td {
-  background: #D4D8F9;
+.admin-page {
+  .header-bold {
+    margin: 10px 0;
+  }
+  .box {
+    margin-top: 20px;
+  }
 }

@@ -10,6 +10,7 @@ Vue.use(Notifications);
 
 export default Vue.extend({
     template: generateUrlTemplate,
+    name: "GenerateUrl",
     components: { Autocomplete, Notifications },
     mounted() {
       this.loadCountries();

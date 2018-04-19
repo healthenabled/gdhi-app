@@ -27,13 +27,13 @@ export default Vue.extend({
         return () => {};
       },
     },
+    noRecordsMessage: {
+      type: String,
+      default() {
+        return '';
+      }
+    }
   },
-  data() {
-    return {
-    };
-  },
-  methods: {
-  },
-
+  name: 'AdminTable',
   template: adminTable
 });

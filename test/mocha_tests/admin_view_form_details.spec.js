@@ -96,6 +96,22 @@ describe("AdminViewFormDetails",()=>{
     moxios.uninstall();
   });
 
+  it("should set error value when the API call is failed",(done) => {
+    let errResp = {
+      status: 500,
+      response: { message: 'problem' },
+    };
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      request.reject(errResp);
+      moxios.wait(() => {
+        expect(component.vm.error).to.equal(errResp.response.message);
+        done();
+      });
+    });
+    moxios.uninstall();
+  });
+
 
   it("should call openUrl when actionHandler is invoked",() => {
     component = mount(adminViewFormDetails, {
@@ -114,10 +130,14 @@ describe("AdminViewFormDetails",()=>{
 
     component.vm.actionHandler('Review','some-uuid');
     sinon.assert.calledWith(openUrl, location.origin + "/health_indicator_questionnaire/some-uuid/review");
+    sinon.assert.calledOnce(openUrl);
 
     component.vm.actionHandler('View Live Data','some-uuid');
     sinon.assert.calledWith(openUrl, location.origin + "/health_indicator_questionnaire/viewPublish/some-uuid");
+    sinon.assert.calledTwice(openUrl);
 
+    component.vm.actionHandler('Other Text','some-uuid');
+    sinon.assert.calledTwice(openUrl);
   });
 
   it("should populate the table rows when getTabData is called ",() => {
@@ -135,15 +155,85 @@ describe("AdminViewFormDetails",()=>{
     component.vm.allData = responseData;
     component.vm.getTabData(component.vm.tabs[0]);
     expect(component.vm.tableRows).to.deep.equal([...responseData.NEW , ...responseData.DRAFT] );
-
+    expect(component.vm.noRecordsMessage).to.equal('');
     component.vm.getTabData(component.vm.tabs[1]);
     expect(component.vm.tableRows).to.deep.equal(responseData.REVIEW_PENDING);
-
+    expect(component.vm.noRecordsMessage).to.equal('');
     component.vm.getTabData(component.vm.tabs[2]);
     expect(component.vm.tableRows).to.deep.equal(responseData.PUBLISHED);
-
-
+    expect(component.vm.noRecordsMessage).to.equal('');
   });
+
+  it("should return empty tablerows when the value is undefined",() => {
+    component = mount(adminViewFormDetails, {
+      data : {
+        tabs: [
+          {id: 0, name:'Awaiting Submission'},
+          {id: 1, name:'Review Pending'},
+          {id: 2, name:'Live Data'}
+        ]
+
+      },
+      router
+    });
+    let updatedResponse = {...responseData};
+    updatedResponse.NEW = undefined;
+    component.vm.allData = updatedResponse;
+    component.vm.getTabData(component.vm.tabs[0]);
+    expect(component.vm.tableRows).to.deep.equal([...responseData.DRAFT] );
+
+    updatedResponse = {...responseData};
+    updatedResponse.DRAFT = undefined;
+    component.vm.allData = updatedResponse;
+    component.vm.getTabData(component.vm.tabs[0]);
+    expect(component.vm.tableRows).to.deep.equal([...responseData.NEW] );
+
+    updatedResponse = {...responseData};
+    updatedResponse.NEW = undefined;
+    updatedResponse.DRAFT = undefined;
+    component.vm.allData = updatedResponse;
+    component.vm.getTabData(component.vm.tabs[0]);
+    expect(component.vm.tableRows).to.deep.equal([]);
+    expect(component.vm.noRecordsMessage).to.equal("No Records Found");
+
+    updatedResponse = {...responseData};
+    updatedResponse.REVIEW_PENDING = undefined;
+    component.vm.allData = updatedResponse;
+    component.vm.getTabData(component.vm.tabs[1]);
+    expect(component.vm.tableRows).to.deep.equal([] );
+    expect(component.vm.noRecordsMessage).to.equal("No Records Found");
+
+    updatedResponse = {...responseData};
+    updatedResponse.PUBLISHED = undefined;
+    component.vm.allData = updatedResponse;
+    component.vm.getTabData(component.vm.tabs[2]);
+    expect(component.vm.tableRows).to.deep.equal([] );
+    expect(component.vm.noRecordsMessage).to.equal("No Records Found");
+
+    component.vm.allData = {};
+    component.vm.getTabData(component.vm.tabs[2]);
+    expect(component.vm.tableRows).to.deep.equal([] );
+    expect(component.vm.noRecordsMessage).to.equal("No Records Found");
+  });
+
+  it("should set the tablerows to [] when getTab data is called for indices greater than 2",() => {
+    component = mount(adminViewFormDetails, {
+      data : {
+        tabs: [
+          {id: 0, name:'Awaiting Submission'},
+          {id: 1, name:'Review Pending'},
+          {id: 2, name:'Live Data'}
+        ]
+
+      },
+      router
+    });
+    component.vm.allData = responseData;
+    component.vm.getTabData(component.vm.tabs[3]);
+    expect(component.vm.tableRows).to.deep.equal([]);
+    expect(component.vm.tableColumns).to.deep.equal([]);
+  });
+
   afterEach(() => {
     moxios.uninstall();
   })

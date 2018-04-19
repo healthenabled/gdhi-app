@@ -1,18 +1,21 @@
 import Vue from "vue";
 import adminViewFormDetails from './admin-view-form-details.html';
-import adminTable from '../displayTable/admin-table.js';
+import AdminTable from '../displayTable/admin-table.js';
 import axios from "axios";
+import { isEmpty } from 'lodash';
 
 export default Vue.extend({
   name:'AdminViewFormDetails',
-  components: { adminTable },
+  components: { AdminTable },
   data() {
     return {
       selectedTab: 0,
       tableColumns: [],
       tableRows: [],
-      allData: [],
+      allData: {},
       action:'',
+      noRecordsMessage: '',
+      error: '',
       tabs: [
         {id: 0, name:'Awaiting Submission'},
         {id: 1, name:'Review Pending'},
@@ -34,7 +37,7 @@ export default Vue.extend({
           this.allData = response.data;
           this.updateSelected(this.tabs[0]);
         }).catch((e) => {
-          console.log("Error");
+          this.error = e.response.message;
         });
     },
     actionHandler(action, countryUUID){
@@ -55,7 +58,12 @@ export default Vue.extend({
       })
     },
     getTabData(tab){
-      if(this.allData == undefined) return;
+      this.tableColumns= [];
+      this.tableRows = [];
+      if(isEmpty(this.allData)) {
+        this.noRecordsMessage = 'No Records Found';
+        return;
+      }
       switch(tab){
         case this.tabs[0]:
            this.tableColumns = [
@@ -64,8 +72,8 @@ export default Vue.extend({
              ];
 
            this.tableRows = [];
-           if(this.allData.NEW != undefined)this.tableRows = [...this.tableRows , ...this.allData.NEW];
-           if(this.allData.DRAFT != undefined)this.tableRows = [...this.tableRows , ...this.allData.DRAFT];
+           if(this.allData.NEW !== undefined)this.tableRows = [...this.tableRows , ...this.allData.NEW];
+           if(this.allData.DRAFT !== undefined)this.tableRows = [...this.tableRows , ...this.allData.DRAFT];
            this.wrapperOnTableRows(this.tableRows);
            this.action='View Data';
           break;
@@ -77,7 +85,7 @@ export default Vue.extend({
             ];
           this.action='Review';
           this.tableRows = [];
-          if(this.allData.REVIEW_PENDING!= undefined){this.tableRows = this.allData.REVIEW_PENDING;}
+          if(this.allData.REVIEW_PENDING !== undefined){this.tableRows = this.allData.REVIEW_PENDING;}
           break;
         case this.tabs[2]:
           this.tableColumns = [
@@ -87,12 +95,14 @@ export default Vue.extend({
             ];
           this.action='View Live Data';
           this.tableRows = [];
-          if(this.allData.PUBLISHED!= undefined){this.tableRows = this.allData.PUBLISHED;}
+          if(this.allData.PUBLISHED !== undefined){this.tableRows = this.allData.PUBLISHED;}
           break;
-        default:
-          this.tableColumns= [];
-          this.tableRows = [];
-          break;
+      }
+      if (this.tableRows.length <= 0) {
+        this.noRecordsMessage = 'No Records Found';
+      }
+      else {
+        this.noRecordsMessage = '';
       }
     }
   },

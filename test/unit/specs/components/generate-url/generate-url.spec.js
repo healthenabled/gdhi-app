@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import generateUrlComp from '@/components/generateUrl/generate_url.js'
+import GenerateUrl from '@/components/generateUrl/generate_url.js'
 import axios from 'axios'
 import { mount } from '@vue/test-utils'
 
@@ -8,7 +8,7 @@ describe('Generate URL Component', ()=> {
   let generateUrl
   let sandBox
   before(() => {
-    const Constructor = Vue.extend(generateUrlComp);
+    const Constructor = Vue.extend(GenerateUrl);
     generateUrl = new Constructor()
   })
   beforeEach(() => {
