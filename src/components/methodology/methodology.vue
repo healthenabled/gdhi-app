@@ -7,10 +7,10 @@
         <p class="header-bold"> Our Approach </p>
         <p>Based on the framework set in the World Health Organization – International Telecommunication Union’s 2012
         National eHealth Strategy Toolkit, the GDHI team conducted rigorous research and engaged digital health experts
-        from over 20 countries to develop a recommended set of 19 indicators that help countries track, monitor, assess,
+        from over 20 countries to develop a recommended set of indicators that help countries track, monitor, assess,
         and benchmark the effective use of digital health.</p>
         <br>
-        <p class="sub-header">To develop the 19 indicators, the GDHI team:</p>
+        <p class="sub-header">To develop the indicators, the GDHI team:</p>
         <ul class="list-with-bullets">
           <li>
             Conducted a landscape review of global data available through multilateral organizations.
