@@ -43,10 +43,10 @@ export default Vue.extend({
     actionHandler(action, countryUUID){
 
       if(action === 'Review'){
-        this.openUrl(location.origin + "/health_indicator_questionnaire/" + countryUUID +"/review");
+        this.openUrl(location.origin + "/admin/health_indicator_questionnaire/" + countryUUID +"/review");
       }
       else if(action === 'View Live Data'){
-        this.openUrl(location.origin + "/health_indicator_questionnaire/viewPublish/" + countryUUID );
+        this.openUrl(location.origin + "/admin/health_indicator_questionnaire/" + countryUUID +"/viewPublished");
       }
     },
     openUrl(url) {
@@ -60,6 +60,7 @@ export default Vue.extend({
     getTabData(tab){
       this.tableColumns= [];
       this.tableRows = [];
+      this.noRecordsMessage = '';
       if(isEmpty(this.allData)) {
         this.noRecordsMessage = 'No Records Found';
         return;
@@ -100,9 +101,6 @@ export default Vue.extend({
       }
       if (this.tableRows.length <= 0) {
         this.noRecordsMessage = 'No Records Found';
-      }
-      else {
-        this.noRecordsMessage = '';
       }
     }
   },

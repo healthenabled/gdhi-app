@@ -79,13 +79,13 @@ export default new Router({
           },
         },
         {
-          path: '/health_indicator_questionnaire/:countryUUID/review',
+          path: '/admin/health_indicator_questionnaire/:countryUUID/review',
           components: {
             routecontent: healthIndicatorQuestionnaire,
           },
         },
         {
-          path: '/health_indicator_questionnaire/viewPublish/:countryUUID',
+          path: '/admin/health_indicator_questionnaire/:countryUUID/viewPublished',
           components: {
             routecontent: healthIndicatorQuestionnaire,
           },

@@ -39,7 +39,7 @@ export default Vue.extend({
     if (this.$route.params.countryUUID) {
       this.showEdit = true;
       common.showLoading();
-      this.isViewPublish = this.$route.path.match('viewPublish') != null;
+      this.isViewPublish = this.$route.path.match('viewPublished') != null;
       this.prepareDataForViewForm(this.$route.params.countryUUID);
     }
   },
@@ -80,7 +80,7 @@ export default Vue.extend({
       });
     },
     reOrderIndicatorScores(scores){
-      scores.splice((scores.length - 1), 0, scores.splice(0, 1)[0]); 
+      scores.splice((scores.length - 1), 0, scores.splice(0, 1)[0]);
       return scores;
     },
     viewFormCallback(options, scores) {
