@@ -8,9 +8,11 @@ import VeeValidate from "vee-validate";
 
 describe("EditQuestionaire",()=>{
   let component;
-  const router = new VueRouter()
+  const router = new VueRouter();
+
   beforeEach(()=> {
     Vue.use(VeeValidate);
+    const $route = { path: 'test', params:{countryUUID: 'random-uuid'} }
     component = shallow(EditQuestionnaire, {
       propsData: {
         showEdit: true,
@@ -20,7 +22,10 @@ describe("EditQuestionaire",()=>{
         status: "status",
         isAdmin: false
       },
-      router
+      router,
+      mocks: {
+        $route
+      }
     });
   });
 
@@ -172,11 +177,10 @@ describe("EditQuestionaire",()=>{
 
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
-      expect(request.config.method).to.equal("post");
-      expect(request.config.url).to.equal("/api/countries/delete");
+      expect(request.config.method).to.equal("delete");
+      let expectedUUID = component.vm.$route.params.countryUUID;
+      expect(request.config.url).to.equal(`/api/countries/${expectedUUID}/delete`);
 
-      let requestParams = JSON.parse(request.config.data);
-      expect(requestParams.countryId).to.equal('some-random-uuid');
       request.respondWith({
         status: 200,
       }).then(() => {
@@ -197,11 +201,10 @@ describe("EditQuestionaire",()=>{
 
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
-      expect(request.config.method).to.equal("post");
-      expect(request.config.url).to.equal("/api/countries/delete");
+      expect(request.config.method).to.equal("delete");
+      let expectedUUID = component.vm.$route.params.countryUUID;
+      expect(request.config.url).to.equal(`/api/countries/${expectedUUID}/delete`);
 
-      let requestParams = JSON.parse(request.config.data);
-      expect(requestParams.countryId).to.equal('some-random-uuid');
       request.respondWith({
         status: 500,
       }).then(() => {

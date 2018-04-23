@@ -106,11 +106,9 @@ export default Vue.extend({
     deleteData() {
       common.showLoading();
       document.body.scrollTop = document.documentElement.scrollTop = 0;
-      let url = '/api/countries/delete';
+      let url = `/api/countries/${this.$route.params.countryUUID}/delete`;
 
-      axios.post(url, {
-        countryId: this.countrySummary.countryId
-      }).then(() => {
+      axios.delete(url).then(() => {
         this.$router.push({path: `/admin`});
         common.hideLoading();
       }).catch(() => {
