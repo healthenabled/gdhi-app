@@ -101,6 +101,7 @@ export function generateFormPDF(countrySummary, questionnaire, healthIndicators)
     .text("Indicator Details", {
       underline: true
     });
+  doc.moveDown();
   questionnaire.forEach((category) => {
     doc.fontSize(16)
       .font("Helvetica-BoldOblique")
@@ -141,14 +142,18 @@ export function generateFormPDF(countrySummary, questionnaire, healthIndicators)
 
   stream.on('finish', () => {
     let blob = stream.toBlob('application/pdf');
-    let a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style = "display: none";
-    let url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = `${countrySummary.countryName} - Digital Health Questionnaire.pdf`;
-    a.click();
-    window.URL.revokeObjectURL(url);
+    if (window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(blob, `${countrySummary.countryName} - Digital Health Questionnaire.pdf`);
+    } else {
+      let a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      let url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = `${countrySummary.countryName} - Digital Health Questionnaire.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
   });
   doc.end();
 }

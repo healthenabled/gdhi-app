@@ -212,6 +212,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   margin-top: 5px;
   border: 1px solid $border-color-dark;
   border-radius: 5px;
+  @extend .copy;
   &:disabled {
     background: $border-color;
     color: $black;

@@ -141,14 +141,18 @@ export function generateScorecard(healthIndicatorData) {
   
   stream.on('finish', () => {
     let blob = stream.toBlob('application/pdf');
-    let a = document.createElement("a");
-    document.body.appendChild(a);
-    a.style = "display: none";
-    let url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = `${healthIndicatorData.countryName} - Scorecard`;
-    a.click();
-    window.URL.revokeObjectURL(url);
+    if (window.navigator.msSaveOrOpenBlob) {
+      window.navigator.msSaveOrOpenBlob(blob, `${healthIndicatorData.countryName} - Scorecard.pdf`);
+    } else {
+      let a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      let url = window.URL.createObjectURL(blob);
+      a.href = url;
+      a.download = `${healthIndicatorData.countryName} - Scorecard.pdf`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
   });
   doc.end();
 }

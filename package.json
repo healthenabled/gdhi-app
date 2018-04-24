@@ -136,6 +136,9 @@
     "include": [
       "src/**/*.js"
     ],
+    "exclude": [
+      "**/pdfHelper/**"
+    ],
     "instrument": false,
     "sourceMap": false
   }
