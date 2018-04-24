@@ -3,7 +3,7 @@ import countryProfile from './countryProfile.html';
 import developmentIndicators from '../developmentIndicators/development-indicators.js';
 import countrySummary from '../countrySummary/country-summary.js';
 import axios from 'axios';
-
+import { generateScorecard } from "../pdfHelper/pdf-generate-scorecard";
 export default Vue.extend({
 
   components: { developmentIndicators, countrySummary },
@@ -36,6 +36,9 @@ export default Vue.extend({
       this.healthIndicatorData.categories.forEach((category) => {
         this.$set(category, 'showCategory', false);
       });
+    },
+    generatePDF() {
+      generateScorecard(this.healthIndicatorData);
     }
   },
   template: countryProfile,
