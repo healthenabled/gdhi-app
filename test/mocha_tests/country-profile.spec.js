@@ -2,6 +2,8 @@ import { shallow, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import CountryProfile from  "../../src/components/countryProfile/country-profile.js";
 import moxios from 'moxios';
+import * as pdfHelper from "../../src/components/pdfHelper/pdf-generate-scorecard.js";
+import sinon from 'sinon';
 
 describe("Country Profile ", () => {
   let wrapper;
@@ -83,6 +85,16 @@ describe("Country Profile ", () => {
       expect(wrapper.vm.healthIndicatorData.categories[0].showCategory).to.equal(true);
       firstCategory.find(".sub-header").trigger("click");
       expect(wrapper.vm.healthIndicatorData.categories[0].showCategory).to.equal(false);
+      done();
+    });
+  });
+
+  it("should updated the showCategory when the category is clicked", (done) => {
+    moxios.wait(() => {
+      var mockFn = sinon.stub(pdfHelper, 'generateScorecard').callsFake(() => { });
+      wrapper.find(".download-btn").trigger("click");
+      var firstArgument = mockFn.getCall(0).args[0];
+      expect(firstArgument).to.deep.equal(healthIndicatorData);
       done();
     });
   });
