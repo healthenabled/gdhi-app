@@ -34,7 +34,6 @@ export default Vue.extend({
     this.fetchPhases()
   },
   mounted: function () {
-    console.log('map mounted')
     EventBus.$on('Map:Searched', this.onSearchTriggered)
     this.$on('Map:Clicked', ($clickedEl) => {
       if ($clickedEl.type === 'GLOBAL') {
@@ -46,13 +45,11 @@ export default Vue.extend({
     })
   },
   beforeDestroy () {
-    console.log('map destroyed')
     EventBus.$off('Map:Searched', this.onSearchTriggered)
   },
   methods: {
 
     filter: function () {
-      console.log('selected cat id ' + this.categoryValue)
       window.appProperties.setCategoryFilter({categoryId: this.categoryValue})
       window.appProperties.setPhaseFilter({phaseId: this.phaseValue})
       this.$emit('filtered')

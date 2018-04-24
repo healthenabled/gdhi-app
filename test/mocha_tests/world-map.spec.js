@@ -1,5 +1,6 @@
-import worldMap from '@/components/landing-map/world-map.js'
-import L from 'leaflet'
+import worldMap from '../../src/components/landing-map/world-map.js';
+import L from 'leaflet';
+import sinon from 'sinon';
 
 const countryIndices = [{
   'countryId': 'AFG',
@@ -68,7 +69,7 @@ describe('World Map', () => {
   })
 
   afterEach(() => {
-    assert(mapStub.called)
+    sinon.assert.called(mapStub)
     mockLayer.restore()
     mapStub.restore()
   })
@@ -80,7 +81,7 @@ describe('World Map', () => {
     }}
 
     worldMap.handleClick(layer, 'AFG', '', countryIndices, callBackSpy)
-    assert(callBackSpy.calledOnce)
+    sinon.assert.calledOnce(callBackSpy)
     expect(callBackSpy.getCall(0).args[0].type).to.equal('COUNTRY')
     expect(callBackSpy.getCall(0).args[0].countryCode).to.equal('AFG')
     expect(callBackSpy.getCall(0).args[0].countryName).to.equal('Afghanistan')
@@ -95,7 +96,7 @@ describe('World Map', () => {
     }}
     worldMap.lastClickedCountry = layer
     worldMap.handleClick('', 'SIA', layer, countryIndices, callBackSpy)
-    assert(callBackSpy.calledOnce)
+    sinon.assert.calledOnce(callBackSpy)
     expect(callBackSpy.getCall(0).args[0].type).to.equal('COUNTRY')
     expect(callBackSpy.getCall(0).args[0].countryCode).to.equal('SIA')
     expect(callBackSpy.getCall(0).args[0].countryName).to.equal('')
