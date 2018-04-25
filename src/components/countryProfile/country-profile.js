@@ -4,14 +4,21 @@ import developmentIndicators from '../developmentIndicators/development-indicato
 import countrySummary from '../countrySummary/country-summary.js';
 import axios from 'axios';
 import { generateScorecard } from "../pdfHelper/pdf-generate-scorecard";
+import { isEmpty } from 'lodash';
+import Notifications from 'vue-notification';
+
+Vue.use(Notifications);
+
 export default Vue.extend({
 
-  components: { developmentIndicators, countrySummary },
+  components: { developmentIndicators, countrySummary, Notifications },
   data() {
     return {
       healthIndicatorData: { countryName: '', countryPhase: 'NA', categories: [] },
       flagSrc: '',
-      url: ''
+      url: '',
+      benchmarkData: {},
+      benchmarkPhase: ''
     };
   },
 
@@ -39,6 +46,42 @@ export default Vue.extend({
     },
     generatePDF() {
       generateScorecard(this.healthIndicatorData);
+    },
+    notifier(props) {
+      this.$notify({
+        group: 'custom-template',
+        title: props.title,
+        text: props.message,
+        type: props.type
+      });
+    },
+    getBenchmarkData() {
+      this.benchmarkData = {};
+      if (this.benchmarkPhase === "") {
+        return;
+      }
+      axios.get(`/api/countries/${this.$route.params.countryCode}/benchmark/${this.benchmarkPhase}`)
+        .then((response) => {
+          this.benchmarkData = response.data;
+          if(isEmpty(this.benchmarkData)) {
+            this.notifier({
+              title: 'No Data',
+              message: 'No benchmark data found for selected phase',
+              type: 'warn'
+            });
+          } else {
+            this.healthIndicatorData.categories.forEach((category) => {
+              this.$set(category, 'showCategory', true);
+            });
+          }
+        })
+        .catch((e) => {
+          this.notifier({
+            title: 'Server Error',
+            message: 'Unable to load benchmark data. Please try after sometime',
+            type: 'error'
+          });
+        });
     }
   },
   template: countryProfile,

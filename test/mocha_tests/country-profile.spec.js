@@ -37,6 +37,85 @@ describe("Country Profile ", () => {
     "countryPhase":4,
     "collectedDate":"January 2018"
  };
+
+ let benchmarkData = {
+  "1":{
+     "benchmarkScore":3,
+     "benchmarkValue":"Above"
+  },
+  "2":{
+     "benchmarkScore":3,
+     "benchmarkValue":"Below"
+  },
+  "3":{
+     "benchmarkScore":4,
+     "benchmarkValue":"At"
+  },
+  "4":{
+     "benchmarkScore":3,
+     "benchmarkValue":"At"
+  },
+  "5":{
+     "benchmarkScore":4,
+     "benchmarkValue":"Below"
+  },
+  "6":{
+     "benchmarkScore":4,
+     "benchmarkValue":"At"
+  },
+  "7":{
+     "benchmarkScore":3,
+     "benchmarkValue":"Below"
+  },
+  "8":{
+     "benchmarkScore":3,
+     "benchmarkValue":"Below"
+  },
+  "9":{
+     "benchmarkScore":4,
+     "benchmarkValue":"Below"
+  },
+  "10":{
+     "benchmarkScore":4,
+     "benchmarkValue":"At"
+  },
+  "11":{
+     "benchmarkScore":4,
+     "benchmarkValue":"At"
+  },
+  "12":{
+     "benchmarkScore":3,
+     "benchmarkValue":"At"
+  },
+  "13":{
+     "benchmarkScore":4,
+     "benchmarkValue":"Below"
+  },
+  "14":{
+     "benchmarkScore":4,
+     "benchmarkValue":"Below"
+  },
+  "15":{
+     "benchmarkScore":4,
+     "benchmarkValue":"Below"
+  },
+  "16":{
+     "benchmarkScore":4,
+     "benchmarkValue":"At"
+  },
+  "17":{
+     "benchmarkScore":4,
+     "benchmarkValue":"At"
+  },
+  "18":{
+     "benchmarkScore":4,
+     "benchmarkValue":"Below"
+  },
+  "19":{
+     "benchmarkScore":3,
+     "benchmarkValue":"At"
+  }
+};
  beforeEach(() => {
     moxios.install();
     wrapper = shallow(CountryProfile, {
@@ -89,13 +168,99 @@ describe("Country Profile ", () => {
     });
   });
 
-  it("should updated the showCategory when the category is clicked", (done) => {
+  it("should call generateScorecard with the healthindicator data", (done) => {
     moxios.wait(() => {
       var mockFn = sinon.stub(pdfHelper, 'generateScorecard').callsFake(() => { });
       wrapper.find(".download-btn").trigger("click");
       var firstArgument = mockFn.getCall(0).args[0];
       expect(firstArgument).to.deep.equal(healthIndicatorData);
       done();
+    });
+  });
+
+  it("should load the benchmark data when the benchmark dropdown is changed", (done) => {
+    moxios.wait(() => {
+      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true 
+      wrapper.find('.benchmarkDropDown').trigger('change');
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: benchmarkData
+        }).then(() => {
+          expect(wrapper.vm.benchmarkData).to.deep.equal(benchmarkData);
+          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark : " + benchmarkData["1"].benchmarkScore.toString());
+          expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal(benchmarkData["1"].benchmarkValue + " Avg.");
+          done();
+        });
+      })
+    });
+  });
+
+  it("should reset the benchmark data to empty object when no value is selected", (done) => {
+    moxios.wait(() => {
+      wrapper.findAll('.benchmarkDropDown option').at(0).element.selected = true 
+      wrapper.find('.benchmarkDropDown').trigger('change');
+      moxios.wait(() => {
+        expect(wrapper.vm.benchmarkData).to.deep.equal({});
+        expect(wrapper.findAll(".benchmark-score").length).to.equal(0);
+        done();
+      })
+    });
+  });
+
+  it("should load the benchmark data when the benchmark dropdown is changed", (done) => {
+    let notifier = sinon.spy();
+    wrapper.vm.$notify = notifier;
+    moxios.wait(() => {
+      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true; 
+      wrapper.find('.benchmarkDropDown').trigger('change');
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.respondWith({
+          status: 200,
+          response: {}
+        }).then(() => {
+          expect(wrapper.vm.benchmarkData).to.deep.equal({});
+          expect(wrapper.findAll(".benchmark-score").length).to.equal(0);
+          sinon.assert.calledWith(notifier,
+            {
+              group: "custom-template",
+              title: 'No Data',
+              text: 'No benchmark data found for selected phase',
+              type: 'warn'}
+          );
+          done();
+        });
+      })
+    });
+  });
+  it("should call error notifier when the benchmark API call is failed",(done) => {
+    let errResp = {
+      status: 500,
+      response: { message: 'problem' },
+    };
+    let notifier = sinon.spy();
+    wrapper.vm.$notify = notifier;
+    moxios.wait(() => {
+      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true; 
+      wrapper.find('.benchmarkDropDown').trigger('change');
+      moxios.wait(() => {
+        let request = moxios.requests.mostRecent();
+        request.reject(errResp);
+        moxios.wait(() => {
+          expect(wrapper.vm.benchmarkData).to.deep.equal({});
+          expect(wrapper.findAll(".benchmark-score").length).to.equal(0);
+          sinon.assert.calledWith(notifier,
+            {
+              group: "custom-template",
+              title: 'Server Error',
+              text: 'Unable to load benchmark data. Please try after sometime',
+              type: 'error'}
+          );
+          done();
+        });
+      });
     });
   });
   afterEach(() => {

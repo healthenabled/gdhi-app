@@ -171,6 +171,12 @@ body, html {
   font-family: "RobotoRegular", sans-serif;
   margin: 5px 0;
 }
+.copy-small-bold {
+  font-size: 0.93em;
+  line-height: 1;
+  font-family: "RobotoBold", sans-serif;
+  margin: 5px 0;
+}
 .copy-small-italics {
   font-size: 0.93em;
   line-height: 1;
@@ -301,9 +307,38 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     flex-wrap: wrap;
     margin: 5px 0;
   }
+  &.without-margin {
+    margin: 0px;
+  }
 }
 .column-100percent {
   width: 100%;
+}
+.column-60percent {
+  width: 60%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-40percent {
+  width: 40%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
 }
 .column-50percent {
   width: 50%;
@@ -327,6 +362,30 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   }
   @media screen and (max-width: 1024px) {
     width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-85percent {
+  width: 85%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-15percent {
+  width: 15%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
     margin-right: 0px;
     margin-top: 5px;
   }
@@ -369,7 +428,6 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   padding-top: 10px;
 }
 .accordion {
-  cursor: pointer;
   position: relative;
   &:after {
     position: absolute;
@@ -392,6 +450,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     text-transform: uppercase;
     margin: -20px;
     padding: 20px;
+    cursor: pointer;
   }
 }
 .top {
