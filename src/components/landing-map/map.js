@@ -14,8 +14,7 @@ export default Vue.extend({
     indicatorPanel, MapLegend
   },
   data () {
-    // Todo: Remove mapData and directly return data
-    this.mapData = {
+    return {
       globalHealthIndices: [],
       lastSelectedCountry: '',
       globalHealthIndicators: [],
@@ -24,7 +23,6 @@ export default Vue.extend({
       categories: [],
       phases: []
     }
-    return this.mapData
   },
   created () {
     this.categoryValue = window.appProperties.getCategoryFilter()
@@ -83,12 +81,9 @@ export default Vue.extend({
     },
     fetchPhases: function () {
       const self = this;
-      self.phases = [{phaseValue: 1, phaseName: 'Phase 1'},
-        {phaseValue: 2, phaseName: 'Phase 2'},
-        {phaseValue: 3, phaseName: 'Phase 3'},
-        {phaseValue: 4, phaseName: 'Phase 4'},
-        {phaseValue: 5, phaseName: 'Phase 5'}]
-      return self.phases
+      axios.get('/api/phases').then((response) => {
+        self.phases = response.data;
+      });
     },
     mergeColorCodeToHealthIndicators: function (globalHealthIndices) {
       const globalHealthIndicesWithScores = globalHealthIndices.data.countryHealthScores.filter((country) => {
