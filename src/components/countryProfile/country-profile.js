@@ -18,15 +18,22 @@ export default Vue.extend({
       flagSrc: '',
       url: '',
       benchmarkData: {},
-      benchmarkPhase: ''
+      benchmarkPhase: '',
+      phases: []
     };
   },
 
   mounted() {
     this.getHealthIndicatorsFor(this.$route.params.countryCode);
     this.url = `/api/export_country_data/${this.$route.params.countryCode}`;
+    this.fetchPhases();
   },
   methods: {
+    fetchPhases() {
+      axios.get('/api/phases').then((response) => {
+        this.phases = response.data;
+      });
+    },
     getHealthIndicatorsFor(countryCode) {
       axios.get(`/api/countries/${countryCode}/health_indicators`)
         .then(this.healthIndicatorCallback.bind(this));

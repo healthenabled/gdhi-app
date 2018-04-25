@@ -3,7 +3,7 @@
     <div class="clearfix header-section">
       <div class="country-name page-title">
         <div class="flag" :style="{ backgroundImage: 'url(' + flagSrc + ')' }" ></div>
-        
+
         {{healthIndicatorData.countryName}}
       </div>
       <span id="collected-date" v-if="healthIndicatorData.collectedDate !== ''" class="copy-italics copy-grey">
@@ -39,6 +39,9 @@
               <select class="benchmarkDropDown" name="benchmarkDropDown" v-model="benchmarkPhase" @change=getBenchmarkData()>
                 <option value="">-</option>
                 <option value="global">Global Avg.</option>
+                <option v-for="phase in phases" v-bind:value="phase.phaseName">
+                  {{phase.phaseName}}
+                </option>
               </select>
             </div>
           </div>
@@ -71,7 +74,7 @@
                           <div :class="'indicator-score' + ' phase' + indicator.score">{{(indicator.score >= 0) ? indicator.score : 'NA'}}</div>
                           <div v-if="benchmarkData[indicator.id.toString()]" class='benchmark copy-small'>
                             <div class="benchmark-score">Benchmark : <span class="copy-small-bold">{{benchmarkData[indicator.id].benchmarkScore}}</span></div>
-                            <div :class="'benchmarkCompare ' + benchmarkData[indicator.id].benchmarkValue">{{benchmarkData[indicator.id].benchmarkValue}} Avg.</div> 
+                            <div :class="'benchmarkCompare ' + benchmarkData[indicator.id].benchmarkValue">{{benchmarkData[indicator.id].benchmarkValue}} Avg.</div>
                           </div>
                         </div>
                       </div>

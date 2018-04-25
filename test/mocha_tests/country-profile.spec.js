@@ -66,7 +66,19 @@ describe("Country Profile ", () => {
      "benchmarkValue":"At"
   }
 };
- beforeEach(() => {
+
+  let phaseData = [
+    {
+      phaseName: "phase1",
+      phaseValue: 1
+    },
+    {
+      phaseName: "phase2",
+      phaseValue: 2
+    }
+  ];
+
+  beforeEach(() => {
     moxios.install();
     wrapper = shallow(CountryProfile, {
       localVue,
@@ -76,7 +88,12 @@ describe("Country Profile ", () => {
       status: 200,
       response: healthIndicatorData
     });
- })
+    moxios.stubRequest('/api/phases', {
+      status: 200,
+      response: phaseData
+    });
+  })
+
   it("should populate the data after successfull API call", (done) => {
 
     moxios.wait(() => {
@@ -130,7 +147,7 @@ describe("Country Profile ", () => {
 
   it("should load the benchmark data when the benchmark dropdown is changed", (done) => {
     moxios.wait(() => {
-      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true 
+      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true
       wrapper.find('.benchmarkDropDown').trigger('change');
       moxios.wait(() => {
         let request = moxios.requests.mostRecent();
@@ -150,7 +167,7 @@ describe("Country Profile ", () => {
 
   it("should reset the benchmark data to empty object when no value is selected", (done) => {
     moxios.wait(() => {
-      wrapper.findAll('.benchmarkDropDown option').at(0).element.selected = true 
+      wrapper.findAll('.benchmarkDropDown option').at(0).element.selected = true
       wrapper.find('.benchmarkDropDown').trigger('change');
       moxios.wait(() => {
         expect(wrapper.vm.benchmarkData).to.deep.equal({});
@@ -164,7 +181,7 @@ describe("Country Profile ", () => {
     let notifier = sinon.spy();
     wrapper.vm.$notify = notifier;
     moxios.wait(() => {
-      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true; 
+      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true;
       wrapper.find('.benchmarkDropDown').trigger('change');
       moxios.wait(() => {
         let request = moxios.requests.mostRecent();
@@ -194,7 +211,7 @@ describe("Country Profile ", () => {
     let notifier = sinon.spy();
     wrapper.vm.$notify = notifier;
     moxios.wait(() => {
-      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true; 
+      wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true;
       wrapper.find('.benchmarkDropDown').trigger('change');
       moxios.wait(() => {
         let request = moxios.requests.mostRecent();
@@ -214,6 +231,16 @@ describe("Country Profile ", () => {
       });
     });
   });
+
+  it(" should fetch phases", (done) => {
+    wrapper.vm.fetchPhases();
+
+    moxios.wait(() => {
+      expect(wrapper.vm.phases).to.deep.equal(phaseData);
+      done();
+    })
+  });
+
   afterEach(() => {
     moxios.uninstall();
   })
