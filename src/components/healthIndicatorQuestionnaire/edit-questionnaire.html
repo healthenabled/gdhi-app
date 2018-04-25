@@ -34,7 +34,7 @@
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
           <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" placeholder="DD-MM-YYYY" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="'Please Enter Date'">
-          <div v-show="errors.has('collectedDate')" class="error-info">Date for which data was collected is either empty or invalid</div>
+          <div v-if="errors.has('collectedDate')" class="error-info">Please enter a date between 2010 and current date</div>
         </div>
         <div class="column-33percent"></div>
         <div class="column-33percent"></div>
@@ -130,30 +130,37 @@
       <span class="fa fa-eye health-indicator-questionnaire-contact-info-publish" title="These details will be displayed publicly on the GDHI platform"></span>
       <div class="health-indicator-questionnaire-contact-info-description copy-small">
         Please provide links to digital health related resources for your country.</div>
+      <div class="health-indicator-questionnaire-contact-info-description copy-small-italics">
+        Example Format : www.example.com </div>
     </div>
     <div class="box">
       <div class="row">
         <div class="form-group column-33percent">
           <label for="resource1">Resource 1</label><span class="mandatory-field">*</span>
           <input type="text" :disabled="!showEdit" name="resource1" id="resource1" v-model="countrySummary.resources[0]" v-validate.disable="'required|url'" :class="errors.has('resource1') ? 'has-error form-control' : 'form-control'" />
+          <div v-if="errors.has('resource1')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-33percent">
           <label for="resource2">Resource 2</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource2') ? 'has-error form-control' : 'form-control'" id="resource2" name="resource2" v-model="countrySummary.resources[1]" v-validate.disable="'url'" />
+          <div v-if="errors.has('resource2')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-33percent">
           <label for="resource3">Resource 3</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource3') ? 'has-error form-control' : 'form-control'" id="resource3" name="resource3" v-model="countrySummary.resources[2]" v-validate.disable="'url'" />
+          <div v-if="errors.has('resource3')" class="error-info resource">Please enter valid resource link</div>
         </div>
       </div>
       <div class="row column-66percent">
         <div class="form-group column-50percent">
           <label for="resource4">Resource 4</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource4') ? 'has-error form-control' : 'form-control'" id="resource4" name="resource4" v-model="countrySummary.resources[3]" v-validate.disable="'url'" />
+          <div v-if="errors.has('resource4')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-50percent">
           <label for="resource5">Resource 5</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource5')  ? 'has-error form-control' : 'form-control'" id="resource5" name="resource5" v-model="countrySummary.resources[4]" v-validate.disable="'url'" />
+          <div v-if="errors.has('resource5')" class="error-info resource">Please enter valid resource link</div>
         </div>
       </div>
     </div>
