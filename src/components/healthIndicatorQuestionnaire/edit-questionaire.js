@@ -93,14 +93,21 @@ export default Vue.extend({
         countrySummary: this.countrySummary,
         healthIndicators: this.getHealthIndicators(),
       }).then(() => {
-        if(action == 'submit') {
+        if(action === 'submit') {
           this.showEdit = false;
         }
         common.hideLoading();
         this.notifier({title: 'Success', message: this.successMessages[action], type: 'success'});
-      }).catch(() => {
+        if(action === 'publish'){
+          this.$router.push({path: `/admin`});
+        }
+      }).catch((e) => {
         common.hideLoading();
-        this.notifier({title: 'Error', message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
+        if(e.response.status === 400){
+          this.notifier({title: 'Error', message: 'Invalid Data', type: 'error'});
+        }else{
+          this.notifier({title: 'Error', message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
+        }
       });
     },
     deleteData() {
@@ -156,7 +163,6 @@ export default Vue.extend({
     },
     publish() {
       this.saveData('publish');
-      this.$router.push({path: `/admin`});
     },
     reject() {
       this.getConfirmationDialog({
