@@ -95,7 +95,7 @@ describe("EditQuestionaire",()=>{
     let getConfirmationDialog = sinon.spy();
     component.vm.getConfirmationDialog = getConfirmationDialog;
     let notifier = sinon.spy();
-    component.vm.notifier = notifier;
+    component.vm.$notify = notifier;
 
     sinon.stub(component.vm.$validator, 'validateAll').returns(new Promise((resolve, reject) => resolve(false)));
     component.vm.validate('publish');
@@ -104,8 +104,9 @@ describe("EditQuestionaire",()=>{
       sinon.assert.notCalled(getConfirmationDialog);
       sinon.assert.calledWith(notifier,
         {
+          group: 'custom-template',
           title: 'Error',
-          message: 'Please correct the highlighted fields.',
+          text: 'Please correct the highlighted fields.',
           type: 'error'}
       );
       done();
@@ -136,7 +137,7 @@ describe("EditQuestionaire",()=>{
     let saveData = sinon.spy();
     component.vm.saveData = saveData;
     let notifier = sinon.spy();
-    component.vm.notifier = notifier;
+    component.vm.$notify = notifier;
 
     sinon.stub(component.vm.$validator, 'validateAll').returns(new Promise((resolve, reject) => resolve(false)));
     component.vm.validate('submit');
@@ -145,8 +146,9 @@ describe("EditQuestionaire",()=>{
       sinon.assert.notCalled(saveData);
       sinon.assert.calledWith(notifier,
         {
+          group: 'custom-template',
           title: 'Error',
-          message: 'Please correct the highlighted fields.',
+          text: 'Please correct the highlighted fields.',
           type: 'error'}
       );
       done();
@@ -195,7 +197,7 @@ describe("EditQuestionaire",()=>{
     moxios.install();
 
     let notifier = sinon.spy();
-    component.vm.notifier = notifier;
+    component.vm.$notify = notifier;
 
     component.vm.deleteData();
 
@@ -210,8 +212,9 @@ describe("EditQuestionaire",()=>{
       }).then(() => {
         sinon.assert.calledWith(notifier,
           {
+            group: 'custom-template',
             title: 'Error',
-            message: 'Something has gone wrong. Please refresh the Page!',
+            text: 'Something has gone wrong. Please refresh the Page!',
             type: 'error'}
             );
         done();

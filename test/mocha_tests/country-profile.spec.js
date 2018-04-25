@@ -30,7 +30,25 @@ describe("Country Profile ", () => {
                 "score":4,
                 "supportingText":"sdg",
                 "scoreDescription":"Governance structure is fully-functional, government-led, consults with other ministries, and monitors implementation of digital health based on a work plan."
-             }
+             },
+             {
+                "id":2,
+                "code":"1",
+                "name":"Digital health prioritized at the national level through dedicated bodies / mechanisms for governance",
+                "indicatorDescription":"Does the country have a separate department / agency / national working group for digital health?",
+                "score":4,
+                "supportingText":"sdg",
+                "scoreDescription":"Governance structure is fully-functional, government-led, consults with other ministries, and monitors implementation of digital health based on a work plan."
+            },
+            {
+              "id":3,
+              "code":"1",
+              "name":"Digital health prioritized at the national level through dedicated bodies / mechanisms for governance",
+              "indicatorDescription":"Does the country have a separate department / agency / national working group for digital health?",
+              "score":4,
+              "supportingText":"sdg",
+              "scoreDescription":"Governance structure is fully-functional, government-led, consults with other ministries, and monitors implementation of digital health based on a work plan."
+           }
           ]
         }
     ],
@@ -39,80 +57,12 @@ describe("Country Profile ", () => {
  };
 
  let benchmarkData = {
-  "1":{
-     "benchmarkScore":3,
-     "benchmarkValue":"Above"
-  },
   "2":{
      "benchmarkScore":3,
      "benchmarkValue":"Below"
   },
   "3":{
      "benchmarkScore":4,
-     "benchmarkValue":"At"
-  },
-  "4":{
-     "benchmarkScore":3,
-     "benchmarkValue":"At"
-  },
-  "5":{
-     "benchmarkScore":4,
-     "benchmarkValue":"Below"
-  },
-  "6":{
-     "benchmarkScore":4,
-     "benchmarkValue":"At"
-  },
-  "7":{
-     "benchmarkScore":3,
-     "benchmarkValue":"Below"
-  },
-  "8":{
-     "benchmarkScore":3,
-     "benchmarkValue":"Below"
-  },
-  "9":{
-     "benchmarkScore":4,
-     "benchmarkValue":"Below"
-  },
-  "10":{
-     "benchmarkScore":4,
-     "benchmarkValue":"At"
-  },
-  "11":{
-     "benchmarkScore":4,
-     "benchmarkValue":"At"
-  },
-  "12":{
-     "benchmarkScore":3,
-     "benchmarkValue":"At"
-  },
-  "13":{
-     "benchmarkScore":4,
-     "benchmarkValue":"Below"
-  },
-  "14":{
-     "benchmarkScore":4,
-     "benchmarkValue":"Below"
-  },
-  "15":{
-     "benchmarkScore":4,
-     "benchmarkValue":"Below"
-  },
-  "16":{
-     "benchmarkScore":4,
-     "benchmarkValue":"At"
-  },
-  "17":{
-     "benchmarkScore":4,
-     "benchmarkValue":"At"
-  },
-  "18":{
-     "benchmarkScore":4,
-     "benchmarkValue":"Below"
-  },
-  "19":{
-     "benchmarkScore":3,
      "benchmarkValue":"At"
   }
 };
@@ -189,8 +139,9 @@ describe("Country Profile ", () => {
           response: benchmarkData
         }).then(() => {
           expect(wrapper.vm.benchmarkData).to.deep.equal(benchmarkData);
-          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark : " + benchmarkData["1"].benchmarkScore.toString());
-          expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal(benchmarkData["1"].benchmarkValue + " Avg.");
+          expect(wrapper.findAll(".benchmark-score").length).to.equal(Object.keys(benchmarkData).length);
+          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark : " + benchmarkData["2"].benchmarkScore.toString());
+          expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal(benchmarkData["2"].benchmarkValue + " Avg.");
           done();
         });
       })
