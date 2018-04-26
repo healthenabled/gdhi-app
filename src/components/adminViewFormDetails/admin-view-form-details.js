@@ -32,7 +32,7 @@ export default Vue.extend({
       this.selectedTab = tab.id;
     },
     loadAdminViewFormDetails() {
-      axios.get('/api/admin/view_form_details')
+      axios.get('/api/countries/country_status_summaries')
         .then(response => {
           this.allData = response.data;
           this.updateSelected(this.tabs[0]);
