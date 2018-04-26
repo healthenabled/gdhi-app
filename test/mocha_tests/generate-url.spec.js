@@ -36,7 +36,7 @@ describe("Generate URL ", () => {
       wrapper.vm.onCountrySelect({
         value: 'AUS',
         display: "Australia",
-        selectedObject: countryData[3] 
+        selectedObject: countryData[3]
       });
       expect(wrapper.vm.generatedURL).to.equal('');
       expect(wrapper.vm.message).to.equal('');
@@ -66,7 +66,7 @@ describe("Generate URL ", () => {
       wrapper.vm.onCountrySelect({
         value: 'AUS',
         display: "Australia",
-        selectedObject: countryData[3] 
+        selectedObject: countryData[3]
       });
       expect(wrapper.find(".btn-primary").classes()).to.not.include('disabled');
       wrapper.vm.onClearCountry();
@@ -75,11 +75,11 @@ describe("Generate URL ", () => {
     });
   });
 
-  it("On success of the url_gen_status API call notifier to be displayed", (done) => {
+  it("On success of the generate_url API call notifier to be displayed", (done) => {
     wrapper.vm.onCountrySelect({
       value: 'AUS',
       display: "Australia",
-      selectedObject: countryData[3] 
+      selectedObject: countryData[3]
     });
     wrapper.find(".btn-primary").trigger("click");
     let notifier = sinon.spy();
@@ -89,7 +89,7 @@ describe("Generate URL ", () => {
         let request = moxios.requests.mostRecent();
         request.resolve({countryId: wrapper.vm.countryUUID, status: 200, data: {success: true}});
         expect(request.config.method).to.equal("post");
-        expect(request.config.url).to.equal("/api/countries/" + wrapper.vm.countryUUID + "/url_gen_status");
+        expect(request.config.url).to.equal("/api/countries/" + wrapper.vm.countryUUID + "/generate_url");
         let requestParams = JSON.parse(request.config.data);
         expect(requestParams.countryId).to.equal(wrapper.vm.countryUUID);
         moxios.wait(() => {
@@ -109,7 +109,7 @@ describe("Generate URL ", () => {
     wrapper.vm.onCountrySelect({
       value: 'AUS',
       display: "Australia",
-      selectedObject: countryData[3] 
+      selectedObject: countryData[3]
     });
     wrapper.find(".btn-primary").trigger("click");
     expect(wrapper.vm.generatedURL).to.equal(location.origin + "/health_indicator_questionnaire/" + wrapper.vm.countryUUID);
@@ -126,7 +126,7 @@ describe("Generate URL ", () => {
     wrapper.vm.onCountrySelect({
       value: 'AUS',
       display: "Australia",
-      selectedObject: countryData[3] 
+      selectedObject: countryData[3]
     });
     wrapper.find(".btn-primary").trigger("click");
     expect(wrapper.vm.generatedURL).to.equal(location.origin + "/health_indicator_questionnaire/" + wrapper.vm.countryUUID);
@@ -143,7 +143,7 @@ describe("Generate URL ", () => {
     wrapper.vm.onCountrySelect({
       value: 'AUS',
       display: "Australia",
-      selectedObject: countryData[3] 
+      selectedObject: countryData[3]
     });
     wrapper.find(".btn-primary").trigger("click");
     expect(wrapper.vm.generatedURL).to.equal(location.origin + "/health_indicator_questionnaire/" + wrapper.vm.countryUUID);
@@ -160,7 +160,7 @@ describe("Generate URL ", () => {
     wrapper.vm.onCountrySelect({
       value: 'AUS',
       display: "Australia",
-      selectedObject: countryData[3] 
+      selectedObject: countryData[3]
     });
     wrapper.find(".btn-primary").trigger("click");
     expect(wrapper.vm.generatedURL).to.equal(location.origin + "/health_indicator_questionnaire/" + wrapper.vm.countryUUID);
@@ -179,7 +179,7 @@ describe("Generate URL ", () => {
     wrapper.vm.onCountrySelect({
       value: 'AUS',
       display: "Australia",
-      selectedObject: countryData[3] 
+      selectedObject: countryData[3]
     });
     wrapper.find(".btn-primary").trigger("click");
     expect(wrapper.vm.generatedURL).to.equal(location.origin + "/health_indicator_questionnaire/" + wrapper.vm.countryUUID);
@@ -199,6 +199,6 @@ describe("Generate URL ", () => {
     });
   });
   afterEach(() => {
-    moxios.uninstall();    
+    moxios.uninstall();
   })
 });
