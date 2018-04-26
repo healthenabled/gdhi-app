@@ -20,14 +20,15 @@ export default Vue.extend({
       const countrySummaryUrl = `/api/countries/${countryCode}/country_summary`;
       axios.get(countrySummaryUrl)
         .then((response) => {
-          this.countrySummaryCallback(response, countryCode)
+          this.countrySummaryCallback(response)
         })
         .catch(e => {
           this.error = e.response.message;
         });
     },
-    countrySummaryCallback(response, countryCode) {
+    countrySummaryCallback(response) {
       this.countrySummaries = response.data;
+      this.$emit('summaryLoaded', this.countrySummaries.summary);
       common.hideLoading();
     },
   },

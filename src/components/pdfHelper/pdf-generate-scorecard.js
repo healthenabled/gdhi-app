@@ -2,7 +2,7 @@ import PDFDocument from 'pdfkit';
 import blobStream from 'blob-stream';
 import colorObj from "../common/color-codes.js";
 
-export function generateScorecard(healthIndicatorData) {
+export function generateScorecard(healthIndicatorData, countrySummary) {
   let doc = new PDFDocument({
     margin: 50
   });
@@ -19,6 +19,17 @@ export function generateScorecard(healthIndicatorData) {
     .font("Helvetica-BoldOblique")
     .fillColor("#666")
     .text(`As on ${healthIndicatorData.collectedDate}`);
+  doc.moveDown();
+  doc.moveDown();
+
+  doc.fontSize(14)
+    .fillColor("#000000")
+    .font("Helvetica-Bold")
+    .text("Country Summary");
+  doc.fontSize(14)
+    .font("Helvetica")
+    .fillColor("#000")
+    .text(countrySummary || "-");
   doc.moveDown();
   doc.moveDown();
 

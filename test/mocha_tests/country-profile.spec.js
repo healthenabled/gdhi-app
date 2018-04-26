@@ -241,6 +241,12 @@ describe("Country Profile ", () => {
     })
   });
 
+  it(" Update the countries summary on the function call", () => {
+    wrapper.vm.onSummaryLoaded('Demo Text');
+    expect(wrapper.vm.countrySummary).to.equal('Demo Text');
+  });
+
+
   afterEach(() => {
     moxios.uninstall();
   })

@@ -19,7 +19,8 @@ export default Vue.extend({
       url: '',
       benchmarkData: {},
       benchmarkPhase: '',
-      phases: []
+      phases: [],
+      countrySummary: ''
     };
   },
 
@@ -33,6 +34,9 @@ export default Vue.extend({
       axios.get('/api/phases').then((response) => {
         this.phases = response.data;
       });
+    },
+    onSummaryLoaded(countrySummary) {
+      this.countrySummary = countrySummary;
     },
     getHealthIndicatorsFor(countryCode) {
       axios.get(`/api/countries/${countryCode}/health_indicators`)
@@ -52,7 +56,7 @@ export default Vue.extend({
       });
     },
     generatePDF() {
-      generateScorecard(this.healthIndicatorData);
+      generateScorecard(this.healthIndicatorData, this.countrySummary);
     },
     notifier(props) {
       this.$notify({
