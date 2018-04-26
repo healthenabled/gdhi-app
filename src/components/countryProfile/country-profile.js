@@ -56,7 +56,7 @@ export default Vue.extend({
       });
     },
     generatePDF() {
-      generateScorecard(this.healthIndicatorData, this.countrySummary);
+      generateScorecard(this.healthIndicatorData, this.countrySummary, this.benchmarkData, this.benchmarkPhase);
     },
     notifier(props) {
       this.$notify({

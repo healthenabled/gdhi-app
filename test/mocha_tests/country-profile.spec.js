@@ -136,11 +136,13 @@ describe("Country Profile ", () => {
   });
 
   it("should call generateScorecard with the healthindicator data", (done) => {
-    moxios.wait(() => {
+    wrapper.vm.countrySummary = "Country Summary";
+    wrapper.vm.benchmarkPhase = "Global";
+    wrapper.vm.benchmarkData = benchmarkData;
+     moxios.wait(() => {
       var mockFn = sinon.stub(pdfHelper, 'generateScorecard').callsFake(() => { });
       wrapper.find(".download-btn").trigger("click");
-      var firstArgument = mockFn.getCall(0).args[0];
-      expect(firstArgument).to.deep.equal(healthIndicatorData);
+      expect(mockFn.getCall(0).args).to.deep.equal([healthIndicatorData, wrapper.vm.countrySummary, benchmarkData, wrapper.vm.benchmarkPhase]);
       done();
     });
   });

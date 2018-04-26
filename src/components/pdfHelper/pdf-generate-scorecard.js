@@ -2,7 +2,7 @@ import PDFDocument from 'pdfkit';
 import blobStream from 'blob-stream';
 import colorObj from "../common/color-codes.js";
 
-export function generateScorecard(healthIndicatorData, countrySummary) {
+export function generateScorecard(healthIndicatorData, countrySummary, benchmarkData, benchmarkPhase) {
   let doc = new PDFDocument({
     margin: 50
   });
@@ -34,7 +34,26 @@ export function generateScorecard(healthIndicatorData, countrySummary) {
   doc.moveDown();
 
   yVal = doc.y;
-  
+ 
+  if(benchmarkPhase) {
+    doc.fontSize(14)
+    .fillColor("#000000")
+    .font("Helvetica-Bold")
+    .text("Benchmark Against " + benchmarkPhase.toLowerCase().replace(/^\w/, (chr) => chr.toUpperCase()), 50, yVal, {
+      width: 500
+    });
+    doc.fontSize(12)
+      .fillColor("#666")
+      .font("Helvetica-Oblique")
+      .text("Compare your overall score with Global Avg. or other phase countries", 50, doc.y,{
+        width: 500
+      });
+    doc.moveDown();    
+    doc.moveDown();
+  }
+
+  yVal = doc.y;
+
   doc.fontSize(14)
     .fillColor("#000000")
     .font("Helvetica-Bold")
@@ -42,15 +61,18 @@ export function generateScorecard(healthIndicatorData, countrySummary) {
       width: 500
     });
   const countryPhase = healthIndicatorData.countryPhase ? healthIndicatorData.countryPhase.toString() : "NA";
-  doc.roundedRect(520, yVal - 16, 32, 32, 5)
+  doc.roundedRect(500, yVal - 16, 32, 32, 5)
     .fill(getColorCodeForPhase(colorCodes, countryPhase));
 
   doc.fillColor("#FFF")
-    .text(countryPhase, 520, yVal - 6, {
+    .text(countryPhase, 500, yVal - 6, {
       width: 32,
       align: 'center'
     });
   doc.moveDown();    
+  doc.moveDown();
+ 
+
   doc.lineWidth(2);
 
   doc.moveTo(50, doc.y)
@@ -95,7 +117,7 @@ export function generateScorecard(healthIndicatorData, countrySummary) {
     let scoreYVal = 0;
     let endYVal = 0;
     category.indicators.forEach((indicator) => {
-      if ((doc.y + 220) > 840) {
+      if ((doc.y + 250) > 840) {
         doc.addPage();
       } else {
         doc.moveDown();
@@ -105,18 +127,18 @@ export function generateScorecard(healthIndicatorData, countrySummary) {
         .fontSize(12)
         .fillColor("#000")
         .text(`${indicator.code}. ${indicator.name}`, 50, doc.y, {
-        width: 440
+        width: 430
       });
       doc.fillColor("#666")
         .font("Helvetica-Oblique") 
         .text(indicator.indicatorDescription, 50, doc.y, {
-          width: 440
+          width: 430
         });
       doc.moveDown();
       doc.fillColor("#4A90E2")
         .font("Helvetica")
         .text(indicator.scoreDescription, 50, doc.y, {
-          width: 440
+          width: 430
         });
 
       endYVal = doc.y;
@@ -130,21 +152,68 @@ export function generateScorecard(healthIndicatorData, countrySummary) {
         .stroke();
         
       doc.moveDown();
-      //score box yValue computation startYVal + ((endYVal - startYVal) / 2) - (scoreBoxHeight / 2)
-      //adjust benchmark height to align center 
-      scoreYVal = initialYVal + (((endYVal - initialYVal) / 2) - 16);
+
+      
+      //score box yValue computation startYVal + ((endYVal - startYVal) / 2) - ((scoreBoxHeight / 2) + (benchmark text height/ 2))
+      
+      if(benchmarkData[indicator.id]) {
+        //adjust benchmark height to align center (12px)
+        scoreYVal = initialYVal + (((endYVal - initialYVal) / 2) - 32);
+      } else {
+        scoreYVal = initialYVal + (((endYVal - initialYVal) / 2) - 16);
+      }
       let indicatorScore = indicator.score ? indicator.score.toString() : "NA";
-      doc.roundedRect(520, scoreYVal, 32, 32, 5)
+      doc.roundedRect(500, scoreYVal, 32, 32, 5)
         .fill(getColorCodeForPhase(colorCodes, indicatorScore));
 
       doc.fontSize(14)
         .font("Helvetica-Bold")
         .fillColor("#FFF")
-        .text(indicatorScore, 520, (scoreYVal + 10) , {
+        .text(indicatorScore, 500, (scoreYVal + 10) , {
           width: 32,
           align: 'center'
         });
-
+      if(benchmarkData[indicator.id]) {
+        doc.moveDown(0.75);
+        doc.fontSize(10)
+          .font("Helvetica-Bold")
+          .fillColor("#000")
+          .text("Benchmark : " + benchmarkData[indicator.id].benchmarkScore, 480, doc.y);
+        switch (benchmarkData[indicator.id].benchmarkValue.toLowerCase()) {
+          case "at" :
+            doc.fontSize(10)
+            .fillColor("#ffa500")
+            .text(benchmarkData[indicator.id].benchmarkValue + " Avg. ", 480, doc.y, {
+              width: 80,
+              align: 'center'
+            });
+            break;
+          case "above" :
+            doc.moveTo(480, (doc.y + 7))
+              .lineTo(490, (doc.y + 7))
+              .lineTo(485, (doc.y))
+              .fill("#92b35a");
+            doc.fontSize(10)
+            .fillColor("#92b35a")
+            .text(benchmarkData[indicator.id].benchmarkValue + " Avg. ", 490, doc.y, {
+              width: 60,
+              align: 'center'
+            });
+            break;
+          case "below" :
+          doc.moveTo(480, (doc.y ))
+              .lineTo(490, (doc.y))
+              .lineTo(485, (doc.y + 7 ))
+              .fill("#ed4c57");
+            doc.fontSize(10)
+            .fillColor("#ed4c57")
+            .text(benchmarkData[indicator.id].benchmarkValue + " Avg. ", 490, doc.y, {
+              width: 60,
+              align: 'center'
+            });
+            break;
+        }
+      }
       // to reset doc.y position in PDFKit, As the doc.y position is updated as soon as we add text  
       doc.text("", 50, endYVal + 25);
     })

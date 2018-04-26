@@ -99,19 +99,25 @@
   &:before {
     display: inline-block;
     margin-right: 5px;
+    border: 8px solid transparent;
   }
-  &.Above {
-    color: $positive;
+  &.at {
+    color: orange;
+  }
+  &.above {
+    color: $positive;    
     &:before {
-      content: "\f062";
-      font-family: "FontAwesome";
+      content: " ";
+      vertical-align: baseline;
+      border-bottom: 8px solid $positive;
     }
   }
-  &.Below {
+  &.below {
     color: $negative;
     &:before {
-      content: "\f063";
-      font-family: "FontAwesome";
+      vertical-align: top;
+      content: " ";
+      border-top: 8px solid $negative;
     }
   }
 }
