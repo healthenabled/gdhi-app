@@ -38,8 +38,8 @@
             <div v-if="healthIndicatorData" class="float-right">
               <select class="benchmarkDropDown" name="benchmarkDropDown" v-model="benchmarkPhase" @change=getBenchmarkData()>
                 <option value="">-</option>
-                <option value="global">Global Avg.</option>
-                <option v-for="phase in phases" v-bind:value="phase.phaseName">
+                <option value="-1">Global Avg.</option>
+                <option v-for="phase in phases" v-bind:value="phase.phaseValue">
                   {{phase.phaseName}}
                 </option>
               </select>
