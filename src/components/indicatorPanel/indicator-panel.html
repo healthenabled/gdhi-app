@@ -59,10 +59,10 @@
       </div>
     </div>
   </div>
-  <div class="button-container" v-if="!isNoGlobalHealthIndicators">
+  <div class="button-container" v-if="!showCountryDetail && !isNoGlobalHealthIndicators">
     <div class="indicator-panel-button btn btn-primary" @click="showListOfCountries()">View Countries</div>
   </div>
-  <div class="button-container" v-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0" >
+  <div class="button-container" v-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0 && isNoGlobalHealthIndicators" >
       <div class="indicator-panel-button btn btn-primary" @click="showCountryDetails(healthIndicators.countryId)">View Details</div>
     </div>
 </div>
