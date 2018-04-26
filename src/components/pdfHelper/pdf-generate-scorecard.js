@@ -76,7 +76,7 @@ export function generateScorecard(healthIndicatorData) {
     doc.font("Helvetica")
       .fillColor("#FFF")
       .fontSize(14)
-      .text(`Phase ${categoryPhase}`, (progressFillWidth - 48), doc.y + 5);
+      .text(`Phase ${categoryPhase}`, (progressFillWidth - 60), doc.y + 5);
 
     doc.moveDown(0.5);
     yVal = doc.y;
@@ -124,7 +124,7 @@ export function generateScorecard(healthIndicatorData) {
       scoreYVal = initialYVal + (((endYVal - initialYVal) / 2) - 16);
       let indicatorScore = indicator.score ? indicator.score.toString() : "NA";
       doc.roundedRect(520, scoreYVal, 32, 32, 5)
-        .fill(colorCodes.filter((colorVal) => colorVal.score === indicatorScore)[0].color);
+        .fill(getColorCodeForPhase(colorCodes, indicatorScore));
 
       doc.fontSize(14)
         .font("Helvetica-Bold")
@@ -158,5 +158,6 @@ export function generateScorecard(healthIndicatorData) {
 }
 
 export function getColorCodeForPhase(colorCodes, phaseValue) {
-  return colorCodes.filter((colorVal) => colorVal.score === phaseValue)[0].color;
+  let filteredValue = colorCodes.filter((colorVal) => colorVal.score === phaseValue)
+  return (filteredValue.length > 0) ? filteredValue[0].color : "#606060";
 }

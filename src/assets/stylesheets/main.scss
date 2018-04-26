@@ -444,7 +444,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
       content: "\f077";
     }
   }
-  .sub-header {
+  > .sub-header {
     position: relative;
     z-index: 2;
     text-transform: uppercase;
