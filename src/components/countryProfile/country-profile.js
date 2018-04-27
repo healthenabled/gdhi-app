@@ -20,7 +20,8 @@ export default Vue.extend({
       benchmarkData: {},
       benchmarkPhase: '',
       phases: [],
-      countrySummary: ''
+      countrySummary: '',
+      hasBenchmarkData: true
     };
   },
 
@@ -68,6 +69,7 @@ export default Vue.extend({
     },
     getBenchmarkData() {
       this.benchmarkData = {};
+      this.hasBenchmarkData = true;
       if (this.benchmarkPhase === "") {
         return;
       }
@@ -75,6 +77,7 @@ export default Vue.extend({
         .then((response) => {
           this.benchmarkData = response.data;
           if(isEmpty(this.benchmarkData)) {
+            this.hasBenchmarkData = false;
             this.notifier({
               title: 'No Data',
               message: 'No benchmark data found for selected phase',
