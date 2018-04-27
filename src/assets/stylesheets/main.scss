@@ -127,7 +127,8 @@ body, html {
 .page-title {
   font-family: 'RobotoSlabBold', 'sans-serif';
   font-size: 2.14em;
-  margin: 20px 0;
+  margin-top: 40px;
+  margin-bottom: 20px;
   max-width: 90%;
   display: inline-block;
 }
@@ -223,6 +224,9 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     background: $border-color;
     color: $black;
     opacity: 0.7;
+  }
+  &::-ms-clear {
+    display: none;
   }
 }
 .btn {
@@ -479,12 +483,15 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     input ~ .checkmark {
       background-color: darken($radio-bg, 10%);
     }
+    input:disabled ~ .checkmark {
+      background-color: $white;
+    }
   }
   input {
     position: absolute;
     opacity: 0;
     &:checked ~ .checkmark {
-      background-color: $logo-blue;
+      background-color: $logo-blue !important;
       &:after {
         display: block;
       }

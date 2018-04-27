@@ -21,6 +21,9 @@
   .indicator {
     margin-bottom: 10px;
     border-bottom: 1px solid $border-color;
+    &:last-child {
+      border: none;
+    }
   }
   .indicator-desc {
     width: calc(100% - 165px);
@@ -91,11 +94,10 @@
 // benchmark
 .benchmark {
   text-transform: uppercase;
-  div {
-    margin-bottom: 5px;
-  }
+  margin-top:10px;
 }
 .benchmarkCompare {
+  margin-top: 5px;
   &:before {
     display: inline-block;
     margin-right: 5px;
@@ -103,9 +105,11 @@
   }
   &.at {
     color: orange;
+    
   }
   &.above {
     color: $positive;    
+    margin-top: 0px;
     &:before {
       content: " ";
       vertical-align: baseline;

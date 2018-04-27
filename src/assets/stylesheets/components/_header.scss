@@ -9,7 +9,7 @@
 
   .header-width {
     margin: 0 auto;
-    width: 90%;
+    padding: 0 70px;
   }
   .hd-element {
     padding: 15px 0px;    
@@ -39,11 +39,12 @@
     letter-spacing: -0.1px;
     cursor: default;
     @extend .logo-font;
+    margin-right: 20px;
   }
   .search-box {
     position: absolute;
     right: 75px;
-    top: 8px;
+    top: 12px;
     width: 240px;
     @extend .copy;
     &-container {

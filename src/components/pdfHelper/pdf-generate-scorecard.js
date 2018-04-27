@@ -129,7 +129,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
     let initialYVal = 0;
     let scoreYVal = 0;
     let endYVal = 0;
-    category.indicators.forEach((indicator) => {
+    category.indicators.forEach((indicator, index) => {
       if ((doc.y + 250) > 840) {
         doc.addPage();
       } else {
@@ -157,13 +157,15 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       endYVal = doc.y;
 
       doc.moveDown();
-      doc.lineWidth(0.5);
-
-      doc.moveTo(50, endYVal + 15)
-        .lineTo(560, endYVal + 15)
-        .strokeColor("#CCC")
-        .stroke();
-        
+      if (index !== category.indicators.length -1)
+      {
+        doc.lineWidth(0.5);
+        doc.moveTo(50, endYVal + 15)
+          .lineTo(560, endYVal + 15)
+          .strokeColor("#CCC")
+          .stroke();
+      }
+      
       doc.moveDown();
 
       
