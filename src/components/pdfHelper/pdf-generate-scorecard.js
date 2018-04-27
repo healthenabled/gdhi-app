@@ -92,7 +92,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
         width: 500
       });
     
-    doc.lineWidth(15);
+    doc.lineWidth(10);
 
     doc.lineCap('round')
       .moveTo(60, doc.y + 10)
@@ -100,16 +100,29 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       .strokeColor("#CCC")
       .stroke();
     const categoryPhase = category.phase ? category.phase.toString() : "NA";
-    const progressFillWidth =  (60 + (((560 - 60) / 5) * Number(category.phase)));
-    doc.lineCap('round')
-      .moveTo(60, doc.y + 10)
-      .lineTo(progressFillWidth, doc.y + 10)
-      .strokeColor(getColorCodeForPhase(colorCodes, categoryPhase))
-      .stroke();
-    doc.font("Helvetica")
+
+    
+    if (!category.phase) {
+      doc.font("Helvetica")
       .fillColor("#FFF")
-      .fontSize(14)
-      .text(`Phase ${categoryPhase}`, (progressFillWidth - 60), doc.y + 5);
+      .fontSize(12)
+      .text(categoryPhase, 60, doc.y + 5, {
+        width: 560,
+        align: 'center'
+      });
+    } else {
+      // total width is 560px, 60 is the starting point
+      const progressFillWidth =  (60 + (((560 - 60) / 5) * Number(category.phase)));
+      doc.lineCap('round')
+        .moveTo(60, doc.y + 10)
+        .lineTo(progressFillWidth, doc.y + 10)
+        .strokeColor(getColorCodeForPhase(colorCodes, categoryPhase))
+        .stroke();
+      doc.font("Helvetica")
+        .fillColor("#FFF")
+        .fontSize(12)
+        .text(`Phase ${categoryPhase}`, (progressFillWidth - 50), doc.y + 5);
+    }
 
     doc.moveDown(0.5);
     yVal = doc.y;
@@ -127,18 +140,18 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
         .fontSize(12)
         .fillColor("#000")
         .text(`${indicator.code}. ${indicator.name}`, 50, doc.y, {
-        width: 430
+        width: 420
       });
       doc.fillColor("#666")
         .font("Helvetica-Oblique") 
         .text(indicator.indicatorDescription, 50, doc.y, {
-          width: 430
+          width: 420
         });
       doc.moveDown();
       doc.fillColor("#4A90E2")
         .font("Helvetica")
         .text(indicator.scoreDescription, 50, doc.y, {
-          width: 430
+          width: 420
         });
 
       endYVal = doc.y;
@@ -162,7 +175,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       } else {
         scoreYVal = initialYVal + (((endYVal - initialYVal) / 2) - 16);
       }
-      let indicatorScore = indicator.score ? indicator.score.toString() : "NA";
+      let indicatorScore = (indicator.score > 0) ? indicator.score.toString() : "NA";
       doc.roundedRect(500, scoreYVal, 32, 32, 5)
         .fill(getColorCodeForPhase(colorCodes, indicatorScore));
 

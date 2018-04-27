@@ -8,7 +8,7 @@ export default ({
   },
 
   getTotalPopulationInMillion(population) {
-    const populationInMillion = population ? Number((population / 10000000).toFixed(2)) : null;
+    const populationInMillion = population ? Number((population / 1000000).toFixed(2)) : null;
     return populationInMillion ? `${populationInMillion}M` : 'NA';
   },
 
