@@ -99,7 +99,6 @@ export default Vue.extend({
       const healthIndicatorsData = {
         countryId: response.data.countryId,
         countryName: response.data.countryName,
-        overallScore: response.data.overallScore,
         categories: response.data.categories,
         countryPhase: response.data.countryPhase,
       };

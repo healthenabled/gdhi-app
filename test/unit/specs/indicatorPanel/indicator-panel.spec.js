@@ -20,7 +20,6 @@ describe("should test indicator panel", () => {
       "countryId": "GHA",
       "countryName": "Ghana",
       "countryPhase": 4,
-      "overallScore": 4,
       "categories": [{
         "categoryId": 1,
         "categoryName": "c1",
