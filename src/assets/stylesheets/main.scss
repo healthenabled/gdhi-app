@@ -518,7 +518,13 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   z-index: 3;
 }
 .sub-content {
-  margin-top: 100px;
+  margin-top: 120px;
+}
+.questionnaire-title {
+  position: absolute;
+  bottom: 20px;
+  left: 80px;
+  font-size: 1.2em;
 }
 /* Create a custom radio button */
 .checkmark {

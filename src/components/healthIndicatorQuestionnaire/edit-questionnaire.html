@@ -1,9 +1,10 @@
 <div class="health-indicator-questionnaire content-centered">
   <div class="clearfix fixed-sub-header">
-    <span class="page-title">
+    <div class="page-title">
         <div v-if="countrySummary.countryAlpha2Code" class="flag" :style="{ backgroundImage: 'url(/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg)' }" ></div>
-        {{countrySummary.countryName}} - Digital Health Questionnaire
-    </span>
+        {{countrySummary.countryName}}
+    </div>
+    <span class="copy-italics copy-grey questionnaire-title">Digital Health Questionnaire</span>
     <div class="float-right button-container">
       <span><button class="submit-btn btn btn-primary" @click="generatePDF()"> <i class="fa fa-download" aria-hidden="true"></i> Download PDF</button></span>
       <span v-if="status === 'REVIEW_PENDING' && isAdmin">
