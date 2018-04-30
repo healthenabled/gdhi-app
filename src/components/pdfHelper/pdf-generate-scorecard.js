@@ -36,10 +36,11 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
   yVal = doc.y;
  
   if(benchmarkPhase) {
+    let benchMarkPhaseValue = (benchmarkPhase < 0) ? "Global Avg." : `Phase ${benchmarkPhase} Countries`;
     doc.fontSize(14)
     .fillColor("#000000")
     .font("Helvetica-Bold")
-    .text("Benchmark Against " + benchmarkPhase.toLowerCase().replace(/^\w/, (chr) => chr.toUpperCase()), 50, yVal, {
+    .text(`Benchmark Against ${benchMarkPhaseValue}`, 50, yVal, {
       width: 500
     });
     doc.fontSize(12)
