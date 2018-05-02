@@ -40,8 +40,7 @@
         <p> The GDHI uses the main indicators in each category to calculate the overall country average.
         While sub-indicators are included to add greater specificity to specific GDHI indicators,
         they are not used in calculating the Component Phase or the Country or Global Averages.
-        The GDHI enables countries to benchmark themselves against the Global Average or a specific phase overall by
-        indicator and sub-indicator. </p>
+        The GDHI enables countries to benchmark themselves against the Global Average or a specific overall phase.</p>
       </div>
     </div>
   </div>
