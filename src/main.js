@@ -16,7 +16,6 @@ new Vue({
   router,
   components: { App, Notifications },
   mounted() {
-    console.log('Route path', this.$route.fullPath);
     if (this.$route.fullPath.length <= 1) {
       this.$router.push('map');
     }

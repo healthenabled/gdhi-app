@@ -1,5 +1,4 @@
-import axios from 'axios';
-import common from './common'
+import axios from "axios";
 
 export default ({
 
@@ -19,7 +18,7 @@ export default ({
   getValue (value) {
     return  !value ? 'NA' : value;
   },
-  
+
   getMinimalDevelopmentIndicatorsData(response) {
     let self = this;
     const developmentIndicatorsData = [
