@@ -84,15 +84,18 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
   healthIndicatorData.categories.forEach((category) => {
     doc.moveDown();
     doc.moveDown();
-    yVal = doc.y;
 
+    if ((doc.y + 150) > 840) {
+      doc.addPage();
+    }
+    yVal = doc.y;
     doc.fontSize(14)
       .fillColor("#000000")
       .font("Helvetica-Bold")
       .text(category.name, 50, doc.y, {
         width: 500
       });
-    
+
     doc.lineWidth(10);
 
     doc.lineCap('round')

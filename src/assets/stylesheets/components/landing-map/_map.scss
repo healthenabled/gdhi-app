@@ -151,12 +151,14 @@ div#reset-btn:before {
 .leaflet-top, .leaflet-bottom {
   z-index: 1;
 }
-.leaflet-touch .leaflet-bar a {
+.leaflet-control-container .leaflet-bar a {
   display: inline-block;
   margin-right: 5px;
   border: 1px solid $black;
   line-height: 1.2;
+  border-radius: 0;
 }
-.leaflet-touch .leaflet-bar {
+.leaflet-control-container .leaflet-bar {
   border: none;
+  box-shadow: none;
 }
