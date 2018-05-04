@@ -41,7 +41,9 @@ export default Vue.extend({
     },
     getHealthIndicatorsFor(countryCode) {
       axios.get(`/api/countries/${countryCode}/health_indicators`)
-        .then(this.healthIndicatorCallback.bind(this));
+        .then((response) => {
+          this.healthIndicatorCallback(response);
+        });
     },
     healthIndicatorCallback(response) {
       this.healthIndicatorData = response.data;
