@@ -22,10 +22,7 @@ describe("EditQuestionaire",()=>{
         status: "status",
         isAdmin: false
       },
-      router,
-      mocks: {
-        $route
-      }
+      router
     });
   });
 

@@ -56,7 +56,7 @@ beforeEach(() => {
       });
     });
   });
-  it(" should render the html elements based on the response ", () => {
+  it(" should render the html elements based on the response ", (done) => {
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
       request.respondWith({status: 200, response: responseData}).then(() => {
