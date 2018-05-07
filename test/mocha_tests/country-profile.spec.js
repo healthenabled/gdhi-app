@@ -197,7 +197,7 @@ describe("Country Profile ", () => {
             {
               group: "custom-template",
               title: 'No Data',
-              text: 'No benchmark data found for selected phase',
+              text: 'No countries in the selected phase for benchmarking',
               type: 'warn'}
           );
           done();
