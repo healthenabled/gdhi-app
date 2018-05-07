@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import IndicatorPanel from  "../../src/components/indicatorPanel/indicator-panel.js";
 import moxios from 'moxios';
 import sinon from "sinon";
+import Obj from  "../../src/common/indicator-http-requests.js";
 
 describe("Indicator Panel ", () => {
   let wrapper;
@@ -138,6 +139,19 @@ describe("Indicator Panel ", () => {
     })
   });
 
+  it("should return phase title based on the filter ", (done) => {
+    moxios.wait(() => {
+      wrapper.vm.categoryFilter = true;
+      let returnStr = wrapper.vm.getPhaseTitle();
+      expect(returnStr).to.deep.equal('Global Average');
+
+      wrapper.vm.phaseFilter = 5;
+      returnStr = wrapper.vm.getPhaseTitle();
+      expect(returnStr).to.deep.equal('Phase 5');
+      done();
+    })
+  });
+
   it("should push the url when showcountrydetails is called ", (done) => {
     moxios.wait(() => {
       var mockFn = sinon.stub(router, 'push').callsFake(() => { });
@@ -156,6 +170,41 @@ describe("Indicator Panel ", () => {
       done();
     })
   });
+
+  it(" should respond with development indicators for the selected country", (done) => {
+    wrapper.vm.getIndicators('', '1');
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      let responseData = {
+        gniPerCapita: 1000,
+        totalPopulation: 1000000,
+        adultLiteracy: 70.22,
+        doingBusinessIndex: 22.22,
+        lifeExpectancy: 60,
+        healthExpenditure: 22.23,
+        totalNcdDeathsPerCapita: 22.2,
+        under5Mortality: 22
+      };
+     const developmentIndicatorsData = [
+      {
+        CONTEXT: {
+          'GNI per capita, atlas method (current US$)': Obj.getGNIPerCapitaInKilo(responseData.gniPerCapita),
+          'Total population': Obj.getTotalPopulationInMillion(responseData.totalPopulation)
+        },
+      },
+      {
+        HEALTH: {
+          'Life expectancy at birth (years)': Obj.getValue(responseData.lifeExpectancy),
+          'Health expenditure (% of GDP)': Obj.getInPercenatge(responseData.healthExpenditure)
+        },
+      },
+    ];
+      request.respondWith({status: 200, response: responseData}).then(() => {
+        expect(wrapper.vm.developmentIndicators).to.deep.equal(developmentIndicatorsData);
+        done();
+      });
+    });
+  });  
   afterEach(() => {
     moxios.uninstall();
   });

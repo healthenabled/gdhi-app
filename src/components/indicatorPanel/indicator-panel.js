@@ -84,9 +84,8 @@ export default Vue.extend({
 
     getIndicators(context, countryId) {
       this.getHealthIndicators(context, countryId);
-      const self = this;
       httpRequests.getDevelopmentIndicators(countryId, true).then((response) => {
-        self.developmentIndicators = response;
+        this.developmentIndicators = response;
       });
     },
 
