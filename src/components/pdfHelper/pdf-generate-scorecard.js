@@ -34,7 +34,6 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
   doc.moveDown();
 
   yVal = doc.y;
- 
   if(benchmarkPhase) {
     let benchMarkPhaseValue = (benchmarkPhase < 0) ? "Global Avg." : `Phase ${benchmarkPhase} Countries`;
     doc.fontSize(14)
@@ -51,8 +50,8 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       });
     doc.moveDown();    
     doc.moveDown();
+    doc.text(""); // to move the cursor to the recent yVal
   }
-
   yVal = doc.y;
 
   doc.fontSize(14)
