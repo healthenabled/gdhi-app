@@ -82,7 +82,7 @@ export default Vue.extend({
             this.hasBenchmarkData = false;
             this.notifier({
               title: 'No Data',
-              message: 'No benchmark data found for selected phase',
+              message: 'No countries in the selected phase for benchmarking',
               type: 'warn'
             });
           } else {
