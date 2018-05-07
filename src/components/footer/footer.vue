@@ -15,7 +15,7 @@
         </router-link>
       </span>
       <span class="ft-element float-right contact">
-        <span class="">Contact : gdhi@globaldevincubator.org</span>
+        <span class="">Contact : info@digitalhealthindex.org</span>
       </span>
     </div>
 
