@@ -10,7 +10,7 @@ export default {
   WHITE_COLOR_CODE: '#fff',
   lastClickedCountry: '',
   lastMouseOverCountry: '',
-  drawMap(healthData, postClickCallBack) {
+  drawMap: function(healthData, postClickCallBack) {
     this.healthData = healthData;
     const self = this;
     const ResetButton = L.Control.extend({
@@ -55,7 +55,7 @@ export default {
     }
     return this.addMapToLeaflet(this, this.countriesData, healthData, postClickCallBack);
   },
-  addMapToLeaflet(self, data, healthData, postClickCallBack) {
+  addMapToLeaflet: function(self, data, healthData, postClickCallBack) {
     self.geoLayer = L.geoJson(data, {
       style(feature) {
         const fillColorCode = helper.getColorCodeOf(
@@ -92,15 +92,14 @@ export default {
     }).addTo(self.map);
     return self.geoLayer._layers;
   },
-  handleSearch(countryCode, postSearchCallBack) {
+  handleSearch: function(countryCode, postSearchCallBack) {
     const searchCountry = filter(this.geoLayer._layers, (layer) => layer.feature.properties.BRK_A3 === countryCode);
-    console.log('Searching', searchCountry[0]);
     this.handleClick(
       searchCountry[0], countryCode, this.lastClickedCountry, this.healthData,
       postSearchCallBack,
     );
   },
-  handleClick($el, countryCode, lastClickedCountry, healthData, postClickCallBack) {
+  handleClick: function($el, countryCode, lastClickedCountry, healthData, postClickCallBack) {
     const clickState = eventHandler.onCountryClick($el, lastClickedCountry, healthData);
     if (clickState === 'CLICK_ON') {
       this.lastClickedCountry = $el;

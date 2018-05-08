@@ -36,9 +36,11 @@ export default Vue.extend({
     this.$on('Map:Clicked', ($clickedEl) => {
       if ($clickedEl.type === 'GLOBAL') {
         this.resetFilters();
-        document.querySelector("#search-box input").value = '';
+        if (document.querySelector("#search-box input"))
+          document.querySelector("#search-box input").value = '';
       } else {
-        document.querySelector("#search-box input").value = $clickedEl.countryName;
+        if (document.querySelector("#search-box input"))
+          document.querySelector("#search-box input").value = $clickedEl.countryName;
       }
     })
   },
@@ -65,9 +67,9 @@ export default Vue.extend({
       common.showLoading();
       const windowProperties = window.appProperties;
       return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
-        .then(function (globalHealthIndices) {
-          self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
-          self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
+        .then((globalHealthIndices) => {
+          this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
+          this.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
             globalHealthIndices);
           worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self));
           common.hideLoading();
@@ -75,7 +77,7 @@ export default Vue.extend({
     },
     fetchCategoricalIndicators: function () {
       const self = this;
-      return axios.get('/api/health_indicator_options').then(function (categories) {
+      return axios.get('/api/health_indicator_options').then((categories) => {
         self.categories = categories.data
       })
     },
@@ -101,7 +103,7 @@ export default Vue.extend({
       this.$emit('Map:Clicked', countryCode)
     },
     onSearchTriggered (countryCode) {
-      worldMap.handleSearch(countryCode, this.onCountrySelection.bind(this))
+      worldMap.handleSearch(countryCode, this.onCountrySelection)
     }
   },
   template: mapTemplate,
