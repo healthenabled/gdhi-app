@@ -32,16 +32,14 @@ export default Vue.extend({
     };
     const healthIndicators = {};
     return {
-      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status, isAdmin: false, isViewPublish: false
+      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status: '', isAdmin: false, isViewPublish: false
     };
   },
   created() {
-    if (this.$route.params.countryUUID) {
       this.showEdit = true;
       common.showLoading();
       this.isViewPublish = this.$route.path.match('viewPublished') != null;
       this.prepareDataForViewForm(this.$route.params.countryUUID);
-    }
   },
   methods: {
     fetchHealthScoresFor(countryUUID) {

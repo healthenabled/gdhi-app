@@ -25,7 +25,9 @@ export default Vue.extend({
     countrySummary: {
       type: Object,
       default() {
-        return {};
+        return {
+          resources: []
+        };
       },
     },
     healthIndicators: {

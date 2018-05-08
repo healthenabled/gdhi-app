@@ -26,26 +26,132 @@ describe("EditQuestionaire",()=>{
     });
   });
 
+  it("should have default value when props are not there", () => {
+    component = shallow(EditQuestionnaire, {
+      router
+    });
+    expect(component.vm.questionnaire).to.deep.equal([]);
+    expect(component.vm.healthIndicators).to.deep.equal({});
+    expect(component.vm.countrySummary).to.deep.equal({"resources": []});
+    expect(component.vm.showEdit).to.deep.equal(true);
+    expect(component.vm.status).to.deep.equal('');
+    expect(component.vm.isAdmin).to.deep.equal(false);
+
+  });
+
   it("should contain the edit-questionnaire component", () => {
     expect(component.contains(".health-indicator-questionnaire")).to.equal(true);
   });
-
+  
   it("should save data as draft", (done) => {
     moxios.install();
-    moxios.stubRequest('/api/countries/save', {
-      status: 200
-    });
-
+    let notifier = sinon.spy();
+    component.vm.$notify = notifier;
     component.vm.saveData('save');
 
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
-      expect(request.config.method).to.equal("post");
-      expect(request.config.url).to.equal("/api/countries/save");
+      request.respondWith({
+        status: 200
+      }).then(() => {
+        expect(request.config.method).to.equal("post");
+        expect(request.config.url).to.equal("/api/countries/save");
+        let requestParams = JSON.parse(request.config.data);
+        expect(requestParams.countryId).to.equal('some-random-uuid');
+        sinon.assert.calledWith(notifier,
+          {
+          group: 'custom-template',
+          title: 'Success',
+          text: component.vm.successMessages['save'],
+          type: 'success'
+          }
+        );
+        done()
+      });
+    });
+    moxios.uninstall();
+  });
 
-      let requestParams = JSON.parse(request.config.data);
-      expect(requestParams.countryId).to.equal('some-random-uuid');
-      done()
+
+  it("should set showEdit to false when save data is called with action submit", (done) => {
+    moxios.install();
+    let notifier = sinon.spy();
+    component.vm.$notify = notifier;
+    component.vm.saveData('submit');
+
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200
+      }).then(() => {
+        expect(component.vm.showEdit).to.equal(false);  
+        sinon.assert.calledWith(notifier,
+          {
+          group: 'custom-template',
+          title: 'Success',
+          text: component.vm.successMessages['submit'],
+          type: 'success'
+          }
+        );
+        done()
+      });
+    });
+    moxios.uninstall();
+  });
+
+
+  it("should display error notifier  when save data call is failed with error 400", (done) => {
+    moxios.install();
+    let notifier = sinon.spy();
+    component.vm.$notify = notifier;
+
+    component.vm.saveData('submit');
+
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      request.reject({
+        status: 400,
+        response: { message: 'problem', status: 400 }
+      });
+      moxios.wait(() => {
+        sinon.assert.calledWith(notifier,
+          {
+          group: 'custom-template',
+          title: 'Error',
+          text: 'Invalid Data',
+          type: 'error'
+          }
+        );
+        done()
+      });
+    });
+    moxios.uninstall();
+  });
+
+  it("should display error notifier  when save data call is failed with error other than 400", (done) => {
+    moxios.install();
+    let notifier = sinon.spy();
+    component.vm.$notify = notifier;
+
+    component.vm.saveData('submit');
+
+    moxios.wait(() => {
+      let request = moxios.requests.mostRecent();
+      request.reject({
+        status: 402,
+        response: { message: 'problem', status: 402 }
+      });
+      moxios.wait(() => {
+        sinon.assert.calledWith(notifier,
+          {
+          group: 'custom-template',
+          title: 'Error',
+          text: 'Something has gone wrong. Please refresh the Page!',
+          type: 'error'
+          }
+        );
+        done()
+      });
     });
     moxios.uninstall();
   });
