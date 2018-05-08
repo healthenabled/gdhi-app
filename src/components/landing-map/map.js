@@ -71,7 +71,7 @@ export default Vue.extend({
           this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
           this.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
             globalHealthIndices);
-          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self));
+          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection);
           common.hideLoading();
         })
     },
