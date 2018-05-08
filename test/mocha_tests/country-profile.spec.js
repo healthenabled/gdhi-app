@@ -142,7 +142,7 @@ describe("Country Profile ", () => {
      moxios.wait(() => {
       var mockFn = sinon.stub(pdfHelper, 'generateScorecard').callsFake(() => { });
       wrapper.find(".download-btn").trigger("click");
-      expect(mockFn.getCall(0).args).to.deep.equal([healthIndicatorData, wrapper.vm.countrySummary, benchmarkData, wrapper.vm.benchmarkPhase]);
+      expect(mockFn.getCall(0).args).to.deep.equal([healthIndicatorData, wrapper.vm.countrySummary, benchmarkData, wrapper.vm.benchmarkPhase, wrapper.vm.hasBenchmarkData]);
       done();
     });
   });

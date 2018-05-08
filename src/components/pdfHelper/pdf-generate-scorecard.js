@@ -2,7 +2,7 @@ import PDFDocument from 'pdfkit';
 import blobStream from 'blob-stream';
 import colorObj from "../common/color-codes.js";
 
-export function generateScorecard(healthIndicatorData, countrySummary, benchmarkData, benchmarkPhase) {
+export function generateScorecard(healthIndicatorData, countrySummary, benchmarkData, benchmarkPhase, hasBenchmarkData) {
   let doc = new PDFDocument({
     margin: 50
   });
@@ -48,6 +48,11 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       .text("Main indicators in each category is used to calculate overall country average. Selected country can be benchmarked against global average or countries within the selected phase.", 50, doc.y,{
         width: 500
       });
+    !hasBenchmarkData &&  
+    doc.fontSize(12)
+      .fillColor("#ed4c57")
+      .font("Helvetica-Oblique")
+      .text("No countries in the selected phase for benchmarking")
     doc.moveDown();    
     doc.moveDown();
     doc.text(""); // to move the cursor to the recent yVal

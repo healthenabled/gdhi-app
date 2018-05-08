@@ -94,9 +94,12 @@ export default Vue.extend({
       axios.get(healthIndicatorsUrl)
         .then((response) => {
           this.getHealthIndicatorCallback(response);
-        }).catch(e => {
+        });
+        /* TODO: Handle error at component Level
+        .catch(e => {
           console.log('Error pulling health indicators data');
         });
+        */
     },
     getHealthIndicatorCallback(response) {
       const healthIndicatorsData = {
@@ -117,10 +120,13 @@ export default Vue.extend({
       axios.get(globalHealthIndicatorsUrl)
         .then((response) => {
           this.getGlobalHealthIndicatorCallback(response);
-        }).catch((e) => {
+        });
+        /* TODO: Handle error at component Level
+        .catch((e) => {
           common.hideLoading();
           console.log('Error pulling health indicators data');
         });
+        */
     },
     getGlobalHealthIndicatorCallback(response) {
       const globalHealthIndicatorsData = {
