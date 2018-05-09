@@ -120,7 +120,6 @@ export default Vue.extend({
       axios.delete(url).then(() => {
         this.$router.push({path: `/admin`});
         common.hideLoading();
-        this.notifier({title: 'Success',message: successMessage, type: 'success'});
       }).catch(() => {
         this.notifier({title: 'Error', message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
         common.hideLoading();
