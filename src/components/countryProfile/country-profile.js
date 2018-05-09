@@ -3,26 +3,47 @@ import countryProfile from './countryProfile.html';
 import developmentIndicators from '../developmentIndicators/development-indicators.js';
 import countrySummary from '../countrySummary/country-summary.js';
 import axios from 'axios';
+import { generateScorecard } from "../pdfHelper/pdf-generate-scorecard";
+import { isEmpty } from 'lodash';
+import Notifications from 'vue-notification';
+
+Vue.use(Notifications);
 
 export default Vue.extend({
 
-  components: { developmentIndicators, countrySummary },
+  components: { developmentIndicators, countrySummary, Notifications },
   data() {
     return {
       healthIndicatorData: { countryName: '', countryPhase: 'NA', categories: [] },
       flagSrc: '',
-      url: ''
+      url: '',
+      benchmarkData: {},
+      benchmarkPhase: '',
+      phases: [],
+      countrySummary: '',
+      hasBenchmarkData: true
     };
   },
 
   mounted() {
     this.getHealthIndicatorsFor(this.$route.params.countryCode);
     this.url = `/api/export_country_data/${this.$route.params.countryCode}`;
+    this.fetchPhases();
   },
   methods: {
+    fetchPhases() {
+      axios.get('/api/phases').then((response) => {
+        this.phases = response.data;
+      });
+    },
+    onSummaryLoaded(countrySummary) {
+      this.countrySummary = countrySummary;
+    },
     getHealthIndicatorsFor(countryCode) {
       axios.get(`/api/countries/${countryCode}/health_indicators`)
-        .then(this.healthIndicatorCallback.bind(this));
+        .then((response) => {
+          this.healthIndicatorCallback(response);
+        });
     },
     healthIndicatorCallback(response) {
       this.healthIndicatorData = response.data;
@@ -36,6 +57,47 @@ export default Vue.extend({
       this.healthIndicatorData.categories.forEach((category) => {
         this.$set(category, 'showCategory', false);
       });
+    },
+    generatePDF() {
+      generateScorecard(this.healthIndicatorData, this.countrySummary, this.benchmarkData, this.benchmarkPhase, this.hasBenchmarkData);
+    },
+    notifier(props) {
+      this.$notify({
+        group: 'custom-template',
+        title: props.title,
+        text: props.message,
+        type: props.type
+      });
+    },
+    getBenchmarkData() {
+      this.benchmarkData = {};
+      this.hasBenchmarkData = true;
+      if (this.benchmarkPhase === "") {
+        return;
+      }
+      axios.get(`/api/countries/${this.$route.params.countryCode}/benchmark/${this.benchmarkPhase}`)
+        .then((response) => {
+          this.benchmarkData = response.data;
+          if(isEmpty(this.benchmarkData)) {
+            this.hasBenchmarkData = false;
+            this.notifier({
+              title: 'No Data',
+              message: 'No countries in the selected phase for benchmarking',
+              type: 'warn'
+            });
+          } else {
+            this.healthIndicatorData.categories.forEach((category) => {
+              this.$set(category, 'showCategory', true);
+            });
+          }
+        })
+        .catch((e) => {
+          this.notifier({
+            title: 'Server Error',
+            message: 'Unable to load benchmark data. Please try after sometime',
+            type: 'error'
+          });
+        });
     }
   },
   template: countryProfile,

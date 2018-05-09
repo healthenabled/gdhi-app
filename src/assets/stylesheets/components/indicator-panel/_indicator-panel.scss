@@ -6,8 +6,8 @@
   @extend .box-shadow, .copy;
   border-radius: 5px;
   z-index: 2;
-  max-height: calc(100vh - 170px);
-  overflow-y: auto;
+  height: calc(100vh - 170px);
+  overflow-y: hidden;
   overflow-x: hidden;
   &-error {
     text-transform: capitalize;
@@ -21,8 +21,9 @@
     display: flex;
     flex-flow: column;
     align-items: center;
-    height: 95%;
-    margin: 15px 15px;
+    height: calc(100% - 90px);
+    padding: 15px 15px;
+    overflow-y: auto;
     &-expand-btn {
       cursor: pointer;
       font-size: 35px;
@@ -207,6 +208,20 @@
   }
   .show {
     width: 100%;
+  }
+  .button-container {
+    position: absolute;
+    bottom: 0;
+    background: $white;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0px;
+    .btn {
+      display: inline-block;
+      margin: 0px;
+    }
   }
 }
 @media screen and (min-width: 1640px) {

@@ -51,6 +51,28 @@ module.exports = {
         test: /\.html$/
       },
       {
+        // These are all pdfkit-related packages that need to be ran through browserify:
+        test: /node_modules\/(pdfkit|png-js|linebreak|unicode-properties|brotli)\//,
+        loader: 'transform-loader?brfs',
+      },
+      // `fontkit` needs special treatment because it needs both `browserify` and `babelify`:
+      {
+        test: /node_modules\/fontkit\//,
+        use: [
+          {loader: 'transform-loader?brfs'},
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['env'],
+            },
+          },
+        ],
+      },
+      {
+        test: /node_modules\/(unicode-properties|fontkit).*\.json$/,
+        use: 'json-loader',
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]

@@ -36,18 +36,18 @@ describe("Country List", () => {
       }
     ]
  };
-  beforeEach(()=> {
-    wrapper = mount(CountryList, {
-      localVue,
-      router
-    });
+ beforeEach(() => {
+  moxios.install();
+  wrapper = mount(CountryList, {
+    localVue,
+    router
   });
+  moxios.stubRequest('/api/countries_health_indicator_scores?categoryId=&phase=', {
+    status: 200,
+    response: responseData
+  });
+ })
   it(" should render one li for each country", (done) => {
-    moxios.install();
-    moxios.stubRequest('/api/countries_health_indicator_scores?categoryId=&phase=', {
-      status: 200,
-      response: responseData
-    });
     moxios.wait(() => {
       expect(wrapper.vm.globalHealthIndicators).to.deep.equal(responseData.countryHealthScores);
       expect(wrapper.findAll(".countries-list-details-country").length).to.equal(responseData.countryHealthScores.length);
@@ -56,11 +56,6 @@ describe("Country List", () => {
   });
 
   it(" should display the correct country score and name", (done) => {
-    moxios.install();
-    moxios.stubRequest('/api/countries_health_indicator_scores?categoryId=&phase=', {
-      status: 200,
-      response: responseData
-    });
     moxios.wait(() => {
       expect(wrapper.findAll(".countries-list-details-country").at(0).find(".country-score").text()).to.equal(responseData.countryHealthScores[0].countryPhase.toString());
       expect(wrapper.findAll(".countries-list-details-country").at(0).find(".country-name").text()).to.equal(responseData.countryHealthScores[0].countryName);
@@ -70,15 +65,13 @@ describe("Country List", () => {
   });
 
   it(" should navigate to correct country url when clicking on the country name", (done) => {
-    moxios.install();
-    moxios.stubRequest('/api/countries_health_indicator_scores?categoryId=&phase=', {
-      status: 200,
-      response: responseData
-    });
     moxios.wait(() => {
       wrapper.findAll(".countries-list-details-country").at(0).find(".country-name").trigger('click');
       expect(wrapper.vm.$route.path).to.equal(`/country_profile/${responseData.countryHealthScores[0].countryId}`);
       done();
     });
+  });
+  afterEach(() => {
+    moxios.uninstall();
   });
 });

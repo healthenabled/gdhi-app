@@ -28,49 +28,37 @@ describe ("Country Summary ", () => {
        "sdfsd"
     ]
  };
+ beforeEach(() => {
+  moxios.install();
+  wrapper = mount(CountrySummary, {
+    localVue,
+    router
+  });
+ })
   it("should return the country data after the API call is made", (done) => {
-    moxios.install();
-    wrapper = mount(CountrySummary, {
-      localVue,
-      router
-    });
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
-      request.resolve({data: responseData});
-      moxios.wait(() => {
+      request.respondWith({status: 200 ,response: responseData}).then(() => {
         expect(wrapper.vm.countrySummaries).to.deep.equal(responseData);
         done();
       });
     });
-    moxios.uninstall();
   });
   it("should update the html based on the data recieved", (done) => {
-    moxios.install();
-    wrapper = mount(CountrySummary, {
-      localVue,
-      router
-    });
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
-      request.resolve({data: responseData});
-      moxios.wait(() => {
+      request.respondWith({status: 200 ,response: responseData}).then(() => {
         expect(wrapper.find(".country-summary-link").text()).to.equal(responseData.contactName + ",");
         expect(wrapper.find(".country-designation").text()).to.equal(responseData.contactDesignation + ",");
         expect(wrapper.find(".country-org").text()).to.equal(responseData.contactOrganization);
-        expect(wrapper.find(".country-text").text()).to.equal(responseData.summary);
+        expect(wrapper.find(".country-summary-text").text()).to.equal(responseData.summary);
         expect(wrapper.findAll(".country-resource-link").length).to.equal(responseData.resources.length);
         expect(wrapper.find(".link-blue").attributes().href).to.equal('mailto:' + responseData.contactEmail);
         done();
       });
     });
-    moxios.uninstall();
   });
   it("should execute catch block if the API call is failed", (done) => {
-    moxios.install();
-    wrapper = mount(CountrySummary, {
-      localVue,
-      router
-    });
     let errResp = {
       status: 500,
       response: { message: 'problem' },
@@ -83,6 +71,8 @@ describe ("Country Summary ", () => {
         done();
       });      
     });
-    moxios.uninstall();
   });
+  afterEach(() => {
+    moxios.uninstall();
+  })
 })

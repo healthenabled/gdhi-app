@@ -55,8 +55,8 @@ describe("Indicator HTTP Requests and Helper methods", () => {
     expect(Obj.getGNIPerCapitaInKilo(0)).to.equal('NA');
   });
   it("getTotalPopulationInMillion should return value in M or NA if the value is null or undefined", () => {
-    expect(Obj.getTotalPopulationInMillion(20000000)).to.equal('2M');
-    expect(Obj.getTotalPopulationInMillion(22233432)).to.equal('2.22M');
+    expect(Obj.getTotalPopulationInMillion(2000000)).to.equal('2M');
+    expect(Obj.getTotalPopulationInMillion(22233432)).to.equal('22.23M');
     expect(Obj.getTotalPopulationInMillion(undefined)).to.equal('NA');
     expect(Obj.getTotalPopulationInMillion(null)).to.equal('NA');
     expect(Obj.getTotalPopulationInMillion(0)).to.equal('NA');

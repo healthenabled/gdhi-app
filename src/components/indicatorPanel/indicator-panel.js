@@ -25,19 +25,20 @@ export default Vue.extend({
   mounted() {
     common.showLoading();
     this.getGlobalHealthIndicators();
-    this.$parent.$on('Map:Clicked', ($clickedEl) => {
-      if ($clickedEl.type === 'COUNTRY') {
-        this.country.countryName = $clickedEl.countryName;
-        this.country.countryCode = $clickedEl.countryCode;
-        console.log('Listening', this.country.countryCode);
-        this.getIndicators(this, this.country.countryCode);
-      } else if ($clickedEl.type === 'GLOBAL') {
+    if(this.$parent) {
+      this.$parent.$on('Map:Clicked', ($clickedEl) => {
+        if ($clickedEl.type === 'COUNTRY') {
+          this.country.countryName = $clickedEl.countryName;
+          this.country.countryCode = $clickedEl.countryCode;
+          this.getIndicators(this, this.country.countryCode);
+        } else if ($clickedEl.type === 'GLOBAL') {
+          this.getGlobalHealthIndicators();
+        }
+      });
+      this.$parent.$on('filtered', () => {
         this.getGlobalHealthIndicators();
-      }
-    });
-    this.$parent.$on('filtered', () => {
-      this.getGlobalHealthIndicators();
-    });
+      });
+    }
   },
 
   methods: {
@@ -83,29 +84,33 @@ export default Vue.extend({
 
     getIndicators(context, countryId) {
       this.getHealthIndicators(context, countryId);
-      const self = this;
       httpRequests.getDevelopmentIndicators(countryId, true).then((response) => {
-        self.developmentIndicators = response;
+        this.developmentIndicators = response;
       });
     },
 
     getHealthIndicators(context, countryId) {
       const healthIndicatorsUrl = `/api/countries/${countryId}/health_indicators`;
       axios.get(healthIndicatorsUrl)
-        .then(this.getHealthIndicatorCallback.bind(this)).catch(e => {
+        .then((response) => {
+          this.getHealthIndicatorCallback(response);
+        });
+        /* TODO: Handle error at component Level
+        .catch(e => {
           console.log('Error pulling health indicators data');
         });
+        */
     },
     getHealthIndicatorCallback(response) {
       const healthIndicatorsData = {
         countryId: response.data.countryId,
         countryName: response.data.countryName,
-        overallScore: response.data.overallScore,
         categories: response.data.categories,
         countryPhase: response.data.countryPhase,
       };
       this.healthIndicators = healthIndicatorsData;
       this.showCountryDetail = true;
+      this.isNoGlobalHealthIndicators = true;
       this.country.countryName = this.country.countryName ? this.country.countryName : healthIndicatorsData.countryName;
     },
 
@@ -113,10 +118,15 @@ export default Vue.extend({
       const windowProperties = window.appProperties;
       const globalHealthIndicatorsUrl = `/api/global_health_indicators?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`;
       axios.get(globalHealthIndicatorsUrl)
-        .then(this.getGlobalHealthIndicatorCallback.bind(this)).catch(e => {
+        .then((response) => {
+          this.getGlobalHealthIndicatorCallback(response);
+        });
+        /* TODO: Handle error at component Level
+        .catch((e) => {
           common.hideLoading();
           console.log('Error pulling health indicators data');
         });
+        */
     },
     getGlobalHealthIndicatorCallback(response) {
       const globalHealthIndicatorsData = {

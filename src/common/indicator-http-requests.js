@@ -1,5 +1,4 @@
-import axios from 'axios';
-import common from './common'
+import axios from "axios";
 
 export default ({
 
@@ -8,7 +7,7 @@ export default ({
   },
 
   getTotalPopulationInMillion(population) {
-    const populationInMillion = population ? Number((population / 10000000).toFixed(2)) : null;
+    const populationInMillion = population ? Number((population / 1000000).toFixed(2)) : null;
     return populationInMillion ? `${populationInMillion}M` : 'NA';
   },
 
@@ -19,7 +18,7 @@ export default ({
   getValue (value) {
     return  !value ? 'NA' : value;
   },
-  
+
   getMinimalDevelopmentIndicatorsData(response) {
     let self = this;
     const developmentIndicatorsData = [
@@ -40,7 +39,7 @@ export default ({
   },
 
   getDevelopmentIndicatorsData(response) {
-    var self = this;
+    let self = this;
     const developmentIndicatorsData = [
       {
         CONTEXT: {

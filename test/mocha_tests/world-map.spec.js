@@ -1,5 +1,7 @@
-import worldMap from '@/components/landing-map/world-map.js'
-import L from 'leaflet'
+import worldMap from '../../src/components/landing-map/world-map.js';
+import eventHandler from '../../src/components/landing-map/map-event-handler';
+import L from 'leaflet';
+import sinon from 'sinon';
 
 const countryIndices = [{
   'countryId': 'AFG',
@@ -68,7 +70,7 @@ describe('World Map', () => {
   })
 
   afterEach(() => {
-    assert(mapStub.called)
+    sinon.assert.called(mapStub)
     mockLayer.restore()
     mapStub.restore()
   })
@@ -80,23 +82,61 @@ describe('World Map', () => {
     }}
 
     worldMap.handleClick(layer, 'AFG', '', countryIndices, callBackSpy)
-    assert(callBackSpy.calledOnce)
+    sinon.assert.calledOnce(callBackSpy)
     expect(callBackSpy.getCall(0).args[0].type).to.equal('COUNTRY')
     expect(callBackSpy.getCall(0).args[0].countryCode).to.equal('AFG')
     expect(callBackSpy.getCall(0).args[0].countryName).to.equal('Afghanistan')
     expect(worldMap.lastClickedCountry).to.equal(layer)
   })
 
-  it('should reset map and pass global on clicking same country', () => {
+  it('should reset map and redirect to country page', () => {
+    window = {
+      location: {
+        href: ''
+      }
+    };
     layer.feature = {'properties': {
       'BRK_A3': 'AFG',
       'NAME_LONG': 'Afghanistan'
     }}
-
+    let mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
     worldMap.handleClick(layer, 'AFG', layer, countryIndices, callBackSpy)
-    assert(callBackSpy.calledOnce)
-    expect(callBackSpy.getCall(0).args[0].type).to.equal('GLOBAL')
-    expect(worldMap.lastClickedCountry).to.equal('')
+    expect(window.location.href).to.equal('/country_profile/AFG');
+    eventHandler.resetLayer.restore();
+  })
+
+
+  it('should not redirect to country page when indices data not found', () => {
+    window = {
+      location: {
+        href: ''
+      }
+    };
+    layer.feature = {'properties': {
+      'BRK_A3': 'AFG',
+      'NAME_LONG': 'Afghanistan'
+    }}
+    let mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
+    worldMap.handleClick(layer, 'AFG', layer, [], callBackSpy)
+    expect(window.location.href).to.equal('');
+    eventHandler.resetLayer.restore();
+  })
+
+
+  it('should handleSearch', () => {
+    layer.feature = {'properties': {
+      'BRK_A3': 'AFG',
+      'NAME_LONG': 'Afghanistan'
+    }}
+    
+    worldMap.geoLayer = {
+      _layers: {1: layer}
+    };
+    let mockFn = sinon.stub(worldMap, 'handleClick').callsFake(() => { });
+    worldMap.handleSearch('AFG', callBackSpy);
+    expect(mockFn.getCall(0).args[0]).to.deep.equal(layer);
+    expect(mockFn.getCall(0).args[1]).to.deep.equal('AFG');
+    worldMap.handleClick.restore();
   })
 
   it('should reset map and pass country code on clicking unknown country', () => {
@@ -106,10 +146,19 @@ describe('World Map', () => {
     }}
     worldMap.lastClickedCountry = layer
     worldMap.handleClick('', 'SIA', layer, countryIndices, callBackSpy)
-    assert(callBackSpy.calledOnce)
+    sinon.assert.calledOnce(callBackSpy)
     expect(callBackSpy.getCall(0).args[0].type).to.equal('COUNTRY')
     expect(callBackSpy.getCall(0).args[0].countryCode).to.equal('SIA')
     expect(callBackSpy.getCall(0).args[0].countryName).to.equal('')
     expect(worldMap.lastClickedCountry).to.equal('')
-  })
+  });
+
+  it('should reset the lastClickedCountry when reset is called', () => {
+    let mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
+    worldMap.resetMap(callBackSpy)
+    sinon.assert.calledOnce(callBackSpy);
+    
+    expect(worldMap.lastClickedCountry).to.equal('');
+    eventHandler.resetLayer.restore();
+  });
 })

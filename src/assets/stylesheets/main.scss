@@ -127,7 +127,8 @@ body, html {
 .page-title {
   font-family: 'RobotoSlabBold', 'sans-serif';
   font-size: 2.14em;
-  margin: 20px 0;
+  margin-top: 40px;
+  margin-bottom: 20px;
   max-width: 90%;
   display: inline-block;
 }
@@ -171,6 +172,12 @@ body, html {
   font-family: "RobotoRegular", sans-serif;
   margin: 5px 0;
 }
+.copy-small-bold {
+  font-size: 0.93em;
+  line-height: 1;
+  font-family: "RobotoBold", sans-serif;
+  margin: 5px 0;
+}
 .copy-small-italics {
   font-size: 0.93em;
   line-height: 1;
@@ -212,10 +219,14 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   margin-top: 5px;
   border: 1px solid $border-color-dark;
   border-radius: 5px;
+  @extend .copy;
   &:disabled {
     background: $border-color;
     color: $black;
     opacity: 0.7;
+  }
+  &::-ms-clear {
+    display: none;
   }
 }
 .btn {
@@ -235,7 +246,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   padding: 10px;
   display: inline-block;
   color: $white;
-  @extend .sub-header;
+  @extend .copy-small;
   cursor: pointer;
   &.btn-primary {
     background-color: $logo-blue;
@@ -300,9 +311,38 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     flex-wrap: wrap;
     margin: 5px 0;
   }
+  &.without-margin {
+    margin: 0px;
+  }
 }
 .column-100percent {
   width: 100%;
+}
+.column-60percent {
+  width: 60%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-40percent {
+  width: 40%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
 }
 .column-50percent {
   width: 50%;
@@ -326,6 +366,30 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   }
   @media screen and (max-width: 1024px) {
     width: 100%;
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-85percent {
+  width: 85%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
+    margin-right: 0px;
+    margin-top: 5px;
+  }
+}
+.column-15percent {
+  width: 15%;
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+    flex-shrink: 0;
+  }
+  @media screen and (max-width: 1024px) {
     margin-right: 0px;
     margin-top: 5px;
   }
@@ -368,7 +432,6 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   padding-top: 10px;
 }
 .accordion {
-  cursor: pointer;
   position: relative;
   &:after {
     position: absolute;
@@ -385,12 +448,13 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
       content: "\f077";
     }
   }
-  .sub-header {
+  > .sub-header {
     position: relative;
     z-index: 2;
     text-transform: uppercase;
     margin: -20px;
     padding: 20px;
+    cursor: pointer;
   }
 }
 .top {
@@ -419,12 +483,15 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     input ~ .checkmark {
       background-color: darken($radio-bg, 10%);
     }
+    input:disabled ~ .checkmark {
+      background-color: $white;
+    }
   }
   input {
     position: absolute;
     opacity: 0;
     &:checked ~ .checkmark {
-      background-color: $logo-blue;
+      background-color: $logo-blue !important;
       &:after {
         display: block;
       }
@@ -451,7 +518,13 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   z-index: 3;
 }
 .sub-content {
-  margin-top: 100px;
+  margin-top: 120px;
+}
+.questionnaire-title {
+  position: absolute;
+  bottom: 20px;
+  left: 80px;
+  font-size: 1.2em;
 }
 /* Create a custom radio button */
 .checkmark {
@@ -547,10 +620,85 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   @extend .btn-red;
 }
 
+.tabs {
+  padding-top: 2em;
+  .tablist {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      display: inline-block;
+      border: 1px solid $border-color-dark;
+      border-bottom: 0;
+      padding: 10px;
+      margin-bottom: -1px;
+      background: $logo-blue;
+      margin-right: 5px;
+      border-radius: 5px 5px 0px 0px;
+      color: $white;
+      @extend .sub-header;
+      &.current {
+        background-color: $white;
+        color: $black;
+      }
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+  .tab-content {
+    border: 1px solid $border-color-dark;
+    padding: 1em;
+    background: $white;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+}
 
 .loader {
   position: fixed;
   z-index: 5;
   top: 50%;
   left: 50%;
+}
+table {
+  border-collapse: collapse;
+  border: 1px solid $border-color-dark;
+  width: 100%;
+  th {
+    text-transform: uppercase;
+    text-align: left;
+    background: $logo-blue;
+    color: #FFF;
+    cursor: pointer;
+    padding: 8px;
+    min-width: 30px;
+    &:hover {
+      background: lighten($black-grey, 10%);
+    }
+  }
+  td {
+    text-align: left;
+    padding: 10px;
+    border-right: 1px solid $border-color-dark;
+    border-collapse: collapse;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .btn {
+    margin: 0px;
+  }
+}
+table tbody tr:nth-child(2n) td {
+  background: $body-bg;
+}
+.admin-page {
+  .header-bold {
+    margin: 10px 0;
+  }
+  .box {
+    margin-top: 20px;
+  }
 }

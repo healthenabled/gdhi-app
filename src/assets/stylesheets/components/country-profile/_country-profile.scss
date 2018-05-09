@@ -2,6 +2,11 @@
   .copy-blue {
     margin-top: 20px;
   }
+  .overall {
+    display: inline-block;
+    width: calc(100% - 85px);
+    vertical-align: middle;
+  }
   .sub-header {
     text-transform: uppercase;
   }
@@ -16,34 +21,48 @@
   .indicator {
     margin-bottom: 10px;
     border-bottom: 1px solid $border-color;
+    &:last-child {
+      border: none;
+    }
   }
   .indicator-desc {
-    width: calc(100% - 48px);
+    width: calc(100% - 165px);
     display: inline-block;
     vertical-align: middle;
     padding: 10px 0;
-    margin-right: 20px;
+    margin-right: 10px;
+  }
+  .score-container {
+    flex-grow: 1;
+  }
+  .score-container {
+    flex-grow: 1;
   }
   .indicator-id {
     align-self: flex-start;
     padding: 10px 0;
   }
-  .heading-row div {
-    display: inline-block;
-    padding: 10px 0;
-    border-bottom: 2px solid $border-color;
-    margin-bottom: 10px;
-    margin-left: -4px;
-
-    &:first-child {
-      margin-left: 0px;
-    }
-    &.indicator-name{
-      width: calc(100% - 92px);
+  .heading-row {
+    display: flex;
+    div {
+      padding: 10px 0;
+      border-bottom: 2px solid $border-color;
+      margin-bottom: 10px;
+      flex-grow: 1;
+      &:first-child {
+        margin-left: 0px;
+      }
+      &.indicator-name{
+        width: calc(100% - 190px);
+      }
     }
   }
   .header-bold {
     text-transform: capitalize;
+  }
+  .country-summary-text {
+    list-style: none;
+    white-space: pre-wrap;
   }
   .country-text {
     list-style: none;
@@ -55,6 +74,7 @@
     position: absolute;
     bottom: 20px;
     left: 80px;
+    font-size: 1.2em;
   }
   .accordion-content {
     .indicator {
@@ -66,9 +86,47 @@
 
 //development indicators 
 .development-indicators {
+  .row {
+    flex-wrap: wrap;
+  }
   .indicator {
-    width: 25%;
-    margin-right: 20px;
+    width: 50%;
     border: none;
+    margin-top: 10px;
+  }
+}
+
+// benchmark
+.benchmark {
+  text-transform: uppercase;
+  margin-top:10px;
+}
+.benchmarkCompare {
+  margin-top: 5px;
+  &:before {
+    display: inline-block;
+    margin-right: 5px;
+    border: 8px solid transparent;
+  }
+  &.at {
+    color: $font-grey;
+    
+  }
+  &.above {
+    color: $positive;    
+    margin-top: 0px;
+    &:before {
+      content: " ";
+      vertical-align: baseline;
+      border-bottom: 8px solid $positive;
+    }
+  }
+  &.below {
+    color: $negative;
+    &:before {
+      vertical-align: top;
+      content: " ";
+      border-top: 8px solid $negative;
+    }
   }
 }

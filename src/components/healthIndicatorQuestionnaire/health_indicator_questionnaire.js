@@ -3,7 +3,7 @@ import healthIndicatorForm from "./health_indicator_questionnaire.html";
 import EditQuestionnaire from "./edit-questionaire.js";
 import axios from "axios";
 import VeeValidate from "vee-validate";
-import common from '../../common/common'
+import common from '../../common/common';
 
 const config = {
   fieldsBagName: 'fieldBags',
@@ -32,24 +32,25 @@ export default Vue.extend({
     };
     const healthIndicators = {};
     return {
-      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status, isAdmin: false,
+      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status: '', isAdmin: false, isViewPublish: false
     };
   },
   created() {
-    if (this.$route.params.countryUUID) {
       this.showEdit = true;
       common.showLoading();
+      this.isViewPublish = this.$route.path.match('viewPublished') != null;
       this.prepareDataForViewForm(this.$route.params.countryUUID);
-    }
   },
   methods: {
     fetchHealthScoresFor(countryUUID) {
-      return axios.get(`/api/countries/${countryUUID}`);
+      if(!this.isViewPublish)return axios.get(`/api/countries/${countryUUID}`);
+      else return axios.get(`/api/countries/viewPublish/${countryUUID}`);
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {
         this.$set(category, 'showCategory', isExpanded);
         category.indicators.forEach(indicator => {
+          indicator.scores = this.reOrderIndicatorScores(indicator.scores);
           this.healthIndicators[indicator.indicatorId] = {
             categoryId: category.categoryId,
             indicatorId: indicator.indicatorId,
@@ -64,6 +65,7 @@ export default Vue.extend({
       let existingIndicatorIds = existingHealthIndicators.map(indicator => indicator.indicatorId);
       data.forEach((category) => {
         category.indicators.forEach(indicator => {
+          indicator.scores = this.reOrderIndicatorScores(indicator.scores);
           if(!existingIndicatorIds.includes(indicator.indicatorId)) {
             this.healthIndicators[indicator.indicatorId] = {
               categoryId: category.categoryId,
@@ -75,14 +77,21 @@ export default Vue.extend({
         });
       });
     },
+    reOrderIndicatorScores(scores){
+      scores.splice((scores.length - 1), 0, scores.splice(0, 1)[0]);
+      return scores;
+    },
     viewFormCallback(options, scores) {
       this.status = scores.data.status;
-      if(this.status === "PUBLISHED")
-        window.location.href = '/error';
+      this.isAdmin = this.$route.path.match('review') != null;
+      if(this.status === "PUBLISHED" && !this.isViewPublish)
+        this.$router.push({path: '/error' });
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
-      this.isAdmin = this.$route.path.match('review') != null;
       if(scores.data.status == "REVIEW_PENDING" && !this.isAdmin) {
+        this.showEdit = false;
+      }
+      if(this.isViewPublish) {
         this.showEdit = false;
       }
       if(scores.data.healthIndicators.length == 0){
@@ -101,7 +110,7 @@ export default Vue.extend({
         this.fetchHealthScoresFor(countryUUID)])
         .then(axios.spread(this.viewFormCallback.bind(this)))
         .catch(() => {
-          location.href = "/error";
+          this.$router.push({path: '/error' });
         });
     },
     transformForView(healthindicators) {

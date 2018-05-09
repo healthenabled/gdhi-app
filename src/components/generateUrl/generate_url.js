@@ -4,17 +4,14 @@ import common from "../../common/common";
 import Autocomplete from "vuejs-auto-complete";
 import axios from "axios";
 import {sortBy} from "lodash";
-import VeeValidate from "vee-validate";
+import Notifications from 'vue-notification';
 
-const config = {
-  fieldsBagName: 'fieldBags',
-};
-Vue.use(VeeValidate, config);
-
+Vue.use(Notifications);
 
 export default Vue.extend({
     template: generateUrlTemplate,
-    components: { Autocomplete, VeeValidate },
+    name: "GenerateUrl",
+    components: { Autocomplete, Notifications },
     mounted() {
       this.loadCountries();
       common.hideLoading();
@@ -79,7 +76,7 @@ export default Vue.extend({
       },
       saveURLGenerationStatus() {
         common.showLoading();
-        let url = "/api/countries/" + this.countryUUID + "/url_gen_status";
+        let url = "/api/countries/" + this.countryUUID + "/generate_url";
         return axios.post(url, {
           countryId: this.countryId
         }).then((response) => {

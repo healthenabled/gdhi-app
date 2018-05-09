@@ -9,10 +9,10 @@
 
   .header-width {
     margin: 0 auto;
-    width: 90%;
+    padding: 0 70px;
   }
   .hd-element {
-    padding: 15px 0px;    
+    padding: 15px 0px;
     display: inline-block;
     min-width: 140px;
     display: flex;
@@ -37,13 +37,14 @@
     color: $logo-blue;
     text-transform: uppercase;
     letter-spacing: -0.1px;
-    cursor: default;
+    cursor: pointer;
     @extend .logo-font;
+    margin-right: 20px;
   }
   .search-box {
     position: absolute;
     right: 75px;
-    top: 8px;
+    top: 12px;
     width: 240px;
     @extend .copy;
     &-container {

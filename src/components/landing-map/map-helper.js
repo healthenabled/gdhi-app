@@ -3,7 +3,8 @@ import colors from '../common/color-codes.js';
 export default {
   getColorCodeFor(score) {
     const colorCodes = colors.getColorCodes();
-    const colorHashArray = colorCodes.filter((c) => (score === null ? 'NA' : c.score === JSON.stringify(score)));
+    const scoreValue = (score === null || score === undefined) ? "NA" : score.toString();
+    const colorHashArray = colorCodes.filter((colorVal) => colorVal.score === scoreValue);
     return colorHashArray.length !== 0 ? colorHashArray[0].color : '#606060';
   },
   getColorCodeOf(country, countryIndices) {

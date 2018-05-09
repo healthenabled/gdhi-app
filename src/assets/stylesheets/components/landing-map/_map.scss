@@ -98,13 +98,17 @@
 }
 
 div#reset-btn:before {
-  content: "\F021";
+  content: "Reset";
   height: 17px;
-  width: 12px;
-  padding: 5px 9px;
-  background: #fff;
-  font-family: 'FontAwesome';
+  width: 57px;
+  padding: 5px;
+  background: $white;
   display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 4px;
+  border: 1px solid $black;
+  line-height: 1;
 }
 
 
@@ -146,4 +150,15 @@ div#reset-btn:before {
 }
 .leaflet-top, .leaflet-bottom {
   z-index: 1;
+}
+.leaflet-control-container .leaflet-bar a {
+  display: inline-block;
+  margin-right: 5px;
+  border: 1px solid $black;
+  line-height: 1.2;
+  border-radius: 0;
+}
+.leaflet-control-container .leaflet-bar {
+  border: none;
+  box-shadow: none;
 }

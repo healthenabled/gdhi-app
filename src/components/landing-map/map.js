@@ -14,8 +14,7 @@ export default Vue.extend({
     indicatorPanel, MapLegend
   },
   data () {
-    // Todo: Remove mapData and directly return data
-    this.mapData = {
+    return {
       globalHealthIndices: [],
       lastSelectedCountry: '',
       globalHealthIndicators: [],
@@ -24,7 +23,6 @@ export default Vue.extend({
       categories: [],
       phases: []
     }
-    return this.mapData
   },
   created () {
     this.categoryValue = window.appProperties.getCategoryFilter()
@@ -34,25 +32,24 @@ export default Vue.extend({
     this.fetchPhases()
   },
   mounted: function () {
-    console.log('map mounted')
     EventBus.$on('Map:Searched', this.onSearchTriggered)
     this.$on('Map:Clicked', ($clickedEl) => {
       if ($clickedEl.type === 'GLOBAL') {
         this.resetFilters();
-        document.querySelector("#search-box input").value = '';
+        if (document.querySelector("#search-box input"))
+          document.querySelector("#search-box input").value = '';
       } else {
-        document.querySelector("#search-box input").value = $clickedEl.countryName;
+        if (document.querySelector("#search-box input"))
+          document.querySelector("#search-box input").value = $clickedEl.countryName;
       }
     })
   },
   beforeDestroy () {
-    console.log('map destroyed')
     EventBus.$off('Map:Searched', this.onSearchTriggered)
   },
   methods: {
 
     filter: function () {
-      console.log('selected cat id ' + this.categoryValue)
       window.appProperties.setCategoryFilter({categoryId: this.categoryValue})
       window.appProperties.setPhaseFilter({phaseId: this.phaseValue})
       this.$emit('filtered')
@@ -70,32 +67,29 @@ export default Vue.extend({
       common.showLoading();
       const windowProperties = window.appProperties;
       return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
-        .then(function (globalHealthIndices) {
-          self.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
-          self.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
+        .then((globalHealthIndices) => {
+          this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
+          this.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
             globalHealthIndices);
-          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection.bind(self));
+          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection);
           common.hideLoading();
         })
     },
     fetchCategoricalIndicators: function () {
       const self = this;
-      return axios.get('/api/health_indicator_options').then(function (categories) {
+      return axios.get('/api/health_indicator_options').then((categories) => {
         self.categories = categories.data
       })
     },
     fetchPhases: function () {
       const self = this;
-      self.phases = [{phaseValue: 1, phaseName: 'Phase 1'},
-        {phaseValue: 2, phaseName: 'Phase 2'},
-        {phaseValue: 3, phaseName: 'Phase 3'},
-        {phaseValue: 4, phaseName: 'Phase 4'},
-        {phaseValue: 5, phaseName: 'Phase 5'}]
-      return self.phases
+      axios.get('/api/phases').then((response) => {
+        self.phases = response.data;
+      });
     },
     mergeColorCodeToHealthIndicators: function (globalHealthIndices) {
       const globalHealthIndicesWithScores = globalHealthIndices.data.countryHealthScores.filter((country) => {
-        return country.overallScore != null
+        return country.countryPhase != null
       });
       const collection = globalHealthIndicesWithScores;
       collection.forEach((value) => {
@@ -109,7 +103,7 @@ export default Vue.extend({
       this.$emit('Map:Clicked', countryCode)
     },
     onSearchTriggered (countryCode) {
-      worldMap.handleSearch(countryCode, this.onCountrySelection.bind(this))
+      worldMap.handleSearch(countryCode, this.onCountrySelection)
     }
   },
   template: mapTemplate,

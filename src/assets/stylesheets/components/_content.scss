@@ -8,12 +8,14 @@
   }
   .content-centered {
     width: 90%;
+    padding-bottom: 30px;
     margin: 0 auto;
   }
   .export {
     margin-left: auto;
     color: $white;
     @extend .copy;
+    display: inline-block;
     &.home {
       position: absolute;
       z-index: 3;

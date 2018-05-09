@@ -1,6 +1,6 @@
-import eventHandler from '@/components/landing-map/map-event-handler.js'
+import eventHandler from '../../src/components/landing-map/map-event-handler.js'
 import L from 'leaflet'
-
+import sinon from 'sinon';
 
 
 const countryIndices = [{
@@ -94,16 +94,6 @@ describe('Event Handler', () => {
     expect(clickState).to.equal('CLICK_ON')
   })
 
-  it('clicking the same country should reset country', () => {
-    layer.feature = {'properties': {
-      'BRK_A3': 'SGP'
-    }}
-    mockLayer.expects('setStyle').once().
-    withArgs({ fillColor: '#11184B', fillOpacity: 0.95 })
-    const clickState = eventHandler.onCountryClick(layer, layer, countryIndices);
-
-    expect(clickState).to.equal('RESET_CLICK')
-  })
 
   it('clicking the country with previous selection', () => {
     layer.feature = {'properties': {
@@ -127,6 +117,31 @@ describe('Event Handler', () => {
     expect(clickState).to.equal('CLICK_ON')
 
   })
+
+
+  it('clicking same country as selected before should return SELECT_COUNTRY', () => {
+    layer.feature = {'properties': {
+      'BRK_A3': 'SGP'
+    }}
+    const clickState = eventHandler.onCountryClick(layer, layer, countryIndices);
+    expect(clickState).to.equal('SELECT_COUNTRY');
+  });
+
+  it('calling onMouseOver should update the fillOpacity', () => {
+    layer.feature = {'properties': {
+      'BRK_A3': 'SGP'
+    }}
+    mockLayer.expects('setStyle').once().withArgs({fillOpacity: 0.65 });
+    eventHandler.onMouseMove(layer);
+  });
+
+  it('calling onMouseOver should update the fillOpacity', () => {
+    layer.feature = {'properties': {
+      'BRK_A3': 'SGP'
+    }}
+    mockLayer.expects('setStyle').once().withArgs({fillOpacity: 0.95 });
+    eventHandler.onMouseOut(layer);
+  });
 
   it('Trigerring a country which is not present should reset previous selection', () => {
     layer.feature = {'properties': {

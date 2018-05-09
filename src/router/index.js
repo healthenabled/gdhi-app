@@ -11,7 +11,7 @@ import methodologyComp from '@/components/methodology/methodology.vue';
 import healthIndicatorQuestionnaire from '@/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js';
 import countryListComp from '@/components/countryList/country-list.js';
 import ErrorComp from '@/components/error-handler/404-error.js';
-import generateUrlComp from '@/components/generateUrl/generate_url.js';
+import adminPageComp from '@/components/adminPage/admin-page.js';
 
 Vue.use(Router);
 
@@ -69,7 +69,7 @@ export default new Router({
         {
           path: '/admin',
           components: {
-            routecontent: generateUrlComp,
+            routecontent: adminPageComp,
           },
         },
         {
@@ -79,7 +79,13 @@ export default new Router({
           },
         },
         {
-          path: '/health_indicator_questionnaire/:countryUUID/review',
+          path: '/admin/health_indicator_questionnaire/:countryUUID/review',
+          components: {
+            routecontent: healthIndicatorQuestionnaire,
+          },
+        },
+        {
+          path: '/admin/health_indicator_questionnaire/:countryUUID/viewPublished',
           components: {
             routecontent: healthIndicatorQuestionnaire,
           },

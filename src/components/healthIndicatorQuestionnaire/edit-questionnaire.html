@@ -1,18 +1,23 @@
 <div class="health-indicator-questionnaire content-centered">
   <div class="clearfix fixed-sub-header">
-    <span class="page-title">
+    <div class="page-title">
         <div v-if="countrySummary.countryAlpha2Code" class="flag" :style="{ backgroundImage: 'url(/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg)' }" ></div>
-        {{countrySummary.countryName}} - Digital Health Questionnaire
-    </span>
+        {{countrySummary.countryName}}
+    </div>
+    <span class="copy-italics copy-grey questionnaire-title">Digital Health Questionnaire</span>
     <div class="float-right button-container">
+      <span><button class="submit-btn btn btn-primary" @click="generatePDF()"> <i class="fa fa-download" aria-hidden="true"></i> Download PDF</button></span>
       <span v-if="status === 'REVIEW_PENDING' && isAdmin">
-        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="saveCorrection()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save </button></span>
-      <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="publish()"><i class="fa fa-check" aria-hidden="true"></i> Publish </button></span>
+        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="saveData('saveCorrection')"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save </button></span>
+        <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="validate('publish')">
+          <i class="fa fa-check" aria-hidden="true"></i> Publish </button></span>
+        <span v-if="showEdit"><button class="submit-btn btn btn-red" @click="reject()"><i class="fa fa-times" aria-hidden="true"></i> Reject </button></span>
         <v-dialog/>
       </span>
       <span v-else>
-        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="save()"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button></span>
-      <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="submit()"><i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
+        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="saveData('save')"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button></span>
+        <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="validate('submit')">
+          <i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
       </span>
     </div>
   </div>
@@ -20,7 +25,7 @@
     <div class="copy-small-italics copy-blue">
       Note: Global Digital Health Index Data will be displayed publicly. As such, please obtain approval for
       submission from the relevant government agency (Ministry of Health, Digital Health Agency, etc.) and provide
-      the contact information of the approver.
+      the contact information of the approver. Leaving this page will discard unsaved changes.
     </div>
     <div class="health-indicator-questionnaire-contact-info-heading header-bold">Contact Information</div>
     <div class="box">
@@ -30,7 +35,7 @@
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
           <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" placeholder="DD-MM-YYYY" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="'Please Enter Date'">
-          <div v-show="errors.has('collectedDate')" class="error-info">Date for which data was collected is either empty or invalid</div>
+          <div v-if="errors.has('collectedDate')" class="error-info">Please enter a date between 2010 and current date</div>
         </div>
         <div class="column-33percent"></div>
         <div class="column-33percent"></div>
@@ -126,30 +131,37 @@
       <span class="fa fa-eye health-indicator-questionnaire-contact-info-publish" title="These details will be displayed publicly on the GDHI platform"></span>
       <div class="health-indicator-questionnaire-contact-info-description copy-small">
         Please provide links to digital health related resources for your country.</div>
+      <div class="health-indicator-questionnaire-contact-info-description copy-small-italics">
+        Example Format : www.example.com </div>
     </div>
     <div class="box">
       <div class="row">
         <div class="form-group column-33percent">
           <label for="resource1">Resource 1</label><span class="mandatory-field">*</span>
           <input type="text" :disabled="!showEdit" name="resource1" id="resource1" v-model="countrySummary.resources[0]" v-validate.disable="'required|url'" :class="errors.has('resource1') ? 'has-error form-control' : 'form-control'" />
+          <div v-if="errors.has('resource1')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-33percent">
           <label for="resource2">Resource 2</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource2') ? 'has-error form-control' : 'form-control'" id="resource2" name="resource2" v-model="countrySummary.resources[1]" v-validate.disable="'url'" />
+          <div v-if="errors.has('resource2')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-33percent">
           <label for="resource3">Resource 3</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource3') ? 'has-error form-control' : 'form-control'" id="resource3" name="resource3" v-model="countrySummary.resources[2]" v-validate.disable="'url'" />
+          <div v-if="errors.has('resource3')" class="error-info resource">Please enter valid resource link</div>
         </div>
       </div>
       <div class="row column-66percent">
         <div class="form-group column-50percent">
           <label for="resource4">Resource 4</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource4') ? 'has-error form-control' : 'form-control'" id="resource4" name="resource4" v-model="countrySummary.resources[3]" v-validate.disable="'url'" />
+          <div v-if="errors.has('resource4')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-50percent">
           <label for="resource5">Resource 5</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource5')  ? 'has-error form-control' : 'form-control'" id="resource5" name="resource5" v-model="countrySummary.resources[4]" v-validate.disable="'url'" />
+          <div v-if="errors.has('resource5')" class="error-info resource">Please enter valid resource link</div>
         </div>
       </div>
     </div>
@@ -162,23 +174,22 @@
           <div class="sub-header" @click="onCategoryExpand(category)">{{category.categoryName}}</div>
           <div class="accordion-content">
             <div class="" data-header="Indicators">
-              <div v-for="indicator in category.indicators" :class="errors.has('indicator_'+indicator.indicatorId+'_rationale') ? 'has-error indicator-items' : 'indicator-items'">
-                <div> {{indicator.indicatorCode}}. {{indicator.indicatorName}}</div>
+              <div v-for="indicator in category.indicators" :class="(errors.has('indicator_'+indicator.indicatorId+'_rationale')|| errors.has(indicator.indicatorId))? 'has-error indicator-items' : 'indicator-items'">
+                <div> {{indicator.indicatorCode}}. {{indicator.indicatorName}}   <span class="mandatory-field">*</span> </div>
                 <div class="copy-small-italics copy-blue indicator-definition">{{indicator.indicatorDefinition}}</div>
                 <div v-for="score in indicator.scores" class="scores">
                   <label class="radio-container">
-                          <span :class="score.score ? 'score-content' : ''">{{score.score}}</span>
-                          <span class="score-content" v-if="score.score !== null">-</span>
+                          <span :class="score.score ? 'score-content' : ''" v-if="score.score >= 0">{{score.score}}</span>
+                          <span class="score-content" v-if="score.score >= 0">-</span>
                           <span>{{score.scoreDefinition}}</span>
-                          <input type="radio" :disabled="!showEdit" :name="indicator.indicatorId" v-model="healthIndicators[indicator.indicatorId].score" :value="score.score" />
+                          <input type="radio" :disabled="!showEdit" :name="indicator.indicatorId" v-model="healthIndicators[indicator.indicatorId].score" :value="score.score" v-validate.disable="'required'"/>
                           <span class="checkmark"></span>
                         </label>
                 </div>
                 <div class="row description_container">
                   <label>Rationale or supporting text</label>
-                  <span class="mandatory-field">*</span>
                   <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate.disable="'required'"></textarea>
-                  <div v-show="errors.has('indicator_'+indicator.indicatorId+'_rationale')" class="error-info">The rationale field is required.</div>
+                  <div v-show="(errors.has('indicator_'+indicator.indicatorId+'_rationale') || errors.has(indicator.indicatorId))" class="error-info">Indicator score and rationale field is required.</div>
                 </div>
               </div>
             </div>

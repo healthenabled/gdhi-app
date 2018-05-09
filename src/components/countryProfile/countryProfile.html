@@ -3,7 +3,7 @@
     <div class="clearfix header-section">
       <div class="country-name page-title">
         <div class="flag" :style="{ backgroundImage: 'url(' + flagSrc + ')' }" ></div>
-        
+
         {{healthIndicatorData.countryName}}
       </div>
       <span id="collected-date" v-if="healthIndicatorData.collectedDate !== ''" class="copy-italics copy-grey">
@@ -13,20 +13,44 @@
         <div class="export">
           <span><a v-bind:href="url" class=" btn btn-primary"><i class="fa  fa-file-excel-o fa-lg"></i>Export Country Data</a></span>
         </div>
+        <button class="download-btn btn btn-primary" @click="generatePDF()"> <i class="fa fa-download" aria-hidden="true"></i> Download Scorecard</button>
       </div>
     </div>
     <div class="row">
-      <div class="column-50percent">
+      <div class="column-60percent">
         <div class="box">
+          <div class="overall">
             <div class="title sub-header">
               Overall Digital Health Phase
-              <div v-if="healthIndicatorData" :class="'score float-right' + ' phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase ? healthIndicatorData.countryPhase : "NA"}}</div>
             </div>
             <div class="phase-desc copy-italics copy-grey">
               <p>
-                The overall score is an average of the scores for the 19 GDHI indicators
+                The overall score is an average of the scores for the GDHI indicators
               </p>
             </div>
+          </div>
+          <div :class="'score ' + ' phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase ? healthIndicatorData.countryPhase : "NA"}}</div>
+
+        </div>
+        <div class="box">
+          <div class="title sub-header">
+            Benchmark
+            <div v-if="healthIndicatorData" class="float-right">
+              <select class="benchmarkDropDown" name="benchmarkDropDown" v-model="benchmarkPhase" @change=getBenchmarkData()>
+                <option value="">-</option>
+                <option value="-1">Global Average</option>
+                <option v-for="phase in phases" v-bind:value="phase.phaseValue">
+                  {{phase.phaseName}}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="phase-desc copy-italics copy-grey">
+            <p>
+              Compare your overall score with Global Average or other phase countries
+            </p>
+            <span v-if="!hasBenchmarkData" class="error-info"> No countries in the selected phase for benchmarking </span>
+          </div>
         </div>
         <div v-if="healthIndicatorData" class="health-indicators">
             <div v-for="(category, index) in healthIndicatorData.categories" class="indicator-panel-container-category-section">
@@ -47,7 +71,13 @@
                           <div class="indicator-score-desc copy-italics copy-grey">{{indicator.indicatorDescription}}</div>
                           <div class="indicator-score-desc copy-italics copy-blue">{{indicator.scoreDescription}}</div>
                         </div>
-                        <div :class="'indicator-score' + ' phase' + indicator.score">{{(indicator.score !== null) ? indicator.score : 'NA'}}</div>
+                        <div class='text-center score-container'>
+                          <div :class="'indicator-score' + ' phase' + indicator.score">{{(indicator.score >= 0) ? indicator.score : 'NA'}}</div>
+                          <div v-if="benchmarkData[indicator.id.toString()]" class='benchmark copy-small'>
+                            <div class="benchmark-score">Benchmark : <span class="copy-small-bold">{{benchmarkData[indicator.id].benchmarkScore}}</span></div>
+                            <div :class="'benchmarkCompare ' + benchmarkData[indicator.id].benchmarkValue.toLowerCase()">{{benchmarkData[indicator.id].benchmarkValue}} Avg.</div>
+                          </div>
+                        </div>
                       </div>
                   </div>
                 </div>
@@ -55,12 +85,12 @@
           </div>
         </div>
       </div>
-      <div class="column-50percent">
+      <div class="column-40percent">
         <div class="health-indicator-container">
           <development-indicators></development-indicators>
         </div>
         <div class="country-summary-container box">
-          <country-summary></country-summary>
+          <country-summary @summaryLoaded="onSummaryLoaded"></country-summary>
         </div>
       </div>
     </div>
