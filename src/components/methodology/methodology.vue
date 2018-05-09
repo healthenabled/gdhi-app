@@ -34,7 +34,14 @@
         leading digital health efforts in their respective countries to collect data for each country.
         These country partners submit their country’s data through an annual GDHI survey,
         and select the appropriate phase for each indicator as well as rationale and evidence to support these phases.
-        The GDHI team verifies the collected data before publishing it.</p>
+        The GDHI team verifies the collected data before publishing it. Broader Health Data from the 
+          <a 
+            href="http://wdi.worldbank.org/tables" 
+            target="_blank" 
+            class="link-blue">
+            World Bank Development Indicators 2016
+          </a> has been included to contextualize digital health maturity
+        </p>
 
         <p class="header-bold">Calculating Averages and Benchmarking</p>
         <p> The GDHI uses the main indicators in each category to calculate the overall country average.

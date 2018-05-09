@@ -13,7 +13,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
 
   doc.fontSize(20)
     .font("Helvetica-Bold")
-    .text(`${healthIndicatorData.countryName} - Scorecard`);
+    .text(`${healthIndicatorData.countryName} - National Digital Health Scorecard`);
 
   doc.fontSize(14)
     .font("Helvetica-BoldOblique")
@@ -35,7 +35,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
 
   yVal = doc.y;
   if(benchmarkPhase) {
-    let benchMarkPhaseValue = (benchmarkPhase < 0) ? "Global Avg." : `Phase ${benchmarkPhase} Countries`;
+    let benchMarkPhaseValue = (benchmarkPhase < 0) ? "Global Average" : `Phase ${benchmarkPhase} Countries`;
     doc.fontSize(14)
     .fillColor("#000000")
     .font("Helvetica-Bold")
@@ -45,7 +45,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
     doc.fontSize(12)
       .fillColor("#666")
       .font("Helvetica-Oblique")
-      .text("Main indicators in each category is used to calculate overall country average. Selected country can be benchmarked against global average or countries within the selected phase.", 50, doc.y,{
+      .text("The main indicator in each category is used to calculate overall country average. Each country can be benchmarked against global average or countries within a selected phase", 50, doc.y,{
         width: 500
       });
     !hasBenchmarkData &&  
@@ -205,7 +205,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
         switch (benchmarkData[indicator.id].benchmarkValue.toLowerCase()) {
           case "at" :
             doc.fontSize(10)
-            .fillColor("#ffa500")
+            .fillColor("#999999")
             .text(benchmarkData[indicator.id].benchmarkValue + " Avg. ", 480, doc.y, {
               width: 80,
               align: 'center'

@@ -38,7 +38,7 @@
             <div v-if="healthIndicatorData" class="float-right">
               <select class="benchmarkDropDown" name="benchmarkDropDown" v-model="benchmarkPhase" @change=getBenchmarkData()>
                 <option value="">-</option>
-                <option value="-1">Global Avg.</option>
+                <option value="-1">Global Average</option>
                 <option v-for="phase in phases" v-bind:value="phase.phaseValue">
                   {{phase.phaseName}}
                 </option>
@@ -47,7 +47,7 @@
           </div>
           <div class="phase-desc copy-italics copy-grey">
             <p>
-              Compare your overall score with Global Avg. or other phase countries
+              Compare your overall score with Global Average or other phase countries
             </p>
             <span v-if="!hasBenchmarkData" class="error-info"> No countries in the selected phase for benchmarking </span>
           </div>
