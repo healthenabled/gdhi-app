@@ -40,7 +40,7 @@
             target="_blank" 
             class="link-blue">
             World Bank Development Indicators 2016
-          </a> has been included to contextualize digital health maturity
+          </a> has been included to contextualize digital health maturity.
         </p>
 
         <p class="header-bold">Calculating Averages and Benchmarking</p>

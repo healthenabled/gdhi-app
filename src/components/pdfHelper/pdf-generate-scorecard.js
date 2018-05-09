@@ -45,7 +45,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
     doc.fontSize(12)
       .fillColor("#666")
       .font("Helvetica-Oblique")
-      .text("The main indicator in each category is used to calculate overall country average. Each country can be benchmarked against global average or countries within a selected phase", 50, doc.y,{
+      .text("The main indicator in each category is used to calculate overall country average. Each country can be benchmarked against global average or countries within a selected phase.", 50, doc.y,{
         width: 500
       });
     !hasBenchmarkData &&  
