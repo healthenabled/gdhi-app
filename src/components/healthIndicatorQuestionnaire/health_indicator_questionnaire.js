@@ -85,7 +85,7 @@ export default Vue.extend({
       this.status = scores.data.status;
       this.isAdmin = this.$route.path.match('review') != null;
       if(this.status === "PUBLISHED" && !this.isViewPublish)
-        window.location.href = '/error';
+        this.$router.push({path: '/error' });
       this.questionnaire = options.data;
       this.countrySummary = scores.data.countrySummary;
       if(scores.data.status == "REVIEW_PENDING" && !this.isAdmin) {
@@ -110,7 +110,7 @@ export default Vue.extend({
         this.fetchHealthScoresFor(countryUUID)])
         .then(axios.spread(this.viewFormCallback.bind(this)))
         .catch(() => {
-          location.href = "/error";
+          this.$router.push({path: '/error' });
         });
     },
     transformForView(healthindicators) {

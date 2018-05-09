@@ -140,7 +140,7 @@ describe("Country Profile ", () => {
     wrapper.vm.benchmarkPhase = "Global";
     wrapper.vm.benchmarkData = benchmarkData;
      moxios.wait(() => {
-      var mockFn = sinon.stub(pdfHelper, 'generateScorecard').callsFake(() => { });
+      let mockFn = sinon.stub(pdfHelper, 'generateScorecard').callsFake(() => { });
       wrapper.find(".download-btn").trigger("click");
       expect(mockFn.getCall(0).args).to.deep.equal([healthIndicatorData, wrapper.vm.countrySummary, benchmarkData, wrapper.vm.benchmarkPhase, wrapper.vm.hasBenchmarkData]);
       done();

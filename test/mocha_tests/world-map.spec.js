@@ -99,7 +99,7 @@ describe('World Map', () => {
       'BRK_A3': 'AFG',
       'NAME_LONG': 'Afghanistan'
     }}
-    var mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
+    let mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
     worldMap.handleClick(layer, 'AFG', layer, countryIndices, callBackSpy)
     expect(window.location.href).to.equal('/country_profile/AFG');
     eventHandler.resetLayer.restore();
@@ -116,7 +116,7 @@ describe('World Map', () => {
       'BRK_A3': 'AFG',
       'NAME_LONG': 'Afghanistan'
     }}
-    var mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
+    let mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
     worldMap.handleClick(layer, 'AFG', layer, [], callBackSpy)
     expect(window.location.href).to.equal('');
     eventHandler.resetLayer.restore();
@@ -132,7 +132,7 @@ describe('World Map', () => {
     worldMap.geoLayer = {
       _layers: {1: layer}
     };
-    var mockFn = sinon.stub(worldMap, 'handleClick').callsFake(() => { });
+    let mockFn = sinon.stub(worldMap, 'handleClick').callsFake(() => { });
     worldMap.handleSearch('AFG', callBackSpy);
     expect(mockFn.getCall(0).args[0]).to.deep.equal(layer);
     expect(mockFn.getCall(0).args[1]).to.deep.equal('AFG');
@@ -154,7 +154,7 @@ describe('World Map', () => {
   });
 
   it('should reset the lastClickedCountry when reset is called', () => {
-    var mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
+    let mockFn = sinon.stub(eventHandler, 'resetLayer').callsFake(() => { });
     worldMap.resetMap(callBackSpy)
     sinon.assert.calledOnce(callBackSpy);
     

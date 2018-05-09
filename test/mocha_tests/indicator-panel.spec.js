@@ -154,7 +154,7 @@ describe("Indicator Panel ", () => {
 
   it("should push the url when showcountrydetails is called ", (done) => {
     moxios.wait(() => {
-      var mockFn = sinon.stub(router, 'push').callsFake(() => { });
+      let mockFn = sinon.stub(router, 'push').callsFake(() => { });
       wrapper.vm.showCountryDetails('IND');
       expect(mockFn.getCall(0).args[0]).to.deep.equal({ path: `/country_profile/IND` });
       router.push.restore();
@@ -164,7 +164,7 @@ describe("Indicator Panel ", () => {
 
   it("should push the url when showlistofcountries is called ", (done) => {
     moxios.wait(() => {
-      var mockFn = sinon.stub(router, 'push').callsFake(() => { });
+      let mockFn = sinon.stub(router, 'push').callsFake(() => { });
       wrapper.vm.showListOfCountries();
       expect(mockFn.getCall(0).args[0]).to.deep.equal({ path: '/country_list' });
       done();

@@ -39,7 +39,7 @@ export default ({
   },
 
   getDevelopmentIndicatorsData(response) {
-    var self = this;
+    let self = this;
     const developmentIndicatorsData = [
       {
         CONTEXT: {

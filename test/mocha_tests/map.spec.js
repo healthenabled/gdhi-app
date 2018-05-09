@@ -162,7 +162,7 @@ describe("Map ", () => {
       response: phaseData
     });
     wrapper = shallow(Map);
-    var mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
+    let mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
     wrapper.vm.fetchPhases();
     moxios.wait(() => {
       expect(wrapper.vm.phases).to.deep.equal(phaseData);
@@ -173,7 +173,7 @@ describe("Map ", () => {
 
   it(" should set the window properties when the filter method is called and fetch the fetchGlobalIndices", (done) => {
     wrapper = shallow(Map);
-    var mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
+    let mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
     wrapper.vm.categoryValue = 1;
     wrapper.vm.phaseValue = 1
     wrapper.vm.filter();
@@ -188,7 +188,7 @@ describe("Map ", () => {
 
   it(" should reset the local values when the reset method is called", (done) => {
     wrapper = shallow(Map);
-    var mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
+    let mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
     wrapper.vm.resetFilters();
     sinon.assert.calledWith(setCategoryFilterMock,{categoryId: ''});
     sinon.assert.calledWith(setPhaseFilterMock,{phaseId: ''});
@@ -201,7 +201,7 @@ describe("Map ", () => {
   });
   it("should update the value for categories when fetchCategoricalIndicators is called ", (done) => {
     wrapper = shallow(Map);
-    var mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
+    let mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
     wrapper.vm.fetchCategoricalIndicators();
     moxios.wait(() => {
       expect(wrapper.vm.categories).to.deep.equal(healthIndicatorData);
@@ -212,7 +212,7 @@ describe("Map ", () => {
 
   it("should emit map clicked event when onCountrySelection is called", (done) => {
     wrapper = shallow(Map);
-    var mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
+    let mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
     wrapper.vm.onCountrySelection('IND');
     expect(wrapper.emitted('Map:Clicked').length).to.equal(1);
     expect(wrapper.emitted('Map:Clicked')[0]).to.deep.equal(['IND'])
@@ -224,8 +224,8 @@ describe("Map ", () => {
 
   it("should call worldMap handleSearch when onSearchTriggered is called", (done) => {
     wrapper = shallow(Map);
-    var mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
-    var mockFn1 = sinon.stub(worldMap, 'handleSearch').callsFake(() => { });
+    let mockFn = sinon.stub(worldMap, 'drawMap').callsFake(() => { });
+    let mockFn1 = sinon.stub(worldMap, 'handleSearch').callsFake(() => { });
     wrapper.vm.onSearchTriggered('IND');
     expect(mockFn1.getCall(0).args[0]).to.deep.equal('IND');
     moxios.wait(() => {
