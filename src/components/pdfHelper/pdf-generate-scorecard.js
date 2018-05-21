@@ -26,10 +26,13 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
     .fillColor("#000000")
     .font("Helvetica-Bold")
     .text("Country Summary");
+  yVal = doc.y;
   doc.fontSize(14)
     .font("Helvetica")
     .fillColor("#000")
-    .text(countrySummary || "-");
+    .text(countrySummary || "-", 50, yVal, {
+      width: 500
+    });
   doc.moveDown();
   doc.moveDown();
 
