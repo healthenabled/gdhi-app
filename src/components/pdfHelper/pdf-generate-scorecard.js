@@ -26,16 +26,44 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
     .fillColor("#000000")
     .font("Helvetica-Bold")
     .text("Country Summary");
-  yVal = doc.y;
-  doc.fontSize(14)
-    .font("Helvetica")
-    .fillColor("#000")
-    .text(countrySummary || "-", 50, yVal, {
-      width: 500
-    });
-  doc.moveDown();
-  doc.moveDown();
 
+  // split each line into an array as PDFKIT having problems in writing huge content
+  let countrySummaryArray = countrySummary.split(/\.\n|\. |\.|;/);
+  let splittedChar = countrySummary.match(/\.\n|\. |\.|;/g);
+  if(countrySummary) {
+    for(let i=0; i < countrySummaryArray.length - 1; i++) {
+      yVal = doc.y;
+
+      if ((countrySummaryArray[i].charAt(0).indexOf('\n') > -1) || (countrySummaryArray[i].charAt(0).indexOf('\r') > -1) ){
+        doc.text("", 50, yVal, {
+          continued: false
+        });
+        doc.moveDown();
+        yVal = doc.y;
+      }
+      doc.fontSize(14)
+        .font("Helvetica")
+        .fillColor("#000")
+        .text(countrySummaryArray[i] + (splittedChar[i] || ""), 50, yVal, {
+          width: 480,
+          continued: true
+        });
+    }
+  } else {
+    doc.fontSize(14)
+      .font("Helvetica")
+      .fillColor("#000")
+      .text("-", 50, yVal, {
+        width: 480,
+        continued: false
+      });
+  }
+
+  doc.text("", 50, doc.y, {
+    continued:false
+  });
+  doc.moveDown();
+  doc.moveDown();
   yVal = doc.y;
   if(benchmarkPhase) {
     let benchMarkPhaseValue = (benchmarkPhase < 0) ? "Global Average" : `Phase ${benchmarkPhase} Countries`;
@@ -51,12 +79,12 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       .text("The main indicator in each category is used to calculate overall country average. Each country can be benchmarked against global average or countries within a selected phase.", 50, doc.y,{
         width: 500
       });
-    !hasBenchmarkData &&  
+    !hasBenchmarkData &&
     doc.fontSize(12)
       .fillColor("#ed4c57")
       .font("Helvetica-Oblique")
       .text("No countries in the selected phase for benchmarking")
-    doc.moveDown();    
+    doc.moveDown();
     doc.moveDown();
     doc.text(""); // to move the cursor to the recent yVal
   }
@@ -77,9 +105,9 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       width: 32,
       align: 'center'
     });
-  doc.moveDown();    
   doc.moveDown();
- 
+  doc.moveDown();
+
 
   doc.lineWidth(2);
 
@@ -112,7 +140,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       .stroke();
     const categoryPhase = category.phase ? category.phase.toString() : "NA";
 
-    
+
     if (!category.phase) {
       doc.font("Helvetica")
       .fillColor("#FFF")
@@ -154,7 +182,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
         width: 420
       });
       doc.fillColor("#666")
-        .font("Helvetica-Oblique") 
+        .font("Helvetica-Oblique")
         .text(indicator.indicatorDescription, 50, doc.y, {
           width: 420
         });
@@ -176,12 +204,12 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
           .strokeColor("#CCC")
           .stroke();
       }
-      
+
       doc.moveDown();
 
-      
+
       //score box yValue computation startYVal + ((endYVal - startYVal) / 2) - ((scoreBoxHeight / 2) + (benchmark text height/ 2))
-      
+
       if(benchmarkData[indicator.id]) {
         //adjust benchmark height to align center (12px)
         scoreYVal = initialYVal + (((endYVal - initialYVal) / 2) - 32);
@@ -240,11 +268,11 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
             break;
         }
       }
-      // to reset doc.y position in PDFKit, As the doc.y position is updated as soon as we add text  
+      // to reset doc.y position in PDFKit, As the doc.y position is updated as soon as we add text
       doc.text("", 50, endYVal + 25);
     })
   })
-  
+
   stream.on('finish', () => {
     let blob = stream.toBlob('application/pdf');
     if (window.navigator.msSaveOrOpenBlob) {
