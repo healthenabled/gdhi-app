@@ -123,6 +123,11 @@ body, html {
   color: $logo-blue;
   text-decoration: underline;
   cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  display: inline-block;
 }
 .page-title {
   font-family: 'RobotoSlabBold', 'sans-serif';
