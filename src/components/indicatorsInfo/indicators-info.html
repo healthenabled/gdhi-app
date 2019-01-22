@@ -1,36 +1,40 @@
 <div class="indicators-info content-centered">
+  <div class='hero-image'>
+     <img src='http://via.placeholder.com/1024x200.png?text=Placeholder'/>
+     <span class='hero-title'>Global Digital Health Index<br/>Indicator Guide</span>
+  </div>
+  <div class='page-description header-regular'>
+      The <a class='link-blue' href='http://digitalhealthindex.org' target='_blank'>Global Digital Health Index</a> is an interactive digital resource that tracks, monitors, and
+      evaluates the use of digital technology for health across countries. GDHI uses seven key
+      indicator categories to track progress.
+  </div>
+  <div class="inline-links text-center">
+          <a class='text-center' :href="'#' + category.categoryName.toString().replace(' ','_')" v-for="category in categoricalIndicators">
+            <span>{{category.categoryName}}</span>
+          </a>
+  </div>
   <div class="indicators-info-content">
     <div class="indicators-info-content-categories">
-      <div class="indicators-info-static">
-        <div class="indicator-info-static-heading page-title">Indicators</div>
-      </div>
-      <div class="row">
         <div class="indicators">
           <div v-for="category in categoricalIndicators">
-              <div class="box indicator-details">
+            <a class='internal_anchor' :name="category.categoryName.toString().replace(' ','_')"></a>
+              <div class="indicator-details">
                 <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'">
                   <div class="align-No sub-header"  @click="onCategoryExpand(category)">
                     {{category.categoryName}}
                   </div>
                   <div class="accordion-content">
-                    <div class="row table-header header-regular">
-                      <div class="column-50percent">
-                        <span class="indicator-id">#</span>
-                        <span class="indicator-name">Indicator</span>
-                      </div>
-                      <div class="column-50percent">
-                        <span>Definition</span>
-                      </div>
-                    </div>
                     <div v-for="indicator in category.indicators">
-                      <div class="row indicator">
-                        <div class="column-50percent">
-                          <span class="indicator-id">{{indicator.indicatorCode}}</span>
+                      <div class="box indicator">
+                        <div class='indicator-info text-center'>
+                          <span class="indicator-id">Indicator {{indicator.indicatorCode}} - </span>
                           <span class="indicator-name">{{indicator.indicatorName}}</span>
-                        </div>
-                        <div class="column-50percent indicator-def">
-                          <span>{{indicator.indicatorDefinition}}</span>
-                        </div>
+                          <div class="indicator-def  copy-italics">{{indicator.indicatorDefinition}}</div>
+                      </div>
+                          <div v-if='score.score !== -1' class='score' v-for="score in indicator.scores">
+                            <span :class="'phase' + score.score">{{score.score }}</span>
+                            <span>{{score.scoreDefinition }}</span>
+                          </div>
                       </div>
                     </div>
                   </div>
@@ -39,7 +43,6 @@
             </div>
         </div>
       </div>
-    </div>
     <div class="top">
       <a class="arrow" href="#"><span class="fa  fa-chevron-circle-up fa-3x"></span></a>
     </div>

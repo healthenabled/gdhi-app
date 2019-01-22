@@ -37,7 +37,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"The digital health governance structure is institutionalized, consults with other ministries, and monitors implementation of digital health. It is relatively protected from interference or organizational changes. It is nationally recognized as the lead for digital health.The governance structure and its technical working groups emphasize gender balance in membership."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -69,7 +69,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health is implemented and periodically evaluated and optimized in national health or other relevant national strategies and/or plans"
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -107,7 +107,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"National digital health strategy and costed plan fully implemented with planning underway for the next 3-5 year cycle"
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -139,7 +139,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Greater than 5%"
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -177,7 +177,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"There is a law on data security (storage, transmission, use) that is relevant to digital health that has been implemented and enforced consistently."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -209,7 +209,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"There is a law to protect individual privacy, governing ownership, access and sharing of individually identifiable digital health data that has been implemented and is enforced consistently."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -241,7 +241,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Protocols, policies, frameworks or accepted processes governing the clinical and patient care use of connected medical devices and digital health services (e.g. telemedicine, applications), particularly in relation to safety, data integrity and quality of care have been implemented and are enforced consistently."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -273,7 +273,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Protocols, policies, frameworks or accepted processes for cross boarder data exchange and storage have been implemented and enforced consistently."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -311,7 +311,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health taught in relevant institutions with >75% of health professionals receiving pre-service training."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -343,7 +343,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health taught in relevant instutitions with >75% of doctors/physicians receiving pre-service training."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -375,7 +375,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health taught in relevant institutions with >75% of nurses receiving pre-service training."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -407,7 +407,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health taught in relevant institutions with >75% of community health workers receiving pre-service training."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -439,7 +439,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health curriculum is implemented as part of in-service (continuing edication) training for >75% health professionals in the workforce."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -471,7 +471,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health curriculum is implemented as part of in-service (continuing education) training for >75% of doctors/physicians in the workforce."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -503,7 +503,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health curriculum is implemented as part of in-service (continuing education) training for >75% of nurses in the workforce."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -535,7 +535,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health curriculum is implemented as part of in-service (continuing education) training for >75% of community health workers in the workforce."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -567,7 +567,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Sufficient numbers of trained digital health professionals available to support national digital health needs."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -599,7 +599,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Sufficient numbers of trained health informatics professionals available to support national health information system needs."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -631,7 +631,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"A long-term plan is in place to grow and sustain staff with the skills needed to sustain digital health at national and subnational levels with an explicit focus on training cadres of female health workers with an estimated >75% of positions needed filled. Performance management systems are in place to ensure growth and sustainability of the digital health workforce with sufficient supply to meet digital health needs and little staff turnover."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -669,7 +669,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"The national digital health architecture and/or health information exchange (HIE) provides core data exchange functions and is periodically reviewed and updated to meet the needs of the changing digital health architecture. There is continuous learning, innovation, and quality control. Data is actively used for national health strategic planning and budgeting."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -701,7 +701,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Data standards are routinely updated and data is actively used for monitoring and evaluating the health system and for national health strategic planning and budgeting."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -739,7 +739,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"WEF score (>5.4 - 7.0)"
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -771,7 +771,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Digital health infrastructure (including equipment- computers/ tablets/ phones, supplies, software, devices, etc.) is available, in use, and regularly maintained and upgraded in >75% of public healthcare service sector."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -809,7 +809,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"All nationally prioritized areas supported by national-scale digital health systems (>75%) with monitoring and evaluation systems and results."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -841,7 +841,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"Health system registries of uniquely identifiable providers, administrators, and public facilities (and private if applicable) are available, up-to-date with geo-tagged data, and used for health system and service strategic planning and budgeting."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -873,7 +873,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"A secure registry exists, is available and in active use and includes >75% of the relevant population. The data is available, used, and curated."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -905,7 +905,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"A master patient index exists, is available and in active use and includes >75% of the relevant population. The data is available, used, and curated."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -937,7 +937,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"A secure birth registry exists, is available and in active use and includes >75% of the relevant population. The data is available, used, and curated."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -969,7 +969,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"A secure death registry exists, is available and in active use and includes >75% of the relevant population. The data is available, used, and curated."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -1001,7 +1001,7 @@ describe ("Indicator Info ", () => {
                    "scoreDefinition":"A secure immunization registry exists, is available and in active use and includes >75% of the relevant population. The data is available, used, and curated."
                 },
                 {
-                   "score":null,
+                   "score":-1,
                    "scoreDefinition":"Not Available or Not Applicable"
                 }
              ]
@@ -1037,9 +1037,12 @@ describe ("Indicator Info ", () => {
       const firstIndicatorElement = wrapper.findAll(".indicator-details").at(0);
       expect(firstIndicatorElement.find(".sub-header").text()).to.equal(responseData[0].categoryName);
       expect(firstIndicatorElement.findAll(".indicator").length).to.equal(responseData[0].indicators.length);
-      expect(firstIndicatorElement.findAll(".indicator").at(0).find(".indicator-id").text()).to.equal(responseData[0].indicators[0].indicatorId.toString());
+      expect(firstIndicatorElement.findAll(".indicator").at(0).find(".indicator-id").text()).to.contain(responseData[0].indicators[0].indicatorId.toString());
       expect(firstIndicatorElement.findAll(".indicator").at(0).find(".indicator-name").text()).to.equal(responseData[0].indicators[0].indicatorName);
       expect(firstIndicatorElement.findAll(".indicator").at(0).find(".indicator-def").text()).to.equal(responseData[0].indicators[0].indicatorDefinition);
+      expect(firstIndicatorElement.findAll(".indicator").at(0).findAll(".score").length).to.equal((responseData[0].indicators[0].scores.length - 1));
+      expect(firstIndicatorElement.findAll(".indicator").at(0).findAll(".score").at(0).findAll('span').at(0).text()).to.equal((responseData[0].indicators[0].scores[0].score.toString()));
+      expect(firstIndicatorElement.findAll(".indicator").at(0).findAll(".score").at(0).findAll('span').at(1).text()).to.equal((responseData[0].indicators[0].scores[0].scoreDefinition));
       done();
     });
   });
