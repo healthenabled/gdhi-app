@@ -707,3 +707,7 @@ table tbody tr:nth-child(2n) td {
     margin-top: 20px;
   }
 }
+
+select::-ms-expand {
+  display: none;
+}

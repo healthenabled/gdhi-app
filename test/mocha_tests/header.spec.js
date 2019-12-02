@@ -34,8 +34,8 @@ describe ("Header ", () => {
          }
       }
     });
-    expect(wrapper.findAll(".hd-element").length).to.equal(4);
-    expect(wrapper.findAll(autoSearch).length).to.equal(1);
+    expect(wrapper.findAll(".hd-element").length).to.equal(5);
+    expect(wrapper.findAll(autoSearch).length).to.equal(2);
   });
-  
+
 })

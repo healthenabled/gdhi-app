@@ -11,6 +11,7 @@
     margin: 0 auto;
     padding: 0 70px;
   }
+
   .hd-element {
     padding: 15px 0px;
     display: inline-block;
@@ -21,9 +22,11 @@
     cursor: pointer;
     box-sizing: border-box;
   }
+
   a {
     @extend .header-regular;
   }
+
   .hide {
     display: none;
   }
@@ -32,6 +35,16 @@
 .header-elements {
   display: flex;
   width: 100%;
+  justify-content: space-between;
+
+  .left-aligned-headers {
+    display: flex;
+  }
+
+  .right-aligned-headers {
+    display: flex;
+  }
+
   .logo-name {
     max-width: 190px;
     color: $logo-blue;
@@ -41,37 +54,72 @@
     @extend .logo-font;
     margin-right: 20px;
   }
+
   .search-box {
-    position: absolute;
-    right: 75px;
-    top: 12px;
     width: 240px;
     @extend .copy;
+
     &-container {
       width: 100%;
       background: url('./assets/img/search.svg') no-repeat right 10px center;
       background-size: 14px;
     }
+
     input {
       padding: 5px;
       max-width: 90%;
       margin-top: 0px;
     }
+
     .autocomplete__icon {
       display: none;
     }
+
     .autocomplete__results__item:hover {
       background: $autocomplete-highlight;
     }
   }
+
   a {
     border-bottom: 4px solid transparent;
   }
+
   .router-link-exact-active {
     border-bottom: 4px solid $logo-blue;
     background: $selected-menu;
   }
+
+  .language-selector {
+    @extend .copy;
+    height: 31px;
+    color: #555;
+    background-color: white;
+    width: 100px;
+    padding-left: 5px;
+    border: $table-border;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+  }
+
+  .drop-down{
+    margin-left: 5px;
+    min-width: 100px;
+  }
+
+
+
+  .drop-down:after {
+    content: '\F078';
+    font: normal normal normal 12px/1 FontAwesome;
+    color: #555;
+    right: 76px;
+    position: absolute;
+    pointer-events: none;
+  }
+
 }
+
 .header-elements__right {
   display: inline-flex;
   width: 15%;
