@@ -1,6 +1,6 @@
 <div class="hd-element drop-down">
-  <select class="language-selector" name="test_select3">
-    <option v-for="language in languages">
+  <select class="language-selector" name="test_select3" v-model="$i18n.locale">
+    <option v-for="language in languages" :key="language.id" :value="language.id">
       {{language.name}}
     </option>
   </select>
