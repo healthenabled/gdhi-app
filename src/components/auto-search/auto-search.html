@@ -2,7 +2,7 @@
  <autocomplete
         id="search-box"
         :source="countries"
-        placeholder="Search by country name"
+        :placeholder="$t('headers.searchBoxPlaceholder')"
         input-class="search-box-container"
         @selected="onCountrySelect"
         />
