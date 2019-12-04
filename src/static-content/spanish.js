@@ -7,4 +7,10 @@ export const es = {
     indicators: 'Indicadores',
     searchBoxPlaceholder: 'Búsqueda por nombre de país',
   },
+  mixed: {
+    textOverAll: 'En general',
+    reset: 'REAJUSTE',
+    phase: 'Fase',
+    all: 'Todos',
+  },
 };

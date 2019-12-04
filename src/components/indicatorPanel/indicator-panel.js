@@ -2,7 +2,7 @@ import Vue from 'vue';
 import indicatorPanel from './indicator-panel.html';
 import axios from 'axios';
 import httpRequests from '../../common/indicator-http-requests';
-import common from '../../common/common'
+import common from '../../common/common';
 
 export default Vue.extend({
   name: 'IndicatorPanel',
@@ -40,6 +40,9 @@ export default Vue.extend({
       });
     }
   },
+  beforeUpdate() {
+    this.indicatorPanelTitle = this.getIndicatorContainerName();
+  },
 
   methods: {
 
@@ -63,7 +66,9 @@ export default Vue.extend({
       if (this.categoryFilter) {
         indicatorPanelTitle = this.getCategoryAsTitle();
       } else {
-        indicatorPanelTitle = this.phaseFilter ? 'Overall' : 'State of Digital Health around the world today';
+        indicatorPanelTitle = this.phaseFilter
+          ? this.$i18n.t('mixed.textOverAll')
+          : this.$i18n.t('worldMap.indicatorPanel.indicatorPanelTitle');
       }
       return indicatorPanelTitle;
     },

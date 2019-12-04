@@ -11,13 +11,13 @@
     </div>
     <div class="indicator-panel-container-category" v-if="globalHealthIndicators.overallCountryScore">
       <div class="indicator-panel-container-category-section" v-if="!categoryFilter">
-        <span class="indicator-panel-container-category-section-name">Overall</span>
+        <span class="indicator-panel-container-category-section-name">{{ $t('mixed.textOverAll') }}</span>
         <div
           :class="'indicator-panel-container-category-section-phase phase' + globalHealthIndicators.overallCountryScore"
           :value="globalHealthIndicators.overallCountryScore"></div>
       </div>
     </div>
-    <div class="indicator-panel-error" v-else>No Global Health Indicators Available</div>
+    <div class="indicator-panel-error" v-else>{{ $t('worldMap.indicatorPanel.noHealthIndicatorAvailable') }}</div>
     <div class="indicator-panel-container-category" v-if="isListOfCategoriesApplicable">
       <div v-for="(catagory, index) in globalHealthIndicators.categories"
            class="indicator-panel-container-category-section">
@@ -32,7 +32,7 @@
 
     <div class="indicator-panel-container-category" v-if="healthIndicators.countryPhase">
       <div class="indicator-panel-container-category-section">
-        <span class="indicator-panel-container-category-section-name">Overall </span>
+        <span class="indicator-panel-container-category-section-name">{{ $t('mixed.textOverAll') }} </span>
         <div :class="'indicator-panel-container-category-section-phase phase' + healthIndicators.countryPhase"
               :value="healthIndicators.countryPhase"></div>
       </div>
@@ -48,20 +48,20 @@
     </div>
     <div class="indicator-panel-container-context">
       <div v-for="indicatorCategory in developmentIndicators" class="indicator-panel-container-context-section">
-        <span class="indicator-panel-container-context-name">{{Object.keys(indicatorCategory)[0].toLowerCase()}}</span>
+        <span class="indicator-panel-container-context-name">{{ $t(`worldMap.indicatorPanel.${Object.keys(indicatorCategory)[0].toLowerCase()}.text`) }}</span>
         <div v-for="indicators in indicatorCategory" class="indicator-panel-container-context-details">
           <div v-for="(indicator, key) in indicators" class="indicator-panel-container-context-details-info">
             <span class="indicator-panel-container-context-details-info-score">{{indicator}}</span>
-            <span class="indicator-panel-container-context-details-info-title">{{key}}</span>
+            <span class="indicator-panel-container-context-details-info-title">{{ $t(`worldMap.indicatorPanel.${Object.keys(indicatorCategory)[0].toLowerCase()}.${key}`) }}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="button-container" v-if="!showCountryDetail && !isNoGlobalHealthIndicators">
-    <div class="indicator-panel-button btn btn-primary" @click="showListOfCountries()">View Countries</div>
+    <div class="indicator-panel-button btn btn-primary" @click="showListOfCountries()">{{ $t('worldMap.indicatorPanel.viewCountries') }}</div>
   </div>
   <div class="button-container" v-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0 && isNoGlobalHealthIndicators" >
-      <div class="indicator-panel-button btn btn-primary" @click="showCountryDetails(healthIndicators.countryId)">View Details</div>
+      <div class="indicator-panel-button btn btn-primary" @click="showCountryDetails(healthIndicators.countryId)">{{ $t('worldMap.indicatorPanel.viewDetails') }}</div>
     </div>
 </div>

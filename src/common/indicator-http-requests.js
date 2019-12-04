@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default ({
 
@@ -24,14 +24,14 @@ export default ({
     const developmentIndicatorsData = [
       {
         CONTEXT: {
-          'GNI per capita, atlas method (current US$)': self.getGNIPerCapitaInKilo(response.gniPerCapita),
-          'Total population': self.getTotalPopulationInMillion(response.totalPopulation),
+          gniPerCapita: self.getGNIPerCapitaInKilo(response.gniPerCapita),
+          totalPopulation: self.getTotalPopulationInMillion(response.totalPopulation),
         },
       },
       {
         HEALTH: {
-          'Life expectancy at birth (years)': self.getValue(response.lifeExpectancy),
-          'Health expenditure (% of GDP)': self.getInPercenatge(response.healthExpenditure),
+          lifeExpectancy: self.getValue(response.lifeExpectancy),
+          healthExpenditure: self.getInPercenatge(response.healthExpenditure),
         },
       },
     ];
@@ -43,20 +43,20 @@ export default ({
     const developmentIndicatorsData = [
       {
         CONTEXT: {
-          'GNI per capita, atlas method (current US$)': self.getGNIPerCapitaInKilo(response.gniPerCapita),
-          'Total population': self.getTotalPopulationInMillion(response.totalPopulation),
-          'Adult literacy rate, population 15+ years, both sexes (%)':
+          gniPerCapita: self.getGNIPerCapitaInKilo(response.gniPerCapita),
+          totalPopulation: self.getTotalPopulationInMillion(response.totalPopulation),
+          adultLiteracyRate:
             this.getInPercenatge(response.adultLiteracy),
-          'Ease of doing business index': self.getValue(response.doingBusinessIndex),
+          easeOfDoingBusinessIndex: self.getValue(response.doingBusinessIndex),
         },
       },
       {
         HEALTH: {
-          'Life expectancy at birth (years)': self.getValue(response.lifeExpectancy),
-          'Health expenditure (% of GDP)': self.getInPercenatge(response.healthExpenditure),
-          'Cause of death, by non-communicable diseases (% of total)':
+          lifeExpectancy: self.getValue(response.lifeExpectancy),
+          healthExpenditure: self.getInPercenatge(response.healthExpenditure),
+          causeOfDeath:
             self.getInPercenatge(response.totalNcdDeathsPerCapita),
-          'Mortality rate, under-5 (per 1,000 live births)': self.getValue(response.under5Mortality),
+          mortalityRate: self.getValue(response.under5Mortality),
         },
       },
     ];

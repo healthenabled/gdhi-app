@@ -43,14 +43,14 @@ export default {
         .then(function (response) {
         self.countriesData = response.data;
         const mapLoader = document.querySelector(".loader");
-        if(mapLoader) 
+        if(mapLoader)
           mapLoader.style.display = "none";
         return self.addMapToLeaflet(self, response.data, healthData, postClickCallBack);
       });
     }
     else {
       const mapLoader = document.querySelector(".loader");
-      if(mapLoader) 
+      if(mapLoader)
         mapLoader.style.display = "none";
     }
     return this.addMapToLeaflet(this, this.countriesData, healthData, postClickCallBack);
