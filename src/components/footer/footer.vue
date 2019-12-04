@@ -4,18 +4,18 @@
       <span class="ft-element sub-header">
         <router-link
           :to="{path: '/methodology'}"
-          class="text-underline">Methodology
+          class="text-underline">{{ $t('headers.methodology') }}
         </router-link>
         <span class="ft-element-pipe"> | </span>
       </span>
       <span class="ft-element sub-header">
         <router-link
           :to="{path: '/indicators_info'}"
-          class="text-underline" >Indicators
+          class="text-underline">{{ $t('headers.indicators') }}
         </router-link>
       </span>
       <span class="ft-element float-right contact">
-        <span class="">Contact : info@digitalhealthindex.org</span>
+        <span class="">{{ $t('footer.contactEmail') }}</span>
       </span>
     </div>
 

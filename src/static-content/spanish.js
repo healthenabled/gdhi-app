@@ -12,5 +12,9 @@ export const es = {
     reset: 'REAJUSTE',
     phase: 'Fase',
     all: 'Todos',
+    methodology: 'Metodología',
+  },
+  footer: {
+    contactEmail: 'Contacto: info@digitalhealthindex.org'
   },
 };
