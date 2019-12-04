@@ -3,9 +3,15 @@ import AutoSearch from "../../src/components/auto-search/auto-search.js";
 import Autocomplete from 'vuejs-auto-complete'
 import moxios from 'moxios';
 import { sortBy } from 'lodash';
+import VueI18n from 'vue-i18n';
 
 describe("AutoSearch", () => {
   let wrapper;
+  const i18n = new VueI18n({
+    locale: 'en',
+    fallbackLocale: 'en',
+  });
+
   let countryData = [
     { id : 'IND', name: 'India', countryAlpha2Code: 'IN'},
     { id : 'USA', name: 'United States of America', countryAlpha2Code: 'US'},
@@ -18,7 +24,7 @@ describe("AutoSearch", () => {
       status: 200,
       response: countryData
     });
-    wrapper = mount(AutoSearch);
+    wrapper = mount(AutoSearch, {i18n});
   });
   it("should contain the countires value, autocomplete component and source of autocomplete to be set to countries", (done) => {
     moxios.wait(() => {
@@ -36,7 +42,7 @@ describe("AutoSearch", () => {
       wrapper.vm.onCountrySelect({
           value: 'AUS',
           display: "Australia",
-          selectedObject: countryData[3] 
+          selectedObject: countryData[3]
       });
       expect(wrapper.vm.countryId).to.deep.equal('AUS');
       done()

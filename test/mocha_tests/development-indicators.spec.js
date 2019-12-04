@@ -23,20 +23,20 @@ describe("Development Indicators", () => {
  const developmentIndicatorsData = [
   {
     CONTEXT: {
-      'GNI per capita, atlas method (current US$)': Obj.getGNIPerCapitaInKilo(responseData.gniPerCapita),
-      'Total population': Obj.getTotalPopulationInMillion(responseData.totalPopulation),
-      'Adult literacy rate, population 15+ years, both sexes (%)':
+      gniPerCapita: Obj.getGNIPerCapitaInKilo(responseData.gniPerCapita),
+      totalPopulation: Obj.getTotalPopulationInMillion(responseData.totalPopulation),
+      adultLiteracyRate:
         Obj.getInPercenatge(responseData.adultLiteracy),
-      'Ease of doing business index': Obj.getValue(responseData.doingBusinessIndex),
+      easeOfDoingBusinessIndex: Obj.getValue(responseData.doingBusinessIndex),
     },
   },
   {
     HEALTH: {
-      'Life expectancy at birth (years)': Obj.getValue(responseData.lifeExpectancy),
-      'Health expenditure (% of GDP)': Obj.getInPercenatge(responseData.healthExpenditure),
-      'Cause of death, by non-communicable diseases (% of total)':
+      lifeExpectancy: Obj.getValue(responseData.lifeExpectancy),
+      healthExpenditure: Obj.getInPercenatge(responseData.healthExpenditure),
+      causeOfDeath:
         Obj.getInPercenatge(responseData.totalNcdDeathsPerCapita),
-      'Mortality rate, under-5 (per 1,000 live births)': Obj.getValue(responseData.under5Mortality),
+      mortalityRate: Obj.getValue(responseData.under5Mortality),
     },
   },
 ];

@@ -10,7 +10,7 @@ const messages = {
 
 const english = 'en';
 const i18n = new VueI18n({
-  locale: 'es',
+  locale: 'en',
   fallbackLocale: english,
   messages,
 });
