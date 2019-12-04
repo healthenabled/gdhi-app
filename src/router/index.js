@@ -48,36 +48,43 @@ export default new Router({
           path: 'country_profile/:countryCode',
           components: {
             routecontent: countryProfile,
+            languageSelect: languageSelector,
           },
         },
         {
           path: '/indicators_info',
           components: {
             routecontent: indicatorsInfoComp,
+            languageSelect: languageSelector,
+
           },
         },
         {
           path: '/methodology',
           components: {
             routecontent: methodologyComp,
+            languageSelect: languageSelector,
           },
         },
         {
           path: '/health_indicator_questionnaire/:countryUUID',
           components: {
             routecontent: healthIndicatorQuestionnaire,
+            languageSelect: languageSelector,
           },
         },
         {
           path: '/admin',
           components: {
             routecontent: adminPageComp,
+            languageSelect: languageSelector,
           },
         },
         {
           path: '/country_list',
           components: {
             routecontent: countryListComp,
+            languageSelect: languageSelector,
           },
         },
         {
