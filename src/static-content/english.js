@@ -1,7 +1,9 @@
 import {worldMap} from './world-map/english';
+import {methodology} from './methodology/english';
 
 export const en = {
   worldMap,
+  methodology,
   headers: {
     worldMap: 'World Map',
     indicators: 'Indicators',
