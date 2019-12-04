@@ -4,7 +4,7 @@
       <span class="ft-element sub-header">
         <router-link
           :to="{path: '/methodology'}"
-          class="text-underline">{{ $t('headers.methodology') }}
+          class="text-underline">{{ $t('methodology.text') }}
         </router-link>
         <span class="ft-element-pipe"> | </span>
       </span>

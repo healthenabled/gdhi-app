@@ -1,13 +1,14 @@
 import {worldMap} from './world-map/english';
 import {methodology} from './methodology/english';
+import {countryList} from './country-list/english';
 
 export const en = {
   worldMap,
   methodology,
+  countryList,
   headers: {
     worldMap: 'World Map',
     indicators: 'Indicators',
-    methodology: 'Methodology',
     searchBoxPlaceholder: 'Search by country name',
   },
   mixed: {
