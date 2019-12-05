@@ -4,7 +4,7 @@ export const worldMap = {
     indicatorPanelTitle: 'State of Digital Health around the world today',
     noHealthIndicatorAvailable: 'No Global Health Indicators Available',
     viewCountries: 'View Countries',
-    viewDetails: 'View Details',
+    // viewDetails: 'View Details',
     context: {
       text: 'Context',
       gniPerCapita: 'GNI per capita, atlas method (current US$)',
