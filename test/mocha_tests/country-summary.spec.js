@@ -2,9 +2,11 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import CountrySummary from  "../../src/components/countrySummary/country-summary.js";
 import moxios from 'moxios';
+import i18n from '../../src/plugins/i18n';
 
 describe ("Country Summary ", () => {
   let wrapper;
+
   const localVue = createLocalVue();
   localVue.use(VueRouter);
   const router = new VueRouter();
@@ -32,7 +34,8 @@ describe ("Country Summary ", () => {
   moxios.install();
   wrapper = mount(CountrySummary, {
     localVue,
-    router
+    router,
+    i18n,
   });
  })
   it("should return the country data after the API call is made", (done) => {
@@ -69,7 +72,7 @@ describe ("Country Summary ", () => {
       moxios.wait(()=> {
         expect(wrapper.vm.error).to.deep.equal(errResp.response.message);
         done();
-      });      
+      });
     });
   });
   afterEach(() => {

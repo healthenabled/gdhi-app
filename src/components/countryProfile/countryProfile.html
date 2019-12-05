@@ -2,7 +2,7 @@
   <div class="health-indicator-section">
     <div class="clearfix header-section">
       <div class="country-name page-title">
-        <div class="flag" :style="{ backgroundImage: 'url(' + flagSrc + ')' }" ></div>
+        <div class="flag" :style="{ backgroundImage: 'url(' + flagSrc + ')' }"></div>
 
         {{healthIndicatorData.countryName}}
       </div>
@@ -11,9 +11,11 @@
       </span>
       <div class="button-container float-right">
         <div class="export">
-          <span><a v-bind:href="url" class=" btn btn-primary"><i class="fa  fa-file-excel-o fa-lg"></i>Export Country Data</a></span>
+          <span><a v-bind:href="url" class=" btn btn-primary"><i class="fa  fa-file-excel-o fa-lg"></i>{{ $t('countryProfile.exportCountryDataButton') }}</a></span>
         </div>
-        <button class="download-btn btn btn-primary" @click="generatePDF()"> <i class="fa fa-download" aria-hidden="true"></i> Download Scorecard</button>
+        <button class="download-btn btn btn-primary" @click="generatePDF()"><i class="fa fa-download" aria-hidden="true"></i> {{
+          $t('countryProfile.downloadScorecard') }}
+        </button>
       </div>
     </div>
     <div class="row">
@@ -21,11 +23,11 @@
         <div class="box">
           <div class="overall">
             <div class="title sub-header">
-              Overall Digital Health Phase
+              {{ $t('countryProfile.overallDigitalHealthPhase') }}
             </div>
             <div class="phase-desc copy-italics copy-grey">
               <p>
-                The overall score is an average of the scores for the GDHI indicators
+                {{ $t('countryProfile.overallDigitalHealthPhaseDescription') }}
               </p>
             </div>
           </div>
@@ -34,11 +36,11 @@
         </div>
         <div class="box">
           <div class="title sub-header">
-            Benchmark
+            {{ $t('countryProfile.benchmark.text') }}
             <div v-if="healthIndicatorData" class="float-right">
               <select class="benchmarkDropDown" name="benchmarkDropDown" v-model="benchmarkPhase" @change=getBenchmarkData()>
                 <option value="">-</option>
-                <option value="-1">Global Average</option>
+                <option value="-1">{{ $t('countryProfile.benchmark.globalAverage') }}</option>
                 <option v-for="phase in phases" v-bind:value="phase.phaseValue">
                   {{phase.phaseName}}
                 </option>
@@ -47,41 +49,47 @@
           </div>
           <div class="phase-desc copy-italics copy-grey">
             <p>
-              Compare your overall score with Global Average or other phase countries
+              {{ $t('countryProfile.benchmark.benchmarkDescription') }}
             </p>
             <span v-if="!hasBenchmarkData" class="error-info"> No countries in the selected phase for benchmarking </span>
           </div>
         </div>
         <div v-if="healthIndicatorData" class="health-indicators">
-            <div v-for="(category, index) in healthIndicatorData.categories" class="indicator-panel-container-category-section">
-              <div class="category-bar box">
-                <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'">
-                  <div class="indicator-panel-container-category-section-name sub-header" @click="onCategoryExpand(category, index)">{{category.name}}</div>
-                  <div :class="'indicator-panel-container-category-section-phase phase' + category.phase" :value="category.phase"></div>
-                  <div class="accordion-content">
-                      <div class="heading-row sub-header">
-                          <div class="indicator-id">#</div>
-                          <div class="indicator-name">Indicator</div>
-                          <div class="indicator-score-heading">Score</div>
-                      </div>
-                      <div v-for="(indicator, index_indicator) in category.indicators" class="indicator">
-                        <div class="indicator-id">{{indicator.code}}</div>
-                        <div class="indicator-desc">
-                          <span class="indicator-name-value">{{indicator.name}}</span>
-                          <div class="indicator-score-desc copy-italics copy-grey">{{indicator.indicatorDescription}}</div>
-                          <div class="indicator-score-desc copy-italics copy-blue">{{indicator.scoreDescription}}</div>
+          <div v-for="(category, index) in healthIndicatorData.categories" class="indicator-panel-container-category-section">
+            <div class="category-bar box">
+              <div v-bind:class="category.showCategory ? 'accordion expanded' : 'accordion'">
+                <div class="indicator-panel-container-category-section-name sub-header" @click="onCategoryExpand(category, index)">
+                  {{category.name}}
+                </div>
+                <div :class="'indicator-panel-container-category-section-phase phase' + category.phase" :value="category.phase"></div>
+                <div class="accordion-content">
+                  <div class="heading-row sub-header">
+                    <div class="indicator-id">#</div>
+                    <div class="indicator-name">{{ $t('countryProfile.indicator') }}</div>
+                    <div class="indicator-score-heading">{{ $t('countryProfile.score') }}</div>
+                  </div>
+                  <div v-for="(indicator, index_indicator) in category.indicators" class="indicator">
+                    <div class="indicator-id">{{indicator.code}}</div>
+                    <div class="indicator-desc">
+                      <span class="indicator-name-value">{{indicator.name}}</span>
+                      <div class="indicator-score-desc copy-italics copy-grey">{{indicator.indicatorDescription}}</div>
+                      <div class="indicator-score-desc copy-italics copy-blue">{{indicator.scoreDescription}}</div>
+                    </div>
+                    <div class='text-center score-container'>
+                      <div :class="'indicator-score' + ' phase' + indicator.score">{{(indicator.score >= 0) ? indicator.score : 'NA'}}</div>
+                      <div v-if="benchmarkData[indicator.id.toString()]" class='benchmark copy-small'>
+                        <div class="benchmark-score"><span
+                          v-html="$t('countryProfile.benchmark.textWithData',{ data: benchmarkData[indicator.id].benchmarkScore } )"></span>
                         </div>
-                        <div class='text-center score-container'>
-                          <div :class="'indicator-score' + ' phase' + indicator.score">{{(indicator.score >= 0) ? indicator.score : 'NA'}}</div>
-                          <div v-if="benchmarkData[indicator.id.toString()]" class='benchmark copy-small'>
-                            <div class="benchmark-score">Benchmark : <span class="copy-small-bold">{{benchmarkData[indicator.id].benchmarkScore}}</span></div>
-                            <div :class="'benchmarkCompare ' + benchmarkData[indicator.id].benchmarkValue.toLowerCase()">{{benchmarkData[indicator.id].benchmarkValue}} Avg.</div>
-                          </div>
+                        <div :class="'benchmarkCompare ' + benchmarkData[indicator.id].benchmarkValue.toLowerCase()">
+                          {{benchmarkData[indicator.id].benchmarkValue}} Avg.
                         </div>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>

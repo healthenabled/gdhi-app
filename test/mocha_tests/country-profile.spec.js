@@ -4,6 +4,7 @@ import CountryProfile from  "../../src/components/countryProfile/country-profile
 import moxios from 'moxios';
 import * as pdfHelper from "../../src/components/pdfHelper/pdf-generate-scorecard.js";
 import sinon from 'sinon';
+import i18n from '../../src/plugins/i18n';
 
 describe("Country Profile ", () => {
   let wrapper;
@@ -82,7 +83,8 @@ describe("Country Profile ", () => {
     moxios.install();
     wrapper = shallow(CountryProfile, {
       localVue,
-      router
+      router,
+      i18n
     });
     moxios.stubRequest(/\/api\/countries\/.*\/health_indicators/, {
       status: 200,
@@ -159,7 +161,7 @@ describe("Country Profile ", () => {
         }).then(() => {
           expect(wrapper.vm.benchmarkData).to.deep.equal(benchmarkData);
           expect(wrapper.findAll(".benchmark-score").length).to.equal(Object.keys(benchmarkData).length);
-          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark : " + benchmarkData["2"].benchmarkScore.toString());
+          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark: " + benchmarkData["2"].benchmarkScore.toString());
           expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal(benchmarkData["2"].benchmarkValue + " Avg.");
           done();
         });
