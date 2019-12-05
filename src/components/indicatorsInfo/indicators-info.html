@@ -1,12 +1,10 @@
 <div class="indicators-info content-centered">
   <div class='hero-image'>
      <img src='/static/img/hero.jpg' alt='hero image'/>
-     <span class='hero-title'>Global Digital Health Index<br/>Indicator Guide</span>
+     <span class='hero-title'>{{$t('indicators.gdhi')}}<br/>{{$t('indicators.indicatorGuide')}}</span>
   </div>
   <div class='page-description header-regular'>
-      The <a class='link-blue' href='http://digitalhealthindex.org' target='_blank'>Global Digital Health Index</a> is an interactive digital resource that tracks, monitors, and
-      evaluates the use of digital technology for health across countries. GDHI uses seven key
-      indicator categories to track progress.
+      <span v-html="$t('indicators.paragraph1')"></span>
   </div>
   <div class="inline-links text-center">
           <a class='text-center' :href="'#' + category.categoryName.toString().replace(' ','_')" v-for="category in categoricalIndicators">

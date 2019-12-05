@@ -2,12 +2,14 @@ import {worldMap} from './world-map/spanish';
 import {methodology} from './methodology/spanish';
 import {countryList} from './country-list/spanish';
 import {countryProfile} from './country-profile/spanish';
+import {indicators} from './indicators/spanish';
 
 export const es = {
   worldMap,
   methodology,
   countryList,
   countryProfile,
+  indicators,
   headers: {
     worldMap: 'Mapa del mundo',
     indicators: 'Indicadores',
