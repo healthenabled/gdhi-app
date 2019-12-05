@@ -63,8 +63,6 @@ beforeEach(() => {
       request.respondWith({status: 200, response: responseData}).then(() => {
         expect(wrapper.findAll(".category").length).to.equal(developmentIndicatorsData.length);
         const firstElement = wrapper.findAll(".category").at(0);
-        console.log('ifondf', firstElement.findAll(".indicator").at(0).find(".copy-grey").text().toLowerCase());
-        console.log('ifondf', Object.keys(developmentIndicatorsData[0]["CONTEXT"])[0].toLowerCase());
         expect(firstElement.find(".header-bold").text().toLowerCase()).to.equal(Object.keys(developmentIndicatorsData[0])[0].toLowerCase());
         expect(firstElement.findAll(".indicator").length).to.equal(Object.keys(developmentIndicatorsData[0]["CONTEXT"]).length);
         done();

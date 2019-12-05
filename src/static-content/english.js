@@ -3,6 +3,7 @@ import {methodology} from './methodology/english';
 import {countryList} from './country-list/english';
 import {countryProfile} from './country-profile/english';
 import {indicators} from './indicators/english';
+import {date} from './date/english';
 
 export const en = {
   worldMap,
@@ -10,6 +11,7 @@ export const en = {
   countryList,
   countryProfile,
   indicators,
+  date,
   headers: {
     worldMap: 'World Map',
     indicators: 'Indicators',

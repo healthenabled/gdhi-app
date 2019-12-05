@@ -3,25 +3,26 @@ import countryProfile from './countryProfile.html';
 import developmentIndicators from '../developmentIndicators/development-indicators.js';
 import countrySummary from '../countrySummary/country-summary.js';
 import axios from 'axios';
-import { generateScorecard } from "../pdfHelper/pdf-generate-scorecard";
-import { isEmpty } from 'lodash';
+import {generateScorecard} from '../pdfHelper/pdf-generate-scorecard';
+import {isEmpty} from 'lodash';
 import Notifications from 'vue-notification';
 
 Vue.use(Notifications);
 
 export default Vue.extend({
 
-  components: { developmentIndicators, countrySummary, Notifications },
+  components: {developmentIndicators, countrySummary, Notifications},
   data() {
     return {
-      healthIndicatorData: { countryName: '', countryPhase: 'NA', categories: [] },
+      healthIndicatorData: {countryName: '', countryPhase: 'NA', categories: []},
       flagSrc: '',
       url: '',
       benchmarkData: {},
       benchmarkPhase: '',
       phases: [],
       countrySummary: '',
-      hasBenchmarkData: true
+      hasBenchmarkData: true,
+      collectedDate: '',
     };
   },
 
@@ -29,6 +30,11 @@ export default Vue.extend({
     this.getHealthIndicatorsFor(this.$route.params.countryCode);
     this.url = `/api/export_country_data/${this.$route.params.countryCode}`;
     this.fetchPhases();
+  },
+  beforeUpdate() {
+    if (this.healthIndicatorData && this.healthIndicatorData.collectedDate) {
+      this.updateCollectedDate(this.healthIndicatorData);
+    }
   },
   methods: {
     fetchPhases() {
@@ -45,6 +51,15 @@ export default Vue.extend({
           this.healthIndicatorCallback(response);
         });
     },
+    updateCollectedDate(response) {
+      const date = response.collectedDate;
+      let digitsOfYear = 4;
+      const year = date.slice(-digitsOfYear);
+      const month = date.slice(-date.length, -(digitsOfYear + 1));
+      const monthInLocale = this.$i18n.t(`date.month.${month}`);
+      this.collectedDate = this.$i18n.t('date.dateFormat1', {year: year, month: monthInLocale});
+    },
+
     healthIndicatorCallback(response) {
       this.healthIndicatorData = response.data;
       this.flagSrc = `/static/img/flags/${response.data.countryAlpha2Code.toLowerCase()}.svg`;
@@ -72,13 +87,13 @@ export default Vue.extend({
     getBenchmarkData() {
       this.benchmarkData = {};
       this.hasBenchmarkData = true;
-      if (this.benchmarkPhase === "") {
+      if (this.benchmarkPhase === '') {
         return;
       }
       axios.get(`/api/countries/${this.$route.params.countryCode}/benchmark/${this.benchmarkPhase}`)
         .then((response) => {
           this.benchmarkData = response.data;
-          if(isEmpty(this.benchmarkData)) {
+          if (isEmpty(this.benchmarkData)) {
             this.hasBenchmarkData = false;
             this.notifier({
               title: 'No Data',

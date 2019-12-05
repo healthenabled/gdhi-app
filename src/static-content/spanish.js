@@ -3,6 +3,7 @@ import {methodology} from './methodology/spanish';
 import {countryList} from './country-list/spanish';
 import {countryProfile} from './country-profile/spanish';
 import {indicators} from './indicators/spanish';
+import {date} from './date/spanish';
 
 export const es = {
   worldMap,
@@ -10,6 +11,7 @@ export const es = {
   countryList,
   countryProfile,
   indicators,
+  date,
   headers: {
     worldMap: 'Mapa del mundo',
     indicators: 'Indicadores',

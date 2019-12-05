@@ -111,7 +111,7 @@ describe("Country Profile ", () => {
   it("should have the appropriate html elements based on the data", (done) => {
     moxios.wait(() => {
       expect(wrapper.find(".country-name").text()).to.equal(healthIndicatorData.countryName);
-      expect(wrapper.find("#collected-date").text()).to.equal(`As on January 2018`);
+      expect(wrapper.find("#collected-date").text()).to.equal(`As on: January 2018`);
       expect(wrapper.find(".export a").attributes().href).to.equal(wrapper.vm.url);
       expect(wrapper.find(".score").text()).to.equal(healthIndicatorData.countryPhase.toString());
       expect(wrapper.findAll(".category-bar").length).to.equal(healthIndicatorData.categories.length);
@@ -250,6 +250,12 @@ describe("Country Profile ", () => {
     expect(wrapper.vm.countrySummary).to.equal('Demo Text');
   });
 
+  it('should render collected on date', (done) => {
+    moxios.wait(() => {
+      expect(wrapper.vm.collectedDate).to.equal('As on: January 2018');
+      done();
+    })
+  });
 
   afterEach(() => {
     moxios.uninstall();

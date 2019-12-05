@@ -4,7 +4,7 @@ import CountrySummary from  "../../src/components/countrySummary/country-summary
 import moxios from 'moxios';
 import i18n from '../../src/plugins/i18n';
 
-describe ("Country Summary ", () => {
+describe("Country Summary ", () => {
   let wrapper;
 
   const localVue = createLocalVue();
