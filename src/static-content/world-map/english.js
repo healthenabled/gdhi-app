@@ -1,5 +1,4 @@
 export const worldMap = {
-  language: 'English',
   indicatorPanel: {
     indicatorPanelTitle: 'State of Digital Health around the world today',
     noHealthIndicatorAvailable: 'No Global Health Indicators Available',
