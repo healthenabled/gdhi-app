@@ -3,7 +3,7 @@ export const worldMap = {
     indicatorPanelTitle: 'El estado de la salud digital en el mundo actual',
     noHealthIndicatorAvailable: 'No hay indicadores de salud disponibles',
     viewCountries: 'Ver Países',
-    // viewDetails: 'Ver Países',
+    viewDetails: 'Ver Detalles',
     context: {
       text: 'Contexto',
       gniPerCapita: 'INB per cápita, método atlas (dólares estadounidenses corrientes)',

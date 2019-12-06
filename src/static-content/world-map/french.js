@@ -3,7 +3,7 @@ export const worldMap = {
     indicatorPanelTitle: 'L\'état de la santé numérique dans le monde aujourd\'hui',
     noHealthIndicatorAvailable: 'Aucun indicateur de santé disponible',
     viewCountries: 'Voir les pays',
-    // viewDetails: 'View Details',
+    viewDetails: 'Voir les détails',
     context: {
       text: 'Contexte',
       gniPerCapita: 'RNB par habitant, méthode de l\'atlas (en dollars)',
