@@ -149,7 +149,7 @@ describe("Country Profile ", () => {
     });
   });
 
-  it("should load the benchmark data when the benchmark dropdown is changed", (done) => {
+  it("should load the benchmark data when the benchmark dropdown is changed when data is present", (done) => {
     moxios.wait(() => {
       wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true
       wrapper.find('.benchmarkDropDown').trigger('change');
@@ -181,7 +181,7 @@ describe("Country Profile ", () => {
     });
   });
 
-  it("should load the benchmark data when the benchmark dropdown is changed", (done) => {
+  it("should load the benchmark data when the benchmark dropdown is changed when no data for country is present", (done) => {
     let notifier = sinon.spy();
     wrapper.vm.$notify = notifier;
     moxios.wait(() => {

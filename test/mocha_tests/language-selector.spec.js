@@ -15,12 +15,8 @@ describe('language selector', () => {
 
     expect(wrapper.vm.$i18n.locale).to.equal('en');
 
-    wrapper
-      .find('select')
-      .findAll('option')
-      .filter((e) => e.element._value === 'es')
-      .at(0)
-      .setSelected();
+    wrapper.findAll('select > option').filter((e) => e.element._value === 'es').at(0).element.selected = true;
+    wrapper.find('select').trigger('change');
 
     expect(wrapper.vm.$i18n.locale).to.equal('es');
 

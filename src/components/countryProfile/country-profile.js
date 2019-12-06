@@ -31,9 +31,9 @@ export default Vue.extend({
     this.url = `/api/export_country_data/${this.$route.params.countryCode}`;
     this.fetchPhases();
   },
-  beforeUpdate() {
+  updated() {
     if (this.healthIndicatorData && this.healthIndicatorData.collectedDate) {
-      this.updateCollectedDate(this.healthIndicatorData);
+      this.updateCollectedDate(this.healthIndicatorData.collectedDate);
     }
   },
   methods: {
@@ -51,8 +51,7 @@ export default Vue.extend({
           this.healthIndicatorCallback(response);
         });
     },
-    updateCollectedDate(response) {
-      const date = response.collectedDate;
+    updateCollectedDate(date) {
       let digitsOfYear = 4;
       const year = date.slice(-digitsOfYear);
       const month = date.slice(-date.length, -(digitsOfYear + 1));
@@ -62,6 +61,7 @@ export default Vue.extend({
 
     healthIndicatorCallback(response) {
       this.healthIndicatorData = response.data;
+      this.updateCollectedDate(this.healthIndicatorData.collectedDate);
       this.flagSrc = `/static/img/flags/${response.data.countryAlpha2Code.toLowerCase()}.svg`;
       this.initialise();
     },
