@@ -24,7 +24,9 @@ export const fr = {
     reset: 'RESET',
     phase: 'Phase',
     all: 'Toutes',
-    methodology: 'Méthodologie',
+    noDataAvailable: 'Pas de données disponibles',
+    noData: 'Aucune donnée',
+    serverErrorTitle: 'Erreur de serveur',
   },
   footer: {
     contactEmail: 'Contact: info@digitalhealthindex.org'

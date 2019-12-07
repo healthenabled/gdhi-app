@@ -94,8 +94,8 @@ export default Vue.extend({
           if (isEmpty(this.benchmarkData)) {
             this.hasBenchmarkData = false;
             this.notifier({
-              title: 'No Data',
-              message: 'No countries in the selected phase for benchmarking',
+              title: this.$i18n.t('mixed.noData'),
+              message: this.$i18n.t('countryProfile.benchmark.benchmarkNoCountryForSelectedPhase'),
               type: 'warn'
             });
           } else {
@@ -106,8 +106,8 @@ export default Vue.extend({
         })
         .catch((e) => {
           this.notifier({
-            title: 'Server Error',
-            message: 'Unable to load benchmark data. Please try after sometime',
+            title: this.$i18n.t('mixed.serverErrorTitle'),
+            message: this.$i18n.t('countryProfile.benchmark.serverErrorDescription'),
             type: 'error'
           });
         });

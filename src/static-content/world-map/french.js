@@ -2,6 +2,7 @@ export const worldMap = {
   indicatorPanel: {
     indicatorPanelTitle: 'L\'état de la santé numérique dans le monde aujourd\'hui',
     noHealthIndicatorAvailable: 'Aucun indicateur de santé disponible',
+    noDigitalIndicatorAvailable: 'Aucun indicateur de santé mondiale disponible',
     viewCountries: 'Voir les pays',
     viewDetails: 'Voir les détails',
     context: {

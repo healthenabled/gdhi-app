@@ -13,7 +13,8 @@ export const countryProfile = {
     textWithData: 'Benchmark: <span class="copy-small-bold">{data}</span>',
     globalAverage: 'Global Average',
     benchmarkDescription: 'Compare your overall score with Global Average or other phase countries',
-    benchmarkNoCountryForSelectedPhase: 'No countries in the selected phase for benchmarking ',
+    benchmarkNoCountryForSelectedPhase: 'No countries in the selected phase for benchmarking',
+    serverErrorDescription: 'Unable to load benchmark data. Please try after sometime',
   },
   indicator: 'Indicator',
   score: 'Score'

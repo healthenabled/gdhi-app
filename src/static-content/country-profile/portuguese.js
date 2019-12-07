@@ -14,6 +14,7 @@ export const countryProfile = {
     globalAverage: 'Promedio Global',
     benchmarkDescription: 'Compare a sua pontuação global com a Média Global ou com as fases de outros países',
     benchmarkNoCountryForSelectedPhase: 'Nenhum país na fase selecionada para comparar',
+    serverErrorDescription: 'Incapaz de carregar dados de referência. Por favor, tente depois de algum tempo',
   },
   indicator: 'Indicador',
   score: 'PONTUAÇÃO'

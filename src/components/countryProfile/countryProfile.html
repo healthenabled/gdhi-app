@@ -51,7 +51,7 @@
             <p>
               {{ $t('countryProfile.benchmark.benchmarkDescription') }}
             </p>
-            <span v-if="!hasBenchmarkData" class="error-info"> No countries in the selected phase for benchmarking </span>
+            <span v-if="!hasBenchmarkData" class="error-info">{{ $t('countryProfile.benchmark.benchmarkNoCountryForSelectedPhase') }}</span>
           </div>
         </div>
         <div v-if="healthIndicatorData" class="health-indicators">

@@ -24,7 +24,9 @@ export const en = {
     reset: 'Reset',
     phase: 'Phase',
     all: 'All',
-    // noDataAvailable: 'No data available',
+    noDataAvailable: 'No data available',
+    noData: 'No Data',
+    serverErrorTitle: 'Server Error',
   },
   footer: {
     contactEmail: 'Contact : info@digitalhealthindex.org'
