@@ -12,9 +12,9 @@ export default Vue.extend({
           id: 'en',
           name: 'English'
         }, {
-          id: 'ar',
-          name: 'Arabic'
-        }, {
+        //   id: 'ar',
+        //   name: 'Arabic'
+        // }, {
           id: 'fr',
           name: 'French'
         }, {
