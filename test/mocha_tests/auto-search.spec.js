@@ -52,4 +52,4 @@ describe("AutoSearch", () => {
   afterEach(() => {
     moxios.uninstall();
   });
-})
+});

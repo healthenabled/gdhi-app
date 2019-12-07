@@ -16,6 +16,12 @@ export default Vue.extend({
       this.loadCountries();
       common.hideLoading();
     },
+    updated(){
+      if(this.locale !== this.$i18n.locale){
+         this.loadCountries();
+        this.locale = this.$i18n.locale
+      }
+    },
     data() {
       return {
         success: false,
@@ -26,12 +32,13 @@ export default Vue.extend({
         generatedURL:"",
         countryId:"",
         message:"",
-        warningMessage: ""
+        warningMessage: "",
+        locale:'en',
       };
     },
     methods: {
       loadCountries() {
-        return axios.get('/api/countries')
+        return axios.get('/api/countries', common.configWithUserLanguageHeader(this.$i18n.locale))
           .then(response => {
             this.countries = sortBy(response.data, ["name"]);
           });

@@ -21,7 +21,8 @@ export default Vue.extend({
       categoryValue: '',
       phaseValue: '',
       categories: [],
-      phases: []
+      phases: [],
+      locale:'en',
     }
   },
   created () {
@@ -43,6 +44,12 @@ export default Vue.extend({
           document.querySelector("#search-box input").value = $clickedEl.countryName;
       }
     })
+  },
+  updated(){
+    if(this.locale !== this.$i18n.locale){
+    this.fetchCategoricalIndicators();
+      this.locale = this.$i18n.locale
+    }
   },
   beforeDestroy () {
     EventBus.$off('Map:Searched', this.onSearchTriggered)
@@ -77,7 +84,8 @@ export default Vue.extend({
     },
     fetchCategoricalIndicators: function () {
       const self = this;
-      return axios.get('/api/health_indicator_options').then((categories) => {
+      return axios.get('/api/health_indicator_options', common.configWithUserLanguageHeader(this.$i18n.locale))
+        .then((categories) => {
         self.categories = categories.data
       })
     },

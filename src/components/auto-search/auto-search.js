@@ -1,24 +1,35 @@
 import Vue from 'vue';
 import axios from 'axios';
-import { EventBus } from '../common/event-bus';
+import {EventBus} from '../common/event-bus';
 import autoSearch from './auto-search.html';
-import Autocomplete from 'vuejs-auto-complete'
-import { sortBy } from 'lodash';
+import Autocomplete from 'vuejs-auto-complete';
+import {sortBy} from 'lodash';
+import common from '../../common/common';
 
 export default Vue.extend({
   name: 'AutoSearch',
-  components: { Autocomplete },
+  components: {Autocomplete},
   mounted() {
     this.loadCountries();
   },
   data() {
-    return { countries: [], countryId: ''};
+    return {
+      countries: [],
+      countryId: '',
+      locale: 'en'
+    };
+  },
+  updated() {
+    if (this.locale !== this.$i18n.locale) {
+      this.loadCountries();
+      this.locale = this.$i18n.locale;
+    }
   },
   methods: {
     loadCountries() {
-      axios.get('/api/countries')
+      axios.get('/api/countries', common.configWithUserLanguageHeader(this.$i18n.locale))
         .then(response => {
-          this.countries = sortBy(response.data, ["name"]);
+          this.countries = sortBy(response.data, ['name']);
         });
     },
     onCountrySelect(selectedItem) {

@@ -32,7 +32,7 @@ export default Vue.extend({
     };
     const healthIndicators = {};
     return {
-      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status: '', isAdmin: false, isViewPublish: false
+      questionnaire: [], countrySummary, healthIndicators, showEdit: true, status: '', isAdmin: false, isViewPublish: false, locale:'en',
     };
   },
   created() {
@@ -40,6 +40,12 @@ export default Vue.extend({
       common.showLoading();
       this.isViewPublish = this.$route.path.match('viewPublished') != null;
       this.prepareDataForViewForm(this.$route.params.countryUUID);
+  },
+  updated(){
+    if(this.locale !== this.$i18n.locale){
+      this.prepareDataForViewForm(this.$route.params.countryUUID);
+      this.locale = this.$i18n.locale
+    }
   },
   methods: {
     fetchHealthScoresFor(countryUUID) {
@@ -106,7 +112,7 @@ export default Vue.extend({
       common.hideLoading();
     },
     prepareDataForViewForm(countryUUID) {
-      axios.all([axios.get('/api/health_indicator_options'),
+      axios.all([axios.get('/api/health_indicator_options', common.configWithUserLanguageHeader(this.$i18n.locale)),
         this.fetchHealthScoresFor(countryUUID)])
         .then(axios.spread(this.viewFormCallback.bind(this)))
         .catch(() => {

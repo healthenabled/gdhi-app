@@ -19,13 +19,14 @@ export default Vue.extend({
       phaseTitle: '',
       isListOfCategoriesApplicable: this.areCategoriesApplicable(),
       isNoGlobalHealthIndicators: false,
+      locale: 'en',
     };
   },
 
   mounted() {
     common.showLoading();
     this.getGlobalHealthIndicators();
-    if(this.$parent) {
+    if (this.$parent) {
       this.$parent.$on('Map:Clicked', ($clickedEl) => {
         if ($clickedEl.type === 'COUNTRY') {
           this.country.countryName = $clickedEl.countryName;
@@ -40,8 +41,12 @@ export default Vue.extend({
       });
     }
   },
-  beforeUpdate() {
+  updated() {
     this.indicatorPanelTitle = this.getIndicatorContainerName();
+    if (this.locale !== this.$i18n.locale) {
+      this.getGlobalHealthIndicators();
+      this.locale = this.$i18n.locale;
+    }
   },
 
   methods: {
@@ -122,7 +127,7 @@ export default Vue.extend({
     getGlobalHealthIndicators() {
       const windowProperties = window.appProperties;
       const globalHealthIndicatorsUrl = `/api/global_health_indicators?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`;
-      axios.get(globalHealthIndicatorsUrl)
+      axios.get(globalHealthIndicatorsUrl, common.configWithUserLanguageHeader(this.$i18n.locale))
         .then((response) => {
           this.getGlobalHealthIndicatorCallback(response);
         });

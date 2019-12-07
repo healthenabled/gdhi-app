@@ -1,3 +1,4 @@
 <div v-if="countrySummary && questionnaire && healthIndicators">
+  <span>{{$t('')}}</span>
   <edit-questionnaire :showEdit="showEdit" :countrySummary="countrySummary" :questionnaire="questionnaire" :healthIndicators="healthIndicators" :status="status" :isAdmin="isAdmin"></edit-questionnaire>
 </div>
