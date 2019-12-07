@@ -4,9 +4,9 @@
         <div v-if="countrySummary.countryAlpha2Code" class="flag" :style="{ backgroundImage: 'url(/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg)' }" ></div>
         {{countrySummary.countryName}}
     </div>
-    <span class="copy-italics copy-grey questionnaire-title">Digital Health Questionnaire</span>
+    <span class="copy-italics copy-grey questionnaire-title">{{ $t('healthIndicatorQuestionnaire.digitalHeathQuestionnaire') }}</span>
     <div class="float-right button-container">
-      <span><button class="submit-btn btn btn-primary" @click="generatePDF()"> <i class="fa fa-download" aria-hidden="true"></i> Download PDF</button></span>
+      <span><button class="submit-btn btn btn-primary" @click="generatePDF()"> <i class="fa fa-download" aria-hidden="true"></i>{{ $t('healthIndicatorQuestionnaire.downloadPDF') }}</button></span>
       <span v-if="status === 'REVIEW_PENDING' && isAdmin">
         <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="saveData('saveCorrection')"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save </button></span>
         <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="validate('publish')">
@@ -15,26 +15,24 @@
         <v-dialog/>
       </span>
       <span v-else>
-        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="saveData('save')"> <i class="fa fa-floppy-o" aria-hidden="true"></i> Save as Draft</button></span>
+        <span v-if="showEdit"><button class="submit-btn btn btn-primary" @click="saveData('save')"> <i class="fa fa-floppy-o" aria-hidden="true"></i>{{ $t('healthIndicatorQuestionnaire.saveAsDraft') }}</button></span>
         <span v-if="showEdit"><button class="submit-btn btn btn-green" @click="validate('submit')">
-          <i class="fa fa-check" aria-hidden="true"></i> Submit</button></span>
+          <i class="fa fa-check" aria-hidden="true"></i>{{ $t('healthIndicatorQuestionnaire.submit') }}</button></span>
       </span>
     </div>
   </div>
   <form class="health-indicator-questionnaire-contact-info clearfix sub-content">
     <div class="copy-small-italics copy-blue">
-      Note: Global Digital Health Index Data will be displayed publicly. As such, please obtain approval for
-      submission from the relevant government agency (Ministry of Health, Digital Health Agency, etc.) and provide
-      the contact information of the approver. Leaving this page will discard unsaved changes.
+      {{ $t('healthIndicatorQuestionnaire.note') }}
     </div>
-    <div class="health-indicator-questionnaire-contact-info-heading header-bold">Contact Information</div>
+    <div class="health-indicator-questionnaire-contact-info-heading header-bold">{{ $t('healthIndicatorQuestionnaire.contactForm.contactInformation') }}</div>
     <div class="box">
       <div class="row">
         <div class="collected-date column-33percent">
-          <label for="date">Date on which data was collected (DD-MM-YYYY)</label>
+          <label for="date">{{ $t('healthIndicatorQuestionnaire.contactForm.dateOnWhichDataWasCollected') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" placeholder="DD-MM-YYYY" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="'Please Enter Date'">
+          <input type="text" :disabled="!showEdit" :class="errors.has('collectedDate') ? 'has-error form-control' : 'form-control'" name='collectedDate' id="date" :placeholder="$t('healthIndicatorQuestionnaire.contactForm.dateFormat')" v-model="countrySummary.collectedDate" v-validate.disable="'required|date_format:DD-MM-YYYY|date_between:01-01-2010,'+today+',true'" :title="'Please Enter Date'">
           <div v-if="errors.has('collectedDate')" class="error-info">Please enter a date between 2010 and current date</div>
         </div>
         <div class="column-33percent"></div>
@@ -42,20 +40,21 @@
       </div>
       <div class="row">
         <div class="form-group column-33percent">
-          <label for="nameofPersonEnteringData">Name of person entering data</label>
+          <label for="nameofPersonEnteringData">{{ $t('healthIndicatorQuestionnaire.contactForm.nameOfPersonEnteringData') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
           <input type="text" :disabled="!showEdit" name='feederName' :class="errors.has('feederName') ? 'has-error form-control' : 'form-control'" id="nameofPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederName"
                  :title="errors.has('feederName') ? 'Name of person entering data is required' : 'Please Enter Name of person entering data'">
         </div>
         <div class="form-group column-33percent">
-          <label for="roleOfPersonEnteringData">Role of the person entering data</label>
+          <label for="roleOfPersonEnteringData">{{ $t('healthIndicatorQuestionnaire.contactForm.roleOfThePersonEnteringData') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
-          <input type="text" :disabled="!showEdit" name="feederRole" :class="errors.has('feederRole') ? 'has-error form-control' : 'form-control'" id="roleOfPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederRole" :title="errors.has('feederRole') ? 'Role of the person entering data is required' : 'Please Enter Role of the person entering data'">
+          <input type="text" :disabled="!showEdit" name="feederRole" :class="errors.has('feederRole') ? 'has-error form-control' : 'form-control'" id="roleOfPersonEnteringData" v-validate.disable="'required'" v-model="countrySummary.dataFeederRole"
+                 :title="errors.has('feederRole') ? 'Role of the person entering data is required' : 'Please Enter Role of the person entering data'">
         </div>
         <div class="form-group column-33percent">
-          <label for="emailOfPersonEnteringData">Email of the person entering data</label>
+          <label for="emailOfPersonEnteringData">{{ $t('healthIndicatorQuestionnaire.contactForm.emailOfThePersonEnteringData') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
           <input type="email" :disabled="!showEdit" name='feederEmail' :class="errors.has('feederEmail') ? 'has-error form-control' : 'form-control'" id="emailOfPersonEnteringData" v-validate.disable="'required|email'" v-model="countrySummary.dataFeederEmail" :title="'Enter email'">
@@ -64,21 +63,21 @@
       </div>
       <div class="row">
         <div class="form-group column-33percent">
-          <label for="nameofPersonApprovedData">Name of the approver</label>
+          <label for="nameofPersonApprovedData">{{ $t('healthIndicatorQuestionnaire.contactForm.nameOfTheApprover') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
           <input type="text" :disabled="!showEdit" class="form-control" id="nameofPersonApprovedData"  name="approvername" v-model="countrySummary.dataApproverName" :class="errors.has('approvername') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required'"
                  :title="errors.has('approvername') ? 'Name of person approving data is required' : 'Please Enter Name of person approving data'">
         </div>
         <div class="form-group column-33percent">
-          <label for="roleofPersonApprovedData">Role of the approver</label>
+          <label for="roleofPersonApprovedData">{{ $t('healthIndicatorQuestionnaire.contactForm.roleOfTheApprover') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
           <input type="text" :disabled="!showEdit" class="form-control" id="roleofPersonApprovedData" name="approverrole" v-model="countrySummary.dataApproverRole" :class="errors.has('approverrole') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required'"
                  :title="errors.has('approverrole') ? 'Role of person approving data is required' : 'Please Enter Role of person approving data'">
         </div>
         <div class="form-group column-33percent">
-          <label for="emailofPersonApprovedData">Email of the approver</label>
+          <label for="emailofPersonApprovedData">{{ $t('healthIndicatorQuestionnaire.contactForm.emailOfTheApprover') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye-slash publish" title="These details will not be featured on the GDHI platform and are for our informational purpose."></span>
           <input type="email" :disabled="!showEdit" class="form-control" id="emailofPersonApprovedData" name="approveremail" v-model="countrySummary.dataApproverEmail" :class="errors.has('approveremail') ? 'has-error form-control' : 'form-control'" v-validate.disable="'required|email'"
@@ -88,21 +87,22 @@
       </div>
       <div class="row">
         <div class="form-group column-33percent">
-          <label for="nameofCountryContact">Name of the country contact</label>
+          <label for="nameofCountryContact">{{ $t('healthIndicatorQuestionnaire.contactForm.nameOfTheCountryContact') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
           <input type="text" :disabled="!showEdit" name="countryContact" :class="errors.has('countryContact') ? 'has-error custom-form-control' : 'custom-form-control'" id="nameofCountryContact" v-validate.disable="'required'" v-model="countrySummary.contactName"
             :title="errors.has('countryContact') ? 'Country contact is Required' : 'Country contact'">
         </div>
         <div class="form-group column-33percent">
-          <label for="roleofCountryContact">Role of the country contact</label>
+          <label for="roleofCountryContact">{{ $t('healthIndicatorQuestionnaire.contactForm.roleOfTheCountryContact') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
-          <input type="text" :disabled="!showEdit" name="contactRole" :class="errors.has('contactRole') ? 'has-error form-control' : 'form-control'" id="roleofCountryContact" v-validate.disable="'required'" :title="errors.has('contactRole') ? 'Role of the country contact is Required' : 'Role of the country contact'"
+          <input type="text" :disabled="!showEdit" name="contactRole" :class="errors.has('contactRole') ? 'has-error form-control' : 'form-control'" id="roleofCountryContact" v-validate.disable="'required'"
+                 :title="errors.has('contactRole') ? 'Role of the country contact is Required' : 'Role of the country contact'"
             v-model="countrySummary.contactDesignation">
         </div>
         <div class="form-group column-33percent">
-          <label for="emailofCountryContact">Email of the country contact</label>
+          <label for="emailofCountryContact">{{ $t('healthIndicatorQuestionnaire.contactForm.emailOfTheCountryContact') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
           <input type="email" :disabled="!showEdit" name="contactEmail" :class="errors.has('contactEmail') ? 'has-error form-control' : 'form-control'" id="emailofCountryContact" v-validate.disable="'required|email'" v-model="countrySummary.contactEmail" :title="'Enter email'">
@@ -111,14 +111,14 @@
       </div>
       <div class="row">
         <div class="column-66percent">
-          <label for="countrySummary">Country Summary</label>
+          <label for="countrySummary">{{ $t('healthIndicatorQuestionnaire.contactForm.countrySummary') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
           <textarea name="countrySummary" rows="5" :disabled="!showEdit" :class="errors.has('countrySummary') ? 'has-error form-control custom-width' : 'form-control custom-width'" id="countrySummary" v-model="countrySummary.summary" v-validate.disable="'required'"
             :title="errors.has('countrySummary') ? 'Country summary is Required' : 'Country summary'"></textarea>
         </div>
         <div class="column-33percent">
-          <label for="Organisation">Organisation of the country contact</label>
+          <label for="Organisation">{{ $t('healthIndicatorQuestionnaire.contactForm.organisationOfTheCountryContact') }}</label>
           <span class="mandatory-field">*</span>
           <span class="fa fa-eye publish" title="These details will be displayed publicly on the GDHI platform"></span>
           <input type="text" :disabled="!showEdit" id="Organisation" name="Organisation" v-validate.disable="'required'"
@@ -127,45 +127,45 @@
         </div>
       </div>
     </div>
-    <div class="health-indicator-questionnaire-contact-info-heading header-bold">Resource Information
+    <div class="health-indicator-questionnaire-contact-info-heading header-bold">{{ $t('healthIndicatorQuestionnaire.resourceForm.resourceInformation') }}
       <span class="fa fa-eye health-indicator-questionnaire-contact-info-publish" title="These details will be displayed publicly on the GDHI platform"></span>
       <div class="health-indicator-questionnaire-contact-info-description copy-small">
-        Please provide links to digital health related resources for your country.</div>
+        {{ $t('healthIndicatorQuestionnaire.resourceForm.note') }} </div>
       <div class="health-indicator-questionnaire-contact-info-description copy-small-italics">
-        Example Format : www.example.com </div>
+        {{ $t('healthIndicatorQuestionnaire.resourceForm.exampleFormat') }}</div>
     </div>
     <div class="box">
       <div class="row">
         <div class="form-group column-33percent">
-          <label for="resource1">Resource 1</label><span class="mandatory-field">*</span>
+          <label for="resource1">{{ $t('healthIndicatorQuestionnaire.resourceForm.resource', {number: 1}) }}</label><span class="mandatory-field">*</span>
           <input type="text" :disabled="!showEdit" name="resource1" id="resource1" v-model="countrySummary.resources[0]" v-validate.disable="'required|url'" :class="errors.has('resource1') ? 'has-error form-control' : 'form-control'" />
           <div v-if="errors.has('resource1')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-33percent">
-          <label for="resource2">Resource 2</label>
+          <label for="resource2">{{ $t('healthIndicatorQuestionnaire.resourceForm.resource', {number: 2}) }}</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource2') ? 'has-error form-control' : 'form-control'" id="resource2" name="resource2" v-model="countrySummary.resources[1]" v-validate.disable="'url'" />
           <div v-if="errors.has('resource2')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-33percent">
-          <label for="resource3">Resource 3</label>
+          <label for="resource3">{{ $t('healthIndicatorQuestionnaire.resourceForm.resource', {number: 3}) }}</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource3') ? 'has-error form-control' : 'form-control'" id="resource3" name="resource3" v-model="countrySummary.resources[2]" v-validate.disable="'url'" />
           <div v-if="errors.has('resource3')" class="error-info resource">Please enter valid resource link</div>
         </div>
       </div>
       <div class="row column-66percent">
         <div class="form-group column-50percent">
-          <label for="resource4">Resource 4</label>
+          <label for="resource4">{{ $t('healthIndicatorQuestionnaire.resourceForm.resource', {number: 4}) }}</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource4') ? 'has-error form-control' : 'form-control'" id="resource4" name="resource4" v-model="countrySummary.resources[3]" v-validate.disable="'url'" />
           <div v-if="errors.has('resource4')" class="error-info resource">Please enter valid resource link</div>
         </div>
         <div class="form-group column-50percent">
-          <label for="resource5">Resource 5</label>
+          <label for="resource5">{{ $t('healthIndicatorQuestionnaire.resourceForm.resource', {number: 5}) }}</label>
           <input type="text" :disabled="!showEdit" :class="errors.has('resource5')  ? 'has-error form-control' : 'form-control'" id="resource5" name="resource5" v-model="countrySummary.resources[4]" v-validate.disable="'url'" />
           <div v-if="errors.has('resource5')" class="error-info resource">Please enter valid resource link</div>
         </div>
       </div>
     </div>
-    <div class="health-indicator-questionnaire-contact-info-heading header-bold">Indicator Details
+    <div class="health-indicator-questionnaire-contact-info-heading header-bold">{{ $t('healthIndicatorQuestionnaire.indicatorDetails') }}
       <span title="Only the score for each indicator will be displayed publicly on the GDHI platform." class="fa fa-eye health-indicator-questionnaire-contact-info-publish"></span>
     </div>
     <div v-for="category in questionnaire" class="">
@@ -187,7 +187,7 @@
                         </label>
                 </div>
                 <div class="row description_container">
-                  <label>Rationale or supporting text</label>
+                  <label>{{ $t('healthIndicatorQuestionnaire.rationaleOrSupportingText') }}</label>
                   <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate.disable="'required'"></textarea>
                   <div v-show="(errors.has('indicator_'+indicator.indicatorId+'_rationale') || errors.has(indicator.indicatorId))" class="error-info">Indicator score and rationale field is required.</div>
                 </div>

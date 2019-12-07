@@ -4,6 +4,7 @@ import {countryList} from './country-list/english';
 import {countryProfile} from './country-profile/english';
 import {indicators} from './indicators/english';
 import {date} from './date/english';
+import {healthIndicatorQuestionnaire} from './health-indicator-questionnaire/english';
 
 export const en = {
   worldMap,
@@ -12,6 +13,7 @@ export const en = {
   countryProfile,
   indicators,
   date,
+  healthIndicatorQuestionnaire,
   headers: {
     worldMap: 'World Map',
     indicators: 'Indicators',
