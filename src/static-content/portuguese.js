@@ -27,4 +27,9 @@ export const pt = {
   footer: {
     contactEmail: 'Contacto: info@digitalhealthindex.org'
   },
+  scoreCardPDF: {
+    title: '{country} - Quadro de Pontuação Nacional de Saúde Digital',
+    benchMarkPhaseValue: 'Fase {benchmarkPhase} Países',
+    benchmarkAgainstBenchmarkValue: 'Referência contra {benchMarkPhaseValue}',
+  },
 };

@@ -1,8 +1,9 @@
 import PDFDocument from 'pdfkit';
 import blobStream from 'blob-stream';
 import colorObj from "../common/color-codes.js";
+import common from '../../common/common';
 
-export function generateScorecard(healthIndicatorData, countrySummary, benchmarkData, benchmarkPhase, hasBenchmarkData) {
+export function generateScorecard(healthIndicatorData, countrySummary, benchmarkData, benchmarkPhase, hasBenchmarkData, i18n) {
   let doc = new PDFDocument({
     margin: 50
   });
@@ -10,22 +11,22 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
   let yVal = 0;
 
   const colorCodes = colorObj.getColorCodes();
-
+  const title = i18n.t('scoreCardPDF.title', {country: healthIndicatorData.countryName});
   doc.fontSize(20)
-    .font("Helvetica-Bold")
-    .text(`${healthIndicatorData.countryName} - National Digital Health Scorecard`);
+    .font('Helvetica-Bold')
+    .text(title);
 
   doc.fontSize(14)
     .font("Helvetica-BoldOblique")
     .fillColor("#666")
-    .text(`As on ${healthIndicatorData.collectedDate}`);
+    .text(common.dateInLocaleFormat(healthIndicatorData.collectedDate, i18n));
   doc.moveDown();
   doc.moveDown();
 
   doc.fontSize(14)
     .fillColor("#000000")
     .font("Helvetica-Bold")
-    .text("Country Summary");
+    .text(i18n.t('countryProfile.countrySummary.text'));
 
   // split each line into an array as PDFKIT having problems in writing huge content
   let countrySummaryArray = countrySummary.split(/\.\n|\. |\.|;/);
@@ -66,37 +67,40 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
   doc.moveDown();
   yVal = doc.y;
   if(benchmarkPhase) {
-    let benchMarkPhaseValue = (benchmarkPhase < 0) ? "Global Average" : `Phase ${benchmarkPhase} Countries`;
+    let benchMarkPhaseValue = (benchmarkPhase < 0)
+      ? i18n.t('countryProfile.benchmark.globalAverage')
+      : i18n.t('scoreCardPDF.benchMarkPhaseValue', {benchmarkPhase: benchmarkPhase});
+
     doc.fontSize(14)
-    .fillColor("#000000")
-    .font("Helvetica-Bold")
-    .text(`Benchmark Against ${benchMarkPhaseValue}`, 50, yVal, {
-      width: 500
-    });
+      .fillColor('#000000')
+      .font('Helvetica-Bold')
+      .text(i18n.t('scoreCardPDF.benchmarkAgainstBenchmarkValue', {benchMarkPhaseValue: benchMarkPhaseValue}), 50, yVal, {
+        width: 500
+      });
     doc.fontSize(12)
-      .fillColor("#666")
-      .font("Helvetica-Oblique")
-      .text("The main indicator in each category is used to calculate overall country average. Each country can be benchmarked against global average or countries within a selected phase.", 50, doc.y,{
+      .fillColor('#666')
+      .font('Helvetica-Oblique')
+      .text('The main indicator in each category is used to calculate overall country average. Each country can be benchmarked against global average or countries within a selected phase.', 50, doc.y, {
         width: 500
       });
     !hasBenchmarkData &&
     doc.fontSize(12)
-      .fillColor("#ed4c57")
-      .font("Helvetica-Oblique")
-      .text("No countries in the selected phase for benchmarking")
+      .fillColor('#ed4c57')
+      .font('Helvetica-Oblique')
+      .text(i18n.t('countryProfile.benchmark.benchmarkNoCountryForSelectedPhase'));
     doc.moveDown();
     doc.moveDown();
-    doc.text(""); // to move the cursor to the recent yVal
+    doc.text(''); // to move the cursor to the recent yVal
   }
   yVal = doc.y;
 
   doc.fontSize(14)
-    .fillColor("#000000")
-    .font("Helvetica-Bold")
-    .text("Overall Digital Health Phase", {
+    .fillColor('#000000')
+    .font('Helvetica-Bold')
+    .text(i18n.t('countryProfile.overallDigitalHealthPhase'), {
       width: 500
     });
-  const countryPhase = healthIndicatorData.countryPhase ? healthIndicatorData.countryPhase.toString() : "NA";
+  const countryPhase = healthIndicatorData.countryPhase ? healthIndicatorData.countryPhase.toString() : 'NA';
   doc.roundedRect(500, yVal - 16, 32, 32, 5)
     .fill(getColorCodeForPhase(colorCodes, countryPhase));
 

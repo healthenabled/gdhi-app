@@ -27,4 +27,9 @@ export const es = {
   footer: {
     contactEmail: 'Contacto: info@digitalhealthindex.org'
   },
+  scoreCardPDF: {
+    title: '{country} - Cuadro de Mando de la Salud Digital Nacional',
+    benchMarkPhaseValue: 'Fase {benchmarkPhase} Países',
+    benchmarkAgainstBenchmarkValue: 'Punto de referencia contra {benchMarkPhaseValue}',
+  },
 };

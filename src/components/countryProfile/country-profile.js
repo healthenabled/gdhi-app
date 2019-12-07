@@ -6,6 +6,8 @@ import axios from 'axios';
 import {generateScorecard} from '../pdfHelper/pdf-generate-scorecard';
 import {isEmpty} from 'lodash';
 import Notifications from 'vue-notification';
+import i18n from '../../plugins/i18n';
+import common from '../../common/common';
 
 Vue.use(Notifications);
 
@@ -52,11 +54,7 @@ export default Vue.extend({
         });
     },
     updateCollectedDate(date) {
-      let digitsOfYear = 4;
-      const year = date.slice(-digitsOfYear);
-      const month = date.slice(-date.length, -(digitsOfYear + 1));
-      const monthInLocale = this.$i18n.t(`date.month.${month}`);
-      this.collectedDate = this.$i18n.t('date.dateFormat1', {year: year, month: monthInLocale});
+      this.collectedDate = common.dateInLocaleFormat(date, i18n);
     },
 
     healthIndicatorCallback(response) {
@@ -74,7 +72,7 @@ export default Vue.extend({
       });
     },
     generatePDF() {
-      generateScorecard(this.healthIndicatorData, this.countrySummary, this.benchmarkData, this.benchmarkPhase, this.hasBenchmarkData);
+      generateScorecard(this.healthIndicatorData, this.countrySummary, this.benchmarkData, this.benchmarkPhase, this.hasBenchmarkData, this.$i18n);
     },
     notifier(props) {
       this.$notify({

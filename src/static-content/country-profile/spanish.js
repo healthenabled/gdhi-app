@@ -13,8 +13,8 @@ export const countryProfile = {
     textWithData: 'PUNTO DE REFERENCIA: <span class="copy-small-bold">{data}</span>',
     globalAverage: 'Promedio Global',
     benchmarkDescription: 'Compare su puntaje general con el Promedio Global u otros países de la fase',
-    // benchmarkNoCountryForSelectedPhase:'No countries in the selected phase for benchmarking',
+    benchmarkNoCountryForSelectedPhase: 'Ningún país en la fase seleccionada para comparar',
   },
-  indicator:'Indicador',
+  indicator: 'Indicador',
   score: 'PUNTUACIÓN'
 };

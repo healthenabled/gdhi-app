@@ -27,4 +27,9 @@ export const fr = {
   footer: {
     contactEmail: 'Contact: info@digitalhealthindex.org'
   },
+  scoreCardPDF: {
+    title: '{country} - Tableau de Bord National de la Santé Numérique ',
+    benchMarkPhaseValue: 'Phase {benchmarkPhase} pays',
+    benchmarkAgainstBenchmarkValue: 'RÉFÉRENCE Against {benchMarkPhaseValue}',
+  },
 };

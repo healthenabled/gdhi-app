@@ -27,4 +27,9 @@ export const en = {
   footer: {
     contactEmail: 'Contact : info@digitalhealthindex.org'
   },
+  scoreCardPDF: {
+    title: '{country} - National Digital Health Scorecard',
+    benchMarkPhaseValue: 'Phase {benchmarkPhase} Countries',
+    benchmarkAgainstBenchmarkValue: 'Benchmark Against {benchMarkPhaseValue}',
+  },
 };

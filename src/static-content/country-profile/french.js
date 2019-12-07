@@ -13,7 +13,7 @@ export const countryProfile = {
     textWithData: 'RÉFÉRENCE: <span class="copy-small-bold">{data}</span>',
     globalAverage: 'Moyenne mondiale',
     benchmarkDescription: 'Comparez votre score global avec la moyenne mondiale ou d\'autres pays en phase d\'évaluation',
-    // benchmarkNoCountryForSelectedPhase:'No countries in the selected phase for benchmarking ',
+    benchmarkNoCountryForSelectedPhase: 'Aucun pays dans la phase sélectionnée à comparer',
   },
   indicator: 'l\'indicateur',
   score: 'Score'

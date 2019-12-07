@@ -13,8 +13,8 @@ export const countryProfile = {
     textWithData: 'DINAMARCA: <span class="copy-small-bold">{data}</span>',
     globalAverage: 'Promedio Global',
     benchmarkDescription: 'Compare a sua pontuação global com a Média Global ou com as fases de outros países',
-    // benchmarkNoCountryForSelectedPhase:'No countries in the selected phase for benchmarking',
+    benchmarkNoCountryForSelectedPhase: 'Nenhum país na fase selecionada para comparar',
   },
-  indicator:'Indicador',
+  indicator: 'Indicador',
   score: 'PONTUAÇÃO'
 };
