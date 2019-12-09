@@ -53,6 +53,9 @@ export default Vue.extend({
     showCountryDetails(countryId) {
       this.$router.push({ path: `/country_profile/${countryId}` });
     },
+    dataSheetUrl() {
+      return `/api/export_global_data?user_language=${this.$i18n.locale}`
+    },
   },
   template: countryList,
 });

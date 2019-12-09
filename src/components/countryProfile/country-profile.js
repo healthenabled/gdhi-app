@@ -116,7 +116,11 @@ export default Vue.extend({
             type: 'error'
           });
         });
-    }
+    },
+    countryDataSheetUrl() {
+      return `/api/export_country_data/${this.$route.params.countryCode}?user_language=${this.$i18n.locale}`;
+
+    },
   },
   template: countryProfile,
 });

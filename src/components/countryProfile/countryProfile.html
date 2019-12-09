@@ -11,7 +11,7 @@
       </span>
       <div class="button-container float-right">
         <div class="export">
-          <span><a v-bind:href="url" class=" btn btn-primary"><i class="fa  fa-file-excel-o fa-lg"></i>{{ $t('countryProfile.exportCountryDataButton') }}</a></span>
+          <span><a v-bind:href="countryDataSheetUrl()" class=" btn btn-primary"><i class="fa  fa-file-excel-o fa-lg"></i>{{ $t('countryProfile.exportCountryDataButton') }}</a></span>
         </div>
         <button class="download-btn btn btn-primary" @click="generatePDF()"><i class="fa fa-download" aria-hidden="true"></i> {{
           $t('countryProfile.downloadScorecard') }}

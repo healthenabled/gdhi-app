@@ -112,7 +112,7 @@ describe("Country Profile ", () => {
     moxios.wait(() => {
       expect(wrapper.find(".country-name").text()).to.equal(healthIndicatorData.countryName);
       expect(wrapper.find("#collected-date").text()).to.equal(`As on: January 2018`);
-      expect(wrapper.find(".export a").attributes().href).to.equal(wrapper.vm.url);
+      expect(wrapper.find(".export a").attributes().href).to.equal(wrapper.vm.countryDataSheetUrl());
       expect(wrapper.find(".score").text()).to.equal(healthIndicatorData.countryPhase.toString());
       expect(wrapper.findAll(".category-bar").length).to.equal(healthIndicatorData.categories.length);
       const firstCategory = wrapper.findAll(".category-bar").at(0);
