@@ -25,7 +25,7 @@
                     <div v-for="indicator in category.indicators">
                       <div class="box indicator">
                         <div class='indicator-info text-center'>
-                          <span class="indicator-id">Indicator {{indicator.indicatorCode}} - </span>
+                          <span class="indicator-id">{{$t('indicators.indicator')}} {{indicator.indicatorCode}} - </span>
                           <span class="indicator-name">{{indicator.indicatorName}}</span>
                           <div class="indicator-def  copy-italics">{{indicator.indicatorDefinition}}</div>
                       </div>
