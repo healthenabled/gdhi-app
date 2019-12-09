@@ -10,7 +10,7 @@ export const countryProfile = {
   overallDigitalHealthPhaseDescription: 'Le score global est une moyenne des scores des indicateurs de l\'indice IGSN',
   benchmark: {
     text: 'RÉFÉRENCE',
-    textWithData: 'RÉFÉRENCE: <span class="copy-small-bold">{data}</span>',
+    textWithData: 'RÉFÉRENCE: {data}',
     benchmarkValues: {
       globalAverage: 'Moyenne mondiale',
       atAvg:'EN MOYEN',

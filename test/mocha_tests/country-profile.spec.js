@@ -162,7 +162,6 @@ describe("Country Profile ", () => {
           expect(wrapper.vm.benchmarkData).to.deep.equal(benchmarkData);
           expect(wrapper.findAll(".benchmark-score").length).to.equal(Object.keys(benchmarkData).length);
           expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark: " + benchmarkData["2"].benchmarkScore.toString());
-          console.log(wrapper.findAll(".benchmarkCompare").at(0).text());
           expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal('BELOW AVG.');
           done();
         });

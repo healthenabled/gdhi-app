@@ -236,7 +236,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
         doc.fontSize(10)
           .font("Helvetica-Bold")
           .fillColor("#000")
-          .text("Benchmark : " + benchmarkData[indicator.id].benchmarkScore, 480, doc.y);
+          .text(i18n.t('countryProfile.benchmark.textWithData',{ data: benchmarkData[indicator.id].benchmarkScore } ), 480, doc.y);
         switch (benchmarkData[indicator.id].benchmarkValue.toLowerCase()) {
           case "at" :
             doc.fontSize(10)

@@ -10,7 +10,7 @@ export const countryProfile = {
   overallDigitalHealthPhaseDescription: 'A nota global é uma média das notas dos indicadores GDHI.',
   benchmark: {
     text: 'DINAMARCA',
-    textWithData: 'DINAMARCA: <span class="copy-small-bold">{data}</span>',
+    textWithData: 'DINAMARCA: {data}',
     benchmarkValues: {
       globalAverage: 'Média Global',
       atAvg:'EM MÉDIA',

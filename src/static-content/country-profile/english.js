@@ -10,7 +10,7 @@ export const countryProfile = {
   overallDigitalHealthPhaseDescription: 'The overall score is an average of the scores for the GDHI indicators',
   benchmark: {
     text: 'Benchmark',
-    textWithData: 'Benchmark: <span class="copy-small-bold">{data}</span>',
+    textWithData: 'Benchmark: {data}',
     benchmarkValues: {
       globalAverage: 'Global Average',
       atAvg:'AT AVG.',

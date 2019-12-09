@@ -10,7 +10,7 @@ export const countryProfile = {
   overallDigitalHealthPhaseDescription: 'La puntuación global es una media de las puntuaciones de los indicadores del GDHI',
   benchmark: {
     text: 'PUNTO DE REFERENCIA',
-    textWithData: 'PUNTO DE REFERENCIA: <span class="copy-small-bold">{data}</span>',
+    textWithData: 'PUNTO DE REFERENCIA: {data}',
     benchmarkValues: {
       globalAverage: 'Promedio Global',
       atAvg:'EN PROMEDIO',
