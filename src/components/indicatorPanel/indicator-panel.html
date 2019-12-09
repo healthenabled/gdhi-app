@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="indicator-panel-error" v-else-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0"></div>
-    <div class="indicator-panel-error" v-else>{{$t('worldMap.indicatorPanel.noDigitalIndicatorAvailable')}}}</div>
+    <div class="indicator-panel-error" v-else>{{ $t('worldMap.indicatorPanel.noDigitalIndicatorAvailable') }}</div>
     <div class="indicator-panel-container-category">
       <div v-for="(catagory, index) in healthIndicators.categories" class="indicator-panel-container-category-section">
         <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>

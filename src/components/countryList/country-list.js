@@ -10,14 +10,19 @@ export default Vue.extend({
     return {
       countryList: [],
       globalHealthIndicators: [],
+      locale: 'en',
     };
   },
 
   mounted() {
     common.showLoading();
-    this.getListOfCountries().then( (response) => {
-      this.countryListCallback(response);
-    });
+    this.getListOfCountries();
+  },
+  updated(){
+    if (this.locale !== this.$i18n.locale) {
+      this.getListOfCountries();
+      this.locale = this.$i18n.locale;
+    }
   },
 
   methods: {
@@ -27,9 +32,13 @@ export default Vue.extend({
     },
     getListOfCountries() {
       const windowProperties = window.appProperties;
-      return axios.get(`/api/countries_health_indicator_scores?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`);
+      return axios.get(`/api/countries_health_indicator_scores?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`,
+        common.configWithUserLanguageHeader(this.$i18n.locale)).then( (response) => {
+        this.countryListCallback(response);
+      });
     },
     listCountries(countriesDetails) {
+      this.countryList =[];
       countriesDetails.forEach((country) => {
         const countryDetail = {
           countryName: country.countryName,

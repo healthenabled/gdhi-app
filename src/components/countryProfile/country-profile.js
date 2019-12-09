@@ -25,6 +25,7 @@ export default Vue.extend({
       countrySummary: '',
       hasBenchmarkData: true,
       collectedDate: '',
+      locale: 'en',
     };
   },
 
@@ -34,8 +35,12 @@ export default Vue.extend({
     this.fetchPhases();
   },
   updated() {
-    if (this.healthIndicatorData && this.healthIndicatorData.collectedDate) {
-      this.updateCollectedDate(this.healthIndicatorData.collectedDate);
+    if (this.locale !== this.$i18n.locale) {
+      this.getHealthIndicatorsFor(this.$route.params.countryCode);
+      if (this.healthIndicatorData && this.healthIndicatorData.collectedDate) {
+        this.updateCollectedDate(this.healthIndicatorData.collectedDate);
+      }
+      this.locale = this.$i18n.locale;
     }
   },
   methods: {
@@ -48,7 +53,7 @@ export default Vue.extend({
       this.countrySummary = countrySummary;
     },
     getHealthIndicatorsFor(countryCode) {
-      axios.get(`/api/countries/${countryCode}/health_indicators`)
+      axios.get(`/api/countries/${countryCode}/health_indicators`, common.configWithUserLanguageHeader(this.$i18n.locale))
         .then((response) => {
           this.healthIndicatorCallback(response);
         });

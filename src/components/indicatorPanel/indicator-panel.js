@@ -45,6 +45,9 @@ export default Vue.extend({
     this.indicatorPanelTitle = this.getIndicatorContainerName();
     if (this.locale !== this.$i18n.locale) {
       this.getGlobalHealthIndicators();
+      if(this.country.countryCode){
+        this.getIndicators(this, this.country.countryCode);
+      }
       this.locale = this.$i18n.locale;
     }
   },
@@ -101,7 +104,7 @@ export default Vue.extend({
 
     getHealthIndicators(context, countryId) {
       const healthIndicatorsUrl = `/api/countries/${countryId}/health_indicators`;
-      axios.get(healthIndicatorsUrl)
+      axios.get(healthIndicatorsUrl, common.configWithUserLanguageHeader(this.$i18n.locale))
         .then((response) => {
           this.getHealthIndicatorCallback(response);
         });
