@@ -61,7 +61,7 @@
                 <div class="indicator-panel-container-category-section-name sub-header" @click="onCategoryExpand(category, index)">
                   {{category.name}}
                 </div>
-                <div :class="'indicator-panel-container-category-section-phase phase' + category.phase" :value="category.phase"></div>
+                <div :class="'indicator-panel-container-category-section-phase phase' + category.phase" :value="category.phase" :data-phase="$t('mixed.phaseN', {number:category.phase})"></div>
                 <div class="accordion-content">
                   <div class="heading-row sub-header">
                     <div class="indicator-id">#</div>

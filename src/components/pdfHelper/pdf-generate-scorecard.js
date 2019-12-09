@@ -164,7 +164,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
       doc.font("Helvetica")
         .fillColor("#FFF")
         .fontSize(12)
-        .text(`Phase ${categoryPhase}`, (progressFillWidth - 50), doc.y + 5);
+        .text(i18n.t('mixed.phaseN', {number: categoryPhase}), (progressFillWidth - 50), doc.y + 5);
     }
 
     doc.moveDown(0.5);

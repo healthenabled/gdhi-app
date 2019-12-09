@@ -23,6 +23,7 @@ export const pt = {
     textOverAll: 'Total',
     reset: 'RESET',
     phase: 'Fase',
+    phaseN:'Fase {number}',
     all: 'Todos',
     noDataAvailable: 'Nenhum dado disponível',
     noData: 'Nenhum dado',

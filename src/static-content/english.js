@@ -23,6 +23,7 @@ export const en = {
     textOverAll: 'Overall',
     reset: 'Reset',
     phase: 'Phase',
+    phaseN:'Phase {number}',
     all: 'All',
     noDataAvailable: 'No data available',
     noData: 'No Data',

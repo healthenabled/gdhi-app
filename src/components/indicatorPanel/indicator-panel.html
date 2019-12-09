@@ -14,16 +14,16 @@
         <span class="indicator-panel-container-category-section-name">{{ $t('mixed.textOverAll') }}</span>
         <div
           :class="'indicator-panel-container-category-section-phase phase' + globalHealthIndicators.overallCountryScore"
-          :value="globalHealthIndicators.overallCountryScore"></div>
+          :value="globalHealthIndicators.overallCountryScore" :data-phase="$t('mixed.phaseN', {number:globalHealthIndicators.overallCountryScore})"></div>
       </div>
     </div>
     <div class="indicator-panel-error" v-else>{{ $t('worldMap.indicatorPanel.noHealthIndicatorAvailable') }}</div>
     <div class="indicator-panel-container-category" v-if="isListOfCategoriesApplicable">
-      <div v-for="(catagory, index) in globalHealthIndicators.categories"
+      <div v-for="(category, index) in globalHealthIndicators.categories"
            class="indicator-panel-container-category-section">
-        <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
-        <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase"
-             :value="catagory.phase"></div>
+        <span class="indicator-panel-container-category-section-name">{{category.name}}</span>
+        <div :class="'indicator-panel-container-category-section-phase phase' + category.phase"
+             :value="category.phase" :data-phase="$t('mixed.phaseN', {number:category.phase})"></div>
       </div>
     </div>
   </div>
@@ -34,16 +34,16 @@
       <div class="indicator-panel-container-category-section">
         <span class="indicator-panel-container-category-section-name">{{ $t('mixed.textOverAll') }} </span>
         <div :class="'indicator-panel-container-category-section-phase phase' + healthIndicators.countryPhase"
-              :value="healthIndicators.countryPhase"></div>
+              :value="healthIndicators.countryPhase" :data-phase="$t('mixed.phaseN', {number:healthIndicators.countryPhase})"></div>
       </div>
     </div>
     <div class="indicator-panel-error" v-else-if="healthIndicators && healthIndicators.categories && healthIndicators.categories.length !== 0"></div>
     <div class="indicator-panel-error" v-else>{{ $t('worldMap.indicatorPanel.noDigitalIndicatorAvailable') }}</div>
     <div class="indicator-panel-container-category">
-      <div v-for="(catagory, index) in healthIndicators.categories" class="indicator-panel-container-category-section">
-        <span class="indicator-panel-container-category-section-name">{{catagory.name}}</span>
-        <div :class="'indicator-panel-container-category-section-phase phase' + catagory.phase"
-              :value="catagory.phase"></div>
+      <div v-for="(category, index) in healthIndicators.categories" class="indicator-panel-container-category-section">
+        <span class="indicator-panel-container-category-section-name">{{category.name}}</span>
+        <div :class="'indicator-panel-container-category-section-phase phase' + category.phase"
+              :value="category.phase" :data-phase="$t('mixed.phaseN', {number:category.phase})"></div>
       </div>
     </div>
     <div class="indicator-panel-container-context">

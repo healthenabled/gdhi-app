@@ -23,6 +23,7 @@ export const es = {
     textOverAll: 'En general',
     reset: 'REAJUSTE',
     phase: 'Fase',
+    phaseN:'Fase {number}',
     all: 'Todos',
     noDataAvailable: 'No hay datos disponibles',
     noData: 'Sin datos',
