@@ -43,10 +43,10 @@ export default Vue.extend({
     actionHandler(action, countryUUID){
 
       if(action === 'Review'){
-        this.openUrl(location.origin + "/admin/health_indicator_questionnaire/" + countryUUID +"/review");
+        this.openUrl(location.origin + "/admin/health_indicator_questionnaire/" + countryUUID +"/review?user_language=" + this.$i18n.locale);
       }
       else if(action === 'View Live Data'){
-        this.openUrl(location.origin + "/admin/health_indicator_questionnaire/" + countryUUID +"/viewPublished");
+        this.openUrl(location.origin + "/admin/health_indicator_questionnaire/" + countryUUID +"/viewPublished?user_language=" + this.$i18n.locale);
       }
     },
     openUrl(url) {

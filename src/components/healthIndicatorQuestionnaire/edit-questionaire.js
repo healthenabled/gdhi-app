@@ -15,6 +15,11 @@ Vue.use(VuejsDialog);
 
 export default Vue.extend({
   name: 'EditQuestionnaire',
+  mounted() {
+    if(this.$route.query.user_language){
+      this.$i18n.locale = this.$route.query.user_language;
+    }
+  },
   props: {
     questionnaire: {
       type: Array,

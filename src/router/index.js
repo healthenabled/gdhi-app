@@ -91,12 +91,14 @@ export default new Router({
           path: '/admin/health_indicator_questionnaire/:countryUUID/review',
           components: {
             routecontent: healthIndicatorQuestionnaire,
+            languageSelect: languageSelector,
           },
         },
         {
           path: '/admin/health_indicator_questionnaire/:countryUUID/viewPublished',
           components: {
             routecontent: healthIndicatorQuestionnaire,
+            languageSelect: languageSelector,
           },
         },
         {
