@@ -180,7 +180,7 @@ export default Vue.extend({
     },
     generatePDF() {
       this.notifier({title: 'Success', message: "Download Started Successfully", type: 'success'});
-      generateFormPDF(this.countrySummary, this.questionnaire, this.healthIndicators);
+      generateFormPDF(this.countrySummary, this.questionnaire, this.healthIndicators, this.$i18n);
     }
   },
   template: editForm,

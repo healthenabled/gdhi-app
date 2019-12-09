@@ -1,5 +1,6 @@
 export const healthIndicatorQuestionnaire = {
   digitalHeathQuestionnaire: 'Digital Health Questionnaire',
+  pdfTitle: '{country} - Digital Health Questionnaire',
   note: 'Note: Global Digital Health Index Data will be displayed publicly. As such, please obtain approval for submission from the relevant ' +
     'government agency (Ministry of Health, Digital Health Agency, etc.) and provide the contact information of the approver. Leaving this ' +
     'page will discard unsaved changes.',
