@@ -97,10 +97,9 @@
   }
 }
 
-div#reset-btn:before {
-  content: "Reset";
+div#reset-btn {
   height: 17px;
-  width: 57px;
+  min-width: 57px;
   padding: 5px;
   background: $white;
   display: inline-block;
@@ -109,6 +108,7 @@ div#reset-btn:before {
   margin-top: 4px;
   border: 1px solid $black;
   line-height: 1;
+  text-transform: uppercase;
 }
 
 

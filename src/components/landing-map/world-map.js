@@ -10,7 +10,7 @@ export default {
   WHITE_COLOR_CODE: '#fff',
   lastClickedCountry: '',
   lastMouseOverCountry: '',
-  drawMap: function(healthData, postClickCallBack) {
+  drawMap: function(healthData, postClickCallBack, i18n) {
     this.healthData = healthData;
     const self = this;
     const ResetButton = L.Control.extend({
@@ -23,6 +23,7 @@ export default {
         container.type = 'button';
         container.title = 'Reset Map Selections';
         container.id = 'reset-btn';
+        container.innerText = i18n.t('mixed.reset');
         container.onclick = function () {
           self.resetMap(postClickCallBack);
         };
