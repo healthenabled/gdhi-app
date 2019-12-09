@@ -119,8 +119,18 @@ export default Vue.extend({
     },
     countryDataSheetUrl() {
       return `/api/export_country_data/${this.$route.params.countryCode}?user_language=${this.$i18n.locale}`;
-
     },
+    getLocaleBenchmarkValue(indicatorId) {
+      const value = this.benchmarkData[indicatorId].benchmarkValue.toLowerCase();
+      const formatMapping = {
+        'at': this.$i18n.t('countryProfile.benchmark.benchmarkValues.atAvg'),
+        'above': this.$i18n.t('countryProfile.benchmark.benchmarkValues.aboveAvg'),
+        'below': this.$i18n.t('countryProfile.benchmark.benchmarkValues.belowAvg'),
+      };
+
+      return formatMapping[value];
+    }
+
   },
   template: countryProfile,
 });

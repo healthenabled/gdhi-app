@@ -40,7 +40,7 @@
             <div v-if="healthIndicatorData" class="float-right">
               <select class="benchmarkDropDown" name="benchmarkDropDown" v-model="benchmarkPhase" @change=getBenchmarkData()>
                 <option value="">-</option>
-                <option value="-1">{{ $t('countryProfile.benchmark.globalAverage') }}</option>
+                <option value="-1">{{ $t('countryProfile.benchmark.benchmarkValues.globalAverage') }}</option>
                 <option v-for="phase in phases" v-bind:value="phase.phaseValue">
                   {{ $t('mixed.phase') }} {{phase.phaseValue}}
                 </option>
@@ -82,7 +82,7 @@
                           v-html="$t('countryProfile.benchmark.textWithData',{ data: benchmarkData[indicator.id].benchmarkScore } )"></span>
                         </div>
                         <div :class="'benchmarkCompare ' + benchmarkData[indicator.id].benchmarkValue.toLowerCase()">
-                          {{benchmarkData[indicator.id].benchmarkValue}} Avg.
+                          {{getLocaleBenchmarkValue(indicator.id)}}
                         </div>
                       </div>
                     </div>

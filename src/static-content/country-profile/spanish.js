@@ -11,7 +11,12 @@ export const countryProfile = {
   benchmark: {
     text: 'PUNTO DE REFERENCIA',
     textWithData: 'PUNTO DE REFERENCIA: <span class="copy-small-bold">{data}</span>',
-    globalAverage: 'Promedio Global',
+    benchmarkValues: {
+      globalAverage: 'Promedio Global',
+      atAvg:'EN PROMEDIO',
+      belowAvg:'BAJO PROMEDIO',
+      aboveAvg:'ARRIBA PROMEDIO',
+    },
     benchmarkDescription: 'Compare su puntaje general con el Promedio Global u otros países de la fase',
     benchmarkNoCountryForSelectedPhase: 'Ningún país en la fase seleccionada para comparar',
     serverErrorDescription: 'No se pueden cargar los datos de referencia. Por favor, inténtalo después de un tiempo.',

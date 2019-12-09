@@ -11,7 +11,12 @@ export const countryProfile = {
   benchmark: {
     text: 'DINAMARCA',
     textWithData: 'DINAMARCA: <span class="copy-small-bold">{data}</span>',
-    globalAverage: 'Promedio Global',
+    benchmarkValues: {
+      globalAverage: 'Média Global',
+      atAvg:'EM MÉDIA',
+      belowAvg:'ABAIXO MÉDIO',
+      aboveAvg:'SOBRE A MÉDIA',
+    },
     benchmarkDescription: 'Compare a sua pontuação global com a Média Global ou com as fases de outros países',
     benchmarkNoCountryForSelectedPhase: 'Nenhum país na fase selecionada para comparar',
     serverErrorDescription: 'Incapaz de carregar dados de referência. Por favor, tente depois de algum tempo',

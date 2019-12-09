@@ -11,7 +11,12 @@ export const countryProfile = {
   benchmark: {
     text: 'RÉFÉRENCE',
     textWithData: 'RÉFÉRENCE: <span class="copy-small-bold">{data}</span>',
-    globalAverage: 'Moyenne mondiale',
+    benchmarkValues: {
+      globalAverage: 'Moyenne mondiale',
+      atAvg:'EN MOYEN',
+      belowAvg:'EN DESSOUS DE LA MOYENNE',
+      aboveAvg:'AU-DESSUS DE LA MOYENNE',
+    },
     benchmarkDescription: 'Comparez votre score global avec la moyenne mondiale ou d\'autres pays en phase d\'évaluation',
     benchmarkNoCountryForSelectedPhase: 'Aucun pays dans la phase sélectionnée à comparer',
     serverErrorDescription: 'Impossible de charger les données de référence. S\'il vous plaît essayer après un certain temps',

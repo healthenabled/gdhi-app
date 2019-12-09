@@ -241,7 +241,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
           case "at" :
             doc.fontSize(10)
             .fillColor("#999999")
-            .text(benchmarkData[indicator.id].benchmarkValue + " Avg. ", 480, doc.y, {
+            .text(i18n.t('countryProfile.benchmark.benchmarkValues.atAvg'), 480, doc.y, {
               width: 80,
               align: 'center'
             });
@@ -253,7 +253,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
               .fill("#92b35a");
             doc.fontSize(10)
             .fillColor("#92b35a")
-            .text(benchmarkData[indicator.id].benchmarkValue + " Avg. ", 490, doc.y, {
+            .text(i18n.t('countryProfile.benchmark.benchmarkValues.aboveAvg'), 490, doc.y, {
               width: 60,
               align: 'center'
             });
@@ -265,7 +265,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
               .fill("#ed4c57");
             doc.fontSize(10)
             .fillColor("#ed4c57")
-            .text(benchmarkData[indicator.id].benchmarkValue + " Avg. ", 490, doc.y, {
+            .text(i18n.t('countryProfile.benchmark.benchmarkValues.belowAvg'), 490, doc.y, {
               width: 60,
               align: 'center'
             });
