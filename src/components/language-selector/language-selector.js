@@ -13,16 +13,16 @@ export default Vue.extend({
           name: 'English'
         }, {
         //   id: 'ar',
-        //   name: 'Arabic'
+        //   name: 'عربى'
         // }, {
           id: 'fr',
-          name: 'French'
+          name: 'Français'
         }, {
           id: 'pt',
-          name: 'Portuguese'
+          name: 'Português'
         }, {
           id: 'es',
-          name: 'Spanish'
+          name: 'Español'
         }]
     };
   },
