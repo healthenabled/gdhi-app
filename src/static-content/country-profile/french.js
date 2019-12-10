@@ -7,7 +7,7 @@ export const countryProfile = {
   exportCountryDataButton: 'DONNÉES DU PAYS EXPORTATEUR',
   downloadScorecard: 'TÉLÉCHARGER CARTOGRAPHIE ET TABLEAU DE BORD - MATURITÉ SANTÉ NUMÉRIQUE',
   overallDigitalHealthPhase: 'NIVEAU GLOBAL DE MATURITÉ DE LA SANTÉ NUMÉRIQUE',
-  overallDigitalHealthPhaseDescription: 'Le score global est une moyenne des scores des indicateurs de l\'indice IGSN',
+  overallDigitalHealthPhaseDescription: 'Le score global est une moyenne des scores des indicateurs de l\'indice GDHI',
   benchmark: {
     text: 'RÉFÉRENCE',
     textWithData: 'RÉFÉRENCE: {data}',
