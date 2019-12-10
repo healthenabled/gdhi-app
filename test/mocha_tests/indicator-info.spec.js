@@ -2,14 +2,10 @@ import { mount } from '@vue/test-utils';
 import IndicatorsInfo from  "../../src/components/indicatorsInfo/indicators-info.js";
 import moxios from 'moxios';
 import { uniq } from 'lodash';
-import VueI18n from 'vue-i18n';
+import i18n from '../../src/plugins/i18n';
 
 describe ("Indicator Info ", () => {
   let wrapper;
-  const i18n = new VueI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
-  });
 
   const responseData = [
     {

@@ -2,15 +2,10 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import CountryList from  "../../src/components/countryList/country-list.js";
 import moxios from 'moxios';
-import VueI18n from 'vue-i18n';
+import i18n from '../../src/plugins/i18n';
 
 describe("Country List", () => {
   let wrapper;
-
-  const i18n = new VueI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
-  });
 
   const localVue = createLocalVue();
   localVue.use(VueRouter);

@@ -3,14 +3,10 @@ import AutoSearch from "../../src/components/auto-search/auto-search.js";
 import Autocomplete from 'vuejs-auto-complete'
 import moxios from 'moxios';
 import { sortBy } from 'lodash';
-import VueI18n from 'vue-i18n';
+import i18n from '../../src/plugins/i18n';
 
 describe("AutoSearch", () => {
   let wrapper;
-  const i18n = new VueI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
-  });
 
   let countryData = [
     { id : 'IND', name: 'India', countryAlpha2Code: 'IN'},

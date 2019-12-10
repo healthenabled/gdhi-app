@@ -3,13 +3,9 @@ import Map from '../../src/components/landing-map/map.js';
 import moxios from 'moxios';
 import sinon from 'sinon';
 import worldMap from '../../src/components/landing-map/world-map.js';
-import VueI18n from 'vue-i18n';
+import i18n from '../../src/plugins/i18n';
 
 describe('Map ', () => {
-  const i18n = new VueI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
-  });
   let wrapper;
   let mockWorldMap;
   let setCategoryFilterMock = sinon.spy();

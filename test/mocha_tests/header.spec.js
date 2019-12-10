@@ -3,14 +3,10 @@ import router from '../../src/router/index.js';
 import Header from  "../../src/components/header/header.js";
 import moxios from 'moxios';
 import autoSearch from '../../src/components/auto-search/auto-search.js';
-import VueI18n from 'vue-i18n';
+import i18n from '../../src/plugins/i18n';
 
 describe ("Header ", () => {
   let wrapper;
-  const i18n = new VueI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
-  });
 
   let countryData = [
     { id : 'IND', name: 'India', countryAlpha2Code: 'IN'},

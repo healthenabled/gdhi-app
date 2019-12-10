@@ -1,15 +1,12 @@
 import { mount } from '@vue/test-utils';
 import MapLegend from  "../../src/components/legend/legend.js";
 import colorCodes from  "../../src/components/common/color-codes.js";
-import VueI18n from 'vue-i18n';
+import i18n from '../../src/plugins/i18n';
 
 describe ("legends", () => {
   let wrapper ;
   let colorCodesValues = colorCodes.getColorCodes();
-  const i18n = new VueI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
-  });
+
   beforeEach(() => {
     wrapper = mount(MapLegend, {i18n});
   })
