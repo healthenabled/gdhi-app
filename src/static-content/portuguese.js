@@ -21,7 +21,7 @@ export const pt = {
   },
   mixed: {
     textOverAll: 'Total',
-    reset: 'RESET',
+    reset: 'reset',
     phase: 'Fase',
     phaseN:'Fase {number}',
     all: 'Todos',

@@ -21,7 +21,7 @@ export const es = {
   },
   mixed: {
     textOverAll: 'En general',
-    reset: 'REAJUSTE',
+    reset: 'reajuste',
     phase: 'Fase',
     phaseN:'Fase {number}',
     all: 'Todos',
