@@ -7,6 +7,10 @@ import App from './App';
 import router from './router';
 import {} from './global.js';
 import i18n from './plugins/i18n';
+import VueCookies from 'vue-cookies'
+
+Vue.use(VueCookies);
+VueCookies.config('7d');
 
 Vue.config.productionTip = false;
 

@@ -131,11 +131,11 @@ describe("AdminViewFormDetails",()=>{
     component.vm.openUrl = openUrl;
 
     component.vm.actionHandler('Review','some-uuid');
-    sinon.assert.calledWith(openUrl, location.origin + "/admin/health_indicator_questionnaire/some-uuid/review?user_language=en");
+    sinon.assert.calledWith(openUrl, location.origin + "/admin/health_indicator_questionnaire/some-uuid/review");
     sinon.assert.calledOnce(openUrl);
 
     component.vm.actionHandler('View Live Data','some-uuid');
-    sinon.assert.calledWith(openUrl, location.origin + "/admin/health_indicator_questionnaire/some-uuid/viewPublished?user_language=en");
+    sinon.assert.calledWith(openUrl, location.origin + "/admin/health_indicator_questionnaire/some-uuid/viewPublished");
     sinon.assert.calledTwice(openUrl);
 
     component.vm.actionHandler('Other Text','some-uuid');

@@ -5,6 +5,14 @@ import languageSelect from './language_selector.html';
 export default Vue.extend({
   name: 'LanguageSelect',
   components: {Autocomplete},
+  mounted() {
+    if (this.$cookies.isKey('user_language')) {
+      this.$i18n.locale = this.$cookies.get('user_language');
+    }
+  },
+  updated() {
+    this.$cookies.set('user_language', this.$i18n.locale);
+  },
   data() {
     return {
       languages: [

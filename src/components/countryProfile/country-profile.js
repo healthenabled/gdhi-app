@@ -6,7 +6,6 @@ import axios from 'axios';
 import {generateScorecard} from '../pdfHelper/pdf-generate-scorecard';
 import {isEmpty} from 'lodash';
 import Notifications from 'vue-notification';
-import i18n from '../../plugins/i18n';
 import common from '../../common/common';
 
 Vue.use(Notifications);
@@ -59,7 +58,7 @@ export default Vue.extend({
         });
     },
     updateCollectedDate(date) {
-      this.collectedDate = common.dateInLocaleFormat(date, i18n);
+      this.collectedDate = common.dateInLocaleFormat(date, this.$i18n);
     },
 
     healthIndicatorCallback(response) {
