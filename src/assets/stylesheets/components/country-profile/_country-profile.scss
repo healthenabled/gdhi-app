@@ -1,15 +1,36 @@
+$width-of-scoreCard-en: 150px;
+$width-of-scoreCard-es: 200px;
+
 .country-detail {
   .copy-blue {
     margin-top: 20px;
   }
-  .overall {
-    display: inline-block;
-    width: calc(100% - 85px);
+
+  .overall-card {
+    display: flex;
     vertical-align: middle;
+
+    div:nth-of-type(1) {
+      flex-grow: 1;
+      flex-basis: 1px;
+    }
   }
+
   .sub-header {
     text-transform: uppercase;
   }
+
+  .overall-score {
+    width: $width-of-scoreCard-es;
+    flex-grow: 0;
+    flex-shrink: 0;
+    text-align: center;
+
+    &.en, &.pt {
+      width: $width-of-scoreCard-en;
+    }
+  }
+
   .score, .indicator-score {
     padding: 10px;
     color: $white;
@@ -18,6 +39,7 @@
     display: inline-block;
     vertical-align: middle;
   }
+
   .indicator {
     margin-bottom: 10px;
     border-bottom: 1px solid $border-color;
@@ -25,57 +47,71 @@
       border: none;
     }
   }
-  .indicator-desc {
-    width: calc(100% - 165px);
-    display: inline-block;
+
+  .indicator-desc, .indicator-name {
     vertical-align: middle;
     padding: 10px 0;
     margin-right: 10px;
-  }
-  .score-container {
+    width: 1px;
+    text-align: justify;
     flex-grow: 1;
   }
-  .score-container {
-    flex-grow: 1;
+
+  .score-container, .indicator-score-heading {
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: $width-of-scoreCard-es;
+    text-align: center;
+
+    &.en, &.pt {
+      width: $width-of-scoreCard-en;
+    }
+
   }
+
   .indicator-id {
     align-self: flex-start;
     padding: 10px 0;
   }
+
   .heading-row {
     display: flex;
+
     div {
       padding: 10px 0;
       border-bottom: 2px solid $border-color;
       margin-bottom: 10px;
-      flex-grow: 1;
+
       &:first-child {
         margin-left: 0px;
       }
-      &.indicator-name{
-        width: calc(100% - 190px);
-      }
     }
   }
+
   .header-bold {
     text-transform: capitalize;
   }
+
   .country-summary-text {
     list-style: none;
     white-space: pre-wrap;
   }
+
   .country-text {
     list-style: none;
   }
+
   .header-section {
     position: relative;
   }
+
   #collected-date {
     position: absolute;
     bottom: 20px;
     left: 80px;
     font-size: 1.2em;
   }
+
   .accordion-content {
     .indicator {
       display: flex;
@@ -84,45 +120,55 @@
   }
 }
 
-//development indicators 
+//development indicators
 .development-indicators {
   .row {
     flex-wrap: wrap;
   }
+
   .indicator {
     width: 50%;
     border: none;
     margin-top: 10px;
+    padding:0 5px;
+    box-sizing: border-box;
   }
 }
 
 // benchmark
 .benchmark {
   text-transform: uppercase;
-  margin-top:10px;
+  margin-top: 10px;
 }
+
 .benchmarkCompare {
   margin-top: 5px;
+
   &:before {
     display: inline-block;
     margin-right: 5px;
     border: 8px solid transparent;
   }
+
   &.at {
     color: $font-grey;
-    
+
   }
+
   &.above {
-    color: $positive;    
+    color: $positive;
     margin-top: 0px;
+
     &:before {
       content: " ";
       vertical-align: baseline;
       border-bottom: 8px solid $positive;
     }
   }
+
   &.below {
     color: $negative;
+
     &:before {
       vertical-align: top;
       content: " ";

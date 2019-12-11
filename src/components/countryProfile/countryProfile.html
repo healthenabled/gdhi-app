@@ -20,8 +20,8 @@
     </div>
     <div class="row">
       <div class="column-60percent">
-        <div class="box">
-          <div class="overall">
+        <div class="box overall-card">
+          <div class="title" >
             <div class="title sub-header">
               {{ $t('countryProfile.overallDigitalHealthPhase') }}
             </div>
@@ -31,7 +31,9 @@
               </p>
             </div>
           </div>
-          <div :class="'score ' + ' phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase ? healthIndicatorData.countryPhase : "NA"}}</div>
+          <div :class="'overall-score ' + locale">
+            <div :class="'score ' + ' phase' + healthIndicatorData.countryPhase">{{healthIndicatorData.countryPhase ? healthIndicatorData.countryPhase : "NA"}}</div>
+          </div>
 
         </div>
         <div class="box">
@@ -66,7 +68,7 @@
                   <div class="heading-row sub-header">
                     <div class="indicator-id">#</div>
                     <div class="indicator-name">{{ $t('countryProfile.indicator') }}</div>
-                    <div class="indicator-score-heading">{{ $t('countryProfile.score') }}</div>
+                    <div :class="'indicator-score-heading ' + locale">{{ $t('countryProfile.score') }}</div>
                   </div>
                   <div v-for="(indicator, index_indicator) in category.indicators" class="indicator">
                     <div class="indicator-id">{{indicator.code}}</div>
@@ -75,7 +77,7 @@
                       <div class="indicator-score-desc copy-italics copy-grey">{{indicator.indicatorDescription}}</div>
                       <div class="indicator-score-desc copy-italics copy-blue">{{indicator.scoreDescription}}</div>
                     </div>
-                    <div class='text-center score-container'>
+                    <div :class="'text-center score-container ' + locale">
                       <div :class="'indicator-score' + ' phase' + indicator.score">{{(indicator.score >= 0) ? indicator.score : 'NA'}}</div>
                       <div v-if="benchmarkData[indicator.id.toString()]" class='benchmark copy-small'>
                         <div class="benchmark-score"><span
