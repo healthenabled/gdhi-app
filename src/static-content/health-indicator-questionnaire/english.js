@@ -50,6 +50,15 @@ export const healthIndicatorQuestionnaire = {
     resource: 'Resource {number}',
     errorMessage: 'Please enter a valid resource weblink'
   },
+  notifications: {
+    submit: 'Form submitted for review',
+    saveCorrection: 'Form saved successfully!',
+    save: 'Form saved successfully!',
+    publish: 'Data is now live',
+    download: 'Download Started Successfully',
+    correctTheHighlightedFields: 'Please correct the highlighted fields.',
+    somethingWentWrong: 'Something has gone wrong. Please refresh the Page!'
+  },
   indicatorDetails: 'Indicator Details',
   indicatorScoreError: 'Indicator score and rationale field is required.',
   rationaleOrSupportingText: 'Rationale or supporting text',
@@ -62,4 +71,6 @@ export const healthIndicatorQuestionnaire = {
   note1: 'These details will be displayed publicly on the GDHI platform.',
   note2: 'These details will not be featured on the GDHI platform and are for our informational purpose.',
   note3: 'Only the score for each indicator will be displayed publicly on the GDHI platform.',
+  publishConfirmation: 'You are about to publish digital health index form for {country}. This cannot be reverted. Do you want to continue?',
+  rejectConfirmation: 'You are about to reject digital health index form for {country}. This cannot be reverted. Do you want to continue?',
 };

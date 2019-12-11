@@ -50,6 +50,15 @@ export const healthIndicatorQuestionnaire = {
     resource: 'Ressource {number}',
     errorMessage: 'Veuillez entrer un lien de ressource valide',
   },
+  notifications: {
+    submit: 'Formulaire soumis pour examen',
+    saveCorrection: 'Formulaire enregistré avec succès!',
+    save: 'Formulaire enregistré avec succès!',
+    publish: 'Les données sont maintenant en direct',
+    download: 'Le téléchargement a démarré avec succès',
+    correctTheHighlightedFields: 'Veuillez corriger les champs en surbrillance.',
+    somethingWentWrong: 'Quelque chose a mal tourné. Veuillez rafraîchir la page!',
+  },
   indicatorDetails: 'Détails de l\'indicateur',
   indicatorScoreError: 'Le score de l\'indicateur et le champ de justification sont obligatoires.',
   rationaleOrSupportingText: 'Détails de l\'indicateur',
@@ -62,4 +71,7 @@ export const healthIndicatorQuestionnaire = {
   note1: 'Ces détails seront affichés publiquement sur la plateforme GDHI.',
   note2: 'Ces informations ne figureront pas sur la plateforme GDHI et sont fournies à titre d\'information.',
   note3: 'Somente a pontuação de cada indicador será exibida publicamente na plataforma GDHI.',
+  publishConfirmation: 'Vous êtes sur le point de publier le formulaire de l\'indice numérique de santé pour {country}. Cela ne peut pas être annulé. Voulez-vous continuer?',
+  rejectConfirmation: 'Vous êtes sur le point de rejeter le formulaire d\'indice-santé pour {country}. Cela ne peut pas être annulé. Voulez-vous continuer?',
+
 };

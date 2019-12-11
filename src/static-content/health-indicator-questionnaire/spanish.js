@@ -50,6 +50,15 @@ export const healthIndicatorQuestionnaire = {
     resource: 'Recurso {number}',
     errorMessage: 'Por favor, introduzca un enlace de recursos válido',
   },
+  notifications: {
+    submit: 'Formulario enviado para su revisión',
+    saveCorrection: 'Formulario guardado con éxito!',
+    save: 'Formulario guardado con éxito!',
+    publish: 'Los datos ya están en vivo',
+    download: 'Descarga iniciada con éxito',
+    correctTheHighlightedFields: 'Por favor, corrija los campos resaltados.',
+    somethingWentWrong: 'Algo ha salido mal. Por favor, actualice la página!',
+  },
   indicatorDetails: 'Detalles del indicador',
   indicatorScoreError: 'La puntuación del indicador y el campo de justificación son obligatorios.',
   rationaleOrSupportingText: 'Justificación o texto de apoyo',
@@ -62,4 +71,6 @@ export const healthIndicatorQuestionnaire = {
   note1: 'Estos detalles se mostrarán públicamente en la plataforma GDHI.',
   note2: 'Estos detalles no aparecerán en la plataforma de GDHI y son para nuestro propósito informativo.',
   note3: 'Seul le score de chaque indicateur sera affiché publiquement sur la plateforme GDHI.',
+  publishConfirmation: 'Está a punto de publicar un formulario de índice de salud digital para {country}. Que no se puede revertir. ¿Quieres continuar?',
+  rejectConfirmation: 'Está a punto de rechazar un formulario de índice de salud digital para {country. Que no se puede revertir. ¿Quieres continuar?',
 };

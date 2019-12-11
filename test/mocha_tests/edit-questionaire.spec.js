@@ -184,7 +184,7 @@ describe("EditQuestionaire",()=>{
       expect(component.vm.questionnaire[0].showCategory).to.be.true;
       expect(component.vm.questionnaire[1].showCategory).to.be.true;
       sinon.assert.calledWith(getConfirmationDialog,
-        { message: 'You are about to publish digital health index form for India, this cannot be reverted. Do you want' +
+        { message: 'You are about to publish digital health index form for India. This cannot be reverted. Do you want' +
         ' to continue?',
           callBackMethod: publishData,
           callBackArgs: []
@@ -271,7 +271,7 @@ describe("EditQuestionaire",()=>{
     component.vm.reject();
 
     sinon.assert.calledWith(getConfirmationDialog,
-      { message: 'You are about to reject health index form for India, this cannot be reverted. Do you want to continue?',
+      { message: 'You are about to reject digital health index form for India. This cannot be reverted. Do you want to continue?',
         callBackMethod: deleteData,
         callBackArgs: []
       })
