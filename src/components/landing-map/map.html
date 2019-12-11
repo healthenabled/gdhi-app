@@ -17,7 +17,7 @@
       </div>
       <div class="phase-indicator">
         <select class="filter-2" v-model="phaseValue" @change=filter() name="test_select2">
-          <option value="">{{ $t('mixed.phase') }}</option>
+          <option value="">{{ $t('mixed.all') }}</option>
           <option v-for="phase in phases" v-bind:value="phase.phaseValue">
             {{ $t('mixed.phase') }} {{phase.phaseValue}}
           </option>
