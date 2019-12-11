@@ -19,6 +19,7 @@ export const worldMap = {
       causeOfDeath: 'Causa de muerte por enfermedades no transmisibles (% del total)',
       mortalityRate: 'Tasa de mortalidad de menores de 5 años (por cada 1,000 nacidos vivos)',
     },
-    description: 'El Índice de Salud Digital Global (GDHI en inglés) es un recurso interactivo basado en web que tiene como objetivo rastrear, monitorear y evaluar el entorno propicio para la salud digital en todo el mundo.',
+    description: 'El Índice de Salud Digital Global (GDHI en inglés) es un recurso interactivo basado en web que tiene como objetivo ' +
+      'rastrear, monitorear y evaluar el entorno propicio para la salud digital en todo el mundo.',
   },
 };
