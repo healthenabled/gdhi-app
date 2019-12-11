@@ -36,5 +36,7 @@ export const fr = {
     title: '{country} - Tableau de Bord National de la Santé Numérique ',
     benchMarkPhaseValue: 'Phase {benchmarkPhase} pays',
     benchmarkAgainstBenchmarkValue: 'RÉFÉRENCE Against {benchMarkPhaseValue}',
+    noteForBenchmark:'L\'indicateur principal de chaque catégorie est utilisé pour calculer la moyenne nationale globale. Chaque pays peut ' +
+      'être comparé à la moyenne mondiale ou à des pays dans une phase donnée.',
   },
 };

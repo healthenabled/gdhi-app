@@ -36,5 +36,7 @@ export const pt = {
     title: '{country} - Quadro de Pontuação Nacional de Saúde Digital',
     benchMarkPhaseValue: 'Fase {benchmarkPhase} Países',
     benchmarkAgainstBenchmarkValue: 'Referência contra {benchMarkPhaseValue}',
+    noteForBenchmark:'O indicador principal em cada categoria é utilizado para calcular a média global do país. Cada país pode ser ' +
+      'comparado com a média global ou com países dentro de uma fase selecionada.',
   },
 };

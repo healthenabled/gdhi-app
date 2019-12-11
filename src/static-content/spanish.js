@@ -36,5 +36,7 @@ export const es = {
     title: '{country} - Cuadro de Mando de la Salud Digital Nacional',
     benchMarkPhaseValue: 'Fase {benchmarkPhase} Países',
     benchmarkAgainstBenchmarkValue: 'Punto de referencia contra {benchMarkPhaseValue}',
+    noteForBenchmark:'El indicador principal de cada categoría se utiliza para calcular el promedio general del país. Cada país puede ser ' +
+      'comparado con el promedio mundial o con los países dentro de una fase seleccionada.',
   },
 };

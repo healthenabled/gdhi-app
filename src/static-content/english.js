@@ -36,5 +36,7 @@ export const en = {
     title: '{country} - National Digital Health Scorecard',
     benchMarkPhaseValue: 'Phase {benchmarkPhase} Countries',
     benchmarkAgainstBenchmarkValue: 'Benchmark Against {benchMarkPhaseValue}',
+    noteForBenchmark:'The main indicator in each category is used to calculate overall country average. Each country can be benchmarked ' +
+      'against global average or countries within a selected phase.'
   },
 };
