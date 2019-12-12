@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 import moxios from "moxios";
 import sinon from "sinon";
 import VeeValidate from "vee-validate";
+import i18n from '../../src/plugins/i18n';
 
 describe("EditQuestionaire",()=>{
   let component;
@@ -22,13 +23,15 @@ describe("EditQuestionaire",()=>{
         status: "status",
         isAdmin: false
       },
-      router
+      router,
+      i18n
     });
   });
 
   it("should have default value when props are not there", () => {
     component = shallow(EditQuestionnaire, {
-      router
+      router,
+      i18n
     });
     expect(component.vm.questionnaire).to.deep.equal([]);
     expect(component.vm.healthIndicators).to.deep.equal({});
@@ -42,7 +45,7 @@ describe("EditQuestionaire",()=>{
   it("should contain the edit-questionnaire component", () => {
     expect(component.contains(".health-indicator-questionnaire")).to.equal(true);
   });
-  
+
   it("should save data as draft", (done) => {
     moxios.install();
     let notifier = sinon.spy();
@@ -84,7 +87,7 @@ describe("EditQuestionaire",()=>{
       request.respondWith({
         status: 200
       }).then(() => {
-        expect(component.vm.showEdit).to.equal(false);  
+        expect(component.vm.showEdit).to.equal(false);
         sinon.assert.calledWith(notifier,
           {
           group: 'custom-template',
@@ -181,7 +184,7 @@ describe("EditQuestionaire",()=>{
       expect(component.vm.questionnaire[0].showCategory).to.be.true;
       expect(component.vm.questionnaire[1].showCategory).to.be.true;
       sinon.assert.calledWith(getConfirmationDialog,
-        { message: 'You are about to publish digital health index form for India, this cannot be reverted. Do you want' +
+        { message: 'You are about to publish digital health index form for India. This cannot be reverted. Do you want' +
         ' to continue?',
           callBackMethod: publishData,
           callBackArgs: []
@@ -268,7 +271,7 @@ describe("EditQuestionaire",()=>{
     component.vm.reject();
 
     sinon.assert.calledWith(getConfirmationDialog,
-      { message: 'You are about to reject health index form for India, this cannot be reverted. Do you want to continue?',
+      { message: 'You are about to reject digital health index form for India. This cannot be reverted. Do you want to continue?',
         callBackMethod: deleteData,
         callBackArgs: []
       })

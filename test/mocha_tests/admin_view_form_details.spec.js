@@ -3,6 +3,7 @@ import adminViewFormDetails from "../../src/components/adminViewFormDetails/admi
 import VueRouter from 'vue-router';
 import moxios from "moxios";
 import sinon from "sinon";
+import i18n from '../../src/plugins/i18n';
 
 
 describe("AdminViewFormDetails",()=>{
@@ -123,7 +124,8 @@ describe("AdminViewFormDetails",()=>{
         ]
 
       },
-      router
+      router,
+      i18n
     });
     let openUrl = sinon.spy();
     component.vm.openUrl = openUrl;

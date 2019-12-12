@@ -2,7 +2,7 @@ import Vue from 'vue';
 import indicatorPanel from './indicator-panel.html';
 import axios from 'axios';
 import httpRequests from '../../common/indicator-http-requests';
-import common from '../../common/common'
+import common from '../../common/common';
 
 export default Vue.extend({
   name: 'IndicatorPanel',
@@ -19,13 +19,14 @@ export default Vue.extend({
       phaseTitle: '',
       isListOfCategoriesApplicable: this.areCategoriesApplicable(),
       isNoGlobalHealthIndicators: false,
+      locale: 'en',
     };
   },
 
   mounted() {
     common.showLoading();
     this.getGlobalHealthIndicators();
-    if(this.$parent) {
+    if (this.$parent) {
       this.$parent.$on('Map:Clicked', ($clickedEl) => {
         if ($clickedEl.type === 'COUNTRY') {
           this.country.countryName = $clickedEl.countryName;
@@ -38,6 +39,16 @@ export default Vue.extend({
       this.$parent.$on('filtered', () => {
         this.getGlobalHealthIndicators();
       });
+    }
+  },
+  updated() {
+    this.indicatorPanelTitle = this.getIndicatorContainerName();
+    if (this.locale !== this.$i18n.locale) {
+      this.getGlobalHealthIndicators();
+      if(this.country.countryCode){
+        this.getIndicators(this, this.country.countryCode);
+      }
+      this.locale = this.$i18n.locale;
     }
   },
 
@@ -63,7 +74,9 @@ export default Vue.extend({
       if (this.categoryFilter) {
         indicatorPanelTitle = this.getCategoryAsTitle();
       } else {
-        indicatorPanelTitle = this.phaseFilter ? 'Overall' : 'State of Digital Health around the world today';
+        indicatorPanelTitle = this.phaseFilter
+          ? this.$i18n.t('mixed.textOverAll')
+          : this.$i18n.t('worldMap.indicatorPanel.indicatorPanelTitle');
       }
       return indicatorPanelTitle;
     },
@@ -91,7 +104,7 @@ export default Vue.extend({
 
     getHealthIndicators(context, countryId) {
       const healthIndicatorsUrl = `/api/countries/${countryId}/health_indicators`;
-      axios.get(healthIndicatorsUrl)
+      axios.get(healthIndicatorsUrl, common.configWithUserLanguageHeader(this.$i18n.locale))
         .then((response) => {
           this.getHealthIndicatorCallback(response);
         });
@@ -117,7 +130,7 @@ export default Vue.extend({
     getGlobalHealthIndicators() {
       const windowProperties = window.appProperties;
       const globalHealthIndicatorsUrl = `/api/global_health_indicators?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`;
-      axios.get(globalHealthIndicatorsUrl)
+      axios.get(globalHealthIndicatorsUrl, common.configWithUserLanguageHeader(this.$i18n.locale))
         .then((response) => {
           this.getGlobalHealthIndicatorCallback(response);
         });

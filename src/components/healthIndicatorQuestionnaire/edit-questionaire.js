@@ -60,22 +60,30 @@ export default Vue.extend({
         return dateFormat(new Date(), "dd-mm-yyyy");
       }
     },
-    successMessages: {
-      type: Object,
-      default() {
-        return {
-          'submit': 'Form submitted for review',
-          'saveCorrection': 'Form saved successfully!',
-          'save': 'Form saved successfully!',
-          'publish': 'Data is now live',
-        }
-      }
-    }
   },
   data() {
-    return {countryId: '', countries: []};
+    return {
+      countryId: '',
+      countries: [],
+      locale: 'en',
+      successMessages: this.getSuccessMessages()
+    };
+  },
+  updated(){
+    if(this.locale !== this.$i18n.locale){
+      this.successMessages= this.getSuccessMessages();
+      this.locale = this.$i18n.locale
+    }
   },
   methods: {
+    getSuccessMessages() {
+      return {
+        'submit': this.$i18n.t('healthIndicatorQuestionnaire.notifications.submit'),
+        'saveCorrection': this.$i18n.t('healthIndicatorQuestionnaire.notifications.saveCorrection'),
+        'save': this.$i18n.t('healthIndicatorQuestionnaire.notifications.save'),
+        'publish': this.$i18n.t('healthIndicatorQuestionnaire.notifications.publish'),
+      }
+    },
     notifier(props) {
       this.$notify({
         group: 'custom-template',
@@ -94,7 +102,7 @@ export default Vue.extend({
         countryId: this.countrySummary.countryId,
         countrySummary: this.countrySummary,
         healthIndicators: this.getHealthIndicators(),
-      }).then(() => {
+      }, common.configWithUserLanguageHeader(this.$i18n.locale)).then(() => {
         if(action === 'submit') {
           this.showEdit = false;
         }
@@ -108,7 +116,7 @@ export default Vue.extend({
         if(e.response.status === 400){
           this.notifier({title: 'Error', message: 'Invalid Data', type: 'error'});
         }else{
-          this.notifier({title: 'Error', message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
+          this.notifier({title: 'Error', message: this.$i18n.t('healthIndicatorQuestionnaire.notifications.somethingWentWrong'), type: 'error'});
         }
       });
     },
@@ -121,7 +129,7 @@ export default Vue.extend({
         this.$router.push({path: `/admin`});
         common.hideLoading();
       }).catch(() => {
-        this.notifier({title: 'Error', message: 'Something has gone wrong. Please refresh the Page!', type: 'error'});
+        this.notifier({title: 'Error', message: this.$i18n.t('healthIndicatorQuestionnaire.notifications.somethingWentWrong'), type: 'error'});
         common.hideLoading();
       });
     },
@@ -139,7 +147,7 @@ export default Vue.extend({
     },
     showValidationError() {
       document.body.scrollTop = document.documentElement.scrollTop = 0;
-      this.notifier({title: 'Error', message: 'Please correct the highlighted fields.', type: 'error'});
+      this.notifier({title: 'Error', message: this.$i18n.t('healthIndicatorQuestionnaire.notifications.correctTheHighlightedFields'), type: 'error'});
     },
     validate(action){
       this.expandAllCategories();
@@ -157,8 +165,7 @@ export default Vue.extend({
     },
     checkAndPublish() {
       this.getConfirmationDialog({
-        message: 'You are about to publish digital health index form for ' + this.countrySummary.countryName
-        + ', this cannot be reverted. Do you want to continue?',
+        message: this.$i18n.t('healthIndicatorQuestionnaire.publishConfirmation', {country: this.countrySummary.countryName}),
         callBackMethod: this.publish,
         callBackArgs: []
       });
@@ -168,8 +175,9 @@ export default Vue.extend({
     },
     reject() {
       this.getConfirmationDialog({
-        message: 'You are about to reject health index form for ' + this.countrySummary.countryName
-        + ', this cannot be reverted. Do you want to continue?', callBackMethod: this.deleteData, callBackArgs: []
+        message: this.$i18n.t('healthIndicatorQuestionnaire.rejectConfirmation', {country: this.countrySummary.countryName}),
+        callBackMethod: this.deleteData,
+        callBackArgs: []
       });
     },
     getHealthIndicators() {
@@ -179,8 +187,8 @@ export default Vue.extend({
       category.showCategory = !category.showCategory;
     },
     generatePDF() {
-      this.notifier({title: 'Success', message: "Download Started Successfully", type: 'success'});
-      generateFormPDF(this.countrySummary, this.questionnaire, this.healthIndicators);
+      this.notifier({title: 'Success', message: this.$i18n.t('healthIndicatorQuestionnaire.notifications.download'), type: 'success'});
+      generateFormPDF(this.countrySummary, this.questionnaire, this.healthIndicators, this.$i18n);
     }
   },
   template: editForm,

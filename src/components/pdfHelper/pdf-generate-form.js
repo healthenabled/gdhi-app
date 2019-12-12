@@ -1,94 +1,94 @@
 import PDFDocument from 'pdfkit';
 import blobStream from 'blob-stream';
 
-export function generateFormPDF(countrySummary, questionnaire, healthIndicators) {
+export function generateFormPDF(countrySummary, questionnaire, healthIndicators,i18n) {
   let doc = new PDFDocument();
   let stream = doc.pipe(blobStream());
 
   doc.fontSize(20)
     .font("Helvetica-Bold")
-    .text(`${countrySummary.countryName} - Digital Health Questionnaire`)
-  doc.moveDown()
+    .text(i18n.t('healthIndicatorQuestionnaire.pdfTitle', {country: countrySummary.countryName}));
+  doc.moveDown();
   doc.fontSize(16)
     .font("Helvetica-Bold")
-    .text("Contact Information", {
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.contactInformation'), {
       underline: true
     });
     doc.moveDown()
   // Country Summary
   doc.fontSize(12)
     .font("Helvetica-Bold")
-    .text('Date for which data was collected (DD-MM-YYYY)')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.dateOnWhichDataWasCollected'))
     .font("Helvetica")
     .text(countrySummary.collectedDate || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Name of person entering data')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.nameOfPersonEnteringData'))
     .font("Helvetica")
     .text(countrySummary.dataFeederName || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Role of the person entering data')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.roleOfThePersonEnteringData'))
     .font("Helvetica")
     .text(countrySummary.dataFeederRole || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Email of the person entering data')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.emailOfThePersonEnteringData'))
     .font("Helvetica")
     .text(countrySummary.dataFeederEmail || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Name of the approver')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.nameOfTheApprover'))
     .font("Helvetica")
     .text(countrySummary.dataApproverName || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Role of the approver')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.roleOfTheApprover'))
     .font("Helvetica")
     .text(countrySummary.dataApproverRole || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Email of the approver')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.emailOfTheApprover'))
     .font("Helvetica")
     .text(countrySummary.dataApproverEmail || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Name of the country contact')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.nameOfTheCountryContact'))
     .font("Helvetica")
     .text(countrySummary.contactName || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Role of the country contact')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.roleOfTheCountryContact'))
     .font("Helvetica")
     .text(countrySummary.contactDesignation || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Email of the country contact')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.emailOfTheCountryContact'))
     .font("Helvetica")
     .text(countrySummary.contactEmail || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Organisation of the country contact')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.organisationOfTheCountryContact'))
     .font("Helvetica")
     .text(countrySummary.contactOrganization || '-')
   doc.moveDown()
     .font("Helvetica-Bold")
-    .text('Country Summary')
+    .text(i18n.t('healthIndicatorQuestionnaire.contactForm.countrySummary'))
     .font("Helvetica")
     .text(countrySummary.summary || '-');
   doc.moveDown();
   doc.fontSize(16)
     .font("Helvetica-Bold")
-    .text("Resource Information", {
+    .text(i18n.t('healthIndicatorQuestionnaire.resourceForm.resourceInformation'), {
       underline: true
     });
   doc.moveDown();
-  
+
   if (countrySummary.resources.length === 0)
     doc.fontSize(12)
       .font("Helvetica")
       .text('-');
-      
+
   for(let i = 0; i < countrySummary.resources.length; i++) {
     doc.fontSize(12)
       .font("Helvetica")
@@ -98,7 +98,7 @@ export function generateFormPDF(countrySummary, questionnaire, healthIndicators)
 
   doc.fontSize(16)
     .font("Helvetica-Bold")
-    .text("Indicator Details", {
+    .text(i18n.t('healthIndicatorQuestionnaire.indicatorDetails'), {
       underline: true
     });
   doc.moveDown();
@@ -132,7 +132,7 @@ export function generateFormPDF(countrySummary, questionnaire, healthIndicators)
           });
           doc.moveDown();
           doc.font("Helvetica-Bold")
-                .text("Rationale Or Supporting Text");
+                .text(i18n.t('healthIndicatorQuestionnaire.rationaleOrSupportingText'));
           doc.font("Helvetica")
             .text(healthIndicators[indicator.indicatorId].supportingText || "-")
           doc.moveDown();

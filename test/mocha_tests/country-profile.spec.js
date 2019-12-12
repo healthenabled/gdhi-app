@@ -4,6 +4,7 @@ import CountryProfile from  "../../src/components/countryProfile/country-profile
 import moxios from 'moxios';
 import * as pdfHelper from "../../src/components/pdfHelper/pdf-generate-scorecard.js";
 import sinon from 'sinon';
+import i18n from '../../src/plugins/i18n';
 
 describe("Country Profile ", () => {
   let wrapper;
@@ -82,7 +83,8 @@ describe("Country Profile ", () => {
     moxios.install();
     wrapper = shallow(CountryProfile, {
       localVue,
-      router
+      router,
+      i18n
     });
     moxios.stubRequest(/\/api\/countries\/.*\/health_indicators/, {
       status: 200,
@@ -109,8 +111,8 @@ describe("Country Profile ", () => {
   it("should have the appropriate html elements based on the data", (done) => {
     moxios.wait(() => {
       expect(wrapper.find(".country-name").text()).to.equal(healthIndicatorData.countryName);
-      expect(wrapper.find("#collected-date").text()).to.equal(`As on January 2018`);
-      expect(wrapper.find(".export a").attributes().href).to.equal(wrapper.vm.url);
+      expect(wrapper.find("#collected-date").text()).to.equal(`As on: January 2018`);
+      expect(wrapper.find(".export a").attributes().href).to.equal(wrapper.vm.countryDataSheetUrl());
       expect(wrapper.find(".score").text()).to.equal(healthIndicatorData.countryPhase.toString());
       expect(wrapper.findAll(".category-bar").length).to.equal(healthIndicatorData.categories.length);
       const firstCategory = wrapper.findAll(".category-bar").at(0);
@@ -142,12 +144,12 @@ describe("Country Profile ", () => {
      moxios.wait(() => {
       let mockFn = sinon.stub(pdfHelper, 'generateScorecard').callsFake(() => { });
       wrapper.find(".download-btn").trigger("click");
-      expect(mockFn.getCall(0).args).to.deep.equal([healthIndicatorData, wrapper.vm.countrySummary, benchmarkData, wrapper.vm.benchmarkPhase, wrapper.vm.hasBenchmarkData]);
+       expect(mockFn.getCall(0).args).to.deep.equal([healthIndicatorData, wrapper.vm.countrySummary, benchmarkData, wrapper.vm.benchmarkPhase, wrapper.vm.hasBenchmarkData, i18n]);
       done();
     });
   });
 
-  it("should load the benchmark data when the benchmark dropdown is changed", (done) => {
+  it("should load the benchmark data when the benchmark dropdown is changed when data is present", (done) => {
     moxios.wait(() => {
       wrapper.findAll('.benchmarkDropDown option').at(1).element.selected = true
       wrapper.find('.benchmarkDropDown').trigger('change');
@@ -159,8 +161,8 @@ describe("Country Profile ", () => {
         }).then(() => {
           expect(wrapper.vm.benchmarkData).to.deep.equal(benchmarkData);
           expect(wrapper.findAll(".benchmark-score").length).to.equal(Object.keys(benchmarkData).length);
-          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark : " + benchmarkData["2"].benchmarkScore.toString());
-          expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal(benchmarkData["2"].benchmarkValue + " Avg.");
+          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark: " + benchmarkData["2"].benchmarkScore.toString());
+          expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal('BELOW AVG.');
           done();
         });
       })
@@ -179,7 +181,7 @@ describe("Country Profile ", () => {
     });
   });
 
-  it("should load the benchmark data when the benchmark dropdown is changed", (done) => {
+  it("should load the benchmark data when the benchmark dropdown is changed when no data for country is present", (done) => {
     let notifier = sinon.spy();
     wrapper.vm.$notify = notifier;
     moxios.wait(() => {
@@ -248,6 +250,12 @@ describe("Country Profile ", () => {
     expect(wrapper.vm.countrySummary).to.equal('Demo Text');
   });
 
+  it('should render collected on date', (done) => {
+    moxios.wait(() => {
+      expect(wrapper.vm.collectedDate).to.equal('As on: January 2018');
+      done();
+    })
+  });
 
   afterEach(() => {
     moxios.uninstall();

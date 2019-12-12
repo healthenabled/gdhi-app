@@ -5,6 +5,7 @@ import moxios from 'moxios';
 import { sortBy } from 'lodash';
 import Autocomplete from 'vuejs-auto-complete'
 import sinon from 'sinon';
+import i18n from '../../src/plugins/i18n';
 
 describe("Generate URL ", () => {
   let wrapper;
@@ -20,7 +21,7 @@ describe("Generate URL ", () => {
       status: 200,
       response: countryData
     });
-    wrapper = mount(GenerateURL);
+    wrapper = mount(GenerateURL, {i18n});
   })
   it("should load the countries after hitting the API", (done) => {
     moxios.wait(() => {

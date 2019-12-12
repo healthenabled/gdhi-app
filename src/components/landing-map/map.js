@@ -1,13 +1,13 @@
-import Vue from 'vue'
-import mapTemplate from './map.html'
-import { EventBus } from '../common/event-bus'
-import indicatorPanel from '../indicatorPanel/indicator-panel.js'
-import MapLegend from '../legend/legend.js'
-import axios from 'axios'
-import worldMap from './world-map'
-import helper from './map-helper'
-import { merge } from 'lodash'
-import common from '../../common/common'
+import Vue from 'vue';
+import mapTemplate from './map.html';
+import {EventBus} from '../common/event-bus';
+import indicatorPanel from '../indicatorPanel/indicator-panel.js';
+import MapLegend from '../legend/legend.js';
+import axios from 'axios';
+import worldMap from './world-map';
+import helper from './map-helper';
+import {merge} from 'lodash';
+import common from '../../common/common';
 
 export default Vue.extend({
   components: {
@@ -21,7 +21,8 @@ export default Vue.extend({
       categoryValue: '',
       phaseValue: '',
       categories: [],
-      phases: []
+      phases: [],
+      locale:'en',
     }
   },
   created () {
@@ -43,6 +44,13 @@ export default Vue.extend({
           document.querySelector("#search-box input").value = $clickedEl.countryName;
       }
     })
+  },
+  updated() {
+    if (this.locale !== this.$i18n.locale) {
+      this.fetchCategoricalIndicators();
+      this.fetchGlobalIndices();
+      this.locale = this.$i18n.locale;
+    }
   },
   beforeDestroy () {
     EventBus.$off('Map:Searched', this.onSearchTriggered)
@@ -66,18 +74,20 @@ export default Vue.extend({
       const self = this;
       common.showLoading();
       const windowProperties = window.appProperties;
-      return axios.get('/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter())
+      let url = '/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter();
+      return axios.get(url, common.configWithUserLanguageHeader(this.$i18n.locale))
         .then((globalHealthIndices) => {
           this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
           this.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
             globalHealthIndices);
-          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection);
+          worldMap.drawMap(self.globalHealthIndices, self.onCountrySelection, this.$i18n);
           common.hideLoading();
         })
     },
     fetchCategoricalIndicators: function () {
       const self = this;
-      return axios.get('/api/health_indicator_options').then((categories) => {
+      return axios.get('/api/health_indicator_options', common.configWithUserLanguageHeader(this.$i18n.locale))
+        .then((categories) => {
         self.categories = categories.data
       })
     },

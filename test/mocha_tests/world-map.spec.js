@@ -65,7 +65,7 @@ describe('World Map', () => {
     layer = L.geoJSON(geoData)
     mockLayer = sinon.mock(layer)
 
-    callback = function a (arg1) {console.log(arg1)}
+    callback = function a (arg1) {console.log()}
     callBackSpy = sinon.spy(callback)
   })
 
@@ -128,7 +128,7 @@ describe('World Map', () => {
       'BRK_A3': 'AFG',
       'NAME_LONG': 'Afghanistan'
     }}
-    
+
     worldMap.geoLayer = {
       _layers: {1: layer}
     };

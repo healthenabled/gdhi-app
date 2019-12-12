@@ -2,9 +2,11 @@ import { mount } from '@vue/test-utils';
 import IndicatorsInfo from  "../../src/components/indicatorsInfo/indicators-info.js";
 import moxios from 'moxios';
 import { uniq } from 'lodash';
+import i18n from '../../src/plugins/i18n';
 
 describe ("Indicator Info ", () => {
   let wrapper;
+
   const responseData = [
     {
        "categoryId":1,
@@ -1011,7 +1013,7 @@ describe ("Indicator Info ", () => {
  ];
  beforeEach(() => {
    moxios.install();
-   wrapper = mount(IndicatorsInfo);
+   wrapper = mount(IndicatorsInfo, {i18n});
  })
  it("should call the API and update the local varaibles with correct data", (done) => {
   moxios.wait(() => {
@@ -1059,6 +1061,6 @@ describe ("Indicator Info ", () => {
   });
  });
  afterEach(() => {
-  moxios.uninstall();   
+  moxios.uninstall();
  });
 })

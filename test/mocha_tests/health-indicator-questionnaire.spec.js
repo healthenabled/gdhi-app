@@ -1,7 +1,8 @@
-import { shallow, createLocalVue } from '@vue/test-utils';
-import HealthIndicatorQuestionnaire from  "../../src/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js";
+import {createLocalVue, shallow} from '@vue/test-utils';
+import HealthIndicatorQuestionnaire from '../../src/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js';
 import moxios from 'moxios';
 import VueRouter from 'vue-router';
+import i18n from '../../src/plugins/i18n';
 
 describe("Health Indicator Questionnaire", () => {
   let wrapper;
@@ -100,11 +101,11 @@ const healthIndicatorOptions = [
        "dataApproverEmail":null,
        "collectedDate":null,
        "resources":[
- 
+
        ]
     },
     "healthIndicators":[
- 
+
     ]
  };
 
@@ -132,7 +133,7 @@ const healthIndicatorOptions = [
      ]
   },
   "healthIndicators":[
-    {  
+    {
       "categoryId":1,
       "indicatorId":1,
       "status":"DRAFT",
@@ -148,16 +149,18 @@ const healthIndicatorOptions = [
       status: 200,
       response: countryData
     });
-  
+
     moxios.stubRequest('/api/health_indicator_options', {
       status: 200,
       response: healthIndicatorOptions
     });
     wrapper = shallow(HealthIndicatorQuestionnaire, {
-        localVue,
-        router
-      });
-   })
+      localVue,
+      router,
+      i18n
+    });
+  });
+
    it("should load all data for new form", (done) => {
       moxios.wait(() => {
           expect(wrapper.vm.status).to.equal(countryData.status);
@@ -182,14 +185,15 @@ const healthIndicatorOptions = [
       status: 200,
       response: draftCountryData
     });
-  
+
     moxios.stubRequest('/api/health_indicator_options', {
       status: 200,
       response: healthIndicatorOptions
     });
     wrapper = shallow(HealthIndicatorQuestionnaire, {
         localVue,
-        router
+        router,
+        i18n
       });
    })
    it("should load all data for new form", (done) => {
@@ -224,16 +228,18 @@ const healthIndicatorOptions = [
       status: 200,
       response: draftCountryData
     });
-  
+
     moxios.stubRequest('/api/health_indicator_options', {
       status: 200,
       response: healthIndicatorOptions
     });
     wrapper = shallow(HealthIndicatorQuestionnaire, {
-        localVue,
-        router
-      });
-   })
+      localVue,
+      router,
+      i18n
+    });
+  });
+
    it("should set showEdit", (done) => {
       moxios.wait(() => {
           expect(wrapper.vm.showEdit).to.equal(false);

@@ -1,13 +1,13 @@
 <div class="countries-container content-centered">
   <div class="countries-list">
-    <div class="countries-list-heading page-title">List of Countries</div>
+    <div class="countries-list-heading page-title">{{ $t('countryList.title') }}</div>
     <div class="countries-list-section-export float-right">
-        <span><a href="/api/export_global_data" class="btn btn-primary">Export Data For All Countries</a></span>
+        <span><a :href='dataSheetUrl()' class="btn btn-primary">{{ $t('countryList.exportButtonText') }}</a></span>
       </div>
     <div class="countries-list-section clearfix">
       <div class="countries-list-section-description">
-        <p>The overall GDHI phases are listed below for each participating country. Country scores on indicators determine the overall phase of digital health for a country.</p>
-      <p>For a more detailed breakdown for each country, please visit the individual country page</p></div>
+        <p>{{ $t('countryList.line1') }}</p>
+      <p>{{ $t('countryList.line2') }}</p></div>
     </div>
     <ul class="countries-list-details">
       <li v-for="country in countryList" class="countries-list-details-country">

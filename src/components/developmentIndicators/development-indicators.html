@@ -1,10 +1,10 @@
 <div class="development-indicators">
   <div v-for="indicatorCategory in developmentIndicators" class="box category">
-    <div class="header-bold no-margin-top">{{Object.keys(indicatorCategory)[0].toLowerCase()}}</div>
+    <div class="header-bold no-margin-top">{{ $t(`worldMap.indicatorPanel.${Object.keys(indicatorCategory)[0].toLowerCase()}.text`) }}</div>
     <div v-for="indicators in indicatorCategory" class="row">
       <div v-for="(indicator, key) in indicators" class="text-center indicator">
         <div class="highlight-text">{{indicator}}</div>
-        <div class="copy-grey">{{key}}</div>
+        <div class="copy-grey">{{ $t(`worldMap.indicatorPanel.${Object.keys(indicatorCategory)[0].toLowerCase()}.${key}`) }}</div>
       </div>
     </div>
   </div>

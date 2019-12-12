@@ -15,34 +15,34 @@ describe("Indicator HTTP Requests and Helper methods", () => {
   const developmentIndicatorsData = [
     {
       CONTEXT: {
-        'GNI per capita, atlas method (current US$)': Obj.getGNIPerCapitaInKilo(response.gniPerCapita),
-        'Total population': Obj.getTotalPopulationInMillion(response.totalPopulation),
-        'Adult literacy rate, population 15+ years, both sexes (%)':
+        gniPerCapita: Obj.getGNIPerCapitaInKilo(response.gniPerCapita),
+        totalPopulation: Obj.getTotalPopulationInMillion(response.totalPopulation),
+        adultLiteracyRate:
           Obj.getInPercenatge(response.adultLiteracy),
-        'Ease of doing business index': Obj.getValue(response.doingBusinessIndex),
+        easeOfDoingBusinessIndex: Obj.getValue(response.doingBusinessIndex),
       },
     },
     {
       HEALTH: {
-        'Life expectancy at birth (years)': Obj.getValue(response.lifeExpectancy),
-        'Health expenditure (% of GDP)': Obj.getInPercenatge(response.healthExpenditure),
-        'Cause of death, by non-communicable diseases (% of total)':
+        lifeExpectancy: Obj.getValue(response.lifeExpectancy),
+        healthExpenditure: Obj.getInPercenatge(response.healthExpenditure),
+        causeOfDeath:
           Obj.getInPercenatge(response.totalNcdDeathsPerCapita),
-        'Mortality rate, under-5 (per 1,000 live births)': Obj.getValue(response.under5Mortality),
+        mortalityRate: Obj.getValue(response.under5Mortality),
       },
     },
   ];
   const minimalDevelopmentIndicatorsData = [
     {
       CONTEXT: {
-        'GNI per capita, atlas method (current US$)': Obj.getGNIPerCapitaInKilo(response.gniPerCapita),
-        'Total population': Obj.getTotalPopulationInMillion(response.totalPopulation),
+        gniPerCapita: Obj.getGNIPerCapitaInKilo(response.gniPerCapita),
+        totalPopulation: Obj.getTotalPopulationInMillion(response.totalPopulation),
       },
     },
     {
       HEALTH: {
-        'Life expectancy at birth (years)': Obj.getValue(response.lifeExpectancy),
-        'Health expenditure (% of GDP)': Obj.getInPercenatge(response.healthExpenditure),
+        lifeExpectancy: Obj.getValue(response.lifeExpectancy),
+        healthExpenditure: Obj.getInPercenatge(response.healthExpenditure),
       },
     },
   ];
@@ -87,15 +87,15 @@ describe("Indicator HTTP Requests and Helper methods", () => {
       response: response
     });
     const returnPromise = Obj.getDevelopmentIndicators('IND', false);
-    
-    moxios.wait(() => { 
+
+    moxios.wait(() => {
       returnPromise.then((value)=> {
         expect(value).to.deep.equal(developmentIndicatorsData);
       });
       done()
       moxios.uninstall();
     });
-    
+
   });
   it ("should set the developmentIndicators data when getDevelopmentIndicators is called for minimal indicators", (done) => {
     moxios.install();
@@ -104,8 +104,8 @@ describe("Indicator HTTP Requests and Helper methods", () => {
       response: response
     });
     const returnPromise = Obj.getDevelopmentIndicators('IND', true);
-    
-    moxios.wait(() => { 
+
+    moxios.wait(() => {
       returnPromise.then((value)=> {
         expect(value).to.deep.equal(minimalDevelopmentIndicatorsData);
       });
@@ -121,8 +121,8 @@ describe("Indicator HTTP Requests and Helper methods", () => {
       response: { message: 'problem' },
     };
     const returnPromise = Obj.getDevelopmentIndicators('IND', true);
-    
-    moxios.wait(() => { 
+
+    moxios.wait(() => {
       let request = moxios.requests.mostRecent();
       request.reject(errResp);
       done()

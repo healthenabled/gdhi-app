@@ -4,12 +4,20 @@ import IndicatorPanel from  "../../src/components/indicatorPanel/indicator-panel
 import moxios from 'moxios';
 import sinon from "sinon";
 import Obj from  "../../src/common/indicator-http-requests.js";
+import i18n from '../../src/plugins/i18n';
+import {en, es} from '../../src/static-content/index';
 
-describe("Indicator Panel ", () => {
+describe("Indicator Panel", () => {
   let wrapper;
   const localVue = createLocalVue();
   localVue.use(VueRouter);
   const router = new VueRouter();
+
+  const messages = {
+    en,
+    es
+  };
+
   let overallScoreData = {
     "overAllScore":3,
     "categories":[
@@ -80,7 +88,8 @@ describe("Indicator Panel ", () => {
     });
     wrapper = shallow(IndicatorPanel, {
       localVue,
-      router
+      router,
+      i18n
     });
   })
   it("should update the variables with indicator data for the global", (done) => {
@@ -188,14 +197,14 @@ describe("Indicator Panel ", () => {
      const developmentIndicatorsData = [
       {
         CONTEXT: {
-          'GNI per capita, atlas method (current US$)': Obj.getGNIPerCapitaInKilo(responseData.gniPerCapita),
-          'Total population': Obj.getTotalPopulationInMillion(responseData.totalPopulation)
+          gniPerCapita: Obj.getGNIPerCapitaInKilo(responseData.gniPerCapita),
+          totalPopulation: Obj.getTotalPopulationInMillion(responseData.totalPopulation)
         },
       },
       {
         HEALTH: {
-          'Life expectancy at birth (years)': Obj.getValue(responseData.lifeExpectancy),
-          'Health expenditure (% of GDP)': Obj.getInPercenatge(responseData.healthExpenditure)
+          lifeExpectancy: Obj.getValue(responseData.lifeExpectancy),
+          healthExpenditure: Obj.getInPercenatge(responseData.healthExpenditure)
         },
       },
     ];
@@ -204,7 +213,7 @@ describe("Indicator Panel ", () => {
         done();
       });
     });
-  });  
+  });
   afterEach(() => {
     moxios.uninstall();
   });

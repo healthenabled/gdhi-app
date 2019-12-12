@@ -1,5 +1,5 @@
 <ul id="v-for-object" class="legend">
-  <li class="legend-desc">Phase</li>
+  <li class="legend-desc">{{ $t('mixed.phase') }}</li>
   <li class="l-box" v-for="value in object.scoreToColor" :id="'phase' + value.score" :title="value.description">
     {{value.score}}
   </li>

@@ -127,7 +127,6 @@ body, html {
   overflow: hidden;
   width: 100%;
   white-space: nowrap;
-  display: inline-block;
 }
 .page-title {
   font-family: 'RobotoSlabBold', 'sans-serif';
@@ -706,4 +705,8 @@ table tbody tr:nth-child(2n) td {
   .box {
     margin-top: 20px;
   }
+}
+
+select::-ms-expand {
+  display: none;
 }

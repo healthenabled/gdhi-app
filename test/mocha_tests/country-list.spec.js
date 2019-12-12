@@ -2,9 +2,11 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import CountryList from  "../../src/components/countryList/country-list.js";
 import moxios from 'moxios';
+import i18n from '../../src/plugins/i18n';
 
 describe("Country List", () => {
   let wrapper;
+
   const localVue = createLocalVue();
   localVue.use(VueRouter);
   const router = new VueRouter();
@@ -40,7 +42,8 @@ describe("Country List", () => {
   moxios.install();
   wrapper = mount(CountryList, {
     localVue,
-    router
+    router,
+    i18n,
   });
   moxios.stubRequest('/api/countries_health_indicator_scores?categoryId=&phase=', {
     status: 200,
