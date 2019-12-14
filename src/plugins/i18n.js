@@ -1,13 +1,14 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import {en, es, fr, pt} from '../static-content/index';
+import {ar, en, es, fr, pt} from '../static-content/index';
 
 Vue.use(VueI18n);
 const messages = {
   en,
   es,
   fr,
-  pt
+  pt,
+  ar,
 };
 
 const english = 'en';
