@@ -4,6 +4,7 @@
 @import "~leaflet/dist/leaflet.css";
 @import "~font-awesome/css/font-awesome.min.css";
 @import "components/all";
+@import "rtl-support";
 
 
 body, html {
@@ -240,7 +241,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   border-radius: 3px;
   display: inline-block;
   vertical-align: middle;
-  margin-left: 8px;
+  @include margin-left(8px);
   min-width: 64px;
   text-transform: uppercase;
   text-align: center;

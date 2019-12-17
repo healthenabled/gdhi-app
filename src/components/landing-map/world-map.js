@@ -4,6 +4,7 @@ import helper from './map-helper';
 import eventHandler from './map-event-handler';
 import { filter } from 'lodash';
 import axios from 'axios'
+import {LayoutDirectionConfig} from '../../plugins/i18n';
 
 export default {
   BLACK_COLOR_CODE: '#000',
@@ -35,7 +36,10 @@ export default {
       this.map.off();
       this.map.remove();
     }
-    this.map = L.map('map', { attributionControl: false }).setView([44, -31], 2);
+    const xAxis = LayoutDirectionConfig[i18n.locale] === 'rtl'? 70 :-31;
+    const yAxis = 44;
+
+    this.map = L.map('map', { attributionControl: false }).setView([yAxis, xAxis], 2);
     this.map.setMinZoom(2);
     L.control.attribution({ position: 'bottomleft' }).addTo(this.map);
     this.map.addControl(new ResetButton());
