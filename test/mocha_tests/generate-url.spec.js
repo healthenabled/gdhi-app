@@ -5,7 +5,7 @@ import moxios from 'moxios';
 import { sortBy } from 'lodash';
 import Autocomplete from 'vuejs-auto-complete'
 import sinon from 'sinon';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("Generate URL ", () => {
   let wrapper;

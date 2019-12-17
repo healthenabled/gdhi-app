@@ -12,10 +12,19 @@ const messages = {
 };
 
 const english = 'en';
-const i18n = new VueI18n({
+export const i18n = new VueI18n({
   locale: 'en',
   fallbackLocale: english,
   messages,
 });
 
-export default i18n;
+const LTR = 'ltr';
+const RTL = 'rtl';
+
+export const LayoutDirectionConfig = {
+  en: LTR,
+  es: LTR,
+  fr: LTR,
+  pt: LTR,
+  ar: RTL,
+};

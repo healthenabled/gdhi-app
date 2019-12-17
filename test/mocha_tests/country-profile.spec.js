@@ -4,7 +4,7 @@ import CountryProfile from  "../../src/components/countryProfile/country-profile
 import moxios from 'moxios';
 import * as pdfHelper from "../../src/components/pdfHelper/pdf-generate-scorecard.js";
 import sinon from 'sinon';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("Country Profile ", () => {
   let wrapper;

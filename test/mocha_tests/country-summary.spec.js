@@ -2,7 +2,7 @@ import { mount, createLocalVue } from '@vue/test-utils';
 import VueRouter from 'vue-router';
 import CountrySummary from  "../../src/components/countrySummary/country-summary.js";
 import moxios from 'moxios';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("Country Summary ", () => {
   let wrapper;

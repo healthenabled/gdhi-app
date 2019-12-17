@@ -3,7 +3,7 @@ import router from '../../src/router/index.js';
 import Header from  "../../src/components/header/header.js";
 import moxios from 'moxios';
 import autoSearch from '../../src/components/auto-search/auto-search.js';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe ("Header ", () => {
   let wrapper;

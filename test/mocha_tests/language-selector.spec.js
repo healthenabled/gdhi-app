@@ -1,6 +1,6 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 import LanguageSelector from '../../src/components/language-selector/language-selector';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 import VueCookies from 'vue-cookies';
 
 describe('language selector', () => {

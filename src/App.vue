@@ -1,5 +1,9 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    :dir="direction"
+  >
+    {{ $t('') }} <!-- Added intentionally as component does not re render on locale change if i18n library is not used in template -->
     <notifications
       group="custom-template"
       position="bottom right"
@@ -33,25 +37,34 @@
       </template>
     </notifications>
 
-    <div 
-      class="loading" 
+    <div
+      class="loading"
       id="loader">
       <div class="error" />
     </div>
-    <layout />
+    <layout/>
   </div>
 </template>
 
 <script>
-import Layout from './components/layout/layout.vue';
+  import Layout from './components/layout/layout.vue';
+  import {LayoutDirectionConfig} from './plugins/i18n';
 
-export default {
-  name: 'App',
-  components: {
-    Layout,
-  },
+  export default {
+    name: 'App',
+    components: {
+      Layout,
+    },
+    data() {
+      return {
+        direction: 'ltr'
+      };
+    },
+    updated() {
+      this.direction = LayoutDirectionConfig[this.$i18n.locale];
+    }
 
-};
+  };
 </script>
 
 <style lang="scss">

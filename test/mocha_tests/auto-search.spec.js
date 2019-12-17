@@ -3,7 +3,7 @@ import AutoSearch from "../../src/components/auto-search/auto-search.js";
 import Autocomplete from 'vuejs-auto-complete'
 import moxios from 'moxios';
 import { sortBy } from 'lodash';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("AutoSearch", () => {
   let wrapper;

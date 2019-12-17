@@ -1,4 +1,4 @@
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe('i18n', () => {
   it('should have default locale as en', () => {
