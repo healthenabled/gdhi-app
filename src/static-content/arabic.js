@@ -25,9 +25,9 @@ export const ar = {
     phase: 'المرحلة',
     phaseN: 'المرحلة {number}',
     all: 'الكل',
-    noDataAvailable: 'لا تتوافر بيانات', //client-verification-pending
-    noData: 'لايوجد بيانات', //client-verification-pending
-    serverErrorTitle: 'خطأ في الخادم', //client-verification-pending
+    noDataAvailable: 'لا تتوافر بيانات',
+    noData: 'لايوجد بيانات',
+    serverErrorTitle: 'خطأ في خادم الكمبيوتر',
   },
   footer: {
     contactEmail: 'الاتصال: info@digitalhealthindex.org'

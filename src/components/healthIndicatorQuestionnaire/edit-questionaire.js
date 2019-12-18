@@ -134,7 +134,7 @@ export default Vue.extend({
       });
     },
     getConfirmationDialog (props) {
-      let options = {okText: 'Confirm', cancelText: 'Cancel'};
+      let options = {okText: this.$i18n.t('healthIndicatorQuestionnaire.confirm'), cancelText: this.$i18n.t('healthIndicatorQuestionnaire.cancel')};
       return this.$dialog.confirm(props.message, options)
         .then(() => {
           return props.callBackMethod.apply(this, props.callBackArgs);

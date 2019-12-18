@@ -68,6 +68,8 @@ export const healthIndicatorQuestionnaire = {
   save: 'Sauvegarder',
   reject: 'Rejeter',
   publish: 'Publier',
+  confirm: 'Confirmer',
+  cancel: 'Annuler',
   note1: 'Ces détails seront affichés publiquement sur la plateforme GDHI.',
   note2: 'Ces informations ne figureront pas sur la plateforme GDHI et sont fournies à titre d\'information.',
   note3: 'Somente a pontuação de cada indicador será exibida publicamente na plataforma GDHI.',

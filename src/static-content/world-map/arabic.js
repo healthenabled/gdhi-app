@@ -1,10 +1,10 @@
 export const worldMap = {
   indicatorPanel: {
     indicatorPanelTitle: 'الوضع الحالي للصحة الرقمية في جميع أنحاء العالم',
-    noHealthIndicatorAvailable: 'لا توجد مؤشرات صحية عالمية متاحة', //client-verification-pending
-    noDigitalIndicatorAvailable: 'لا توجد مؤشرات صحية عالمية متاحة', //client-verification-pending
+    noHealthIndicatorAvailable: 'لا توجد مؤشرات صحية عالمية متاحة',
+    noDigitalIndicatorAvailable: 'لا توجد مؤشرات الصحة الرقمية المتاحة',
     viewCountries: 'عرض البلدان',
-    viewDetails: 'عرض التفاصيل', //client-verification-pending
+    viewDetails: 'عرض التفاصيل',
     context: {
       text: 'السياق',
       gniPerCapita: 'الدخل القومي الإجمالي للفرد، طريقة أطلس (بالأسعار الجارية للدولار الأمريكي)',

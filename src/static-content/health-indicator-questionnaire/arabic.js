@@ -17,7 +17,7 @@ export const healthIndicatorQuestionnaire = {
     emailOfTheCountryContact: 'البريد الإلكتروني لجهة الاتصال بالبلد',
     countrySummary: 'ملخص البلد',
     organisationOfTheCountryContact: 'المنظمة التي يتبع لها جهة الاتصال بالبلد',
-    error: {//client-verification-pending
+    error: {
       wrongDate: 'الرجاء إدخال تاريخ بين عام 2010 والتاريخ الحالي',
       nameOfPersonEnteringData: 'اسم الشخص الذي يدخل البيانات مطلوب',
       roleOfThePersonEnteringData: 'مطلوب دور الشخص الذي يدخل البيانات',
@@ -29,7 +29,7 @@ export const healthIndicatorQuestionnaire = {
       countrySummary: 'ملخص البلد مطلوب',
       organisationOfTheCountryContact: 'يرجى إدخال المنظمة',
     },
-    hoverText: {//client-verification-pending
+    hoverText: {
       date: 'الرجاء إدخال تاريخ',
       nameOfPersonEnteringData: 'الرجاء إدخال اسم الشخص الذي يدخل هذه البيانات',
       roleOfThePersonEnteringData: 'يرجى إدخال دور الشخص الذي يدخل البيانات',
@@ -46,9 +46,9 @@ export const healthIndicatorQuestionnaire = {
     note: 'يرجى تقديم روابط إلى الموارد ذات الصلة بالصحة الرقمية لبلدك.',
     exampleFormat: 'مثال التنسيق: www.example.com',
     resource: 'المصدر {number}',
-    errorMessage: 'الرجاء إدخال رابط ويب صالح للمورد' //client-verification-pending
+    errorMessage: 'الرجاء إدخال رابط ويب صالح للمورد'
   },
-  notifications: {//client-verification-pending
+  notifications: {
     submit: 'نموذج مقدم للمراجعة',
     saveCorrection: 'تم حفظ النموذج بنجاح!',
     save: 'تم حفظ النموذج بنجاح!',
@@ -58,17 +58,19 @@ export const healthIndicatorQuestionnaire = {
     somethingWentWrong: 'لقد حدث خطأ ما. يرجى تحديث الصفحة!'
   },
   indicatorDetails: 'تفاصيل المؤشر',
-  indicatorScoreError: 'مؤشر النتيجة والحقل المنطقي مطلوب.', //client-verification-pending
+  indicatorScoreError: 'مؤشر النتيجة والحقل المنطقي مطلوب.',
   rationaleOrSupportingText: 'الأساس المنطقي أو النص الداعم',
-  downloadPDF: 'تحميل PDF', //client-verification-pending
-  saveAsDraft: 'حفظ كمسودة', //client-verification-pending
-  submit: 'خضع', //client-verification-pending
-  save: 'حفظ', //client-verification-pending
-  reject: 'الرجاء إدخال رابط ويب صالح للمورد...', //client-verification-pending
-  publish: 'نشر', //client-verification-pending
-  note1: 'سيتم عرض هذه التفاصيل علانية على منصة GDHI.', //client-verification-pending
-  note2: 'لن يتم عرض هذه التفاصيل على منصة GDHI وهي لأغراضنا الإعلامية.', //client-verification-pending
-  note3: 'سيتم عرض نقاط كل مؤشر علنًا فقط على منصة GDHI.', //client-verification-pending
-  publishConfirmation: 'أنت على وشك نشر نموذج فهرس الصحة الرقمية لـ {country}. هذا لا يمكن التراجع عنه. هل تريد الاستمرار؟', //client-verification-pending
-  rejectConfirmation: 'أنت على وشك رفض نموذج مؤشر الصحة لـ {country}. هذا لا يمكن التراجع عنه. هل تريد الاستمرار؟', //client-verification-pending
+  downloadPDF: 'تحميل PDF',
+  saveAsDraft: 'حفظ كمسودة',
+  submit: 'خضع',
+  save: 'حفظ',
+  reject: 'رفض',
+  publish: 'نشر',
+  confirm: 'تؤكد',
+  cancel: 'إلغاء',
+  note1: 'سيتم عرض هذه التفاصيل علانية على منصة GDHI.',
+  note2: 'لن يتم عرض هذه التفاصيل على منصة GDHI وهي لأغراضنا الإعلامية.',
+  note3: 'سيتم عرض نقاط كل مؤشر علنًا فقط على منصة GDHI.',
+  publishConfirmation: 'أنت على وشك نشر نموذج فهرس الصحة الرقمية لـ {country}. هذا لا يمكن التراجع عنه. هل تريد الاستمرار؟',
+  rejectConfirmation: 'أنت على وشك رفض نموذج مؤشر الصحة لـ {country}. هذا لا يمكن التراجع عنه. هل تريد الاستمرار؟',
 };

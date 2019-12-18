@@ -18,8 +18,8 @@ export const countryProfile = {
       aboveAvg: 'فوق المتوسط',
     },
     benchmarkDescription: 'قارن درجاتك الإجمالية مع المتوسط العالمي أو دول المرحلة الأخرى',
-    benchmarkNoCountryForSelectedPhase: 'لا توجد دول في المرحلة المحددة للقياس', //client-verification-pending
-    serverErrorDescription: 'غير قادر على تحميل البيانات المرجعية. يرجى المحاولة بعد مرور بعض الوقت', //client-verification-pending
+    benchmarkNoCountryForSelectedPhase: 'لا توجد دول في المرحلة المحددة للقياس',
+    serverErrorDescription: 'غير قادر على تحميل البيانات المرجعية. يرجى المحاولة بعد مرور بعض الوقت',
   },
   indicator: 'تفاصيل',
   score: 'أحرز هدفا'
