@@ -1,3 +1,5 @@
+@import './../../rtl-support';
+
 $width-of-scoreCard-en: 150px;
 $width-of-scoreCard-es: 200px;
 
@@ -26,7 +28,7 @@ $width-of-scoreCard-es: 200px;
     flex-shrink: 0;
     text-align: center;
 
-    &.en, &.pt {
+    &.en, &.pt, &.ar {
       width: $width-of-scoreCard-en;
     }
   }
@@ -51,7 +53,7 @@ $width-of-scoreCard-es: 200px;
   .indicator-desc, .indicator-name {
     vertical-align: middle;
     padding: 10px 0;
-    margin-right: 10px;
+    @include margin-right(10px);
     width: 1px;
     text-align: justify;
     flex-grow: 1;
@@ -63,7 +65,7 @@ $width-of-scoreCard-es: 200px;
     width: $width-of-scoreCard-es;
     text-align: center;
 
-    &.en, &.pt {
+    &.en, &.pt, &.ar {
       width: $width-of-scoreCard-en;
     }
 
@@ -83,7 +85,7 @@ $width-of-scoreCard-es: 200px;
       margin-bottom: 10px;
 
       &:first-child {
-        margin-left: 0px;
+       @include margin-left(0);
       }
     }
   }
@@ -108,7 +110,7 @@ $width-of-scoreCard-es: 200px;
   #collected-date {
     position: absolute;
     bottom: 20px;
-    left: 80px;
+    @include left(80px);
     font-size: 1.2em;
   }
 
@@ -146,7 +148,7 @@ $width-of-scoreCard-es: 200px;
 
   &:before {
     display: inline-block;
-    margin-right: 5px;
+    @include margin-right(5px);
     border: 8px solid transparent;
   }
 

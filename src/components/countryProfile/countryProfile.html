@@ -3,7 +3,6 @@
     <div class="clearfix header-section">
       <div class="country-name page-title">
         <div class="flag" :style="{ backgroundImage: 'url(' + flagSrc + ')' }"></div>
-
         {{healthIndicatorData.countryName}}
       </div>
       <span id="collected-date" v-if="healthIndicatorData.collectedDate !== ''" class="copy-italics copy-grey">

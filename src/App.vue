@@ -6,7 +6,7 @@
     {{ $t('') }} <!-- Added intentionally as component does not re render on locale change if i18n library is not used in template -->
     <notifications
       group="custom-template"
-      position="bottom right"
+      :position="'bottom ' + notificationDirection"
       :width="400">
       <template
         slot="body"
@@ -57,11 +57,13 @@
     },
     data() {
       return {
-        direction: 'ltr'
+        direction: 'ltr',
+        notificationDirection: 'right',
       };
     },
     updated() {
       this.direction = LayoutDirectionConfig[this.$i18n.locale];
+      this.notificationDirection = this.direction === 'ltr'? 'right': 'left'
     }
 
   };

@@ -188,6 +188,7 @@
                 </div>
                 <div class="row description_container">
                   <label>{{ $t('healthIndicatorQuestionnaire.rationaleOrSupportingText') }}</label>
+                  <span class="mandatory-field">&nbsp *</span>
                   <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate.disable="'required'"></textarea>
                   <div v-show="(errors.has('indicator_'+indicator.indicatorId+'_rationale') || errors.has(indicator.indicatorId))" class="error-info">{{ $t('healthIndicatorQuestionnaire.indicatorScoreError') }}</div>
                 </div>

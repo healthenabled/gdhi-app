@@ -58,3 +58,25 @@
 
   }
 }
+
+@mixin float($direction) {
+  [dir=ltr] & {
+    float: $direction;
+  }
+
+  [dir=rtl] & {
+    @if $direction == left {
+      float: right;
+    } @else if $direction == right {
+      float: left;
+    } @else {
+      float: $direction
+    }
+  }
+}
+
+@mixin font-bold {
+  [dir=rtl] & {
+    font-weight: bold
+  }
+}

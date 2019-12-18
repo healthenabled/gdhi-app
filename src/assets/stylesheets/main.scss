@@ -214,7 +214,7 @@ body, html {
   float: left;
 }
 .float-right {
-  float: right;
+  @include float(right);
 }
 input[type='text'], input[type='email'], textarea, input[type='date'] {
   display: block;
@@ -235,11 +235,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   }
 }
 .btn {
-  padding: 8px;
   border: none;
-  cursor: pointer;
-  border-radius: 3px;
-  display: inline-block;
   vertical-align: middle;
   @include margin-left(8px);
   min-width: 64px;
@@ -283,7 +279,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   }
   i {
     display: inline-block;
-    margin-right: 5px;
+    @include margin-right(5px);
   }
 }
 
@@ -325,95 +321,76 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 }
 .column-60percent {
   width: 60%;
-  margin-right: 20px;
+  @include margin-right(20px);
   &:last-child {
-    margin-right: 0px;
+    @include margin-right(0);
     flex-shrink: 0;
   }
   @media screen and (max-width: 1024px) {
     width: 100%;
-    margin-right: 0px;
+    @include margin-right(0);
     margin-top: 5px;
   }
 }
 .column-40percent {
   width: 40%;
-  margin-right: 20px;
   &:last-child {
-    margin-right: 0px;
+    @include margin-right(0);
     flex-shrink: 0;
   }
   @media screen and (max-width: 1024px) {
     width: 100%;
-    margin-right: 0px;
+    @include margin-right(0);
     margin-top: 5px;
   }
 }
 .column-50percent {
   width: 50%;
-  margin-right: 20px;
+  @include margin-right(20px);
+
   &:last-child {
-    margin-right: 0px;
+    @include margin-right(0);
     flex-shrink: 0;
   }
   @media screen and (max-width: 1024px) {
     width: 100%;
-    margin-right: 0px;
+    @include margin-right(0);
     margin-top: 5px;
   }
 }
 .column-33percent {
   width: 33.33%;
-  margin-right: 20px;
+  @include margin-right(20px);
+
   &:last-child {
     margin-right: 0px;
     flex-shrink: 0;
   }
   @media screen and (max-width: 1024px) {
     width: 100%;
-    margin-right: 0px;
+    @include margin-right(0);
     margin-top: 5px;
   }
 }
-.column-85percent {
-  width: 85%;
-  margin-right: 20px;
-  &:last-child {
-    margin-right: 0px;
-    flex-shrink: 0;
-  }
-  @media screen and (max-width: 1024px) {
-    margin-right: 0px;
-    margin-top: 5px;
-  }
-}
-.column-15percent {
-  width: 15%;
-  margin-right: 20px;
-  &:last-child {
-    margin-right: 0px;
-    flex-shrink: 0;
-  }
-  @media screen and (max-width: 1024px) {
-    margin-right: 0px;
-    margin-top: 5px;
-  }
-}
+
 .column-66percent {
   width: 66.67%;
-  margin-right: 20px;
-  .column-50percent{
+  @include margin-right(20px);
+
+  .column-50percent {
     flex-shrink: 1;
+
     &:last-child {
-      margin-right: 20px;
+      @include margin-right(20px);
       @media screen and (max-width: 1024px) {
-        margin-right: 0px;
+        @include margin-right(0);
       }
     }
   }
+
   @media screen and (max-width: 1024px) {
     width: 100%;
-    margin-right: 0px;
+    @include margin-right(0);
     margin-top: 5px;
   }
 }
@@ -426,7 +403,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   margin-top: 5px;
   i {
     display: inline-block;
-    margin-right: 5px;
+    @include margin-right(5px);
   }
 }
 
@@ -440,7 +417,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   position: relative;
   &:after {
     position: absolute;
-    right: 0px;
+    @include right(0px);
     content: "\f078";
     font-family: "FontAwesome";
     top: 15px;
@@ -465,19 +442,22 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 .top {
   position: fixed;
   bottom: 50px;
-  right: 20px;
+  @include right(20px);
 }
 .hide {
   display: none;
 }
 
+.health-indicator-questionnaire-contact-info-heading {
+  @include font-bold
+}
 
 //custom radio button
 /* Customize the label (the container) */
 .radio-container {
   display: block;
   position: relative;
-  padding-left: 30px;
+ @include padding-left(30px);
   margin-bottom: 12px;
   cursor: pointer;
   -webkit-user-select: none;
@@ -528,14 +508,14 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 .questionnaire-title {
   position: absolute;
   bottom: 20px;
-  left: 80px;
+  @include left(80px);
   font-size: 1.2em;
 }
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
   top: 0;
-  left: 0;
+  @include left(0);
   height: 18px;
   width: 18px;
   // background-color: $radio-bg;
@@ -547,13 +527,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     display: none;
   }
   &:after {
-    // top: 6px;
-    // left: 6px;
-    // width: 8px;
-    // height: 8px;
-    // border-radius: 50%;
-    // background: $white;
-    left: 7px;
+    @include left(7px);
     top: 2px;
     width: 4px;
     height: 9px;
@@ -596,7 +570,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     margin: 0;
   }
   .custom-template-icon {
-    margin-right: 20px;
+    @include margin-right(20px);
 
   }
   .header-bold {
@@ -654,7 +628,6 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   }
   .tab-content {
     border: 1px solid $border-color-dark;
-    padding: 1em;
     background: $white;
     padding: 20px;
     margin-bottom: 20px;
