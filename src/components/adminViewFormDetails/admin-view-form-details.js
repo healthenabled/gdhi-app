@@ -53,7 +53,7 @@ export default Vue.extend({
       window.open(url);
     },
     wrapperOnTableRows(rows) {
-      rows.forEach(function(row,index) {
+      rows.forEach(function(row) {
         row.url = location.origin + "/health_indicator_questionnaire/" + row.countryUUID;
       })
     },

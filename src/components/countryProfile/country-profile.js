@@ -112,7 +112,7 @@ export default Vue.extend({
             });
           }
         })
-        .catch((e) => {
+        .catch(() => {
           this.notifier({
             title: this.$i18n.t('mixed.serverErrorTitle'),
             message: this.$i18n.t('countryProfile.benchmark.serverErrorDescription'),
