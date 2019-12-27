@@ -4,6 +4,7 @@
         <div v-if="countrySummary.countryAlpha2Code" class="flag" :style="{ backgroundImage: 'url(/static/img/flags/' + countrySummary.countryAlpha2Code.toLowerCase() + '.svg)' }" ></div>
         {{countrySummary.countryName}}
     </div>
+    <div class="pdf-title">{{$t('healthIndicatorQuestionnaire.pdfTitle', {country: countrySummary.countryName})}}</div>
     <span class="copy-italics copy-grey questionnaire-title">{{ $t('healthIndicatorQuestionnaire.digitalHeathQuestionnaire') }}</span>
     <div class="float-right button-container">
       <span><button class="submit-btn btn btn-primary" @click="generatePDF()"> <i class="fa fa-download" aria-hidden="true"></i>{{ $t('healthIndicatorQuestionnaire.downloadPDF') }}</button></span>
@@ -22,11 +23,11 @@
     </div>
   </div>
   <form class="health-indicator-questionnaire-contact-info clearfix sub-content">
-    <div class="copy-small-italics copy-blue">
+    <div class="copy-small-italics copy-blue note">
       {{ $t('healthIndicatorQuestionnaire.note') }}
     </div>
     <div class="health-indicator-questionnaire-contact-info-heading header-bold">{{ $t('healthIndicatorQuestionnaire.contactForm.contactInformation') }}</div>
-    <div class="box">
+    <div class="box contact-info">
       <div class="row">
         <div class="collected-date column-33percent">
           <label for="date">{{ $t('healthIndicatorQuestionnaire.contactForm.dateOnWhichDataWasCollected') }}</label>
@@ -134,7 +135,12 @@
       <div class="health-indicator-questionnaire-contact-info-description copy-small-italics">
         {{ $t('healthIndicatorQuestionnaire.resourceForm.exampleFormat') }}</div>
     </div>
-    <div class="box">
+    <div class="box resources">
+      <div class="pdf-resource">
+        <p v-for="resource in countrySummary.resources" class="">
+          {{resource}}
+        </p>
+      </div>
       <div class="row">
         <div class="form-group column-33percent">
           <label for="resource1">{{ $t('healthIndicatorQuestionnaire.resourceForm.resource', {number: 1}) }}</label><span class="mandatory-field">*</span>
@@ -189,6 +195,7 @@
                 <div class="row description_container">
                   <label>{{ $t('healthIndicatorQuestionnaire.rationaleOrSupportingText') }}</label>
                   <span class="mandatory-field">&nbsp *</span>
+                  <div class="pdf-rationale-or-supporting-text"><p>{{healthIndicators[indicator.indicatorId].supportingText}}</p></div>
                   <textarea rows="5" class="description" :disabled="!showEdit" :name="'indicator_' + indicator.indicatorId + '_rationale'" v-model="healthIndicators[indicator.indicatorId].supportingText" v-validate.disable="'required'"></textarea>
                   <div v-show="(errors.has('indicator_'+indicator.indicatorId+'_rationale') || errors.has(indicator.indicatorId))" class="error-info">{{ $t('healthIndicatorQuestionnaire.indicatorScoreError') }}</div>
                 </div>

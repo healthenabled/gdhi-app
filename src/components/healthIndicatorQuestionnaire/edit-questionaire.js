@@ -187,8 +187,12 @@ export default Vue.extend({
       category.showCategory = !category.showCategory;
     },
     generatePDF() {
-      this.notifier({title: 'Success', message: this.$i18n.t('healthIndicatorQuestionnaire.notifications.download'), type: 'success'});
-      generateFormPDF(this.countrySummary, this.questionnaire, this.healthIndicators, this.$i18n);
+      if (this.$i18n.locale === 'ar') {
+        window.print();
+      } else {
+        this.notifier({title: 'Success', message: this.$i18n.t('healthIndicatorQuestionnaire.notifications.download'), type: 'success'});
+        generateFormPDF(this.countrySummary, this.questionnaire, this.healthIndicators, this.$i18n);
+      }
     }
   },
   template: editForm,

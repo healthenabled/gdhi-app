@@ -406,60 +406,6 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   }
 }
 
-.column-50percent {
-  width: 50%;
-  @include margin-right(20px);
-
-  &:last-child {
-    @include margin-right(0);
-    flex-shrink: 0;
-  }
-
-  @media all and (max-width: 1024px) {
-    width: 100%;
-    @include margin-right(0);
-    margin-top: 5px;
-  }
-}
-
-.column-33percent {
-  width: 33.33%;
-  @include margin-right(20px);
-
-  &:last-child {
-    margin-right: 0px;
-    flex-shrink: 0;
-  }
-
-  @media all and (max-width: 1024px) {
-    width: 100%;
-    @include margin-right(0);
-    margin-top: 5px;
-  }
-}
-
-.column-66percent {
-  width: 66.67%;
-  @include margin-right(20px);
-
-  .column-50percent {
-    flex-shrink: 1;
-
-    &:last-child {
-      @include margin-right(20px);
-      @media all and (max-width: 1024px) {
-        @include margin-right(0);
-      }
-    }
-  }
-
-  @media all and (max-width: 1024px) {
-    width: 100%;
-    @include margin-right(0);
-    margin-top: 5px;
-  }
-}
-
 #info-box {
   background: $nodiff;
   padding: 5px;
@@ -525,43 +471,6 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   @include font-bold
 }
 
-//custom radio button
-/* Customize the label (the container) */
-.radio-container {
-  display: block;
-  position: relative;
-  @include padding-left(30px);
-  margin-bottom: 12px;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  &:hover {
-    input ~ .checkmark {
-      background-color: darken($radio-bg, 10%);
-    }
-
-    input:disabled ~ .checkmark {
-      background-color: $white;
-    }
-  }
-
-  input {
-    position: absolute;
-    opacity: 0;
-
-    &:checked ~ .checkmark {
-      background-color: $logo-blue !important;
-
-      &:after {
-        display: block;
-      }
-    }
-  }
-}
-
 .has-error {
   border: 1px solid $negative !important;
 }
@@ -575,54 +484,6 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   position: relative;
   top: -100px;
   visibility: hidden;
-}
-
-.fixed-sub-header {
-  position: fixed;
-  top: 88px;
-  width: 90%;
-  background: $body-bg;
-  z-index: 3;
-}
-
-.sub-content {
-  margin-top: 120px;
-}
-
-.questionnaire-title {
-  position: absolute;
-  bottom: 20px;
-  @include left(80px);
-  font-size: 1.2em;
-}
-
-/* Create a custom radio button */
-.checkmark {
-  position: absolute;
-  top: 0;
-  @include left(0);
-  height: 18px;
-  width: 18px;
-  // background-color: $radio-bg;
-  border: 1px solid $radio-bg;
-  border-radius: 50%;
-
-  &:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-
-  &:after {
-    @include left(7px);
-    top: 2px;
-    width: 4px;
-    height: 9px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
 }
 
 
