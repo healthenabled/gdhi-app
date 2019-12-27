@@ -83,3 +83,9 @@
     }
   }
 }
+
+@media print {
+  .content-container {
+    padding-top: 5px;
+  }
+}

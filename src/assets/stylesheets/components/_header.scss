@@ -61,7 +61,7 @@
     width: 240px;
     @extend .copy;
 
-       &-container {
+    &-container {
       width: 100%;
       background-image: url('./assets/img/search.svg');
       background-repeat: no-repeat;
@@ -133,4 +133,10 @@
 .header-elements__right {
   display: inline-flex;
   width: 15%;
+}
+
+@media print {
+  .header {
+    display: none;
+  }
 }

@@ -19,25 +19,26 @@ body, html {
   color: $black-grey;
 }
 
- #app {
-   width: 100%;
-   height: 100%;
- }
+#app {
+  width: 100%;
+  height: 100%;
+}
 
- a {
-   text-decoration: none;
-   color: inherit;
- }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
- .clearfix:after{
-   content: "";
-   display: table;
-   clear: both;
- }
- p {
-   margin: 0;
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
 
- }
+p {
+  margin: 0;
+
+}
 
 /* Spinner */
 .loading {
@@ -71,8 +72,8 @@ body, html {
     overflow: hidden;
     display: inline-block;
     vertical-align: bottom;
-    -webkit-animation: ellipsis steps(5,end) 900ms infinite;
-    animation: ellipsis steps(5,end) 900ms infinite;
+    -webkit-animation: ellipsis steps(5, end) 900ms infinite;
+    animation: ellipsis steps(5, end) 900ms infinite;
     content: "\2026"; /* ascii code for the ellipsis character */
     width: 0px;
   }
@@ -112,6 +113,7 @@ body, html {
 
 .list-with-bullets {
   margin: 10px;
+
   li {
     display: list-item;
     list-style-type: disc;
@@ -120,6 +122,7 @@ body, html {
   }
 
 }
+
 .link-blue {
   color: $logo-blue;
   text-decoration: underline;
@@ -129,6 +132,7 @@ body, html {
   width: 100%;
   white-space: nowrap;
 }
+
 .page-title {
   font-family: 'RobotoSlabBold', 'sans-serif';
   font-size: 2.14em;
@@ -137,17 +141,20 @@ body, html {
   max-width: 90%;
   display: inline-block;
 }
+
 .highlight-text {
   font-family: "RobotoRegular", sans-serif;
   font-size: 1.5em;
   line-height: 1;
   margin-bottom: 10px;
 }
+
 .copy {
   font-size: 1em;
   font-weight: $regular;
   font-family: "RobotoRegular", sans-serif;
 }
+
 .copy-italics {
   font-size: 1em;
   font-weight: $regular;
@@ -171,33 +178,40 @@ body, html {
   font-family: "RobotoRegular", sans-serif;
   line-height: 1;
 }
+
 .copy-small {
   font-size: 0.93em;
   line-height: 1;
   font-family: "RobotoRegular", sans-serif;
   margin: 5px 0;
 }
+
 .copy-small-bold {
   font-size: 0.93em;
   line-height: 1;
   font-family: "RobotoBold", sans-serif;
   margin: 5px 0;
 }
+
 .copy-small-italics {
   font-size: 0.93em;
   line-height: 1;
   font-family: "RobotoItalic", sans-serif;
   margin: 5px 0;
 }
+
 .copy-grey {
   color: $font-grey;
 }
+
 .copy-blue {
   color: $link-blue;
 }
+
 .box-shadow {
-  box-shadow: 0px 2px 13.5px 1.5px rgba($shadow-grey, 0.2)
+  box-shadow: 0px 2px 13.5px 1.5px rgba($shadow-grey, 0.2);
 }
+
 .box {
   background: $white;
   @extend .box-shadow;
@@ -205,17 +219,29 @@ body, html {
   padding: 20px;
   margin-bottom: 20px;
 }
+
+@media print {
+  .box-shadow {
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+    border: 1px solid $border-color;
+  }
+}
+
 .logo-font {
   font-family: 'RobotoSlabBold';
   font-size: 23px;
   line-height: 1.09em;
 }
+
 .float-left {
   float: left;
 }
+
 .float-right {
   @include float(right);
 }
+
 input[type='text'], input[type='email'], textarea, input[type='date'] {
   display: block;
   width: 100%;
@@ -225,15 +251,18 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   border: 1px solid $border-color-dark;
   border-radius: 5px;
   @extend .copy;
+
   &:disabled {
     background: $border-color;
     color: $black;
     opacity: 0.7;
   }
+
   &::-ms-clear {
     display: none;
   }
 }
+
 .btn {
   border: none;
   vertical-align: middle;
@@ -249,34 +278,43 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   color: $white;
   @extend .copy-small;
   cursor: pointer;
+
   &.btn-primary {
     background-color: $logo-blue;
+
     &:hover {
       background-color: darken($logo-blue, 10%);
     }
   }
+
   &.btn-secondary {
     @extend .link-blue;
     background: transparent;
     box-shadow: none;
     color: $logo-blue;
   }
+
   &.btn-green {
     background-color: $positive;
+
     &:hover {
       background-color: darken($positive, 10%);
     }
   }
+
   &.btn-red {
     background-color: $negative;
+
     &:hover {
       background-color: darken($negative, 10%);
     }
   }
+
   &.disabled {
     opacity: 0.5;
     color: $font-grey;
   }
+
   i {
     display: inline-block;
     @include margin-right(5px);
@@ -293,57 +331,81 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   background-size: cover;
   border: 1px solid $black;
 }
+
+@media print {
+  .flag {
+    display: none;
+  }
+}
+
 .no-margin-top {
   margin-top: 0px;
 }
-.row {
-  display: flex;
-  margin: 20px 0;
-  &:first-child {
-    margin-top: 0px;
-  }
-  &:last-child {
-    margin-bottom: 0px;
-  }
-  &:only-child {
-    margin-bottom: 20px;
-  }
-  @media screen and (max-width: 1024px) {
-    flex-wrap: wrap;
-    margin: 5px 0;
-  }
-  &.without-margin {
-    margin: 0px;
+
+@media screen {
+
+  .row {
+    display: flex;
+    margin: 20px 0;
+
+    &:first-child {
+      margin-top: 0px;
+    }
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+
+    &:only-child {
+      margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      flex-wrap: wrap;
+      margin: 5px 0;
+    }
+
+    &.without-margin {
+      margin: 0px;
+    }
   }
 }
+
 .column-100percent {
   width: 100%;
 }
+
 .column-60percent {
   width: 60%;
   @include margin-right(20px);
+
   &:last-child {
     @include margin-right(0);
     flex-shrink: 0;
   }
-  @media screen and (max-width: 1024px) {
+
+  @media all and (max-width: 1024px) {
     width: 100%;
     @include margin-right(0);
     margin-top: 5px;
   }
 }
+
 .column-40percent {
   width: 40%;
+
   &:last-child {
     @include margin-right(0);
     flex-shrink: 0;
   }
-  @media screen and (max-width: 1024px) {
+
+  @media all and (max-width: 1024px) {
     width: 100%;
     @include margin-right(0);
     margin-top: 5px;
   }
 }
+
 .column-50percent {
   width: 50%;
   @include margin-right(20px);
@@ -352,12 +414,14 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     @include margin-right(0);
     flex-shrink: 0;
   }
-  @media screen and (max-width: 1024px) {
+
+  @media all and (max-width: 1024px) {
     width: 100%;
     @include margin-right(0);
     margin-top: 5px;
   }
 }
+
 .column-33percent {
   width: 33.33%;
   @include margin-right(20px);
@@ -366,7 +430,8 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     margin-right: 0px;
     flex-shrink: 0;
   }
-  @media screen and (max-width: 1024px) {
+
+  @media all and (max-width: 1024px) {
     width: 100%;
     @include margin-right(0);
     margin-top: 5px;
@@ -382,13 +447,13 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 
     &:last-child {
       @include margin-right(20px);
-      @media screen and (max-width: 1024px) {
+      @media all and (max-width: 1024px) {
         @include margin-right(0);
       }
     }
   }
 
-  @media screen and (max-width: 1024px) {
+  @media all and (max-width: 1024px) {
     width: 100%;
     @include margin-right(0);
     margin-top: 5px;
@@ -401,6 +466,7 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   display: inline-block;
   border-left: 5px solid darken($nodiff, 25%);
   margin-top: 5px;
+
   i {
     display: inline-block;
     @include margin-right(5px);
@@ -413,8 +479,10 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   margin-top: 10px;
   padding-top: 10px;
 }
+
 .accordion {
   position: relative;
+
   &:after {
     position: absolute;
     @include right(0px);
@@ -422,14 +490,17 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     font-family: "FontAwesome";
     top: 15px;
   }
+
   &.expanded {
     .accordion-content {
       display: block;
     }
+
     &:after {
       content: "\f077";
     }
   }
+
   > .sub-header {
     position: relative;
     z-index: 2;
@@ -439,11 +510,13 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
     cursor: pointer;
   }
 }
+
 .top {
   position: fixed;
   bottom: 50px;
   @include right(20px);
 }
+
 .hide {
   display: none;
 }
@@ -457,60 +530,72 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 .radio-container {
   display: block;
   position: relative;
- @include padding-left(30px);
+  @include padding-left(30px);
   margin-bottom: 12px;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
   &:hover {
     input ~ .checkmark {
       background-color: darken($radio-bg, 10%);
     }
+
     input:disabled ~ .checkmark {
       background-color: $white;
     }
   }
+
   input {
     position: absolute;
     opacity: 0;
+
     &:checked ~ .checkmark {
       background-color: $logo-blue !important;
+
       &:after {
         display: block;
       }
     }
   }
 }
+
 .has-error {
   border: 1px solid $negative !important;
 }
+
 .error-info {
   color: $negative;
 }
+
 .named-anchor {
   display: block;
   position: relative;
   top: -100px;
   visibility: hidden;
 }
+
 .fixed-sub-header {
   position: fixed;
-  top:88px;
+  top: 88px;
   width: 90%;
   background: $body-bg;
   z-index: 3;
 }
+
 .sub-content {
   margin-top: 120px;
 }
+
 .questionnaire-title {
   position: absolute;
   bottom: 20px;
   @include left(80px);
   font-size: 1.2em;
 }
+
 /* Create a custom radio button */
 .checkmark {
   position: absolute;
@@ -521,11 +606,13 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   // background-color: $radio-bg;
   border: 1px solid $radio-bg;
   border-radius: 50%;
+
   &:after {
     content: "";
     position: absolute;
     display: none;
   }
+
   &:after {
     @include left(7px);
     top: 2px;
@@ -544,40 +631,50 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   font-size: 14px;
   padding: 20px;
   margin: 0 10px 10px;
+
   &.success {
     background: $positive;
     border-left-color: darken($positive, 25%);
+
     .custom-template-icon {
       color: darken($positive, 25%);
     }
   }
+
   &.error {
     background: $negative;
     border-left-color: darken($negative, 25%);
+
     .custom-template-icon {
       color: darken($negative, 25%);
     }
   }
+
   &.warn {
     background: $nodiff;
     border-left-color: darken($nodiff, 25%);
+
     .custom-template-icon {
       color: darken($nodiff, 25%);
     }
   }
+
   .row {
     align-items: center;
     margin: 0;
   }
+
   .custom-template-icon {
     @include margin-right(20px);
 
   }
+
   .header-bold {
     margin-top: 0px;
     margin-bottom: 10px;
   }
-  .sub-header{
+
+  .sub-header {
     @extend .copy-italics;
   }
 }
@@ -586,26 +683,32 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
 .dg-content {
   @extend .copy
 }
+
 .dg-content-body {
   border-color: $border-color;
 }
-.dg-container .dg-btn--cancel, .dg-container .dg-btn--ok  {
+
+.dg-container .dg-btn--cancel, .dg-container .dg-btn--ok {
   @extend .btn;
 }
+
 .dg-container .dg-btn--ok {
   @extend .btn-green;
 }
+
 .dg-container .dg-btn--cancel {
   @extend .btn-red;
 }
 
 .tabs {
   padding-top: 2em;
+
   .tablist {
     cursor: pointer;
     margin: 0;
     padding: 0;
     list-style: none;
+
     li {
       display: inline-block;
       border: 1px solid $border-color-dark;
@@ -617,15 +720,18 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
       border-radius: 5px 5px 0px 0px;
       color: $white;
       @extend .sub-header;
+
       &.current {
         background-color: $white;
         color: $black;
       }
+
       &:hover {
         opacity: 0.9;
       }
     }
   }
+
   .tab-content {
     border: 1px solid $border-color-dark;
     background: $white;
@@ -640,10 +746,12 @@ input[type='text'], input[type='email'], textarea, input[type='date'] {
   top: 50%;
   left: 50%;
 }
+
 table {
   border-collapse: collapse;
   border: 1px solid $border-color-dark;
   width: 100%;
+
   th {
     text-transform: uppercase;
     text-align: left;
@@ -652,30 +760,37 @@ table {
     cursor: pointer;
     padding: 8px;
     min-width: 30px;
+
     &:hover {
       background: lighten($black-grey, 10%);
     }
   }
+
   td {
     text-align: left;
     padding: 10px;
     border-right: 1px solid $border-color-dark;
     border-collapse: collapse;
+
     &:last-child {
       border-right: none;
     }
   }
+
   .btn {
     margin: 0px;
   }
 }
+
 table tbody tr:nth-child(2n) td {
   background: $body-bg;
 }
+
 .admin-page {
   .header-bold {
     margin: 10px 0;
   }
+
   .box {
     margin-top: 20px;
   }
@@ -683,4 +798,28 @@ table tbody tr:nth-child(2n) td {
 
 select::-ms-expand {
   display: none;
+}
+
+@page {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+@media print {
+  body {
+    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    background: white;
+  }
+
+  .accordion {
+    .accordion-content {
+      display: block;
+    }
+
+    &:after {
+      content: "";
+    }
+  }
+
 }

@@ -18,3 +18,9 @@
     @extend .copy-italics;
   }
 }
+
+@media print {
+  .footer {
+    display: none;
+  }
+}

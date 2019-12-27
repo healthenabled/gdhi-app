@@ -76,7 +76,11 @@ export default Vue.extend({
       });
     },
     generatePDF() {
-      generateScorecard(this.healthIndicatorData, this.countrySummary, this.benchmarkData, this.benchmarkPhase, this.hasBenchmarkData, this.$i18n);
+      if (this.$i18n.locale === 'ar') {
+        window.print();
+      } else {
+        generateScorecard(this.healthIndicatorData, this.countrySummary, this.benchmarkData, this.benchmarkPhase, this.hasBenchmarkData, this.$i18n);
+      }
     },
     notifier(props) {
       this.$notify({

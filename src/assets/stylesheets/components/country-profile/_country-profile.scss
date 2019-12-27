@@ -45,6 +45,7 @@ $width-of-scoreCard-es: 200px;
   .indicator {
     margin-bottom: 10px;
     border-bottom: 1px solid $border-color;
+
     &:last-child {
       border: none;
     }
@@ -85,7 +86,7 @@ $width-of-scoreCard-es: 200px;
       margin-bottom: 10px;
 
       &:first-child {
-       @include margin-left(0);
+        @include margin-left(0);
       }
     }
   }
@@ -132,7 +133,7 @@ $width-of-scoreCard-es: 200px;
     width: 50%;
     border: none;
     margin-top: 10px;
-    padding:0 5px;
+    padding: 0 5px;
     box-sizing: border-box;
   }
 }
@@ -176,5 +177,41 @@ $width-of-scoreCard-es: 200px;
       content: " ";
       border-top: 8px solid $negative;
     }
+  }
+}
+
+
+//To print the appropriate content
+@media print {
+  .country-detail {
+
+    #collected-date {
+      display: block;
+      position: unset;
+    }
+
+    .button-container {
+      display: none;
+      margin-top: 0;
+    }
+
+    .country-name {
+      margin-bottom: 0;
+      display: block;
+    }
+  }
+  .box-shadow {
+    -webkit-box-shadow: unset;
+    box-shadow: unset;
+    border: 1px solid $border-color;
+  }
+  .development-indicators {
+    .indicator {
+      width: unset;
+    }
+  }
+
+  .accordion.expanded:after {
+    content: '';
   }
 }

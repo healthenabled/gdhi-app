@@ -36,6 +36,7 @@ export default {
       this.map.off();
       this.map.remove();
     }
+    //To adjust map according to RTL view
     const xAxis = LayoutDirectionConfig[i18n.locale] === 'rtl'? 70 :-31;
     const yAxis = 44;
 
