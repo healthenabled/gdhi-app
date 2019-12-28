@@ -68,7 +68,7 @@ export function generateScorecard(healthIndicatorData, countrySummary, benchmark
   yVal = doc.y;
   if(benchmarkPhase) {
     let benchMarkPhaseValue = (benchmarkPhase < 0)
-      ? i18n.t('countryProfile.benchmark.globalAverage')
+      ? i18n.t('countryProfile.benchmark.benchmarkValues.globalAverage')
       : i18n.t('scoreCardPDF.benchMarkPhaseValue', {benchmarkPhase: benchmarkPhase});
 
     doc.fontSize(14)
