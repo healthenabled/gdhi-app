@@ -1,4 +1,8 @@
 export const worldMap = {
+  reset: 'reset',
+  resetMapSelections: 'Reset Map Selections',
+  zoomIn:'Zoom In',
+  zoomOut:'Zoom Out',
   indicatorPanel: {
     indicatorPanelTitle: 'State of Digital Health around the world today',
     noHealthIndicatorAvailable: 'No Global Health Indicators Available',

@@ -21,7 +21,6 @@ export const ar = {
   },
   mixed: {
     textOverAll: 'المؤشر العام',
-    reset: 'إعادة تعيين',
     phase: 'المرحلة',
     phaseN: 'المرحلة {number}',
     all: 'الكل',

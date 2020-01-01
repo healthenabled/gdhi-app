@@ -2,8 +2,8 @@ import L from 'leaflet';
 //import countriesData from '../../assets/countries_mega.json';
 import helper from './map-helper';
 import eventHandler from './map-event-handler';
-import { filter } from 'lodash';
-import axios from 'axios'
+import {filter} from 'lodash';
+import axios from 'axios';
 import {LayoutDirectionConfig} from '../../plugins/i18n';
 
 export default {
@@ -22,9 +22,9 @@ export default {
         const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control ' +
           'leaflet-control-custom');
         container.type = 'button';
-        container.title = 'Reset Map Selections';
+        container.title = i18n.t('worldMap.resetMapSelections');
         container.id = 'reset-btn';
-        container.innerText = i18n.t('mixed.reset');
+        container.innerText = i18n.t('worldMap.reset');
         container.onclick = function () {
           self.resetMap(postClickCallBack);
         };
@@ -40,9 +40,17 @@ export default {
     const xAxis = LayoutDirectionConfig[i18n.locale] === 'rtl'? 70 :-31;
     const yAxis = 44;
 
-    this.map = L.map('map', { attributionControl: false }).setView([yAxis, xAxis], 2);
+    this.map = L.map('map', {
+      attributionControl: false,
+      zoomControl: false
+    }).setView([yAxis, xAxis], 2);
+
     this.map.setMinZoom(2);
     L.control.attribution({ position: 'bottomleft' }).addTo(this.map);
+    L.control.zoom({
+        zoomInTitle: i18n.t('worldMap.zoomIn'),
+        zoomOutTitle: i18n.t('worldMap.zoomOut')
+      }).addTo(this.map);
     this.map.addControl(new ResetButton());
     if (!self.countriesData) {
       axios.get('/static/data/countries_mega.json')

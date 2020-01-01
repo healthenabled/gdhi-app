@@ -1,4 +1,8 @@
 export const worldMap = {
+  reset: 'إعادة تعيين',
+  resetMapSelections: 'إعادة اختيار الخريطة',
+  zoomIn:'إجعلها أكبر',
+  zoomOut:'اجعلها أصغر',
   indicatorPanel: {
     indicatorPanelTitle: 'الوضع الحالي للصحة الرقمية في جميع أنحاء العالم',
     noHealthIndicatorAvailable: 'لا توجد مؤشرات صحية عالمية متاحة',

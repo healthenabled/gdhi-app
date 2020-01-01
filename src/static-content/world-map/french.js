@@ -1,4 +1,8 @@
 export const worldMap = {
+  reset: 'reset',
+  resetMapSelections: 'Réinitialisation des sélections de cartes',
+  zoomIn:'Zoomer en avant',
+  zoomOut:'Effectuer un zoom arrière',
   indicatorPanel: {
     indicatorPanelTitle: 'L\'état de la santé numérique dans le monde aujourd\'hui',
     noHealthIndicatorAvailable: 'Aucun indicateur de santé disponible',
