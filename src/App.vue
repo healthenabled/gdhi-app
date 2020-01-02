@@ -40,7 +40,7 @@
     <div
       class="loading"
       id="loader">
-      <div class="error" />
+      <div class="error">{{ $t('mixed.loading') }}</div>
     </div>
     <layout/>
   </div>

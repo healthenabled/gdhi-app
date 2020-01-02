@@ -27,6 +27,7 @@ export const en = {
     noDataAvailable: 'No data available',
     noData: 'No Data',
     serverErrorTitle: 'Server Error',
+    loading: 'Loading',
   },
   footer: {
     contactEmail: 'Contact : info@digitalhealthindex.org'

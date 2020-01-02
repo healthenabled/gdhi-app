@@ -27,6 +27,7 @@ export const ar = {
     noDataAvailable: 'لا تتوافر بيانات',
     noData: 'لايوجد بيانات',
     serverErrorTitle: 'خطأ في خادم الكمبيوتر',
+    loading: 'جارٍ تحميل',
   },
   footer: {
     contactEmail: 'الاتصال: info@digitalhealthindex.org'

@@ -57,15 +57,11 @@ p {
     left: 0;
     bottom: 0;
     right: 0;
-    width: 180px;
+    width: 230px;
     height: 100px;
     margin: auto;
     font-size: 35px;
     color: $grey;
-  }
-
-  .error:before {
-    content: "Loading";
   }
 
   .error:after {
