@@ -37,13 +37,13 @@
         </div>
         <div class="box">
           <div class="title sub-header">
-            {{ $t('countryProfile.benchmark.text') }}
+            <span class="benchmark-dropdown-container">{{ $t('countryProfile.benchmark.text') }}</span>
             <div v-if="healthIndicatorData" class="float-right">
               <select class="benchmarkDropDown" name="benchmarkDropDown" v-model="benchmarkPhase" @change=getBenchmarkData()>
                 <option value="">-</option>
                 <option value="-1">{{ $t('countryProfile.benchmark.benchmarkValues.globalAverage') }}</option>
                 <option v-for="phase in phases" v-bind:value="phase.phaseValue">
-                  {{ $t('mixed.phase') }} {{phase.phaseValue}}
+                  {{ $t('mixed.phaseN', {number: phase.phaseValue} ) }}
                 </option>
               </select>
             </div>
