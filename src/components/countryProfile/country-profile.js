@@ -76,7 +76,11 @@ export default Vue.extend({
       });
     },
     generatePDF() {
-      generateScorecard(this.healthIndicatorData, this.countrySummary, this.benchmarkData, this.benchmarkPhase, this.hasBenchmarkData, this.$i18n);
+      if (this.$i18n.locale === 'ar') {
+        window.print();
+      } else {
+        generateScorecard(this.healthIndicatorData, this.countrySummary, this.benchmarkData, this.benchmarkPhase, this.hasBenchmarkData, this.$i18n);
+      }
     },
     notifier(props) {
       this.$notify({
@@ -108,7 +112,7 @@ export default Vue.extend({
             });
           }
         })
-        .catch((e) => {
+        .catch(() => {
           this.notifier({
             title: this.$i18n.t('mixed.serverErrorTitle'),
             message: this.$i18n.t('countryProfile.benchmark.serverErrorDescription'),

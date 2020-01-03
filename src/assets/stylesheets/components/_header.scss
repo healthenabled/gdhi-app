@@ -1,3 +1,5 @@
+@import './../rtl-support';
+
 .header {
   width: 100%;
   background: $white;
@@ -52,7 +54,7 @@
     letter-spacing: -0.1px;
     cursor: pointer;
     @extend .logo-font;
-    margin-right: 20px;
+    @include margin-right(20px);
   }
 
   .search-box {
@@ -61,8 +63,16 @@
 
     &-container {
       width: 100%;
-      background: url('./assets/img/search.svg') no-repeat right 10px center;
+      background-image: url('./assets/img/search.svg');
+      background-repeat: no-repeat;
       background-size: 14px;
+
+      [dir=ltr] & {
+        background-position: right 10px center;
+      }
+      [dir=rtl] & {
+        background-position: left 10px center;
+      }
     }
 
     input {
@@ -95,27 +105,27 @@
     color: #555;
     background-color: white;
     width: 100px;
-    padding-left: 5px;
+    @include padding-left(5px);
     border: $table-border;
     -webkit-appearance: none;
     appearance: none;
     -moz-appearance: none;
   }
 
-  .drop-down{
-    margin-left: 5px;
+  .drop-down {
+    @include margin-left(5px);
     min-width: 100px;
   }
-
 
 
   .drop-down:after {
     content: '\F078';
     font: normal normal normal 12px/1 FontAwesome;
     color: #555;
-    right: 76px;
-    position: absolute;
+    position: relative;
     pointer-events: none;
+    width: 0;
+    @include right(20px);
   }
 
 }
@@ -123,4 +133,10 @@
 .header-elements__right {
   display: inline-flex;
   width: 15%;
+}
+
+@media print {
+  .header {
+    display: none;
+  }
 }

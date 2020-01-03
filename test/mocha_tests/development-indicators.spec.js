@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import moxios from 'moxios';
 import DevelopmentIndicators from "../../src/components/developmentIndicators/development-indicators.js";
 import Obj from  "../../src/common/indicator-http-requests.js";
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("Development Indicators", () => {
   let wrapper;

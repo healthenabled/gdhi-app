@@ -1,3 +1,5 @@
+@import "./../../rtl-support";
+
 .map-layer {
   font-family: 'RobotoBold';
   background: $bg-beige;
@@ -11,7 +13,7 @@
 .filter-section {
   position: absolute;
   z-index: 2;
-  right: 0;
+  @include right(0);
   height: 34px;
   display: flex;
   font-size: 12px;
@@ -23,10 +25,9 @@
   }
 
   .filter-1 {
-    margin-right: 5px;
     color: #555;
     width: 218px;
-    padding-left: 5px;
+    @include padding-left(5px);
     border: $table-border;
     -webkit-appearance: none;
     appearance: none;
@@ -36,7 +37,6 @@
   .filter-2 {
     @extend .filter-1;
     width: 75px;
-    margin-right: 0;
   }
 
   /* IE11 hide native button */
@@ -46,27 +46,32 @@
 }
 
 .filter-indicator:after {
+  @include margin-right(5px);
   content: '\F078';
   font: normal normal normal 12px/1 FontAwesome;
   color: #555;
-  right: 88px;
-  padding: 11px 0px 0px 8px;
-  position: absolute;
   pointer-events: none;
+  position: relative;
+  top: 12px;
+  width: 0;
+  @include right(20px);
 }
 
 .phase-indicator:after {
   @extend .filter-indicator:after;
-  right: 5px;
+  @include margin-right(0);
 }
 
 #map {
-  height: calc(100vh - 130px);
+  height: calc(100vh - 136px);
   background: $bg-beige;
 }
 .legend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
-  right: 0px;
+  @include right(0px);
   bottom: 30px;
   color: $white;
   z-index: 3;
@@ -93,7 +98,7 @@
     color: $font-grey-dark;
     display: inline-block;
     padding: 5px 0;
-    margin-left: -10px;
+    @include margin-left( -10px);
   }
 }
 
@@ -125,13 +130,19 @@ div#reset-btn {
 }
 
 .leaflet-left .leaflet-control {
-  margin-left: 351px;
+  @include margin-left(351px);
   top: 3px;
   margin-top: 0;
   &.leaflet-control-attribution {
-    margin-left: 0;
+    @include margin-left(0);
   }
 }
+
+.leaflet-left {
+  @include left(0);
+  @include right(unset);
+}
+
 .leaflet-bar {
   border-radius: 0;
 }

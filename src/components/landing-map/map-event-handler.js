@@ -20,10 +20,10 @@ export default {
     return COUNTRY_NOT_FOUND;
   },
 
-  onMouseMove(layer, lastMouseOverCountry) {
+  onMouseMove(layer) {
     layer.setStyle({ fillOpacity: 0.65 });
   },
-  onMouseOut(layer, lastMouseOverCountry) {
+  onMouseOut(layer) {
     layer.setStyle({ fillOpacity: 0.95 });
   },
   resetLayer(layer, countryIndices) {

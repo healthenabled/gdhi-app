@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import MapLegend from  "../../src/components/legend/legend.js";
 import colorCodes from  "../../src/components/common/color-codes.js";
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe ("legends", () => {
   let wrapper ;

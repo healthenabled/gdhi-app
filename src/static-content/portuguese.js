@@ -21,13 +21,13 @@ export const pt = {
   },
   mixed: {
     textOverAll: 'Total',
-    reset: 'reset',
     phase: 'Fase',
     phaseN:'Fase {number}',
     all: 'Todos',
     noDataAvailable: 'Nenhum dado disponível',
     noData: 'Nenhum dado',
     serverErrorTitle: 'Erro do servidor',
+    loading: 'Carregando',
   },
   footer: {
     contactEmail: 'Contacto: info@digitalhealthindex.org'

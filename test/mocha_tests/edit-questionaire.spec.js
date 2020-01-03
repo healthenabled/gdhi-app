@@ -5,7 +5,7 @@ import VueRouter from 'vue-router';
 import moxios from "moxios";
 import sinon from "sinon";
 import VeeValidate from "vee-validate";
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("EditQuestionaire",()=>{
   let component;

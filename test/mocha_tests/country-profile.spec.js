@@ -1,10 +1,10 @@
-import { shallow, createLocalVue } from '@vue/test-utils';
+import {createLocalVue, shallow} from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import CountryProfile from  "../../src/components/countryProfile/country-profile.js";
+import CountryProfile from '../../src/components/countryProfile/country-profile.js';
 import moxios from 'moxios';
-import * as pdfHelper from "../../src/components/pdfHelper/pdf-generate-scorecard.js";
+import * as pdfHelper from '../../src/components/pdfHelper/pdf-generate-scorecard.js';
 import sinon from 'sinon';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("Country Profile ", () => {
   let wrapper;
@@ -57,16 +57,20 @@ describe("Country Profile ", () => {
     "collectedDate":"January 2018"
  };
 
- let benchmarkData = {
-  "2":{
-     "benchmarkScore":3,
-     "benchmarkValue":"Below"
-  },
-  "3":{
-     "benchmarkScore":4,
-     "benchmarkValue":"At"
-  }
-};
+  let benchmarkData = {
+    '1': {
+      'benchmarkScore': 5,
+      'benchmarkValue': 'above'
+    },
+    '2': {
+      'benchmarkScore': 3,
+      'benchmarkValue': 'Below'
+    },
+    '3': {
+      'benchmarkScore': 4,
+      'benchmarkValue': 'At'
+    }
+  };
 
   let phaseData = [
     {
@@ -108,6 +112,7 @@ describe("Country Profile ", () => {
       done();
     });
   });
+
   it("should have the appropriate html elements based on the data", (done) => {
     moxios.wait(() => {
       expect(wrapper.find(".country-name").text()).to.equal(healthIndicatorData.countryName);
@@ -126,6 +131,7 @@ describe("Country Profile ", () => {
       done();
     });
   });
+
   it("should updated the showCategory when the category is clicked", (done) => {
     moxios.wait(() => {
       const firstCategory = wrapper.findAll(".category-bar").at(0);
@@ -161,8 +167,12 @@ describe("Country Profile ", () => {
         }).then(() => {
           expect(wrapper.vm.benchmarkData).to.deep.equal(benchmarkData);
           expect(wrapper.findAll(".benchmark-score").length).to.equal(Object.keys(benchmarkData).length);
-          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark: " + benchmarkData["2"].benchmarkScore.toString());
-          expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal('BELOW AVG.');
+          expect(wrapper.findAll('.benchmark-score').at(0).html()).equal('<div class="benchmark-score"><span>Benchmark: <span class="copy-small-bold">5</span></span></div>');
+          expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark: " + benchmarkData["1"].benchmarkScore.toString());
+
+          expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal('ABOVE AVG.');
+          expect(wrapper.findAll(".benchmarkCompare").at(1).text()).to.equal('BELOW AVG.');
+          expect(wrapper.findAll(".benchmarkCompare").at(2).text()).to.equal('AT AVG.');
           done();
         });
       })
@@ -207,6 +217,7 @@ describe("Country Profile ", () => {
       })
     });
   });
+
   it("should call error notifier when the benchmark API call is failed",(done) => {
     let errResp = {
       status: 500,
@@ -255,6 +266,40 @@ describe("Country Profile ", () => {
       expect(wrapper.vm.collectedDate).to.equal('As on: January 2018');
       done();
     })
+  });
+
+  it('should render localization texts properly', (done) => {
+    moxios.wait(() => {
+      expect(wrapper.find('.export').find('a').text()).equal(i18n.messages.en.countryProfile.exportCountryDataButton);
+
+      expect(wrapper.find('.download-btn').text()).equal(i18n.messages.en.countryProfile.downloadScorecard);
+
+      expect(wrapper.findAll('.title .sub-header').at(0).text()).equal(i18n.messages.en.countryProfile.overallDigitalHealthPhase);
+
+      expect(wrapper.findAll('.phase-desc').at(0).find('p').text()).equal(i18n.messages.en.countryProfile.overallDigitalHealthPhaseDescription);
+
+      expect(wrapper.find('.benchmark-dropdown-container').text()).equal(i18n.messages.en.countryProfile.benchmark.text);
+
+      expect(wrapper.find('.benchmarkDropDown').findAll('option').at(1).text()).equal(i18n.messages.en.countryProfile.benchmark.benchmarkValues.globalAverage);
+
+      expect(wrapper.find('.benchmarkDropDown').findAll('option').at(2).text()).equal('Phase 1');
+
+      expect(wrapper.findAll('.phase-desc').at(1).find('p').text()).equal(i18n.messages.en.countryProfile.benchmark.benchmarkDescription);
+
+      expect(wrapper.findAll('.indicator-panel-container-category-section-phase').at(0).element.attributes.getNamedItem('data-phase').value).equal('Phase 3');
+
+      expect(wrapper.find('.indicator-name').text()).equal(i18n.messages.en.countryProfile.indicator);
+
+      done();
+    });
+  });
+
+  it('should render localization benchmark error text', (done) => {
+    moxios.wait(() => {
+      wrapper.setData({hasBenchmarkData: false});
+      expect(wrapper.findAll('.phase-desc').at(1).find('span').text()).equal(i18n.messages.en.countryProfile.benchmark.benchmarkNoCountryForSelectedPhase);
+      done();
+    });
   });
 
   afterEach(() => {

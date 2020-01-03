@@ -2,7 +2,7 @@ import {createLocalVue, shallow} from '@vue/test-utils';
 import HealthIndicatorQuestionnaire from '../../src/components/healthIndicatorQuestionnaire/health_indicator_questionnaire.js';
 import moxios from 'moxios';
 import VueRouter from 'vue-router';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("Health Indicator Questionnaire", () => {
   let wrapper;

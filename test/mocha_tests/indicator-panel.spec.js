@@ -4,7 +4,7 @@ import IndicatorPanel from  "../../src/components/indicatorPanel/indicator-panel
 import moxios from 'moxios';
 import sinon from "sinon";
 import Obj from  "../../src/common/indicator-http-requests.js";
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 import {en, es} from '../../src/static-content/index';
 
 describe("Indicator Panel", () => {

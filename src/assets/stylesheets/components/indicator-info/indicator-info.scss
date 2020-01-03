@@ -1,3 +1,5 @@
+@import "./../../rtl-support";
+
 .indicators {
   width: 100%;
   div {
@@ -12,7 +14,7 @@
     &:after {
       z-index: 2;
       color: $white;
-      right: 20px;
+     @include right(20px);
     }
     .sub-header {
       background-color: $logo-blue;
@@ -46,7 +48,6 @@
   font-size: 1.25em;
   // border: 1px solid $shadow-grey;
   border-radius: 5px;
-  padding: 10px;
   line-height: 1.5;
   margin-bottom: 20px;
 }

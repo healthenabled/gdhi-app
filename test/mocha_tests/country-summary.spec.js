@@ -1,8 +1,8 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import {createLocalVue, mount} from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import CountrySummary from  "../../src/components/countrySummary/country-summary.js";
+import CountrySummary from '../../src/components/countrySummary/country-summary.js';
 import moxios from 'moxios';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("Country Summary ", () => {
   let wrapper;
@@ -47,6 +47,7 @@ describe("Country Summary ", () => {
       });
     });
   });
+
   it("should update the html based on the data recieved", (done) => {
     moxios.wait(() => {
       let request = moxios.requests.mostRecent();
@@ -61,6 +62,7 @@ describe("Country Summary ", () => {
       });
     });
   });
+
   it("should execute catch block if the API call is failed", (done) => {
     let errResp = {
       status: 500,
@@ -75,6 +77,27 @@ describe("Country Summary ", () => {
       });
     });
   });
+
+  it('should render localization texts properly', (done) => {
+    moxios.wait(() => {
+      expect(wrapper.find('.country-contact').text()).equal(i18n.messages.en.countryProfile.countrySummary.keyContacts);
+      expect(wrapper.find('.country-summary-title').text()).equal(i18n.messages.en.countryProfile.countrySummary.text);
+      expect(wrapper.find('.country-resource-title').text()).equal(i18n.messages.en.countryProfile.countrySummary.resources);
+      done();
+    });
+  });
+
+  it('should render localization error texts properly', (done) => {
+    moxios.wait(() => {
+      expect(wrapper.findAll('.error').length).to.equal(3);
+      expect(wrapper.findAll('.error').at(0).text()).equal(i18n.messages.en.mixed.noDataAvailable);
+      expect(wrapper.findAll('.error').at(1).text()).equal(i18n.messages.en.mixed.noDataAvailable);
+      expect(wrapper.findAll('.error').at(2).text()).equal(i18n.messages.en.mixed.noDataAvailable);
+
+      done();
+    });
+  });
+
   afterEach(() => {
     moxios.uninstall();
   })

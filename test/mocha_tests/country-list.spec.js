@@ -1,8 +1,8 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import {createLocalVue, mount} from '@vue/test-utils';
 import VueRouter from 'vue-router';
-import CountryList from  "../../src/components/countryList/country-list.js";
+import CountryList from '../../src/components/countryList/country-list.js';
 import moxios from 'moxios';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe("Country List", () => {
   let wrapper;
@@ -74,6 +74,17 @@ describe("Country List", () => {
       done();
     });
   });
+
+  it('should render localization texts properly', (done) => {
+    moxios.wait(() => {
+      expect(wrapper.find('.page-title').text()).equal(i18n.messages.en.countryList.title);
+      expect(wrapper.find('.export-button').text()).equal(i18n.messages.en.countryList.exportButtonText);
+      expect(wrapper.find('.countries-list-section-description').findAll('p').at(0).text()).equal(i18n.messages.en.countryList.line1);
+      expect(wrapper.find('.countries-list-section-description').findAll('p').at(1).text()).equal(i18n.messages.en.countryList.line2);
+      done();
+    });
+  });
+
   afterEach(() => {
     moxios.uninstall();
   });

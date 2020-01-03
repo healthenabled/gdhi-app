@@ -3,7 +3,7 @@ import Map from '../../src/components/landing-map/map.js';
 import moxios from 'moxios';
 import sinon from 'sinon';
 import worldMap from '../../src/components/landing-map/world-map.js';
-import i18n from '../../src/plugins/i18n';
+import {i18n} from '../../src/plugins/i18n';
 
 describe('Map ', () => {
   let wrapper;

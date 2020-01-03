@@ -49,8 +49,9 @@ export default Vue.extend({
   },
   methods: {
     fetchHealthScoresFor(countryUUID) {
-      if(!this.isViewPublish)return axios.get(`/api/countries/${countryUUID}`);
-      else return axios.get(`/api/countries/viewPublish/${countryUUID}`);
+      let config = common.configWithUserLanguageHeader(this.$i18n.locale);
+      if(!this.isViewPublish)return axios.get(`/api/countries/${countryUUID}`,config);
+      else return axios.get(`/api/countries/viewPublish/${countryUUID}`,config);
     },
     setUpHealthIndicators(data, isExpanded) {
       data.forEach((category) => {

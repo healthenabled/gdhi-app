@@ -15,7 +15,7 @@
     <div v-if="countrySummaries.summary">{{countrySummaries.summary}}</div>
     <div class="error" v-else>{{ $t('mixed.noDataAvailable') }}</div>
   </div>
-  <div class="country-summary-title header-bold">{{ $t('countryProfile.countrySummary.resources') }}</div>
+  <div class="country-resource-title header-bold">{{ $t('countryProfile.countrySummary.resources') }}</div>
   <ul class="country-text" v-if="countrySummaries.resources">
     <li v-for="resource in countrySummaries.resources" class="country-resource-link">
       <a :href="resource.startsWith('http')? resource : 'http://'+resource" target="_blank" class="link-blue">{{resource}}</a>
