@@ -167,7 +167,7 @@ describe("Country Profile ", () => {
         }).then(() => {
           expect(wrapper.vm.benchmarkData).to.deep.equal(benchmarkData);
           expect(wrapper.findAll(".benchmark-score").length).to.equal(Object.keys(benchmarkData).length);
-          expect(wrapper.findAll('.benchmark-score').at(0).html()).equal('<div class="benchmark-score"><span>Benchmark: <span class="copy-small-bold">5</span></span></div>');
+          expect(wrapper.findAll('.benchmark-score').at(0).html()).equal('<div class="benchmark-score"><span>Benchmark: 5</span></div>');
           expect(wrapper.findAll(".benchmark-score").at(0).text()).to.equal("Benchmark: " + benchmarkData["1"].benchmarkScore.toString());
 
           expect(wrapper.findAll(".benchmarkCompare").at(0).text()).to.equal('ABOVE AVG.');
