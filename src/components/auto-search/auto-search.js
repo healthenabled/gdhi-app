@@ -27,7 +27,7 @@ export default Vue.extend({
   },
   methods: {
     loadCountries() {
-      axios.get('/api/countries', common.configWithUserLanguageHeader(this.$i18n.locale))
+      axios.get('/api/countries', common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale))
         .then(response => {
           this.countries = sortBy(response.data, ['name']);
         });

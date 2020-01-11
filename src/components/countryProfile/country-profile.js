@@ -52,7 +52,7 @@ export default Vue.extend({
       this.countrySummary = countrySummary;
     },
     getHealthIndicatorsFor(countryCode) {
-      axios.get(`/api/countries/${countryCode}/health_indicators`, common.configWithUserLanguageHeader(this.$i18n.locale))
+      axios.get(`/api/countries/${countryCode}/health_indicators`, common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale))
         .then((response) => {
           this.healthIndicatorCallback(response);
         });

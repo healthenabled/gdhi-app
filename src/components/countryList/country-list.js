@@ -33,7 +33,7 @@ export default Vue.extend({
     getListOfCountries() {
       const windowProperties = window.appProperties;
       return axios.get(`/api/countries_health_indicator_scores?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`,
-        common.configWithUserLanguageHeader(this.$i18n.locale)).then( (response) => {
+        common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale)).then( (response) => {
         this.countryListCallback(response);
       });
     },
