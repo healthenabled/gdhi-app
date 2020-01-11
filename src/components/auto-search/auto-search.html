@@ -1,10 +1,11 @@
 <div class="search-box hd-element" ref="autocomplete">
- <autocomplete
-        id="search-box"
-        :source="countries"
-        :placeholder="$t('headers.searchBoxPlaceholder')"
-        input-class="search-box-container"
-        @selected="onCountrySelect"
-        />
-      </autocomplete>
+  <autocomplete
+    id="search-box"
+    :source="countries"
+    :placeholder="$t('headers.searchBoxPlaceholder')"
+    input-class="search-box-container"
+    @selected="onCountrySelect"
+    ref="autoComplete"
+  />
+  </autocomplete>
 </div>

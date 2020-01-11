@@ -30,6 +30,7 @@ export default Vue.extend({
       axios.get('/api/countries', common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale))
         .then(response => {
           this.countries = sortBy(response.data, ['name']);
+          this.$refs.autoComplete.clear();
         });
     },
     onCountrySelect(selectedItem) {
