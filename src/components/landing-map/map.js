@@ -75,7 +75,7 @@ export default Vue.extend({
       common.showLoading();
       const windowProperties = window.appProperties;
       let url = '/api/countries_health_indicator_scores?categoryId=' + windowProperties.getCategoryFilter() + '&phase=' + windowProperties.getPhaseFilter();
-      return axios.get(url, common.configWithUserLanguageHeader(this.$i18n.locale))
+      return axios.get(url, common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale))
         .then((globalHealthIndices) => {
           this.globalHealthIndicators = globalHealthIndices.data.countryHealthScores;
           this.globalHealthIndices = self.mergeColorCodeToHealthIndicators(
@@ -86,7 +86,7 @@ export default Vue.extend({
     },
     fetchCategoricalIndicators: function () {
       const self = this;
-      return axios.get('/api/health_indicator_options', common.configWithUserLanguageHeader(this.$i18n.locale))
+      return axios.get('/api/health_indicator_options', common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale))
         .then((categories) => {
         self.categories = categories.data
       })

@@ -102,7 +102,7 @@ export default Vue.extend({
         countryId: this.countrySummary.countryId,
         countrySummary: this.countrySummary,
         healthIndicators: this.getHealthIndicators(),
-      }, common.configWithUserLanguageHeader(this.$i18n.locale)).then(() => {
+      }, common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale)).then(() => {
         if(action === 'submit') {
           this.showEdit = false;
         }

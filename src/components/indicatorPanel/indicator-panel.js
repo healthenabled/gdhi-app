@@ -104,7 +104,7 @@ export default Vue.extend({
 
     getHealthIndicators(context, countryId) {
       const healthIndicatorsUrl = `/api/countries/${countryId}/health_indicators`;
-      axios.get(healthIndicatorsUrl, common.configWithUserLanguageHeader(this.$i18n.locale))
+      axios.get(healthIndicatorsUrl, common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale))
         .then((response) => {
           this.getHealthIndicatorCallback(response);
         });
@@ -130,7 +130,7 @@ export default Vue.extend({
     getGlobalHealthIndicators() {
       const windowProperties = window.appProperties;
       const globalHealthIndicatorsUrl = `/api/global_health_indicators?categoryId=${windowProperties.getCategoryFilter()}&phase=${windowProperties.getPhaseFilter()}`;
-      axios.get(globalHealthIndicatorsUrl, common.configWithUserLanguageHeader(this.$i18n.locale))
+      axios.get(globalHealthIndicatorsUrl, common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale))
         .then((response) => {
           this.getGlobalHealthIndicatorCallback(response);
         });

@@ -39,7 +39,7 @@ export default Vue.extend({
       });
     },
     fetchCategoricalIndicators() {
-      return axios.get('/api/health_indicator_options', common.configWithUserLanguageHeader(this.$i18n.locale));
+      return axios.get('/api/health_indicator_options', common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale));
     },
 
     getCategoryNames(categories) {

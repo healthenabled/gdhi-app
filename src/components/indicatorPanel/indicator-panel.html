@@ -48,11 +48,11 @@
     </div>
     <div class="indicator-panel-container-context">
       <div v-for="indicatorCategory in developmentIndicators" class="indicator-panel-container-context-section">
-        <span class="indicator-panel-container-context-name">{{ $t(`worldMap.indicatorPanel.${Object.keys(indicatorCategory)[0].toLowerCase()}.text`) }}</span>
+        <span class="indicator-panel-container-context-name">{{ $t('worldMap.indicatorPanel.'+ Object.keys(indicatorCategory)[0].toLowerCase()+'.text') }}</span>
         <div v-for="indicators in indicatorCategory" class="indicator-panel-container-context-details">
           <div v-for="(indicator, key) in indicators" class="indicator-panel-container-context-details-info">
             <span class="indicator-panel-container-context-details-info-score">{{indicator}}</span>
-            <span class="indicator-panel-container-context-details-info-title">{{ $t(`worldMap.indicatorPanel.${Object.keys(indicatorCategory)[0].toLowerCase()}.${key}`) }}</span>
+            <span class="indicator-panel-container-context-details-info-title">{{ $t('worldMap.indicatorPanel.'+Object.keys(indicatorCategory)[0].toLowerCase()+ '.'+ key) }}</span>
           </div>
         </div>
       </div>

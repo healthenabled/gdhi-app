@@ -139,8 +139,7 @@ div#reset-btn {
 }
 
 .leaflet-left {
-  @include left(0);
-  @include right(unset);
+ left: auto;
 }
 
 .leaflet-bar {

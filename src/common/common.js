@@ -9,9 +9,14 @@ export default ({
     if(loadingElement)
       loadingElement.style.display = "block";
   },
-  configWithUserLanguageHeader(language) {
+  configWithUserLanguageAndNoCacheHeader(language) {
     return {
-      headers: {'user_language': language}
+      headers: {
+        'user_language': language,
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': 0,
+      }
     };
   },
   dateInLocaleFormat(date, i18n) {

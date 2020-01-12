@@ -49,7 +49,7 @@ export default Vue.extend({
   },
   methods: {
     fetchHealthScoresFor(countryUUID) {
-      let config = common.configWithUserLanguageHeader(this.$i18n.locale);
+      let config = common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale);
       if(!this.isViewPublish)return axios.get(`/api/countries/${countryUUID}`,config);
       else return axios.get(`/api/countries/viewPublish/${countryUUID}`,config);
     },
@@ -113,7 +113,7 @@ export default Vue.extend({
       common.hideLoading();
     },
     prepareDataForViewForm(countryUUID) {
-      axios.all([axios.get('/api/health_indicator_options', common.configWithUserLanguageHeader(this.$i18n.locale)),
+      axios.all([axios.get('/api/health_indicator_options', common.configWithUserLanguageAndNoCacheHeader(this.$i18n.locale)),
         this.fetchHealthScoresFor(countryUUID)])
         .then(axios.spread(this.viewFormCallback.bind(this)))
         .catch(() => {
