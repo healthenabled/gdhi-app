@@ -46,14 +46,16 @@ export default {
     }).setView([yAxis, xAxis], 2);
 
     this.map.setMinZoom(2);
-    L.control.attribution({ position: 'bottomleft' }).addTo(this.map);
+    L.control.attribution({ position: 'bottomleft',
+      prefix: 'Made with Natural Earth.<a href="https://github.com/datameet/maps/blob/master/Country/india-composite.geojson">India boundaries</a> by <a href="http://datameet.org/">DataMeet India community</a>'}).addTo(this.map);
+
     L.control.zoom({
         zoomInTitle: i18n.t('worldMap.zoomIn'),
         zoomOutTitle: i18n.t('worldMap.zoomOut')
       }).addTo(this.map);
     this.map.addControl(new ResetButton());
     if (!self.countriesData) {
-      axios.get('/static/data/countries_mega.json')
+      axios.get('/static/data/countries_modified.json')
         .then(function (response) {
         self.countriesData = response.data;
         const mapLoader = document.querySelector(".loader");

@@ -113,7 +113,7 @@ module.exports = {
       from: './src/assets/img',
       to: utils.assetsPath('img/')
     }, {
-      from: './src/assets/countries_mega.json',
+      from: './src/assets/countries_modified.json',
       to: utils.assetsPath('data/')
     }])
   ]
