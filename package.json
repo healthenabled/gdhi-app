@@ -15,7 +15,7 @@
     "mochacoverage": "nyc --reporter=lcov --reporter=text npm run mocha"
   },
   "dependencies": {
-    "axios": "^0.17.0",
+    "axios": "^0.21.1",
     "blob-stream": "^0.1.3",
     "date-input-polyfill": "^2.14.0",
     "dateformat": "^3.0.3",
